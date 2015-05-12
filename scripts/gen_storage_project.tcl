@@ -1,6 +1,6 @@
 set root_dir "d:/Telops/fir-00257-Storage"
 set proj_name "fir_00257_MemStorage"
-set proj_dir $root_dir/xilinx/mem_storage
+set proj_dir $root_dir/xilinx/
 set script_dir $root_dir/scripts
 set aldec_dir $root_dir/aldec/compile
 set ip_dir $root_dir/IP
@@ -18,8 +18,7 @@ set_property "part" "xc7k160tfbg676-1" $obj
 set_property "simulator_language" "Mixed" $obj
 set_property "target_language" "VHDL" $obj
 
-# Add top level
-add_files $aldec_dir/fir_00257_top.vhd
+
 
 # Add Project IP sources
 foreach subdir [glob -nocomplain -type d $ip_dir/*] {
@@ -29,20 +28,22 @@ foreach subdir [glob -nocomplain -type d $ip_dir/*] {
 #Add filelist
 set filelist ""
 
+# Add aldec compile
+set filelist  [concat $filelist [glob  $aldec_dir/*.vhd]]
+
 # Add common project sources 
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Fifo/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Utilities/*.vhd]]
 
 # BD
-set filelist  [concat $filelist [glob  $src_dir/BD/*.vhd]]
+set filelist  [concat $filelist [glob  $src_dir/BD/hdl/*.vhd]]
 
 # Buffering
-#set filelist  [concat $filelist [glob -nocomplain $src_dir/Buffering/HDL/*.vhd]]
+set filelist  [concat $filelist [glob -nocomplain $src_dir/Buffering/HDL/*.vhd]]
 
 #MGT
-#
-
+set filelist  [concat $filelist [glob  $src_dir/MGT/hdl/*.vhd]]
 
 # Add specific contraint
 add_files -fileset constrs_1 $constr_dir
@@ -51,18 +52,18 @@ add_files -fileset constrs_1 $constr_dir
 add_files $filelist
 
 #Generate the bloc design
-#source $script_dir/gen_bd_core.tcl
+source $script_dir/gen_bd_core.tcl
 
 
 #create the bd wrapper
-#make_wrapper -files [get_files $proj_dir/$proj_name.srcs/sources_1/bd/core/core.bd] -top
-#add_files -norecurse $proj_dir/$proj_name.srcs/sources_1/bd/core/hdl/core_wrapper.vhd
+make_wrapper -files [get_files $proj_dir/$proj_name.srcs/sources_1/bd/core/core.bd] -top
+add_files -norecurse $proj_dir/$proj_name.srcs/sources_1/bd/core/hdl/core_wrapper.vhd
 
 #Update the ip catalog
 update_ip_catalog
 
 #Set top level design
-set_property top $proj_name [current_fileset]
+set_property top fir_257_top [current_fileset]
 
 update_compile_order -fileset sources_1
 

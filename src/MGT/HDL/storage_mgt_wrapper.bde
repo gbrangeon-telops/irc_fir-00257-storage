@@ -2,10 +2,10 @@ SCHM0104
 
 HEADER
 {
- FREEID 7256
+ FREEID 7371
  VARIABLES
  {
-  #ARCHITECTURE="mgt_wrapper"
+  #ARCHITECTURE="storage_mgt_wrapper"
   #BLOCKTABLE_FILE="F:\\Bibliotheque\\Electronique\\Active-HDL\\Cartouche\\#Telops.bde"
   #BLOCKTABLE_INCLUDED="1"
   #DEFAULT_RANGE0="<range<name=\"data_downlink_n\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
@@ -20,7 +20,7 @@ HEADER
   #DEFAULT_RANGE7="<range<name=\"proc_exp_p\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
   #DEFAULT_RANGE8="<range<name=\"video_downlink_n\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
   #DEFAULT_RANGE9="<range<name=\"video_downlink_p\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
-  #ENTITY="mgt_wrapper"
+  #ENTITY="storage_mgt_wrapper"
   #LANGUAGE="VHDL"
   AUTHOR="Patrick Daraiche"
   COMPANY="Telops inc."
@@ -1483,7 +1483,7 @@ PAGE ""
     #CUSTOM_NAME=""
     #DOWNTO="0"
     #LIBRARY="#terminals"
-    #REFERENCE="PROC_EXP_N(0:1)"
+    #REFERENCE="TO_PROC_N(0:1)"
     #SYMBOL="BusOutput"
     #SYMBOL_GLOBALLY_UNIQUE_IDENTIFIER=""
    }
@@ -1493,7 +1493,7 @@ PAGE ""
   TEXT  239, 0, 0
   {
    TEXT "$#REFERENCE"
-   RECT (2692,883,2948,918)
+   RECT (2692,883,2933,918)
    ALIGN 4
    MARGINS (1,1)
    PARENT 238
@@ -1506,7 +1506,7 @@ PAGE ""
     #CUSTOM_NAME=""
     #DOWNTO="0"
     #LIBRARY="#terminals"
-    #REFERENCE="PROC_EXP_P(0:1)"
+    #REFERENCE="TO_PROC_P(0:1)"
     #SYMBOL="BusOutput"
     #SYMBOL_GLOBALLY_UNIQUE_IDENTIFIER=""
    }
@@ -1516,7 +1516,7 @@ PAGE ""
   TEXT  249, 0, 0
   {
    TEXT "$#REFERENCE"
-   RECT (2692,863,2946,898)
+   RECT (2692,863,2931,898)
    ALIGN 4
    MARGINS (1,1)
    PARENT 248
@@ -1529,7 +1529,7 @@ PAGE ""
     #CUSTOM_NAME=""
     #DOWNTO="0"
     #LIBRARY="#terminals"
-    #REFERENCE="EXP_PROC_N(0:1)"
+    #REFERENCE="FROM_PROC_N(0:1)"
     #SYMBOL="BusInput"
     #SYMBOL_GLOBALLY_UNIQUE_IDENTIFIER=""
    }
@@ -1540,7 +1540,7 @@ PAGE ""
   TEXT  294, 0, 0
   {
    TEXT "$#REFERENCE"
-   RECT (2691,923,2947,958)
+   RECT (2691,923,2975,958)
    ALIGN 4
    MARGINS (1,1)
    PARENT 293
@@ -1554,7 +1554,7 @@ PAGE ""
     #CUSTOM_NAME=""
     #DOWNTO="0"
     #LIBRARY="#terminals"
-    #REFERENCE="EXP_PROC_P(0:1)"
+    #REFERENCE="FROM_PROC_P(0:1)"
     #SYMBOL="BusInput"
     #SYMBOL_GLOBALLY_UNIQUE_IDENTIFIER=""
    }
@@ -1565,7 +1565,7 @@ PAGE ""
   TEXT  299, 0, 0
   {
    TEXT "$#REFERENCE"
-   RECT (2691,943,2945,978)
+   RECT (2691,943,2973,978)
    ALIGN 4
    MARGINS (1,1)
    PARENT 298
@@ -1587,7 +1587,7 @@ PAGE ""
 "library work;\n"+
 "\n"+
 "use work.tel2000.all;"
-   RECT (260,240,660,480)
+   RECT (260,240,1020,500)
    OUTLINE 5,1, (0,0,0)
    FILL (0,(239,235,255),0)
    MARGINS (20,20)
@@ -3208,7 +3208,7 @@ PAGE ""
  
  BODY
  {
-  TEXT  7233, 0, 0
+  TEXT  7348, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3219,7 +3219,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  7234, 0, 0
+  TEXT  7349, 0, 0
   {
    PAGEALIGN 10
    TEXT "$CREATIONDATE"
@@ -3230,7 +3230,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  7235, 0, 0
+  TEXT  7350, 0, 0
   {
    PAGEALIGN 10
    TEXT "Title:"
@@ -3240,7 +3240,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  7236, 0, 0
+  TEXT  7351, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3252,27 +3252,27 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  LINE  7237, 0, 0
+  LINE  7352, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3660,3080), (4200,3080) )
    FILL (1,(0,0,0),0)
   }
-  LINE  7238, 0, 0
+  LINE  7353, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3660,3080), (3660,3200) )
   }
-  LINE  7239, 0, 0
+  LINE  7354, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (4200,3200), (4200,2960), (3220,2960), (3220,3200), (4200,3200) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  7240, 0, 0
+  TEXT  7355, 0, 0
   {
    PAGEALIGN 10
    TEXT 
@@ -3287,20 +3287,20 @@ PAGE ""
    VAR
    MULTILINE
   }
-  LINE  7241, 0, 0
+  LINE  7356, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3660,2960), (3660,3080) )
   }
-  LINE  7242, 0, 0
+  LINE  7357, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (4200,2960), (4200,2840), (3660,2840), (3660,2960), (4200,2960) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  7243, 0, 0
+  TEXT  7358, 0, 0
   {
    PAGEALIGN 10
    TEXT "$FIRMWARE"
@@ -3311,7 +3311,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  7244, 0, 0
+  TEXT  7359, 0, 0
   {
    PAGEALIGN 10
    TEXT "$AUTHOR"
@@ -3322,7 +3322,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  7245, 0, 0
+  TEXT  7360, 0, 0
   {
    PAGEALIGN 10
    TEXT "$PROJECT"
@@ -3333,7 +3333,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  7246, 0, 0
+  TEXT  7361, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3344,7 +3344,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  7247, 0, 0
+  TEXT  7362, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3355,20 +3355,20 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  LINE  7248, 0, 0
+  LINE  7363, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3380,2960), (3380,3080) )
   }
-  LINE  7249, 0, 0
+  LINE  7364, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3220,3080), (3660,3080) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  7250, 0, 0
+  TEXT  7365, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3379,7 +3379,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  7251, 0, 0
+  TEXT  7366, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -3390,19 +3390,19 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  LINE  7252, 0, 0
+  LINE  7367, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3380,3080), (3380,3200) )
   }
-  LINE  7253, 0, 0
+  LINE  7368, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (3780,3080), (3780,3200) )
   }
-  TEXT  7254, 0, 0
+  TEXT  7369, 0, 0
   {
    PAGEALIGN 10
    TEXT "$REVISION"
@@ -3413,7 +3413,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  BMPPICT  7255, 0, 0
+  BMPPICT  7370, 0, 0
   {
    PAGEALIGN 10
    RECT (3740,2860,4120,2955)

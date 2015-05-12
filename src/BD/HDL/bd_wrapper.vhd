@@ -34,53 +34,72 @@ entity bd_wrapper is
     clk_100 : out STD_LOGIC;
     clk_160 : out STD_LOGIC;
     clk_50  : out STD_LOGIC;
-    SYS_CLK_0_P : in STD_LOGIC;
-    SYS_CLK_0_N : in STD_LOGIC;
-	SYS_CLK_1_P : in STD_LOGIC;
-	SYS_CLK_1_N : in STD_LOGIC;
+    DIMM0_CLK_P : in STD_LOGIC;
+    DIMM0_CLK_N : in STD_LOGIC;
+	DIMM1_CLK_P : in STD_LOGIC;
+	DIMM1_CLK_N : in STD_LOGIC;
 
     
     AXIS_BUF_S2MM_MOSI : in t_axi4_stream_mosi32;
     AXIS_BUF_S2MM_MISO : out t_axi4_stream_miso;
     
-    AXIS_BUF_S2MM_CMD_MOSI : in t_axi4_stream_mosi72;
+    AXIS_BUF_S2MM_CMD_MOSI : in t_axi4_stream_mosi_cmd64;
     AXIS_BUF_S2MM_CMD_MISO : out t_axi4_stream_miso;
     
     AXIS_BUF_S2MM_STS_MOSI : out t_axi4_stream_mosi_status;
     AXIS_BUF_S2MM_STS_MISO : in t_axi4_stream_miso;
 
-    AXIS_BUF_MM2S_MOSI : out t_axi4_stream_mosi32;
+    AXIS_BUF_MM2S_MOSI : out t_axi4_stream_mosi16;
     AXIS_BUF_MM2S_MISO : in t_axi4_stream_miso;
     
-    AXIS_BUF_MM2S_CMD_MOSI : in t_axi4_stream_mosi72;
+    AXIS_BUF_MM2S_CMD_MOSI : in t_axi4_stream_mosi_cmd64;
     AXIS_BUF_MM2S_CMD_MISO : out t_axi4_stream_miso;
     
     AXIS_BUF_MM2S_STS_MOSI : out t_axi4_stream_mosi_status;
     AXIS_BUF_MM2S_STS_MISO : in t_axi4_stream_miso;
     
-    DDR3_addr : out STD_LOGIC_VECTOR ( 14 downto 0 );
-    DDR3_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    DDR3_cas_n : out STD_LOGIC;
-    DDR3_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
-    DDR3_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_ras_n : out STD_LOGIC;
-    DDR3_reset_n : out STD_LOGIC;
-    DDR3_we_n : out STD_LOGIC;
+    DIMM0_addr : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    DIMM0_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    DIMM0_cas_n : out STD_LOGIC;
+    DIMM0_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
+    DIMM0_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_ras_n : out STD_LOGIC;
+    DIMM0_reset_n : out STD_LOGIC;
+    DIMM0_we_n : out STD_LOGIC;
+    
+    DIMM1_addr : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    DIMM1_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    DIMM1_cas_n : out STD_LOGIC;
+    DIMM1_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
+    DIMM1_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_ras_n : out STD_LOGIC;
+    DIMM1_reset_n : out STD_LOGIC;
+    DIMM1_we_n : out STD_LOGIC;
     
     AXIL_MGT_MOSI : out t_axi4_lite_mosi;
     AXIL_MGT_MISO : in t_axi4_lite_miso;
     
-    AXIL_DUT_MOSI : out t_axi4_lite_mosi;
-    AXIL_DUT_MISO : in t_axi4_lite_miso;
+    AXIL_BUF_MOSI : out t_axi4_lite_mosi;
+    AXIL_BUF_MISO : in t_axi4_lite_miso;
     
-    GPIO : inout STD_LOGIC_VECTOR(3 downto 0)
+    AXIL_BUF_TABLE_MOSI : out t_axi4_lite_mosi;
+    AXIL_BUF_TABLE_MISO : in t_axi4_lite_miso
+    
+    --GPIO : inout STD_LOGIC_VECTOR(3 downto 0)
 
 	);
 end bd_wrapper;
@@ -91,67 +110,102 @@ end bd_wrapper;
 architecture bd_wrapper of bd_wrapper is
 
 component core_wrapper
-  port (
-    DDR3_addr : out STD_LOGIC_VECTOR ( 14 downto 0 );
-    DDR3_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    DDR3_cas_n : out STD_LOGIC;
-    DDR3_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
-    DDR3_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
-    DDR3_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    DDR3_ras_n : out STD_LOGIC;
-    DDR3_reset_n : out STD_LOGIC;
-    DDR3_we_n : out STD_LOGIC;
-    M_AXIL_DUT_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_DUT_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M_AXIL_DUT_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_DUT_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M_AXIL_DUT_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M_AXIL_DUT_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_DUT_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M_AXIL_DUT_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_DUT_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_DUT_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M_AXIL_DUT_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_MGT_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M_AXIL_MGT_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_MGT_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    M_AXIL_MGT_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M_AXIL_MGT_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_MGT_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    M_AXIL_MGT_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIL_MGT_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
-    M_AXIL_MGT_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    M_AXIL_MGT_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+  port  (
+    ARESETN : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_TABLE_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_BUF_TABLE_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_TABLE_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_BUF_TABLE_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_BUF_TABLE_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_TABLE_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_BUF_TABLE_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_TABLE_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_TABLE_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    AXIL_BUF_TABLE_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_BUF_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_BUF_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_BUF_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_BUF_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_BUF_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_BUF_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    AXIL_BUF_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_MGT_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_MGT_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_MGT_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    AXIL_MGT_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_MGT_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_MGT_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    AXIL_MGT_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    AXIL_MGT_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
+    AXIL_MGT_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    AXIL_MGT_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+    DIMM0_addr : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    DIMM0_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    DIMM0_cas_n : out STD_LOGIC;
+    DIMM0_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
+    DIMM0_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM0_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM0_ras_n : out STD_LOGIC;
+    DIMM0_reset_n : out STD_LOGIC;
+    DIMM0_we_n : out STD_LOGIC;
+    DIMM1_addr : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    DIMM1_ba : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    DIMM1_cas_n : out STD_LOGIC;
+    DIMM1_ck_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_ck_p : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_cke : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_cs_n : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_dm : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_dq : inout STD_LOGIC_VECTOR ( 63 downto 0 );
+    DIMM1_dqs_n : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_dqs_p : inout STD_LOGIC_VECTOR ( 7 downto 0 );
+    DIMM1_odt : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    DIMM1_ras_n : out STD_LOGIC;
+    DIMM1_reset_n : out STD_LOGIC;
+    DIMM1_we_n : out STD_LOGIC;
     M_AXIS_MM2S_STS_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
     M_AXIS_MM2S_STS_tkeep : out STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXIS_MM2S_STS_tlast : out STD_LOGIC;
     M_AXIS_MM2S_STS_tready : in STD_LOGIC;
     M_AXIS_MM2S_STS_tvalid : out STD_LOGIC;
-    M_AXIS_MM2S_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    M_AXIS_MM2S_tkeep : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    M_AXIS_MM2S_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    M_AXIS_MM2S_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
     M_AXIS_MM2S_tlast : out STD_LOGIC;
     M_AXIS_MM2S_tready : in STD_LOGIC;
     M_AXIS_MM2S_tvalid : out STD_LOGIC;
@@ -160,12 +214,14 @@ component core_wrapper
     M_AXIS_S2MM_STS_tlast : out STD_LOGIC;
     M_AXIS_S2MM_STS_tready : in STD_LOGIC;
     M_AXIS_S2MM_STS_tvalid : out STD_LOGIC;
-    SYS_CLK_clk_n : in STD_LOGIC;
-    SYS_CLK_clk_p : in STD_LOGIC;
-    S_AXIS_MM2S_CMD_tdata : in STD_LOGIC_VECTOR ( 71 downto 0 );
+    SYS_CLK_0_clk_n : in STD_LOGIC;
+    SYS_CLK_0_clk_p : in STD_LOGIC;
+    SYS_CLK_1_clk_n : in STD_LOGIC;
+    SYS_CLK_1_clk_p : in STD_LOGIC;
+    S_AXIS_MM2S_CMD_tdata : in STD_LOGIC_VECTOR ( 103 downto 0 );
     S_AXIS_MM2S_CMD_tready : out STD_LOGIC;
     S_AXIS_MM2S_CMD_tvalid : in STD_LOGIC;
-    S_AXIS_S2MM_CMD_tdata : in STD_LOGIC_VECTOR ( 71 downto 0 );
+    S_AXIS_S2MM_CMD_tdata : in STD_LOGIC_VECTOR ( 103 downto 0 );
     S_AXIS_S2MM_CMD_tready : out STD_LOGIC;
     S_AXIS_S2MM_CMD_tvalid : in STD_LOGIC;
     S_AXIS_S2MM_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -187,15 +243,12 @@ component core_wrapper
     UART_rxrdyn : out STD_LOGIC;
     UART_txd : out STD_LOGIC;
     UART_txrdyn : out STD_LOGIC;
-    aresetn : out STD_LOGIC_VECTOR ( 0 to 0 );
     clk100 : out STD_LOGIC;
     clk160 : out STD_LOGIC;
-    clk50 : out STD_LOGIC;
-    gpio_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    clk_out3 : out STD_LOGIC
   );
-end component;
+end component core_wrapper;
 
-signal mux_add : std_logic_vector(4 downto 0);
 begin
    
 	-- enter your statements here --
@@ -212,32 +265,49 @@ port map (
     UART_dsrn           => '0',
     UART_ri             => '0',
     
-    gpio_tri_i          => GPIO,
+    --gpio_tri_i          => GPIO,
    
     --Code Mem
-    DDR3_addr       => DDR3_addr,
-    DDR3_ba         => DDR3_ba,
-    DDR3_cas_n      => DDR3_cas_n,
-    DDR3_ck_n       => DDR3_ck_n,
-    DDR3_ck_p       => DDR3_ck_p,
-    DDR3_cke        => DDR3_cke,
-    DDR3_dm         => DDR3_dm,
-    DDR3_dq         => DDR3_dq,
-    DDR3_dqs_n      => DDR3_dqs_n,
-    DDR3_dqs_p      => DDR3_dqs_p,
-    DDR3_odt        => DDR3_odt,
-    DDR3_ras_n      => DDR3_ras_n,
-    DDR3_reset_n    => DDR3_reset_n,
-    DDR3_we_n       => DDR3_we_n,
+    DIMM0_addr       => DIMM0_addr,
+    DIMM0_ba         => DIMM0_ba,
+    DIMM0_cas_n      => DIMM0_cas_n,
+    DIMM0_ck_n       => DIMM0_ck_n,
+    DIMM0_ck_p       => DIMM0_ck_p,
+    DIMM0_cke        => DIMM0_cke,
+    DIMM0_dm         => DIMM0_dm,
+    DIMM0_dq         => DIMM0_dq,
+    DIMM0_dqs_n      => DIMM0_dqs_n,
+    DIMM0_dqs_p      => DIMM0_dqs_p,
+    DIMM0_odt        => DIMM0_odt,
+    DIMM0_ras_n      => DIMM0_ras_n,
+    DIMM0_reset_n    => DIMM0_reset_n,
+    DIMM0_we_n       => DIMM0_we_n,
+    
+    DIMM1_addr       => DIMM1_addr,
+    DIMM1_ba         => DIMM1_ba,
+    DIMM1_cas_n      => DIMM1_cas_n,
+    DIMM1_ck_n       => DIMM1_ck_n,
+    DIMM1_ck_p       => DIMM1_ck_p,
+    DIMM1_cke        => DIMM1_cke,
+    DIMM1_dm         => DIMM1_dm,
+    DIMM1_dq         => DIMM1_dq,
+    DIMM1_dqs_n      => DIMM1_dqs_n,
+    DIMM1_dqs_p      => DIMM1_dqs_p,
+    DIMM1_odt        => DIMM1_odt,
+    DIMM1_ras_n      => DIMM1_ras_n,
+    DIMM1_reset_n    => DIMM1_reset_n,
+    DIMM1_we_n       => DIMM1_we_n,
 
     aresetn(0) => ARESETN,
     clk100     => clk_100,     
     clk160     => clk_160,
-    clk50     => clk_50,      
 
-	SYS_CLK_clk_n => SYS_CLK_0_N,
-    SYS_CLK_clk_p => SYS_CLK_0_P,
-     
+
+	SYS_CLK_0_clk_n => DIMM0_CLK_N,
+    SYS_CLK_0_clk_p => DIMM0_CLK_P,
+    
+	SYS_CLK_1_clk_n => DIMM1_CLK_N,
+    SYS_CLK_1_clk_p => DIMM1_CLK_P,    
   
     -- BUFFERING DM INTERFACE
 	M_AXIS_MM2S_tvalid => AXIS_BUF_MM2S_MOSI.TVALID,
@@ -272,46 +342,65 @@ port map (
     M_AXIS_S2MM_STS_tvalid => AXIS_BUF_S2MM_STS_MOSI.TVALID,
     M_AXIS_S2MM_STS_tready => AXIS_BUF_S2MM_STS_MISO.TREADY,
     
-    M_AXIL_DUT_araddr   =>  AXIL_DUT_MOSI.araddr,
-    M_AXIL_DUT_arprot   =>  AXIL_DUT_MOSI.arprot,
-    M_AXIL_DUT_arready(0)  =>  AXIL_DUT_MISO.arready,
-    M_AXIL_DUT_arvalid(0)  =>  AXIL_DUT_MOSI.arvalid,
-    M_AXIL_DUT_awaddr   =>  AXIL_DUT_MOSI.awaddr,
-    M_AXIL_DUT_awprot   =>  AXIL_DUT_MOSI.awprot,
-    M_AXIL_DUT_awready(0)  =>  AXIL_DUT_MISO.awready,
-    M_AXIL_DUT_awvalid(0)  =>  AXIL_DUT_MOSI.awvalid,
-    M_AXIL_DUT_bready(0)   =>  AXIL_DUT_MOSI.bready,
-    M_AXIL_DUT_bresp    =>  AXIL_DUT_MISO.bresp,
-    M_AXIL_DUT_bvalid(0)   =>  AXIL_DUT_MISO.bvalid,
-    M_AXIL_DUT_rdata    =>  AXIL_DUT_MISO.rdata,
-    M_AXIL_DUT_rready(0)   =>  AXIL_DUT_MOSI.rready,
-    M_AXIL_DUT_rresp    =>  AXIL_DUT_MISO.rresp,
-    M_AXIL_DUT_rvalid(0)   =>  AXIL_DUT_MISO.rvalid,
-    M_AXIL_DUT_wdata    =>  AXIL_DUT_MOSI.wdata,
-    M_AXIL_DUT_wready(0)   =>  AXIL_DUT_MISO.wready,
-    M_AXIL_DUT_wstrb    =>  AXIL_DUT_MOSI.wstrb,
-    M_AXIL_DUT_wvalid(0)   =>  AXIL_DUT_MOSI.wvalid,
+    AXIL_BUF_araddr     =>  AXIL_BUF_MOSI.araddr,
+    AXIL_BUF_arprot     =>  AXIL_BUF_MOSI.arprot,
+    AXIL_BUF_arready(0) =>  AXIL_BUF_MISO.arready,
+    AXIL_BUF_arvalid(0) =>  AXIL_BUF_MOSI.arvalid,
+    AXIL_BUF_awaddr     =>  AXIL_BUF_MOSI.awaddr,
+    AXIL_BUF_awprot     =>  AXIL_BUF_MOSI.awprot,
+    AXIL_BUF_awready(0) =>  AXIL_BUF_MISO.awready,
+    AXIL_BUF_awvalid(0) =>  AXIL_BUF_MOSI.awvalid,
+    AXIL_BUF_bready(0)  =>  AXIL_BUF_MOSI.bready,
+    AXIL_BUF_bresp      =>  AXIL_BUF_MISO.bresp,
+    AXIL_BUF_bvalid(0)  =>  AXIL_BUF_MISO.bvalid,
+    AXIL_BUF_rdata      =>  AXIL_BUF_MISO.rdata,
+    AXIL_BUF_rready(0)  =>  AXIL_BUF_MOSI.rready,
+    AXIL_BUF_rresp      =>  AXIL_BUF_MISO.rresp,
+    AXIL_BUF_rvalid(0)  =>  AXIL_BUF_MISO.rvalid,
+    AXIL_BUF_wdata      =>  AXIL_BUF_MOSI.wdata,
+    AXIL_BUF_wready(0)  =>  AXIL_BUF_MISO.wready,
+    AXIL_BUF_wstrb      =>  AXIL_BUF_MOSI.wstrb,
+    AXIL_BUF_wvalid(0)  =>  AXIL_BUF_MOSI.wvalid,
     
+    AXIL_BUF_TABLE_araddr     =>  AXIL_BUF_TABLE_MOSI.araddr,
+    AXIL_BUF_TABLE_arprot     =>  AXIL_BUF_TABLE_MOSI.arprot,
+    AXIL_BUF_TABLE_arready(0) =>  AXIL_BUF_TABLE_MISO.arready,
+    AXIL_BUF_TABLE_arvalid(0) =>  AXIL_BUF_TABLE_MOSI.arvalid,
+    AXIL_BUF_TABLE_awaddr     =>  AXIL_BUF_TABLE_MOSI.awaddr,
+    AXIL_BUF_TABLE_awprot     =>  AXIL_BUF_TABLE_MOSI.awprot,
+    AXIL_BUF_TABLE_awready(0) =>  AXIL_BUF_TABLE_MISO.awready,
+    AXIL_BUF_TABLE_awvalid(0) =>  AXIL_BUF_TABLE_MOSI.awvalid,
+    AXIL_BUF_TABLE_bready(0)  =>  AXIL_BUF_TABLE_MOSI.bready,
+    AXIL_BUF_TABLE_bresp      =>  AXIL_BUF_TABLE_MISO.bresp,
+    AXIL_BUF_TABLE_bvalid(0)  =>  AXIL_BUF_TABLE_MISO.bvalid,
+    AXIL_BUF_TABLE_rdata      =>  AXIL_BUF_TABLE_MISO.rdata,
+    AXIL_BUF_TABLE_rready(0)  =>  AXIL_BUF_TABLE_MOSI.rready,
+    AXIL_BUF_TABLE_rresp      =>  AXIL_BUF_TABLE_MISO.rresp,
+    AXIL_BUF_TABLE_rvalid(0)  =>  AXIL_BUF_TABLE_MISO.rvalid,
+    AXIL_BUF_TABLE_wdata      =>  AXIL_BUF_TABLE_MOSI.wdata,
+    AXIL_BUF_TABLE_wready(0)  =>  AXIL_BUF_TABLE_MISO.wready,
+    AXIL_BUF_TABLE_wstrb      =>  AXIL_BUF_TABLE_MOSI.wstrb,
+    AXIL_BUF_TABLE_wvalid(0)  =>  AXIL_BUF_TABLE_MOSI.wvalid,
     
-    M_AXIL_MGT_araddr   =>  AXIL_MGT_MOSI.araddr,
-    M_AXIL_MGT_arprot   =>  AXIL_MGT_MOSI.arprot,
-    M_AXIL_MGT_arready(0)  =>  AXIL_MGT_MISO.arready,
-    M_AXIL_MGT_arvalid(0)  =>  AXIL_MGT_MOSI.arvalid,
-    M_AXIL_MGT_awaddr   =>  AXIL_MGT_MOSI.awaddr,
-    M_AXIL_MGT_awprot   =>  AXIL_MGT_MOSI.awprot,
-    M_AXIL_MGT_awready(0)  =>  AXIL_MGT_MISO.awready,
-    M_AXIL_MGT_awvalid(0)  =>  AXIL_MGT_MOSI.awvalid,
-    M_AXIL_MGT_bready(0)   =>  AXIL_MGT_MOSI.bready,
-    M_AXIL_MGT_bresp    =>  AXIL_MGT_MISO.bresp,
-    M_AXIL_MGT_bvalid(0)   =>  AXIL_MGT_MISO.bvalid,
-    M_AXIL_MGT_rdata    =>  AXIL_MGT_MISO.rdata,
-    M_AXIL_MGT_rready(0)   =>  AXIL_MGT_MOSI.rready,
-    M_AXIL_MGT_rresp    =>  AXIL_MGT_MISO.rresp,
-    M_AXIL_MGT_rvalid(0)   =>  AXIL_MGT_MISO.rvalid,
-    M_AXIL_MGT_wdata    =>  AXIL_MGT_MOSI.wdata,
-    M_AXIL_MGT_wready(0)   =>  AXIL_MGT_MISO.wready,
-    M_AXIL_MGT_wstrb    =>  AXIL_MGT_MOSI.wstrb,
-    M_AXIL_MGT_wvalid(0)   =>  AXIL_MGT_MOSI.wvalid
+    AXIL_MGT_araddr   =>  AXIL_MGT_MOSI.araddr,
+    AXIL_MGT_arprot   =>  AXIL_MGT_MOSI.arprot,
+    AXIL_MGT_arready(0)  =>  AXIL_MGT_MISO.arready,
+    AXIL_MGT_arvalid(0)  =>  AXIL_MGT_MOSI.arvalid,
+    AXIL_MGT_awaddr   =>  AXIL_MGT_MOSI.awaddr,
+    AXIL_MGT_awprot   =>  AXIL_MGT_MOSI.awprot,
+    AXIL_MGT_awready(0)  =>  AXIL_MGT_MISO.awready,
+    AXIL_MGT_awvalid(0)  =>  AXIL_MGT_MOSI.awvalid,
+    AXIL_MGT_bready(0)   =>  AXIL_MGT_MOSI.bready,
+    AXIL_MGT_bresp    =>  AXIL_MGT_MISO.bresp,
+    AXIL_MGT_bvalid(0)   =>  AXIL_MGT_MISO.bvalid,
+    AXIL_MGT_rdata    =>  AXIL_MGT_MISO.rdata,
+    AXIL_MGT_rready(0)   =>  AXIL_MGT_MOSI.rready,
+    AXIL_MGT_rresp    =>  AXIL_MGT_MISO.rresp,
+    AXIL_MGT_rvalid(0)   =>  AXIL_MGT_MISO.rvalid,
+    AXIL_MGT_wdata    =>  AXIL_MGT_MOSI.wdata,
+    AXIL_MGT_wready(0)   =>  AXIL_MGT_MISO.wready,
+    AXIL_MGT_wstrb    =>  AXIL_MGT_MOSI.wstrb,
+    AXIL_MGT_wvalid(0)   =>  AXIL_MGT_MOSI.wvalid
                                 
     
 
