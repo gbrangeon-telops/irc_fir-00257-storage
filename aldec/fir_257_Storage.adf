@@ -41,7 +41,7 @@ Active_lib=
 WindowVisible=0
 
 [HierarchyViewer]
-HierarchyInformation=core|STRUCTURE|0
+HierarchyInformation=fir_257_top|fir_257_top|0 
 ShowHide=ShowTopLevel
 Selected=
 
@@ -78,7 +78,6 @@ IP/..\..\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_wrapper.vhd=-1
 
 [Files.Data]
 .\..\src\fir_257_top.bde=Block Diagram
-.\src\DUT.vhd=VHDL Source Code
 .\..\xilinx\fir-00257-Storage.srcs\sources_1\bd\core\hdl\core.vhd=VHDL Source Code
 .\..\xilinx\fir-00257-Storage.srcs\sources_1\bd\core\hdl\core_wrapper.vhd=VHDL Source Code
 .\..\src\BD\HDL\bd_wrapper.vhd=VHDL Source Code
@@ -101,15 +100,13 @@ IP/..\..\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_wrapper.vhd=-1
 .\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_funcsim.vhdl=VHDL Source Code
 .\..\IP\AXI4_Stream32_to_64\AXI4_Stream32_to_64_wrapper.vhd=VHDL Source Code
 .\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_wrapper.vhd=VHDL Source Code
-.\compile\mgt_block.vhd=VHDL Source Code
-.\compile\mgt_wrapper.vhd=VHDL Source Code
-.\compile\fir_257_top.vhd=VHDL Source Code
 
-[file_out:MGT/..\..\..\src\MGT\HDL\mgt_wrapper.bde]
-MGT/..\..\compile\mgt_wrapper.vhd=-1
+[file_out:/..\..\src\fir_257_top.bde]
+/..\compile\fir_257_top.vhd=-1
 
 [file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
 MGT/..\..\compile\mgt_block.vhd=-1
 
-[file_out:/..\..\src\fir_257_top.bde]
-/..\compile\fir_257_top.vhd=-1
+[file_out:MGT/..\..\..\src\MGT\HDL\mgt_wrapper.bde]
+MGT/..\..\compile\mgt_wrapper.vhd=-1
+
