@@ -1,5 +1,5 @@
 set root_dir "d:/Telops/fir-00257-Storage"
-set proj_name "fir_00257_MemStorage"
+set proj_name "fir_00257_Storage"
 set proj_dir $root_dir/xilinx/
 set script_dir $root_dir/scripts
 set aldec_dir $root_dir/aldec/compile
@@ -35,6 +35,7 @@ set filelist  [concat $filelist [glob  $aldec_dir/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Fifo/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Utilities/*.vhd]]
+set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Buffering/*.vhd]]
 
 # BD
 set filelist  [concat $filelist [glob  $src_dir/BD/hdl/*.vhd]]
@@ -47,13 +48,30 @@ set filelist  [concat $filelist [glob  $src_dir/MGT/hdl/*.vhd]]
 
 # Add specific contraint
 add_files -fileset constrs_1 $constr_dir
+set_property target_constrs_file $src_dir/Constraints/fir_00257_Target.xdc [current_fileset -constrset]
+reorder_files -fileset constrs_1 -before $src_dir/Constraints/fir_00257_Timing.xdc $src_dir/Constraints/fir_00257_Physical.xdc
+reorder_files -fileset constrs_1 -before $src_dir/Constraints/fir_00257_Target.xdc $src_dir/Constraints/fir_00257_Timing.xdc
 
 #Add filelist to project
 add_files $filelist
 
+#ADD STAND ALONE COMMON HDL SOURCE
+add_files $common_hdl_dir/Utilities/double_sync_vector.vhd
+add_files $common_hdl_dir/Utilities/double_sync.vhd
+add_files $common_hdl_dir/Utilities/sync_reset.vhd
+add_files $common_hdl_dir/Utilities/sync_resetn.vhd
+add_files $common_hdl_dir/gh_vhdl_lib/custom_MSI/gh_PWM.vhd
+add_files $common_hdl_dir/gh_vhdl_lib/custom_MSI/gh_stretch.vhd
+add_files $common_hdl_dir/gh_vhdl_lib/custom_MSI/gh_edge_det.vhd
+add_files $common_hdl_dir/gh_vhdl_lib/custom_MSI/gh_edge_det_xcd.vhd
+add_files $common_hdl_dir/Utilities/err_sync.vhd
+add_files $common_hdl_dir/Utilities/Clk_Divider.vhd
+add_files $common_hdl_dir/Utilities/Clk_Divider_Pulse.vhd
+add_files $common_hdl_dir/RS232/uarts.vhd
+add_files $common_hdl_dir/Utilities/dcm_reset.vhd
+
 #Generate the bloc design
 source $script_dir/gen_bd_core.tcl
-
 
 #create the bd wrapper
 make_wrapper -files [get_files $proj_dir/$proj_name.srcs/sources_1/bd/core/core.bd] -top
@@ -64,6 +82,8 @@ update_ip_catalog
 
 #Set top level design
 set_property top fir_257_top [current_fileset]
+
+set_property generate_synth_checkpoint true [get_files  d:/Telops/fir-00257-Storage/xilinx/fir_00257_Storage.srcs/sources_1/bd/core/core.bd]
 
 update_compile_order -fileset sources_1
 

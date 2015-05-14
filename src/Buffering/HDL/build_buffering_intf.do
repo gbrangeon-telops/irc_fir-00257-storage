@@ -40,12 +40,12 @@ acom "$COMMON\VHDL\Utilities\axis16_merge_axis32.vhd"
 
 #source Buffering
 
-acom "$PROC\src\buffering\hdl\BufferingDefine.vhd"
+acom "$COMMON\VHDL\buffering\BufferingDefine.vhd"
 acom "$BUF_INTF\buffering_fsm.vhd"
 acom -relax "$BUF_INTF\buffering_Ctrl.vhd"
 acom "$STORAGE\IP\buffer_table_ram\buffer_table_ram_funcsim.vhdl"
-acom "$PROC\src\buffering\hdl\axis32_img_sof.vhd"
-acom "$PROC\src\buffering\hdl\axis32_img_eof.vhd"
+acom "$COMMON\VHDL\buffering\axis32_img_sof.vhd"
+acom "$COMMON\VHDL\buffering\axis32_img_eof.vhd"
 acom "$PROC\src\buffering\hdl\moi_source_selector.vhd"
 
 #Top
