@@ -13,20 +13,30 @@ set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
 ############### DCI ###############################
 set_property DCI_CASCADE {32 34} [get_iobanks 33]
 
+####################### Sys clocks #######################
+set_property PACKAGE_PIN C12 [get_ports SYSCLK_0_P]
+#set_property PACKAGE_PIN C11 [get_ports SYSCLK_0_N]
+set_property PACKAGE_PIN AB11 [get_ports SYSCLK_1_P]
+#set_property PACKAGE_PIN AC11 [get_ports SYSCLK_1_N]
+set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_0_P]
+set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_1_P]
+set_property DIFF_TERM FALSE [get_ports SYSCLK_0_P]
+set_property DIFF_TERM FALSE [get_ports SYSCLK_1_P]
+
 ####################### GT reference clock LOC #######################
 set_property PACKAGE_PIN H6 [get_ports RCLKC_P]
-set_property PACKAGE_PIN H5 [get_ports RCLKC_N]
+#set_property PACKAGE_PIN H5 [get_ports RCLKC_N]
 
 ############################### GT LOC ###################################
 set_property PACKAGE_PIN R4 [get_ports {FROM_PROC_P[0]}]
-set_property PACKAGE_PIN R3 [get_ports {FROM_PROC_N[0]}]
+#set_property PACKAGE_PIN R3 [get_ports {FROM_PROC_N[0]}]
 set_property PACKAGE_PIN N4 [get_ports {FROM_PROC_P[1]}]
-set_property PACKAGE_PIN N3 [get_ports {FROM_PROC_N[1]}]
+#set_property PACKAGE_PIN N3 [get_ports {FROM_PROC_N[1]}]
 
 set_property PACKAGE_PIN P2 [get_ports {TO_PROC_P[0]}]
-set_property PACKAGE_PIN P1 [get_ports {TO_PROC_N[0]}]
+#set_property PACKAGE_PIN P1 [get_ports {TO_PROC_N[0]}]
 set_property PACKAGE_PIN M2 [get_ports {TO_PROC_P[1]}]
-set_property PACKAGE_PIN M1 [get_ports {TO_PROC_N[1]}]
+#set_property PACKAGE_PIN M1 [get_ports {TO_PROC_N[1]}]
 
 ################### PROM  ##############################
 set_property PACKAGE_PIN B24 [get_ports PROM_QSPI[0]]
@@ -34,13 +44,13 @@ set_property PACKAGE_PIN A25 [get_ports PROM_QSPI[1]]
 set_property PACKAGE_PIN B22 [get_ports PROM_QSPI[2]]
 set_property PACKAGE_PIN A22 [get_ports PROM_QSPI[3]]
 set_property PACKAGE_PIN C23 [get_ports FCS_B]
-set_property PACKAGE_PIN C8 [get_ports PROM_SCLK]
+#set_property PACKAGE_PIN C8 [get_ports PROM_SCLK]
 
 set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[0]]
 set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[1]]
 set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[2]]
 set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[3]]
-set_property IOSTANDARD LVCMOS15[get_ports FCS_B]
+set_property IOSTANDARD LVCMOS15 [get_ports FCS_B]
 
 
 ################### FPGA COM ######################
@@ -79,6 +89,8 @@ set_property IOSTANDARD LVCMOS15 [get_ports MOI]
 
 
 ################### B32 BUFFER SPARE  ###########################
+#set_property PACKAGE_PIN AF10 [get_ports B32_BUFFER_SPARE_8_P]
+#set_property PACKAGE_PIN AF9 [get_ports B32_BUFFER_SPARE_8_N]
 #set_property PACKAGE_PIN E13 [get_ports B32_BUFFER_SPARE_9_P]
 #set_property PACKAGE_PIN E12 [get_ports B32_BUFFER_SPARE_9_N]
 #set_property PACKAGE_PIN B10 [get_ports B32_BUFFER_SPARE_10_P]
@@ -93,8 +105,6 @@ set_property IOSTANDARD LVCMOS15 [get_ports MOI]
 #set_property PACKAGE_PIN A12 [get_ports B32_BUFFER_SPARE_14_N]
 
 ################### B34 BUFFER SPARE  ###########################
-
-
 set_property PACKAGE_PIN AE12 [get_ports B34_BUFFER_SPARE_2_P]
 set_property PACKAGE_PIN AF12 [get_ports B34_BUFFER_SPARE_2_N]
 set_property PACKAGE_PIN D26 [get_ports B34_BUFFER_SPARE_3_P]
@@ -107,8 +117,18 @@ set_property PACKAGE_PIN AE13 [get_ports B34_BUFFER_SPARE_6_P]
 set_property PACKAGE_PIN AF13 [get_ports B34_BUFFER_SPARE_6_N]
 set_property PACKAGE_PIN K23 [get_ports B34_BUFFER_SPARE_7_P]
 set_property PACKAGE_PIN J23 [get_ports B34_BUFFER_SPARE_7_N]
-set_property PACKAGE_PIN AF10 [get_ports B34_BUFFER_SPARE_8_P]
-set_property PACKAGE_PIN AF9 [get_ports B34_BUFFER_SPARE_8_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_2_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_2_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_3_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_3_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_4_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_4_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_5_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_5_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_6_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_6_N]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_7_P]
+set_property IOSTANDARD LVCMOS15 [get_ports B34_BUFFER_SPARE_7_N]
 
 ################### SDXC  ###########################
 set_property PACKAGE_PIN AE26 [get_ports SDXC_PIN1]
@@ -135,3 +155,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports SDXC_PIN15]
 ################### OTHERS  ###########################
 set_property PACKAGE_PIN AB21 [get_ports CALIB_COMPLETE]
 set_property IOSTANDARD LVCMOS33 [get_ports CALIB_COMPLETE]
+
+set_property PACKAGE_PIN AB22 [get_ports TG_COMPARE_ERROR]
+set_property IOSTANDARD LVCMOS33 [get_ports TG_COMPARE_ERROR]
