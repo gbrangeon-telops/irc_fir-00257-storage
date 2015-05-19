@@ -2,12 +2,39 @@ SCHM0104
 
 HEADER
 {
- FREEID 3177
+ FREEID 3200
  VARIABLES
  {
   #ARCHITECTURE="fir_257_top"
   #BLOCKTABLE_FILE="F:\\Bibliotheque\\Electronique\\Active-HDL\\Cartouche\\#Telops.bde"
   #BLOCKTABLE_INCLUDED="1"
+  #DEFAULT_RANGE0="<range<name=\"dimm0_ddr3_addr\"><left=\"15\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE1="<range<name=\"dimm0_ddr3_ba\"><left=\"2\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE10="<range<name=\"dimm0_ddr3_odt\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE11="<range<name=\"dimm1_ddr3_addr\"><left=\"15\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE12="<range<name=\"dimm1_ddr3_ba\"><left=\"2\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE13="<range<name=\"dimm1_ddr3_ck_n\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE14="<range<name=\"dimm1_ddr3_ck_p\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE15="<range<name=\"dimm1_ddr3_cke\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE16="<range<name=\"dimm1_ddr3_cs_n\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE17="<range<name=\"dimm1_ddr3_dm\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE18="<range<name=\"dimm1_ddr3_dq\"><left=\"63\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE19="<range<name=\"dimm1_ddr3_dqs_n\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE2="<range<name=\"dimm0_ddr3_ck_n\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE20="<range<name=\"dimm1_ddr3_dqs_p\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE21="<range<name=\"dimm1_ddr3_odt\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE22="<range<name=\"from_proc_n\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE23="<range<name=\"from_proc_p\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE24="<range<name=\"prom_qspi\"><left=\"3\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE25="<range<name=\"to_proc_n\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE26="<range<name=\"to_proc_p\"><left=\"0\"><direction=\"to\"><right=\"1\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE3="<range<name=\"dimm0_ddr3_ck_p\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE4="<range<name=\"dimm0_ddr3_cke\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE5="<range<name=\"dimm0_ddr3_cs_n\"><left=\"1\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE6="<range<name=\"dimm0_ddr3_dm\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE7="<range<name=\"dimm0_ddr3_dq\"><left=\"63\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE8="<range<name=\"dimm0_ddr3_dqs_n\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
+  #DEFAULT_RANGE9="<range<name=\"dimm0_ddr3_dqs_p\"><left=\"7\"><direction=\"downto\"><right=\"0\"><initial_value=\"\"><delay=\"\">>"
   #ENTITY="fir_257_top"
   #LANGUAGE="VHDL"
   AUTHOR="Telops"
@@ -6157,7 +6184,7 @@ PAGE ""
  
  BODY
  {
-  TEXT  3154, 0, 0
+  TEXT  3177, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6168,7 +6195,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  3155, 0, 0
+  TEXT  3178, 0, 0
   {
    PAGEALIGN 10
    TEXT "$CREATIONDATE"
@@ -6179,7 +6206,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  3156, 0, 0
+  TEXT  3179, 0, 0
   {
    PAGEALIGN 10
    TEXT "Title:"
@@ -6189,7 +6216,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  3157, 0, 0
+  TEXT  3180, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6201,27 +6228,27 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  LINE  3158, 0, 0
+  LINE  3181, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5874,4356), (6414,4356) )
    FILL (1,(0,0,0),0)
   }
-  LINE  3159, 0, 0
+  LINE  3182, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5874,4356), (5874,4476) )
   }
-  LINE  3160, 0, 0
+  LINE  3183, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (6414,4476), (6414,4236), (5434,4236), (5434,4476), (6414,4476) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  3161, 0, 0
+  TEXT  3184, 0, 0
   {
    PAGEALIGN 10
    TEXT 
@@ -6236,20 +6263,20 @@ PAGE ""
    VAR
    MULTILINE
   }
-  LINE  3162, 0, 0
+  LINE  3185, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5874,4236), (5874,4356) )
   }
-  LINE  3163, 0, 0
+  LINE  3186, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (6414,4236), (6414,4116), (5874,4116), (5874,4236), (6414,4236) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  3164, 0, 0
+  TEXT  3187, 0, 0
   {
    PAGEALIGN 10
    TEXT "$FIRMWARE"
@@ -6260,7 +6287,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  3165, 0, 0
+  TEXT  3188, 0, 0
   {
    PAGEALIGN 10
    TEXT "$AUTHOR"
@@ -6271,7 +6298,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  3166, 0, 0
+  TEXT  3189, 0, 0
   {
    PAGEALIGN 10
    TEXT "$PROJECT"
@@ -6282,7 +6309,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  TEXT  3167, 0, 0
+  TEXT  3190, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6293,7 +6320,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  3168, 0, 0
+  TEXT  3191, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6304,20 +6331,20 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  LINE  3169, 0, 0
+  LINE  3192, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5594,4236), (5594,4356) )
   }
-  LINE  3170, 0, 0
+  LINE  3193, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5434,4356), (5874,4356) )
    FILL (1,(0,0,0),0)
   }
-  TEXT  3171, 0, 0
+  TEXT  3194, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6328,7 +6355,7 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  TEXT  3172, 0, 0
+  TEXT  3195, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 5,1, (0,0,0)
@@ -6339,19 +6366,19 @@ PAGE ""
    COLOR (0,0,0)
    FONT (11,0,0,400,0,0,0,"Arial")
   }
-  LINE  3173, 0, 0
+  LINE  3196, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5594,4356), (5594,4476) )
   }
-  LINE  3174, 0, 0
+  LINE  3197, 0, 0
   {
    PAGEALIGN 10
    OUTLINE 0,1, (128,128,128)
    POINTS ( (5994,4356), (5994,4476) )
   }
-  TEXT  3175, 0, 0
+  TEXT  3198, 0, 0
   {
    PAGEALIGN 10
    TEXT "$REVISION"
@@ -6362,7 +6389,7 @@ PAGE ""
    FONT (11,0,0,400,0,0,0,"Arial")
    UPDATE 0
   }
-  BMPPICT  3176, 0, 0
+  BMPPICT  3199, 0, 0
   {
    PAGEALIGN 10
    RECT (5954,4136,6334,4231)

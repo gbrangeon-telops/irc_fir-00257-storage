@@ -7,8 +7,10 @@ setenv COMMON_HDL "D:\Telops\Common_HDL"
 setenv STORAGE "D:\Telops\FIR-00257-Storage"
 setenv PROC "D:\Telops\FIR-00251-Proc"
 
+#__BEGIN COMPILE BUFFERING
+
 # Package
-acom  "D:\Telops\FIR-00251-Common\VHDL\tel2000pkg.vhd"
+acom  "$COMMON\VHDL\tel2000pkg.vhd"
 
 #common_hdl
 acom "$COMMON_HDL\Utilities\SYNC_RESET.vhd"
@@ -39,16 +41,16 @@ acom "$COMMON\VHDL\axis32_pixel_cnt.vhd"
 acom "$COMMON\VHDL\Utilities\axis16_merge_axis32.vhd"
 
 #source Buffering
-
 acom "$COMMON\VHDL\buffering\BufferingDefine.vhd"
 acom "$BUF_INTF\buffering_fsm.vhd"
 acom -relax "$BUF_INTF\buffering_Ctrl.vhd"
 acom "$STORAGE\IP\buffer_table_ram\buffer_table_ram_funcsim.vhdl"
 acom "$COMMON\VHDL\buffering\axis32_img_sof.vhd"
 acom "$COMMON\VHDL\buffering\axis32_img_eof.vhd"
-acom "$PROC\src\buffering\hdl\moi_source_selector.vhd"
 
 #Top
 acom "$BUF_INTF\buffering.bde"
+
+#__END COMPILE BUFFERING
 
 

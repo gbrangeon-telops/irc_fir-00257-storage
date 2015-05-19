@@ -3,6 +3,8 @@ setActivelib work
 
 setenv MGT "D:\Telops\FIR-00257-Storage\src\mgt"
 
+#__BEGIN COMPILE MGT
+
 #Shared Logic
 
 acom  "$MGT\hdl\exp_mgt_cdc_sync_exdes.vhd"
@@ -19,4 +21,6 @@ acom  "$MGT\hdl\mgt_block.bde"
 
 #MGT Wrapper
 acom  "$MGT\hdl\storage_mgt_wrapper.bde"
+
+#__END COMPILE MGT
 
