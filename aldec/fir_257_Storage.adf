@@ -8,8 +8,8 @@ Current Config=compile
 compile=work
 
 [Library]
-fir_257_Storage=.\fir_257_storage\fir_257_storage\fir_257_storage.LIB
 work=.\src\work\work.lib
+fir_257_storage=.\fir_257_storage\fir_257_storage\fir_257_storage.LIB
 
 [Settings]
 AccessRead=0
@@ -35,9 +35,9 @@ EnableDebug=0
 CompileWithDebug=0
 
 [$LibMap$]
-fir_257_Storage=.
 Active_lib=
 work=.
+fir_257_storage=.
 
 [SpecTracer]
 WindowVisible=0
