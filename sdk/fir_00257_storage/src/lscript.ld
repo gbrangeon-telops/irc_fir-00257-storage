@@ -69,7 +69,7 @@ SECTIONS
    KEEP (*(.ctors))
    __CTOR_END__ = .;
    ___CTORS_END___ = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .dtors : {
    __DTOR_LIST__ = .;
@@ -80,7 +80,7 @@ SECTIONS
    KEEP (*(.dtors))
    PROVIDE(__DTOR_END__ = .);
    PROVIDE(___DTORS_END___ = .);
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .rodata : {
    __rodata_start = .;
@@ -88,7 +88,7 @@ SECTIONS
    *(.rodata.*)
    *(.gnu.linkonce.r.*)
    __rodata_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .sdata2 : {
    . = ALIGN(8);
@@ -98,7 +98,7 @@ SECTIONS
    *(.gnu.linkonce.s2.*)
    . = ALIGN(8);
    __sdata2_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .sbss2 : {
    __sbss2_start = .;
@@ -106,7 +106,7 @@ SECTIONS
    *(.sbss2.*)
    *(.gnu.linkonce.sb2.*)
    __sbss2_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .data : {
    . = ALIGN(4);
@@ -115,31 +115,31 @@ SECTIONS
    *(.data.*)
    *(.gnu.linkonce.d.*)
    __data_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .got : {
    *(.got)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .got1 : {
    *(.got1)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .got2 : {
    *(.got2)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .eh_frame : {
    *(.eh_frame)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .jcr : {
    *(.jcr)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .gcc_except_table : {
    *(.gcc_except_table)
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .sdata : {
    . = ALIGN(8);
@@ -148,7 +148,7 @@ SECTIONS
    *(.sdata.*)
    *(.gnu.linkonce.s.*)
    __sdata_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .sbss (NOLOAD) : {
    . = ALIGN(4);
@@ -158,7 +158,7 @@ SECTIONS
    *(.gnu.linkonce.sb.*)
    . = ALIGN(8);
    __sbss_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .tdata : {
    __tdata_start = .;
@@ -166,7 +166,7 @@ SECTIONS
    *(.tdata.*)
    *(.gnu.linkonce.td.*)
    __tdata_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .tbss : {
    __tbss_start = .;
@@ -174,7 +174,7 @@ SECTIONS
    *(.tbss.*)
    *(.gnu.linkonce.tb.*)
    __tbss_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .bss (NOLOAD) : {
    . = ALIGN(4);
@@ -185,7 +185,7 @@ SECTIONS
    *(COMMON)
    . = ALIGN(4);
    __bss_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 _SDA_BASE_ = __sdata_start + ((__sbss_end - __sdata_start) / 2 );
 
@@ -199,7 +199,7 @@ _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2 );
    _heap_start = .;
    . += _HEAP_SIZE;
    _heap_end = .;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 .stack (NOLOAD) : {
    _stack_end = .;
@@ -207,7 +207,7 @@ _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2 );
    . = ALIGN(8);
    _stack = .;
    __stack = _stack;
-} > MemoryBuffer_dimm1_ctrl
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
 
 _end = .;
 }
