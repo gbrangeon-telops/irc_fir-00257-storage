@@ -941,27 +941,26 @@ proc create_root_design { parentCell } {
   set DIMM0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DIMM0 ]
   set DIMM1 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DIMM1 ]
   set M_AXIS_MM2S [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {160000000}  ] $M_AXIS_MM2S
   set M_AXIS_MM2S_STS [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S_STS ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {160000000}  ] $M_AXIS_MM2S_STS
   set M_AXIS_S2MM_STS [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_S2MM_STS ]
-  set_property -dict [ list CONFIG.FREQ_HZ {160000000}  ] $M_AXIS_S2MM_STS
   set QSPI [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:spi_rtl:1.0 QSPI ]
   set STARTUP_IO [ create_bd_intf_port -mode Master -vlnv xilinx.com:display_startup_io:startup_io_rtl:1.0 STARTUP_IO ]
   set SYS_CLK_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_0 ]
   set SYS_CLK_1 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_1 ]
   set S_AXIS_MM2S_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_MM2S_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {160000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
+  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
   set S_AXIS_S2MM [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {160000000} CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {4} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM
+  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {4} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM
   set S_AXIS_S2MM_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {160000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
+  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
   set UART [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 UART ]
 
   # Create ports
   set ARESETN [ create_bd_port -dir O -from 0 -to 0 -type rst ARESETN ]
   set clk100 [ create_bd_port -dir O -type clk clk100 ]
+  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {AXIL_MGT:AXIL_BUF:AXIL_BUF_TABLE}  ] $clk100
   set clk160 [ create_bd_port -dir O -type clk clk160 ]
+  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {S_AXIS_MM2S_CMD:M_AXIS_MM2S:M_AXIS_MM2S_STS:S_AXIS_S2MM_CMD:S_AXIS_S2MM:M_AXIS_S2MM_STS}  ] $clk160
   set clk_50 [ create_bd_port -dir O -type clk clk_50 ]
   set dimm0_init_calib_complete [ create_bd_port -dir O dimm0_init_calib_complete ]
   set dimm1_init_calib_complete [ create_bd_port -dir O dimm1_init_calib_complete ]
@@ -975,6 +974,9 @@ proc create_root_design { parentCell } {
   # Create instance: MemoryBuffer
   create_hier_cell_MemoryBuffer [current_bd_instance .] MemoryBuffer
 
+  # Create instance: VCC, and set properties
+  set VCC [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 VCC ]
+
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
   set_property -dict [ list CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_GPIO_WIDTH {4}  ] $axi_gpio_0
@@ -985,14 +987,14 @@ proc create_root_design { parentCell } {
 
   # Create instance: axi_quad_spi_0, and set properties
   set axi_quad_spi_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_quad_spi:3.2 axi_quad_spi_0 ]
-  set_property -dict [ list CONFIG.C_FIFO_DEPTH {16} CONFIG.C_SCK_RATIO {2} CONFIG.C_SPI_MEMORY {2} CONFIG.C_SPI_MODE {2} CONFIG.C_USE_STARTUP {1}  ] $axi_quad_spi_0
+  set_property -dict [ list CONFIG.C_FIFO_DEPTH {16} CONFIG.C_SPI_MEMORY {2} CONFIG.C_SPI_MODE {2} CONFIG.C_USE_STARTUP {1}  ] $axi_quad_spi_0
 
   # Create instance: axi_uart_fpga_output, and set properties
   set axi_uart_fpga_output [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uart16550:2.0 axi_uart_fpga_output ]
 
   # Create instance: clk_wiz_1, and set properties
   set clk_wiz_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.1 clk_wiz_1 ]
-  set_property -dict [ list CONFIG.CLKIN2_JITTER_PS {166.66} CONFIG.CLKOUT1_JITTER {144.719} CONFIG.CLKOUT1_PHASE_ERROR {114.212} CONFIG.CLKOUT2_JITTER {131.841} CONFIG.CLKOUT2_PHASE_ERROR {114.212} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {160.000} CONFIG.CLKOUT2_USED {true} CONFIG.CLKOUT3_JITTER {167.017} CONFIG.CLKOUT3_PHASE_ERROR {114.212} CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {50.000} CONFIG.CLKOUT3_USED {true} CONFIG.MMCM_CLKOUT2_DIVIDE {16} CONFIG.NUM_OUT_CLKS {3} CONFIG.PRIM_SOURCE {Global_buffer} CONFIG.RESET_PORT {reset} CONFIG.RESET_TYPE {ACTIVE_HIGH} CONFIG.USE_INCLK_SWITCHOVER {false}  ] $clk_wiz_1
+  set_property -dict [ list CONFIG.CLKIN2_JITTER_PS {166.66} CONFIG.CLKOUT1_JITTER {144.719} CONFIG.CLKOUT1_PHASE_ERROR {114.212} CONFIG.CLKOUT2_JITTER {131.841} CONFIG.CLKOUT2_PHASE_ERROR {114.212} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {160.000} CONFIG.CLKOUT2_USED {true} CONFIG.CLKOUT3_JITTER {167.017} CONFIG.CLKOUT3_PHASE_ERROR {114.212} CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {50.000} CONFIG.CLKOUT3_USED {true} CONFIG.NUM_OUT_CLKS {3} CONFIG.PRIM_SOURCE {Global_buffer} CONFIG.RESET_TYPE {ACTIVE_HIGH} CONFIG.USE_INCLK_SWITCHOVER {false}  ] $clk_wiz_1
 
   # Create instance: rst_clk_wiz_1_100M, and set properties
   set rst_clk_wiz_1_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_clk_wiz_1_100M ]
@@ -1032,6 +1034,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net MemoryBuffer_init_calib_complete1 [get_bd_ports dimm1_init_calib_complete] [get_bd_pins MemoryBuffer/init_calib_complete1]
   connect_bd_net -net MemoryBuffer_ui_clk [get_bd_pins MemoryBuffer/ui_clk] [get_bd_pins clk_wiz_1/clk_in1]
   connect_bd_net -net MemoryBuffer_ui_clk_rst [get_bd_pins MemoryBuffer/ui_clk_rst] [get_bd_pins clk_wiz_1/reset]
+  connect_bd_net -net VCC_dout [get_bd_pins VCC/dout] [get_bd_pins rst_clk_wiz_1_100M/aux_reset_in] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
   connect_bd_net -net axi_quad_spi_0_ip2intc_irpt [get_bd_pins INTC/qspi_intc] [get_bd_pins axi_quad_spi_0/ip2intc_irpt]
   connect_bd_net -net axi_uart_fpga_output_ip2intc_irpt [get_bd_pins INTC/uart_intc] [get_bd_pins axi_uart_fpga_output/ip2intc_irpt]
   connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_ports clk160] [get_bd_pins MemoryBuffer/aclk160] [get_bd_pins clk_wiz_1/clk_out2]
