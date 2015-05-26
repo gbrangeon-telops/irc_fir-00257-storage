@@ -29,7 +29,9 @@ int main()  // Defining the standard main() function
     while(1)
     {
         AXI4L_write32(cnt, XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
-        read_data = AXI4L_read32(cnt);
+        read_data = AXI4L_read32(XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
         cnt += 4;
+        if (cnt >= 0xFFFF)
+        	cnt = 0;
     }
 }
