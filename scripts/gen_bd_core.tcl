@@ -974,8 +974,8 @@ proc create_root_design { parentCell } {
   # Create instance: MemoryBuffer
   create_hier_cell_MemoryBuffer [current_bd_instance .] MemoryBuffer
 
-  # Create instance: VCC, and set properties
-  set VCC [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 VCC ]
+  # Create instance: vcc_1, and set properties
+  set vcc_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 vcc_1 ]
 
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
@@ -1034,7 +1034,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net MemoryBuffer_init_calib_complete1 [get_bd_ports dimm1_init_calib_complete] [get_bd_pins MemoryBuffer/init_calib_complete1]
   connect_bd_net -net MemoryBuffer_ui_clk [get_bd_pins MemoryBuffer/ui_clk] [get_bd_pins clk_wiz_1/clk_in1]
   connect_bd_net -net MemoryBuffer_ui_clk_rst [get_bd_pins MemoryBuffer/ui_clk_rst] [get_bd_pins clk_wiz_1/reset]
-  connect_bd_net -net VCC_dout [get_bd_pins VCC/dout] [get_bd_pins rst_clk_wiz_1_100M/aux_reset_in] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
+  connect_bd_net -net vcc_1_dout [get_bd_pins vcc_1/dout] [get_bd_pins rst_clk_wiz_1_100M/aux_reset_in] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
   connect_bd_net -net axi_quad_spi_0_ip2intc_irpt [get_bd_pins INTC/qspi_intc] [get_bd_pins axi_quad_spi_0/ip2intc_irpt]
   connect_bd_net -net axi_uart_fpga_output_ip2intc_irpt [get_bd_pins INTC/uart_intc] [get_bd_pins axi_uart_fpga_output/ip2intc_irpt]
   connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_ports clk160] [get_bd_pins MemoryBuffer/aclk160] [get_bd_pins clk_wiz_1/clk_out2]
