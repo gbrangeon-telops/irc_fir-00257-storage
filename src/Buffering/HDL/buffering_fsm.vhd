@@ -24,13 +24,13 @@ entity BUFFERING_FSM is
         ARESETN          : in std_logic;
             
         --DataMover interface
-        AXIS_MM2S_CMD_MOSI  : out t_axi4_stream_mosi72;
+        AXIS_MM2S_CMD_MOSI  : out t_axi4_stream_mosi_cmd64;
         AXIS_MM2S_CMD_MISO  : in t_axi4_stream_miso;
             
         AXIS_MM2S_STS_MOSI  : in t_axi4_stream_mosi_status;
         AXIS_MM2S_STS_MISO  : out t_axi4_stream_miso;
             
-        AXIS_S2MM_CMD_MOSI  : out t_axi4_stream_mosi72;
+        AXIS_S2MM_CMD_MOSI  : out t_axi4_stream_mosi_cmd64;
         AXIS_S2MM_CMD_MISO  : in t_axi4_stream_miso;
             
         AXIS_S2MM_STS_MOSI  : in t_axi4_stream_mosi_status;
@@ -149,8 +149,8 @@ architecture rtl of BUFFERING_FSM is
    --CMD Signal
    signal s_mm2s_cmd_tag : std_logic_vector(3 downto 0) :="0000";
    signal s_s2mm_cmd_tag : std_logic_vector(3 downto 0) :="0000";
-   signal s_mm2s_saddr : std_logic_vector(31 downto 0) := x"00000000";
-   signal s_s2mm_saddr : std_logic_vector(31 downto 0) := x"00000000";
+   signal s_mm2s_saddr : std_logic_vector(63 downto 0) := x"0000000000000000";
+   signal s_s2mm_saddr : std_logic_vector(63 downto 0) := x"0000000000000000";
    signal s_mm2s_eof : std_logic := '0';
    signal s_s2mm_eof : std_logic := '0';
    signal s_mm2s_btt : std_logic_vector(22 downto 0) := x"00000" & b"000";
@@ -173,8 +173,8 @@ architecture rtl of BUFFERING_FSM is
    signal read_img_loc : unsigned(SEQ_IMG_TOTAL'length-1 downto 0) := to_unsigned(0,SEQ_IMG_TOTAL'length); -- Location of the img read 
   
   
-  signal s2mm_cmd_mosi : t_axi4_stream_mosi72 := axi4_stream_mosi72_dflt;
-  signal mm2s_cmd_mosi : t_axi4_stream_mosi72 := axi4_stream_mosi72_dflt;
+  signal s2mm_cmd_mosi : t_axi4_stream_mosi_cmd64;
+  signal mm2s_cmd_mosi : t_axi4_stream_mosi_cmd64;
   signal s2mm_cmd_miso : t_axi4_stream_miso;
   signal mm2s_cmd_miso : t_axi4_stream_miso;
   
@@ -223,18 +223,6 @@ read_stop_id_u <= READ_STOP_ID;
 --Cmd structure generation
 mm2s_cmd_mosi.TDATA <= (c_RSVD & s_mm2s_cmd_tag & s_mm2s_saddr & c_DRR & s_mm2s_eof & c_DSA & c_TYPE & s_mm2s_btt);
 s2mm_cmd_mosi.TDATA <= (c_RSVD & s_s2mm_cmd_tag & s_s2mm_saddr & c_DRR & s_s2mm_eof & c_DSA & c_TYPE & s_s2mm_btt);
-
-mm2s_cmd_mosi.TKEEP <= (others => '0');
-mm2s_cmd_mosi.TUSER <= (others => '0');
-mm2s_cmd_mosi.TID <= (others => '0');
-mm2s_cmd_mosi.TSTRB <= (others => '0');
-mm2s_cmd_mosi.TDEST <= (others => '0');
-
-s2mm_cmd_mosi.TKEEP <= (others => '0');
-s2mm_cmd_mosi.TUSER <= (others => '0');
-s2mm_cmd_mosi.TID <= (others => '0');
-s2mm_cmd_mosi.TSTRB <= (others => '0');
-s2mm_cmd_mosi.TDEST <= (others => '0');
 
 
 AXIS_MM2S_CMD_MOSI <= mm2s_cmd_mosi;

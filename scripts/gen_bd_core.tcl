@@ -672,6 +672,10 @@ proc create_hier_cell_MemoryBuffer { parentCell nameHier } {
   create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S
   create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S_STS
   create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_S2MM_STS
+  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_MM2S
+  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_S2MM
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S00_AXI
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S01_AXI
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S02_AXI
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_0
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_1
@@ -731,14 +735,16 @@ proc create_hier_cell_MemoryBuffer { parentCell nameHier } {
   connect_bd_intf_net -intf_net Conn3 [get_bd_intf_pins DIMM1] [get_bd_intf_pins dimm1_ctrl/DDR3]
   connect_bd_intf_net -intf_net Conn4 [get_bd_intf_pins SYS_CLK_0] [get_bd_intf_pins dimm0_ctrl/SYS_CLK]
   connect_bd_intf_net -intf_net Conn5 [get_bd_intf_pins SYS_CLK_1] [get_bd_intf_pins dimm1_ctrl/SYS_CLK]
+  connect_bd_intf_net -intf_net Conn6 [get_bd_intf_pins M_AXI_MM2S] [get_bd_intf_pins axi_dm_buffer/M_AXI_MM2S]
+  connect_bd_intf_net -intf_net Conn7 [get_bd_intf_pins S00_AXI] [get_bd_intf_pins buffer_interconnect_0/S00_AXI]
+  connect_bd_intf_net -intf_net Conn8 [get_bd_intf_pins M_AXI_S2MM] [get_bd_intf_pins axi_dm_buffer/M_AXI_S2MM]
+  connect_bd_intf_net -intf_net Conn9 [get_bd_intf_pins S01_AXI] [get_bd_intf_pins buffer_interconnect_0/S01_AXI]
   connect_bd_intf_net -intf_net S_AXIS_MM2S_CMD_1 [get_bd_intf_pins S_AXIS_MM2S_CMD] [get_bd_intf_pins axi_dm_buffer/S_AXIS_MM2S_CMD]
   connect_bd_intf_net -intf_net S_AXIS_S2MM_1 [get_bd_intf_pins S_AXIS_S2MM] [get_bd_intf_pins axi_dm_buffer/S_AXIS_S2MM]
   connect_bd_intf_net -intf_net S_AXIS_S2MM_CMD_1 [get_bd_intf_pins S_AXIS_S2MM_CMD] [get_bd_intf_pins axi_dm_buffer/S_AXIS_S2MM_CMD]
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_MM2S [get_bd_intf_pins M_AXIS_MM2S] [get_bd_intf_pins axi_dm_buffer/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_MM2S_STS [get_bd_intf_pins M_AXIS_MM2S_STS] [get_bd_intf_pins axi_dm_buffer/M_AXIS_MM2S_STS]
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_S2MM_STS [get_bd_intf_pins M_AXIS_S2MM_STS] [get_bd_intf_pins axi_dm_buffer/M_AXIS_S2MM_STS]
-  connect_bd_intf_net -intf_net axi_dm_buffer_M_AXI_MM2S [get_bd_intf_pins axi_dm_buffer/M_AXI_MM2S] [get_bd_intf_pins buffer_interconnect_0/S00_AXI]
-  connect_bd_intf_net -intf_net axi_dm_buffer_M_AXI_S2MM [get_bd_intf_pins axi_dm_buffer/M_AXI_S2MM] [get_bd_intf_pins buffer_interconnect_0/S01_AXI]
   connect_bd_intf_net -intf_net buffer_interconnect_0_M00_AXI [get_bd_intf_pins buffer_interconnect_0/M00_AXI] [get_bd_intf_pins dimm0_ctrl/S_AXI]
   connect_bd_intf_net -intf_net buffer_interconnect_0_M01_AXI [get_bd_intf_pins buffer_interconnect_0/M01_AXI] [get_bd_intf_pins dimm1_ctrl/S_AXI]
 
@@ -936,10 +942,23 @@ proc create_root_design { parentCell } {
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_BUF
   set AXIL_BUF_TABLE [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_BUF_TABLE ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_BUF_TABLE
+  set AXIL_MEM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MEM_IN ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {32} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {0} CONFIG.MAX_BURST_LENGTH {1} CONFIG.NUM_READ_OUTSTANDING {1} CONFIG.NUM_WRITE_OUTSTANDING {1} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4LITE} CONFIG.READ_WRITE_MODE {READ_WRITE} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXIL_MEM_IN
+  set AXIL_MEM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MEM_OUT ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_MEM_OUT
   set AXIL_MGT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MGT ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_MGT
+  set AXI_MM2S_DM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_MM2S_DM_IN ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {256} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {READ_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_MM2S_DM_IN
+  set AXI_MM2S_DM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_MM2S_DM_OUT ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.DATA_WIDTH {256} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {READ_ONLY}  ] $AXI_MM2S_DM_OUT
+  set AXI_S2MM_DM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_S2MM_DM_IN ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {256} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {WRITE_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_S2MM_DM_IN
+  set AXI_S2MM_DM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_S2MM_DM_OUT ]
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.DATA_WIDTH {256} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {WRITE_ONLY}  ] $AXI_S2MM_DM_OUT
   set DIMM0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DIMM0 ]
   set DIMM1 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DIMM1 ]
+  set MEM_ADDR_MSB [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 MEM_ADDR_MSB ]
   set M_AXIS_MM2S [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S ]
   set M_AXIS_MM2S_STS [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_MM2S_STS ]
   set M_AXIS_S2MM_STS [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 M_AXIS_S2MM_STS ]
@@ -948,19 +967,19 @@ proc create_root_design { parentCell } {
   set SYS_CLK_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_0 ]
   set SYS_CLK_1 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_1 ]
   set S_AXIS_MM2S_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_MM2S_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
+  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
   set S_AXIS_S2MM [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM ]
   set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {4} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM
   set S_AXIS_S2MM_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {9} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
+  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
   set UART [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 UART ]
 
   # Create ports
   set ARESETN [ create_bd_port -dir O -from 0 -to 0 -type rst ARESETN ]
   set clk100 [ create_bd_port -dir O -type clk clk100 ]
-  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {AXIL_MGT:AXIL_BUF:AXIL_BUF_TABLE}  ] $clk100
+  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {AXIL_MGT:AXIL_BUF:AXIL_BUF_TABLE:AXIL_MEM_IN:AXIL_MEM_OUT}  ] $clk100
   set clk160 [ create_bd_port -dir O -type clk clk160 ]
-  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {S_AXIS_MM2S_CMD:M_AXIS_MM2S:M_AXIS_MM2S_STS:S_AXIS_S2MM_CMD:S_AXIS_S2MM:M_AXIS_S2MM_STS}  ] $clk160
+  set_property -dict [ list CONFIG.ASSOCIATED_BUSIF {S_AXIS_MM2S_CMD:M_AXIS_MM2S:M_AXIS_MM2S_STS:S_AXIS_S2MM_CMD:S_AXIS_S2MM:M_AXIS_S2MM_STS:AXI_MM2S_DM_OUT:AXI_S2MM_DM_OUT:AXI_MM2S_DM_IN:AXI_S2MM_DM_IN}  ] $clk160
   set clk_50 [ create_bd_port -dir O -type clk clk_50 ]
   set dimm0_init_calib_complete [ create_bd_port -dir O dimm0_init_calib_complete ]
   set dimm1_init_calib_complete [ create_bd_port -dir O dimm1_init_calib_complete ]
@@ -974,12 +993,9 @@ proc create_root_design { parentCell } {
   # Create instance: MemoryBuffer
   create_hier_cell_MemoryBuffer [current_bd_instance .] MemoryBuffer
 
-  # Create instance: vcc_1, and set properties
-  set vcc_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 vcc_1 ]
-
   # Create instance: axi_gpio_0, and set properties
   set axi_gpio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0 ]
-  set_property -dict [ list CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_GPIO_WIDTH {4}  ] $axi_gpio_0
+  set_property -dict [ list CONFIG.C_ALL_OUTPUTS {1} CONFIG.C_GPIO_WIDTH {5}  ] $axi_gpio_0
 
   # Create instance: axi_interconnect_0, and set properties
   set axi_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0 ]
@@ -999,6 +1015,9 @@ proc create_root_design { parentCell } {
   # Create instance: rst_clk_wiz_1_100M, and set properties
   set rst_clk_wiz_1_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_clk_wiz_1_100M ]
 
+  # Create instance: vcc_1, and set properties
+  set vcc_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 vcc_1 ]
+
   # Create instance: xadc_wiz_0, and set properties
   set xadc_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xadc_wiz:3.0 xadc_wiz_0 ]
   set_property -dict [ list CONFIG.ENABLE_TEMP_BUS {true}  ] $xadc_wiz_0
@@ -1006,7 +1025,12 @@ proc create_root_design { parentCell } {
   # Create interface connections
   connect_bd_intf_net -intf_net MemoryBuffer_DDR3 [get_bd_intf_ports DIMM0] [get_bd_intf_pins MemoryBuffer/DIMM0]
   connect_bd_intf_net -intf_net MemoryBuffer_DDR4 [get_bd_intf_ports DIMM1] [get_bd_intf_pins MemoryBuffer/DIMM1]
+  connect_bd_intf_net -intf_net MemoryBuffer_M_AXI_MM2S [get_bd_intf_ports AXI_MM2S_DM_OUT] [get_bd_intf_pins MemoryBuffer/M_AXI_MM2S]
+  connect_bd_intf_net -intf_net MemoryBuffer_M_AXI_S2MM [get_bd_intf_ports AXI_S2MM_DM_OUT] [get_bd_intf_pins MemoryBuffer/M_AXI_S2MM]
   connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_pins MCU/M_AXI_DP] [get_bd_intf_pins axi_interconnect_0/S00_AXI]
+  connect_bd_intf_net -intf_net S00_AXI_2 [get_bd_intf_ports AXI_MM2S_DM_IN] [get_bd_intf_pins MemoryBuffer/S00_AXI]
+  connect_bd_intf_net -intf_net S01_AXI_1 [get_bd_intf_ports AXI_S2MM_DM_IN] [get_bd_intf_pins MemoryBuffer/S01_AXI]
+  connect_bd_intf_net -intf_net S02_AXI_1 [get_bd_intf_ports AXIL_MEM_IN] [get_bd_intf_pins MemoryBuffer/S02_AXI]
   connect_bd_intf_net -intf_net SYS_CLK_1 [get_bd_intf_ports SYS_CLK_0] [get_bd_intf_pins MemoryBuffer/SYS_CLK_0]
   connect_bd_intf_net -intf_net SYS_CLK_1_1 [get_bd_intf_ports SYS_CLK_1] [get_bd_intf_pins MemoryBuffer/SYS_CLK_1]
   connect_bd_intf_net -intf_net S_AXIS_MM2S_CMD_1 [get_bd_intf_ports S_AXIS_MM2S_CMD] [get_bd_intf_pins MemoryBuffer/S_AXIS_MM2S_CMD]
@@ -1015,11 +1039,12 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_MM2S [get_bd_intf_ports M_AXIS_MM2S] [get_bd_intf_pins MemoryBuffer/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_MM2S_STS [get_bd_intf_ports M_AXIS_MM2S_STS] [get_bd_intf_pins MemoryBuffer/M_AXIS_MM2S_STS]
   connect_bd_intf_net -intf_net axi_dm_buffer_M_AXIS_S2MM_STS [get_bd_intf_ports M_AXIS_S2MM_STS] [get_bd_intf_pins MemoryBuffer/M_AXIS_S2MM_STS]
+  connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports MEM_ADDR_MSB] [get_bd_intf_pins axi_gpio_0/GPIO]
   connect_bd_intf_net -intf_net axi_interconnect_0_M00_AXI [get_bd_intf_pins INTC/s_axi] [get_bd_intf_pins axi_interconnect_0/M00_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_0_M01_AXI [get_bd_intf_pins axi_interconnect_0/M01_AXI] [get_bd_intf_pins xadc_wiz_0/s_axi_lite]
   connect_bd_intf_net -intf_net axi_interconnect_0_M02_AXI [get_bd_intf_pins axi_interconnect_0/M02_AXI] [get_bd_intf_pins axi_uart_fpga_output/S_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_0_M03_AXI [get_bd_intf_pins axi_gpio_0/S_AXI] [get_bd_intf_pins axi_interconnect_0/M03_AXI]
-  connect_bd_intf_net -intf_net axi_interconnect_0_M04_AXI [get_bd_intf_pins MemoryBuffer/S02_AXI] [get_bd_intf_pins axi_interconnect_0/M04_AXI]
+  connect_bd_intf_net -intf_net axi_interconnect_0_M04_AXI [get_bd_intf_ports AXIL_MEM_OUT] [get_bd_intf_pins axi_interconnect_0/M04_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_0_M05_AXI [get_bd_intf_ports AXIL_BUF] [get_bd_intf_pins axi_interconnect_0/M05_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_0_M06_AXI [get_bd_intf_ports AXIL_MGT] [get_bd_intf_pins axi_interconnect_0/M06_AXI]
   connect_bd_intf_net -intf_net axi_interconnect_0_M07_AXI [get_bd_intf_ports AXIL_BUF_TABLE] [get_bd_intf_pins axi_interconnect_0/M07_AXI]
@@ -1034,7 +1059,6 @@ proc create_root_design { parentCell } {
   connect_bd_net -net MemoryBuffer_init_calib_complete1 [get_bd_ports dimm1_init_calib_complete] [get_bd_pins MemoryBuffer/init_calib_complete1]
   connect_bd_net -net MemoryBuffer_ui_clk [get_bd_pins MemoryBuffer/ui_clk] [get_bd_pins clk_wiz_1/clk_in1]
   connect_bd_net -net MemoryBuffer_ui_clk_rst [get_bd_pins MemoryBuffer/ui_clk_rst] [get_bd_pins clk_wiz_1/reset]
-  connect_bd_net -net vcc_1_dout [get_bd_pins vcc_1/dout] [get_bd_pins rst_clk_wiz_1_100M/aux_reset_in] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
   connect_bd_net -net axi_quad_spi_0_ip2intc_irpt [get_bd_pins INTC/qspi_intc] [get_bd_pins axi_quad_spi_0/ip2intc_irpt]
   connect_bd_net -net axi_uart_fpga_output_ip2intc_irpt [get_bd_pins INTC/uart_intc] [get_bd_pins axi_uart_fpga_output/ip2intc_irpt]
   connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_ports clk160] [get_bd_pins MemoryBuffer/aclk160] [get_bd_pins clk_wiz_1/clk_out2]
@@ -1046,27 +1070,29 @@ proc create_root_design { parentCell } {
   connect_bd_net -net rst_clk_wiz_1_100M_interconnect_aresetn [get_bd_pins MemoryBuffer/ARESETN] [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins rst_clk_wiz_1_100M/interconnect_aresetn]
   connect_bd_net -net rst_clk_wiz_1_100M_mb_reset [get_bd_pins INTC/processor_rst] [get_bd_pins MCU/processor_rst] [get_bd_pins rst_clk_wiz_1_100M/mb_reset]
   connect_bd_net -net rst_clk_wiz_1_100M_peripheral_aresetn [get_bd_ports ARESETN] [get_bd_pins INTC/s_axi_aresetn] [get_bd_pins MCU/s_axi_aresetn] [get_bd_pins MemoryBuffer/m_axis_s2mm_cmdsts_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_quad_spi_0/s_axi_aresetn] [get_bd_pins axi_uart_fpga_output/s_axi_aresetn] [get_bd_pins rst_clk_wiz_1_100M/peripheral_aresetn] [get_bd_pins xadc_wiz_0/s_axi_aresetn]
+  connect_bd_net -net vcc_1_dout [get_bd_pins rst_clk_wiz_1_100M/aux_reset_in] [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in] [get_bd_pins vcc_1/dout]
   connect_bd_net -net xadc_wiz_0_ip2intc_irpt [get_bd_pins INTC/xadc_intc] [get_bd_pins xadc_wiz_0/ip2intc_irpt]
   connect_bd_net -net xadc_wiz_0_temp_out [get_bd_pins MemoryBuffer/device_temp_i] [get_bd_pins xadc_wiz_0/temp_out]
 
   # Create address segments
   create_bd_addr_seg -range 0x10000 -offset 0x0 [get_bd_addr_spaces MCU/mdm_1/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB1/Mem] SEG_dlmb_bram_if_cntlr_Mem
-  create_bd_addr_seg -range 0x10000 -offset 0x44A10000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF/Reg] SEG_AXIL_BUF_Reg
-  create_bd_addr_seg -range 0x10000 -offset 0x44A30000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF_TABLE/Reg] SEG_AXIL_BUF_TABLE_Reg
-  create_bd_addr_seg -range 0x10000 -offset 0x44A20000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MGT/Reg] SEG_AXIL_MGT_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x40000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] SEG_axi_gpio_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x44A40000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x40400000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_uart_fpga_output/S_AXI/Reg] SEG_axi_uart_fpga_output_Reg
-  create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
-  create_bd_addr_seg -range 0x20000000 -offset 0x20000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
   create_bd_addr_seg -range 0x10000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x10000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Instruction] [get_bd_addr_segs MCU/microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x10000 -offset 0x41200000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs INTC/microblaze_0_axi_intc/s_axi/Reg] SEG_microblaze_0_axi_intc_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x44A00000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs xadc_wiz_0/s_axi_lite/Reg] SEG_xadc_wiz_0_Reg
-  create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MemoryBuffer/axi_dm_buffer/Data_MM2S] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
-  create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MemoryBuffer/axi_dm_buffer/Data_S2MM] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
-  create_bd_addr_seg -range 0x20000000 -offset 0x20000000 [get_bd_addr_spaces MemoryBuffer/axi_dm_buffer/Data_MM2S] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
-  create_bd_addr_seg -range 0x20000000 -offset 0x20000000 [get_bd_addr_spaces MemoryBuffer/axi_dm_buffer/Data_S2MM] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
+  create_bd_addr_seg -range 0x10000 -offset 0x44A10000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF/Reg] TEL_AXIL_BUF
+  create_bd_addr_seg -range 0x10000 -offset 0x44A30000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF_TABLE/Reg] TEL_AXIL_BUF_TABLE
+  create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MEM_OUT/Reg] TEL_AXIL_MEM_OUT
+  create_bd_addr_seg -range 0x10000 -offset 0x44A20000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MGT/Reg] TEL_AXIL_MGT
+  create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXI_MM2S_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXI_S2MM_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXI_MM2S_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXI_S2MM_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
   
 
   # Restore current instance

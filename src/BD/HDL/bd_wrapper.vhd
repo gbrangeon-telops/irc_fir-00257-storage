@@ -192,23 +192,23 @@ component core_wrapper
       AXIL_MEM_IN_wvalid : in STD_LOGIC;
       AXIL_MEM_OUT_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
       AXIL_MEM_OUT_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-      AXIL_MEM_OUT_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
-      AXIL_MEM_OUT_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_arready : in STD_LOGIC;
+      AXIL_MEM_OUT_arvalid : out STD_LOGIC;
       AXIL_MEM_OUT_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
       AXIL_MEM_OUT_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
-      AXIL_MEM_OUT_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
-      AXIL_MEM_OUT_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
-      AXIL_MEM_OUT_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_awready : in STD_LOGIC;
+      AXIL_MEM_OUT_awvalid : out STD_LOGIC;
+      AXIL_MEM_OUT_bready : out STD_LOGIC;
       AXIL_MEM_OUT_bresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-      AXIL_MEM_OUT_bvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_bvalid : in STD_LOGIC;
       AXIL_MEM_OUT_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-      AXIL_MEM_OUT_rready : out STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_rready : out STD_LOGIC;
       AXIL_MEM_OUT_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 );
-      AXIL_MEM_OUT_rvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_rvalid : in STD_LOGIC;
       AXIL_MEM_OUT_wdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-      AXIL_MEM_OUT_wready : in STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_wready : in STD_LOGIC;
       AXIL_MEM_OUT_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
-      AXIL_MEM_OUT_wvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
+      AXIL_MEM_OUT_wvalid : out STD_LOGIC;
       AXIL_MGT_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
       AXIL_MGT_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
       AXIL_MGT_arready : in STD_LOGIC;
@@ -231,6 +231,7 @@ component core_wrapper
       AXI_MM2S_DM_IN_araddr : in STD_LOGIC_VECTOR ( 63 downto 0 );
       AXI_MM2S_DM_IN_arburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
       AXI_MM2S_DM_IN_arcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
+      AXI_MM2S_DM_IN_arid : in STD_LOGIC_VECTOR ( 3 downto 0 );
       AXI_MM2S_DM_IN_arlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
       AXI_MM2S_DM_IN_arlock : in STD_LOGIC_VECTOR ( 0 to 0 );
       AXI_MM2S_DM_IN_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -240,6 +241,7 @@ component core_wrapper
       AXI_MM2S_DM_IN_arsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
       AXI_MM2S_DM_IN_arvalid : in STD_LOGIC;
       AXI_MM2S_DM_IN_rdata : out STD_LOGIC_VECTOR ( 255 downto 0 );
+      AXI_MM2S_DM_IN_rid : out STD_LOGIC_VECTOR ( 3 downto 0 );
       AXI_MM2S_DM_IN_rlast : out STD_LOGIC;
       AXI_MM2S_DM_IN_rready : in STD_LOGIC;
       AXI_MM2S_DM_IN_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -262,6 +264,7 @@ component core_wrapper
       AXI_S2MM_DM_IN_awaddr : in STD_LOGIC_VECTOR ( 63 downto 0 );
       AXI_S2MM_DM_IN_awburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
       AXI_S2MM_DM_IN_awcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
+      AXI_S2MM_DM_IN_awid : in STD_LOGIC_VECTOR ( 3 downto 0 );
       AXI_S2MM_DM_IN_awlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
       AXI_S2MM_DM_IN_awlock : in STD_LOGIC_VECTOR ( 0 to 0 );
       AXI_S2MM_DM_IN_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -270,6 +273,7 @@ component core_wrapper
       AXI_S2MM_DM_IN_awregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
       AXI_S2MM_DM_IN_awsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
       AXI_S2MM_DM_IN_awvalid : in STD_LOGIC;
+      AXI_S2MM_DM_IN_bid : out STD_LOGIC_VECTOR ( 3 downto 0 );
       AXI_S2MM_DM_IN_bready : in STD_LOGIC;
       AXI_S2MM_DM_IN_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
       AXI_S2MM_DM_IN_bvalid : out STD_LOGIC;
@@ -612,14 +616,16 @@ port map (
     AXI_S2MM_DM_IN_awaddr => AXI_S2MM_DM_IN_MOSI.awaddr,
     AXI_S2MM_DM_IN_awburst => AXI_S2MM_DM_IN_MOSI.awburst,
     AXI_S2MM_DM_IN_awcache => AXI_S2MM_DM_IN_MOSI.awcache,
+    AXI_S2MM_DM_IN_awid => AXI_S2MM_DM_IN_MOSI.awid,
     AXI_S2MM_DM_IN_awlen => AXI_S2MM_DM_IN_MOSI.awlen,
-    AXI_S2MM_DM_IN_awlock => AXI_S2MM_DM_IN_MOSI.awlock,
+    AXI_S2MM_DM_IN_awlock => (others => '0'),
     AXI_S2MM_DM_IN_awprot => AXI_S2MM_DM_IN_MOSI.awprot,
-    AXI_S2MM_DM_IN_awqos => AXI_S2MM_DM_IN_MOSI.awqos,
+    AXI_S2MM_DM_IN_awqos => (others => '0'),
     AXI_S2MM_DM_IN_awready => AXI_S2MM_DM_IN_MISO.awready,
-    AXI_S2MM_DM_IN_awregion => AXI_S2MM_DM_IN_MOSI.awregion,
+    AXI_S2MM_DM_IN_awregion => (others => '0'),
     AXI_S2MM_DM_IN_awsize => AXI_S2MM_DM_IN_MOSI.awsize,
     AXI_S2MM_DM_IN_awvalid => AXI_S2MM_DM_IN_MOSI.awvalid,
+    AXI_S2MM_DM_IN_bid => open,
     AXI_S2MM_DM_IN_bready => AXI_S2MM_DM_IN_MOSI.bready,
     AXI_S2MM_DM_IN_bresp => AXI_S2MM_DM_IN_MISO.bresp,
     AXI_S2MM_DM_IN_bvalid => AXI_S2MM_DM_IN_MISO.bvalid,
@@ -648,15 +654,17 @@ port map (
     AXI_MM2S_DM_IN_araddr => AXI_MM2S_DM_IN_MOSI.araddr,
     AXI_MM2S_DM_IN_arburst => AXI_MM2S_DM_IN_MOSI.arburst,
     AXI_MM2S_DM_IN_arcache => AXI_MM2S_DM_IN_MOSI.arcache,
+    AXI_MM2S_DM_IN_arid => AXI_MM2S_DM_IN_MOSI.arid,
     AXI_MM2S_DM_IN_arlen => AXI_MM2S_DM_IN_MOSI.arlen,
-    AXI_MM2S_DM_IN_arlock => AXI_MM2S_DM_IN_MOSI.arlock,
+    AXI_MM2S_DM_IN_arlock => (others => '0'),
     AXI_MM2S_DM_IN_arprot => AXI_MM2S_DM_IN_MOSI.arprot,
-    AXI_MM2S_DM_IN_arqos => AXI_MM2S_DM_IN_MOSI.arqos,
+    AXI_MM2S_DM_IN_arqos => (others => '0'),
     AXI_MM2S_DM_IN_arready => AXI_MM2S_DM_IN_MISO.arready,
-    AXI_MM2S_DM_IN_arregion => AXI_MM2S_DM_IN_MOSI.arregion,
+    AXI_MM2S_DM_IN_arregion => (others => '0'),
     AXI_MM2S_DM_IN_arsize => AXI_MM2S_DM_IN_MOSI.arsize,
     AXI_MM2S_DM_IN_arvalid => AXI_MM2S_DM_IN_MOSI.arvalid,
     AXI_MM2S_DM_IN_rdata => AXI_MM2S_DM_IN_MISO.rdata,
+    AXI_MM2S_DM_IN_rid => open,
     AXI_MM2S_DM_IN_rlast => AXI_MM2S_DM_IN_MISO.rlast,
     AXI_MM2S_DM_IN_rready => AXI_MM2S_DM_IN_MOSI.rready,
     AXI_MM2S_DM_IN_rresp => AXI_MM2S_DM_IN_MISO.rresp,
