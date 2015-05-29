@@ -64,5 +64,10 @@
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/storage_ctrl.c</locationURI>
 		</link>
+		<link>
+			<name>src/tel2000_param.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/tel2000_param.h</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
