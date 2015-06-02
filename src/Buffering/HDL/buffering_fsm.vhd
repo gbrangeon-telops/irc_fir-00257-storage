@@ -46,7 +46,7 @@ entity BUFFERING_FSM is
         --WRITE MODE
         CONFIG_VALID        : in STD_LOGIC;        
         NB_SEQUENCE         : in unsigned(7 downto 0);
-        FRAME_SIZE          : in unsigned(31 DOWNTO 0);         -- in pixels
+        FRAME_SIZE          : in unsigned(31 downto 0);         -- in pixels
         HDR_BYTESSIZE       : in unsigned(31 downto 0);         -- in bytes
         IMG_BYTESSIZE       : in unsigned(31 downto 0);         -- in bytes
         MEMORY_BASED_ADDR   : in std_logic_vector(31 downto 0); -- START of DDR buffering memory location
@@ -108,7 +108,7 @@ architecture rtl of BUFFERING_FSM is
    --WR CONFIG
    signal nb_img_pre_u : unsigned(NB_IMG_PRE'length-1 downto 0);
    signal nb_img_post_u : unsigned(NB_IMG_POST'length-1 downto 0);
-   signal SeqSizeMax_bytes_u : unsigned (31 downto 0); 
+   signal SeqSizeMax_bytes_u : unsigned(31 downto 0); 
    signal wr_sequence_offset : unsigned(31 downto 0);
    signal wr_frame_offset : unsigned(31 downto 0);
    signal wr_frame_offset_temp : unsigned(31 downto 0);
@@ -252,27 +252,29 @@ Synchronous_calc : process(CLK_DATA)
 begin
     if rising_edge(CLK_DATA) then
         if sresetn = '0' then
-            SeqSizeMax_bytes_u <= to_unsigned(0,32);
+            SeqSizeMax_bytes_u <= to_unsigned(0, SeqSizeMax_bytes_u'length);
             
-            wr_sequence_offset <= to_unsigned(0,32);
-            wr_frame_offset <= to_unsigned(0,32);
-            wr_frame_offset_temp <= to_unsigned(0,32);
+            wr_sequence_offset <= to_unsigned(0, wr_sequence_offset'length);
+            wr_frame_offset <= to_unsigned(0, wr_frame_offset'length);
+            wr_frame_offset_temp <= to_unsigned(0, wr_frame_offset_temp'length);
             
-            rd_sequence_offset <= to_unsigned(0,32);
-            rd_image_offset <= to_unsigned(0,32);
-            rd_image_offset_temp <= to_unsigned(0,32);
+            rd_sequence_offset <= to_unsigned(0, rd_sequence_offset'length);
+            rd_image_offset <= to_unsigned(0, rd_image_offset'length);
+            rd_image_offset_temp <= to_unsigned(0, rd_image_offset_temp'length);
+            
+            rd_start_image <= to_unsigned(0, rd_start_image'length);
         else
-            SeqSizeMax_bytes_u <= resize(shift_left(frame_size_u,1) * total_img_per_seq_u,32);
+            SeqSizeMax_bytes_u <= resize(shift_left(frame_size_u,1) * total_img_per_seq_u, SeqSizeMax_bytes_u'length);
             
-            wr_sequence_offset <= resize( (nb_seq_in_mem_u * SeqSizeMax_bytes_u),32);
-            wr_frame_offset_temp <= resize( (write_img_loc * shift_left(unsigned(frame_size_u),1)), 32);
+            wr_sequence_offset <= resize( (nb_seq_in_mem_u * SeqSizeMax_bytes_u), wr_sequence_offset'length);
+            wr_frame_offset_temp <= resize( (write_img_loc * shift_left(frame_size_u,1)), wr_frame_offset_temp'length);
             wr_frame_offset <= wr_frame_offset_temp;
             
-            rd_sequence_offset <= resize( (read_seq_id_u * SeqSizeMax_bytes_u),32);
-            rd_image_offset_temp <= resize( (read_img_loc * shift_left(unsigned(frame_size_u),1)), 32);
+            rd_sequence_offset <= resize( (read_seq_id_u * SeqSizeMax_bytes_u), rd_sequence_offset'length);
+            rd_image_offset_temp <= resize( (read_img_loc * shift_left(frame_size_u,1)), rd_image_offset_temp'length);
             rd_image_offset <= rd_image_offset_temp;
             
-            rd_start_image <= resize(read_start_id_u * shift_left(unsigned(frame_size_u),1),32);
+            rd_start_image <= resize(read_start_id_u * shift_left(frame_size_u,1), rd_start_image'length);
             
         end if;
         
@@ -333,8 +335,8 @@ begin
                         end if;
                         write_state <= WAIT_WR_HDR_CMD_ACK;
                         --fill the tag with the img position
-                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc),4);                        
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset +  wr_frame_offset),32); -- base +sequenceoffset + imageoffset
+                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length);                        
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset +  wr_frame_offset), s_s2mm_saddr'length); -- base +sequenceoffset + imageoffset
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes 
                         s2mm_cmd_mosi.tvalid <= '1';
@@ -442,8 +444,8 @@ begin
                         write_state <= WAIT_WR_HDR_CMD_ACK;
                         
                         --fill the tag with the img position
-                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc),4); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset),32);
+                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -538,8 +540,8 @@ begin
                         write_state <= WAIT_WR_HDR_CMD_ACK;
                         
                         --fill the tag with the img position
-                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc),4); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset),32);
+                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -584,8 +586,8 @@ begin
                         write_state <= WAIT_WR_HDR_CMD_ACK;
                         
                         --fill the tag with the img position
-                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc),4); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset),32);
+                        s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes 
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -712,8 +714,8 @@ begin
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
-                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_start_id_u),4);                        
-                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_start_image),32);
+                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_start_id_u), s_mm2s_cmd_tag'length);                        
+                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_start_image), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
@@ -751,8 +753,8 @@ begin
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
-                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc),4);                        
-                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_image_offset),32);
+                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc), s_mm2s_cmd_tag'length);                        
+                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_image_offset), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
@@ -794,8 +796,8 @@ begin
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
-                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc),4);                        
-                        s_mm2s_saddr <= resize(std_logic_vector( baseaddr_u + rd_sequence_offset + rd_image_offset ),32);
+                        s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc), s_mm2s_cmd_tag'length);                        
+                        s_mm2s_saddr <= resize(std_logic_vector( baseaddr_u + rd_sequence_offset + rd_image_offset ), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
