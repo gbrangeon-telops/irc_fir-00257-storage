@@ -66,11 +66,11 @@ entity BUFFERING_FSM is
         CLEAR_MEMORY_CONTENT    : in std_logic;
 
         --TABLE INFORMATION TO STORE BUFFER INFORMATION
-        BM_TABLE_ADDR       : out std_logic_Vector(7 downto 0); --256 sequence max
-        BM_TABLE_WR_DATA         : out std_logic_vector( 95 downto 0); -- [ START_LOC & MOI_LOC & END_IMG_LOC ]
+        BM_TABLE_ADDR       : out std_logic_vector(7 downto 0); --256 sequence max
+        BM_TABLE_WR_DATA    : out std_logic_vector( 95 downto 0); -- [ START_LOC & MOI_LOC & END_IMG_LOC ]
         BM_TABLE_WREN       : out std_logic;
         BM_TABLE_REN        : out std_logic;
-        BM_TABLE_RD_DATA        : in std_logic_vector( 95 downto 0); -- [ START_LOC & MOI_LOC & END_IMG_LOC ]
+        BM_TABLE_RD_DATA    : in std_logic_vector( 95 downto 0); -- [ START_LOC & MOI_LOC & END_IMG_LOC ]
         BM_TABLE_R_DVAL     : in std_logic; 
 
         --ERROR MONITORING
@@ -173,15 +173,15 @@ architecture rtl of BUFFERING_FSM is
    signal read_img_loc : unsigned(SEQ_IMG_TOTAL'length-1 downto 0) := to_unsigned(0,SEQ_IMG_TOTAL'length); -- Location of the img read 
   
   
-  signal s2mm_cmd_mosi : t_axi4_stream_mosi_cmd64;
-  signal mm2s_cmd_mosi : t_axi4_stream_mosi_cmd64;
-  signal s2mm_cmd_miso : t_axi4_stream_miso;
-  signal mm2s_cmd_miso : t_axi4_stream_miso;
+   signal s2mm_cmd_mosi : t_axi4_stream_mosi_cmd64;
+   signal mm2s_cmd_mosi : t_axi4_stream_mosi_cmd64;
+   signal s2mm_cmd_miso : t_axi4_stream_miso;
+   signal mm2s_cmd_miso : t_axi4_stream_miso;
   
-  signal s2mm_sts_mosi : t_axi4_stream_mosi_status;
-  signal mm2s_sts_mosi : t_axi4_stream_mosi_status;
-  signal s2mm_sts_miso : t_axi4_stream_miso;
-  signal mm2s_sts_miso : t_axi4_stream_miso;
+   signal s2mm_sts_mosi : t_axi4_stream_mosi_status;
+   signal mm2s_sts_mosi : t_axi4_stream_mosi_status;
+   signal s2mm_sts_miso : t_axi4_stream_miso;
+   signal mm2s_sts_miso : t_axi4_stream_miso;
   
    attribute keep : string; 
    attribute keep of write_state : signal is "TRUE";  
