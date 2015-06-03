@@ -17,9 +17,9 @@ if  {$comparison != 0} {
 }
 
 #First Extract the port information
-set DataName [get_property NAME [get_bd_addr_segs -of_objects [get_bd_addr_spaces -of_objects [get_bd_cells /MCU/microblaze_0]] -filter {NAME =~ "TEL_*"}]]
-set DataAddr [get_property offset [get_bd_addr_segs -of_objects [get_bd_addr_spaces -of_objects [get_bd_cells /MCU/microblaze_0]] -filter {NAME =~ "TEL_*"}]]
-set Datarange [get_property range [get_bd_addr_segs -of_objects [get_bd_addr_spaces -of_objects [get_bd_cells /MCU/microblaze_0]] -filter {NAME =~ "TEL_*"}]]
+set DataName [get_property NAME [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
+set DataAddr [get_property offset [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
+set Datarange [get_property range [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
 
 #open a file to write to
 set filename  "d:/telops/fir-00257-Storage/src/sw/tel2000_param.h"
@@ -55,7 +55,11 @@ foreach j $DataName {
    puts $fd1 "/* Definitions for peripheral [lindex $DataName $i] */"
    puts $fd1 "#define TEL_PAR_[lindex $DataName $i]_BASEADDR [lindex $DataAddr $i]"
    set HighAddr [expr {[lindex $DataAddr $i] + [lindex $Datarange $i] - 1}]
-   puts $fd1 "#define TEL_PAR_[lindex $DataName $i]_HIGHADDR 0x[format %08X $HighAddr] \n"
+   if {$HighAddr <= 0xFFFFFFFF} {
+		puts $fd1 "#define TEL_PAR_[lindex $DataName $i]_HIGHADDR 0x[format %08X $HighAddr] \n"
+   } else {
+		puts $fd1 "#define TEL_PAR_[lindex $DataName $i]_HIGHADDR 0x[format %016lX $HighAddr] \n"
+   }
    incr i
 }
 

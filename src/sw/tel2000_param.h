@@ -36,4 +36,12 @@
 #define TEL_PAR_TEL_AXIL_MGT_BASEADDR 0x44A20000
 #define TEL_PAR_TEL_AXIL_MGT_HIGHADDR 0x44A2FFFF 
 
+/* Definitions for peripheral TEL_dimm0_ctrl_memaddr */
+#define TEL_PAR_TEL_dimm0_ctrl_memaddr_BASEADDR 0x0000000000000000
+#define TEL_PAR_TEL_dimm0_ctrl_memaddr_HIGHADDR 0x00000001FFFFFFFF 
+
+/* Definitions for peripheral TEL_dimm1_ctrl_memaddr */
+#define TEL_PAR_TEL_dimm1_ctrl_memaddr_BASEADDR 0x0000000200000000
+#define TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR 0x00000003FFFFFFFF 
+
 #endif // TEL2000_PARAM_H
