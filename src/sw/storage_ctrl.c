@@ -17,7 +17,7 @@
 #include "xparameters.h"
 #include "tel2000_param.h"
 #include "mb_axi4l_bridge.h"
-
+#include "BufferManager.h"
 
 /*--------------------------------------------------------------------------------------*/
 /* main                                                                                 */

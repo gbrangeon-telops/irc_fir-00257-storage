@@ -25,6 +25,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>src/Buffering</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/Buffering/Drivers</locationURI>
+		</link>
+		<link>
 			<name>src/BuildInfo</name>
 			<type>2</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/BuildInfo</locationURI>
