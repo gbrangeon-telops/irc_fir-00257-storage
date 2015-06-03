@@ -8,8 +8,6 @@ BEGIN OS
  PARAMETER OS_NAME = standalone
  PARAMETER OS_VER = 4.2
  PARAMETER PROC_INSTANCE = MCU_microblaze_0
- PARAMETER stdin = axi_uart_fpga_output
- PARAMETER stdout = axi_uart_fpga_output
 END
 
 
