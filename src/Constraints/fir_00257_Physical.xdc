@@ -21,7 +21,9 @@ set_property INTERNAL_VREF 0.75 [get_iobanks 33]
 set_property PACKAGE_PIN C12 [get_ports SYSCLK_0_P]
 #set_property PACKAGE_PIN C11 [get_ports SYSCLK_0_N]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_0_P]
+set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_0_N]
 set_property DIFF_TERM FALSE [get_ports SYSCLK_0_P]
+set_property DIFF_TERM FALSE [get_ports SYSCLK_0_N]
 
 set_property PACKAGE_PIN AB11 [get_ports SYSCLK_1_P]
 #set_property PACKAGE_PIN AC11 [get_ports SYSCLK_1_N]
@@ -33,28 +35,22 @@ set_property PACKAGE_PIN H6 [get_ports RCLKC_P]
 #set_property PACKAGE_PIN H5 [get_ports RCLKC_N]
 
 ############################### GT LOC ###################################
-set_property PACKAGE_PIN R4 [get_ports {FROM_PROC_P[0]}]
-set_property PACKAGE_PIN R3 [get_ports {FROM_PROC_N[0]}]
-set_property PACKAGE_PIN N4 [get_ports {FROM_PROC_P[1]}]
-set_property PACKAGE_PIN N3 [get_ports {FROM_PROC_N[1]}]
 
-set_property PACKAGE_PIN P2 [get_ports {TO_PROC_P[0]}]
 set_property PACKAGE_PIN P1 [get_ports {TO_PROC_N[0]}]
-set_property PACKAGE_PIN M2 [get_ports {TO_PROC_P[1]}]
 set_property PACKAGE_PIN M1 [get_ports {TO_PROC_N[1]}]
 
 ################### PROM  ##############################
-set_property PACKAGE_PIN B24 [get_ports PROM_QSPI[0]]
-set_property PACKAGE_PIN A25 [get_ports PROM_QSPI[1]]
-set_property PACKAGE_PIN B22 [get_ports PROM_QSPI[2]]
-set_property PACKAGE_PIN A22 [get_ports PROM_QSPI[3]]
+set_property PACKAGE_PIN B24 [get_ports {PROM_QSPI[0]}]
+set_property PACKAGE_PIN A25 [get_ports {PROM_QSPI[1]}]
+set_property PACKAGE_PIN B22 [get_ports {PROM_QSPI[2]}]
+set_property PACKAGE_PIN A22 [get_ports {PROM_QSPI[3]}]
 set_property PACKAGE_PIN C23 [get_ports FCS_B]
 #set_property PACKAGE_PIN C8 [get_ports PROM_SCLK]
 
-set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[0]]
-set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[1]]
-set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[2]]
-set_property IOSTANDARD LVCMOS15 [get_ports PROM_QSPI[3]]
+set_property IOSTANDARD LVCMOS15 [get_ports {PROM_QSPI[0]}]
+set_property IOSTANDARD LVCMOS15 [get_ports {PROM_QSPI[1]}]
+set_property IOSTANDARD LVCMOS15 [get_ports {PROM_QSPI[2]}]
+set_property IOSTANDARD LVCMOS15 [get_ports {PROM_QSPI[3]}]
 set_property IOSTANDARD LVCMOS15 [get_ports FCS_B]
 
 
@@ -143,3 +139,4 @@ set_property IOSTANDARD LVCMOS33 [get_ports CALIB_COMPLETE]
 
 set_property PACKAGE_PIN AB22 [get_ports TG_COMPARE_ERROR]
 set_property IOSTANDARD LVCMOS33 [get_ports TG_COMPARE_ERROR]
+
