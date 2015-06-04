@@ -1087,12 +1087,12 @@ proc create_root_design { parentCell } {
   create_bd_addr_seg -range 0x10000 -offset 0x44A30000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF_TABLE/Reg] TEL_AXIL_BUF_TABLE
   create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MEM_OUT/Reg] TEL_AXIL_MEM_OUT
   create_bd_addr_seg -range 0x10000 -offset 0x44A20000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MGT/Reg] TEL_AXIL_MGT
-  create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
   create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXI_MM2S_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
   create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXI_S2MM_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] SEG_dimm0_ctrl_memaddr
-  create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
   create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXI_MM2S_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
   create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXI_S2MM_DM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] SEG_dimm1_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x0 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm0_ctrl/memmap/memaddr] TEL_dimm0_ctrl_memaddr
+  create_bd_addr_seg -range 0x200000000 -offset 0x200000000 [get_bd_addr_spaces AXIL_MEM_IN] [get_bd_addr_segs MemoryBuffer/dimm1_ctrl/memmap/memaddr] TEL_dimm1_ctrl_memaddr
   
 
   # Restore current instance
