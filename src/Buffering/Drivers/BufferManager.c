@@ -16,6 +16,7 @@
 
 #include "BufferManager.h"
 #include "xparameters.h"
+#include "xgpio.h"
 #include "tel2000_param.h"
 #include "irc_status.h"
 #include "mb_axi4l_bridge.h"
@@ -23,11 +24,14 @@
 
 
 // Global variables
+static XGpio memAddrGPIO;
 
 
 // Private function prototypes
 static t_bufferTable BufferManager_ReadBufferTable(uint32_t SequenceID);
 static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID, uint32_t ImageLocation);
+static IRC_Status_t BufferManager_MemAddrGPIO_Init();
+static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr);
 
 
 /**
@@ -36,7 +40,8 @@ static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t 
  * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
  * @param pGCRegs Pointer to the Genicam registers.
  *
- * @return IRC_SUCCESS.
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
  */
 IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs)
 {
@@ -60,7 +65,8 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 	// Write values
 	WriteStruct(pBufferCtrl);
 
-	return IRC_SUCCESS;
+	// Init memory address GPIO
+	return BufferManager_MemAddrGPIO_Init();
 }
 
 
@@ -429,13 +435,61 @@ static t_bufferTable BufferManager_ReadBufferTable(uint32_t SequenceID)
 static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID, uint32_t ImageLocation)
 {
     uint64_t readAddrLoc;
+    uint32_t AXI4L_addrVal;
     const uint32_t FrameIDHdrAddr = 0x08;
     const uint32_t FrameSizeInBytes = pBufferCtrl->FrameSize * 2;
 
     // readAddrLoc = BaseAddr + sequence offset + image offset + FrameIdReg offset
     readAddrLoc = pBufferCtrl->Buffer_base_addr + (SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) * FrameSizeInBytes + FrameIDHdrAddr;
 
-    // TODO Convert address location to GPIO + AXI4L_32
+    // Convert address location to GPIO + AXI4L_32
+    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(readAddrLoc);
 
-    return AXI4L_read32((uint32_t)readAddrLoc);
+    return AXI4L_read32(AXI4L_addrVal);
+}
+
+
+/**
+ * Initialize the memory address GPIO controller.
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+static IRC_Status_t BufferManager_MemAddrGPIO_Init()
+{
+    XStatus status;
+
+    // Initialize memory address GPIO
+    status = XGpio_Initialize(&memAddrGPIO, XPAR_AXI_GPIO_0_DEVICE_ID);
+
+    // Set GPIO direction (0 for output, 1 for input)
+    XGpio_SetDataDirection(&memAddrGPIO, GPIO_CHANNEL_ID, 0);
+
+    // Set GPIO initial values
+    XGpio_DiscreteWrite(&memAddrGPIO, GPIO_CHANNEL_ID, 0);
+
+    return (status == XST_SUCCESS) ? IRC_SUCCESS : IRC_FAILURE;
+}
+
+
+/**
+ * Manage operations to access memory by AXI4L.
+ *
+ * @param memAddr Address in the memory.
+ *
+ * @return Address to use on AXI4L.
+ */
+static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
+{
+    // Calculate address space of this peripheral
+    const uint32_t AXI4L_addrSpace = TEL_PAR_TEL_AXIL_MEM_OUT_HIGHADDR - TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR + 1;
+
+    // Take only the part that fits in the address space
+    uint32_t AXI4L_addrVal = (uint32_t)(memAddr % AXI4L_addrSpace + TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR);
+
+    // Set GPIO values with the part that multiplies the address space
+    XGpio_DiscreteWrite(&memAddrGPIO, GPIO_CHANNEL_ID, (uint32_t)(memAddr / AXI4L_addrSpace));
+
+    // Return the address to be used on the AXI4L
+    return AXI4L_addrVal;
 }

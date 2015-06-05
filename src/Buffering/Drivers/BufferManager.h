@@ -26,6 +26,7 @@
 
 /************************** Constant Definitions ****************************/
 #define BUF_MAX_SEQUENCE 		256
+#define GPIO_CHANNEL_ID         1
 
 /**
  * Memory address map.
