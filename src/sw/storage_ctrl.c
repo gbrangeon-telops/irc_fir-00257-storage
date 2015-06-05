@@ -14,10 +14,12 @@
  */
 
 #include <stdint.h>
-#include "xparameters.h"
 #include "tel2000_param.h"
-#include "mb_axi4l_bridge.h"
 #include "BufferManager.h"
+
+
+// Global variables
+t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
 
 /*--------------------------------------------------------------------------------------*/
 /* main                                                                                 */
@@ -29,8 +31,8 @@ int main()  // Defining the standard main() function
 
     while(1)
     {
-        AXI4L_write32(cnt, XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
-        read_data = AXI4L_read32(XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
+        //AXI4L_write32(cnt, XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
+        //read_data = AXI4L_read32(XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
         cnt += 4;
         if (cnt >= 0xFFFF)
         	cnt = 0;
