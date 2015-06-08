@@ -55,6 +55,9 @@ struct gcRegistersDataStruct {
  */
 typedef struct gcRegistersDataStruct gcRegistersData_t;
 
+
+extern gcRegistersData_t gcRegsData;
+
 /* AUTO-CODE END */
 
 

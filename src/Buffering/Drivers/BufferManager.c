@@ -25,6 +25,7 @@
 
 // Global variables
 static XGpio memAddrGPIO;
+static t_bufferManagerError gBufManagerError;
 
 
 // Private function prototypes
@@ -45,7 +46,10 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr);
  */
 IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs)
 {
-	// Default control values
+	// Reset error flags
+    *(uint32_t *)&gBufManagerError = 0;
+
+    // Default control values
     pBufferCtrl->Buffer_base_addr = MEMORY_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
 	pBufferCtrl->nbSequenceMax = 1;
 	pBufferCtrl->FrameSize = pGCRegs->Width*(pGCRegs->Height+2); // In pixel (+2 for header lines)
@@ -67,6 +71,51 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 
 	// Init memory address GPIO
 	return BufferManager_MemAddrGPIO_Init();
+}
+
+
+/**
+ * Wait for Mem Ready signal from Buffer Manager module.
+ *
+ * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
+ *
+ * @return void.
+ */
+void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl)
+{
+    uint32_t cnt = 100e06;
+
+    // Set error flag by default
+    gBufManagerError.memReadyErr = 1;
+
+    // TODO: implement using a real timer
+
+    for (; cnt > 0; cnt--)
+    {
+        // Get Mem Ready signal from Buffer Manager module
+        if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 )
+        {
+            // Reset error flag and exit
+            gBufManagerError.memReadyErr = 0;
+            return;
+        }
+    }
+}
+
+
+/**
+ * Update error flags with values from Buffer Manager module.
+ *
+ * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
+ *
+ * @return void.
+ */
+void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl)
+{
+    // Update error flags
+    gBufManagerError.bufWriteErr = AXI4L_read32(pBufferCtrl->ADD + BM_WRITE_ERR);
+    gBufManagerError.bufReadErr  = AXI4L_read32(pBufferCtrl->ADD + BM_READ_ERR);
+    gBufManagerError.memReadyErr = ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 ) ? 0 : 1;
 }
 
 
@@ -492,4 +541,20 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
 
     // Return the address to be used on the AXI4L
     return AXI4L_addrVal;
+}
+
+
+void temp_mem_write(uint64_t memAddr, uint32_t data)
+{
+    uint32_t AXI4L_addrVal;
+    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(memAddr);
+    AXI4L_write32(data, AXI4L_addrVal);
+}
+
+
+uint32_t temp_mem_read(uint64_t memAddr)
+{
+    uint32_t AXI4L_addrVal;
+    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(memAddr);
+    return AXI4L_read32(AXI4L_addrVal);
 }

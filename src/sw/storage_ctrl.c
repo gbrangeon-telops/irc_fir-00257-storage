@@ -26,15 +26,24 @@ t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR)
 /*--------------------------------------------------------------------------------------*/
 int main()  // Defining the standard main() function
 {
-    uint32_t cnt = 0;
+    uint64_t addr = MEMORY_BUFFER_BASEADDR;
     uint32_t read_data;
+    const uint32_t data = 0xAA55AA55;
+
+    BufferManager_Init(&gBufManager, &gcRegsData);
+
+    BufferManager_WaitMemReady(&gBufManager);
 
     while(1)
     {
-        //AXI4L_write32(cnt, XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
-        //read_data = AXI4L_read32(XPAR_MEMORYBUFFER_DIMM0_CTRL_BASEADDR + cnt);
-        cnt += 4;
-        if (cnt >= 0xFFFF)
-        	cnt = 0;
+        BufferManager_UpdateErrorFlags(&gBufManager);
+        temp_mem_write(addr, data);
+        read_data = 0;
+        read_data = temp_mem_read(addr);
+        if (read_data != data)
+            break;
+        addr += 0x100;
+        if (addr >= MEMORY_BUFFER_HIGHADDR)
+            addr = MEMORY_BUFFER_BASEADDR;
     }
 }

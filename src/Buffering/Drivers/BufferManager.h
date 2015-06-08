@@ -33,7 +33,8 @@
  * @attention Multiple address spaces must be contiguous.
  */
 #define MEMORY_BUFFER_BASEADDR  ((uint64_t)TEL_PAR_TEL_dimm0_ctrl_memaddr_BASEADDR)
-#define MEMORY_BUFFER_SIZE      ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR + 1 - MEMORY_BUFFER_BASEADDR)
+#define MEMORY_BUFFER_HIGHADDR  ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR)
+#define MEMORY_BUFFER_SIZE      ((uint64_t)(MEMORY_BUFFER_HIGHADDR - MEMORY_BUFFER_BASEADDR + 1))
 
 //BUFFER CTRL ADDRESS MAP
 #define BM_BASE_ADDR_LSB		0x0     //MEMORY BASE ADDR LSB
@@ -110,6 +111,14 @@ struct s_bufferTable {
 };
 typedef struct s_bufferTable t_bufferTable;
 
+struct s_bufferManagerError {
+    uint32_t bufWriteErr    : 4;
+    uint32_t bufReadErr     : 4;
+    uint32_t memReadyErr    : 1;
+    uint32_t reserved       : 23;
+};
+typedef struct s_bufferManagerError t_bufferManagerError;
+
 
 /***************** Macros (Inline Functions) Definitions ********************/
 #define Buffering_Intf_Ctor(add) {sizeof(t_bufferManager)/4 - 2, add, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -117,6 +126,8 @@ typedef struct s_bufferTable t_bufferTable;
 
 /************************** Function Prototypes *****************************/
 IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs);
+void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl);
+void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl);
 void BufferManager_ReadSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
 void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
 void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
@@ -133,5 +144,8 @@ uint32_t BufferManager_GetNumSequenceCount(t_bufferManager *pBufferCtrl);
 uint32_t BufferManager_GetSequenceFirstFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 uint32_t BufferManager_GetSequenceMOIFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
+
+void temp_mem_write(uint64_t memAddr, uint32_t data);
+uint32_t temp_mem_read(uint64_t memAddr);
 
 #endif // BUFFERMANAGER_H
