@@ -25,7 +25,7 @@
 
 
 /************************** Constant Definitions ****************************/
-#define BUF_MAX_SEQUENCE 		256
+#define BUF_MAX_SEQUENCE 		255
 #define GPIO_CHANNEL_ID         1
 
 /**
