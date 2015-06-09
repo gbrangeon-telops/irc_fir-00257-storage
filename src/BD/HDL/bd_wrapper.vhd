@@ -449,6 +449,7 @@ port map (
     DIMM1_we_n       => DIMM1_we_n,
 
     aresetn(0) => ARESETN,
+    clk_50     => clk_50,
     clk100     => clk_100,     
     clk160     => clk_160,
 
