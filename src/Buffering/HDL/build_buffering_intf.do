@@ -5,7 +5,6 @@ setenv BUF_INTF "D:\Telops\FIR-00257-Storage\src\Buffering\HDL"
 setenv COMMON "D:\Telops\FIR-00251-Common"
 setenv COMMON_HDL "D:\Telops\Common_HDL"
 setenv STORAGE "D:\Telops\FIR-00257-Storage"
-setenv PROC "D:\Telops\FIR-00251-Proc"
 
 #__BEGIN COMPILE BUFFERING
 

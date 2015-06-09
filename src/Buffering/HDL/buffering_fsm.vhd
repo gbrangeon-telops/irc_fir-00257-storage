@@ -49,7 +49,7 @@ entity BUFFERING_FSM is
         FRAME_SIZE          : in unsigned(31 downto 0);         -- in pixels
         HDR_BYTESSIZE       : in unsigned(31 downto 0);         -- in bytes
         IMG_BYTESSIZE       : in unsigned(31 downto 0);         -- in bytes
-        MEMORY_BASED_ADDR   : in std_logic_vector(31 downto 0); -- START of DDR buffering memory location
+        MEMORY_BASED_ADDR   : in std_logic_vector(63 downto 0); -- START of DDR buffering memory location
         SEQ_IMG_TOTAL       : in unsigned(31 downto 0);
         NB_IMG_PRE          : in unsigned(31 downto 0); 
         NB_IMG_POST         : in unsigned(31 downto 0); -- including MOI
@@ -99,7 +99,6 @@ architecture rtl of BUFFERING_FSM is
    signal frame_size_u :unsigned(FRAME_SIZE'length-1 downto 0);
    signal img_bytessize_u :unsigned(IMG_BYTESSIZE'length-1 downto 0);
    signal hdr_bytessize_u :unsigned(HDR_BYTESSIZE'length-1 downto 0);
-   signal baseaddr_s : std_logic_vector(MEMORY_BASED_ADDR'length-1 downto 0);
    signal baseaddr_u : unsigned(MEMORY_BASED_ADDR'length-1 downto 0);
    signal nb_sequence_u : unsigned(NB_SEQUENCE'length-1 downto 0);
    signal total_img_per_seq_u : unsigned(SEQ_IMG_TOTAL'length-1 downto 0);
@@ -197,8 +196,7 @@ begin
 
 -- resync reset
 inst_sync_reset : sync_resetn port map(ARESETN => ARESETN, SRESETN => sresetn, CLK => CLK_DATA);
-baseaddr_s <= MEMORY_BASED_ADDR;
-baseaddr_u <= unsigned(baseaddr_s);
+baseaddr_u <= unsigned(MEMORY_BASED_ADDR);
 
 frame_size_u <= FRAME_SIZE;
 hdr_bytessize_u <= HDR_BYTESSIZE;

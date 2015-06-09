@@ -32,7 +32,7 @@ entity Buffering_Ctrl is
     --------------------------------
     -- BUFFER_FSM_CTRL
     --------------------------------
-    MEMORY_BASE_ADDR  : out std_logic_vector(31 downto 0);
+    MEMORY_BASE_ADDR  : out std_logic_vector(63 downto 0);
     NB_SEQUENCE_MAX   : out unsigned(7 downto 0); -- Sequence
     SEQ_IMG_TOTAL     : out unsigned(31 downto 0);
     FRAME_SIZE        : out unsigned(31 downto 0);
@@ -86,25 +86,26 @@ architecture RTL of Buffering_Ctrl is
    ----------------------------   
    -- Address of registers
    ----------------------------   
-   constant MEMORY_BASE_ADDR_ADDR       : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(0,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant NB_SEQUENCE_MAX_ADDR        : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(4,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant SEQ_IMG_TOTAL_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(8,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant FRAME_SIZE_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(12,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant BUFFER_MODE_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(16,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant HDR_BYTESSIZE_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(20,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant IMG_BYTESSIZE_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(24,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant NB_IMG_PRE_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(28,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant NB_IMG_POST_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(32,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant RD_SEQ_ID_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(36,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant RD_START_ID_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(40,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant RD_STOP_ID_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(44,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant CLEAR_MEMORY_CONTENT_ADDR   : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(48,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant ACQ_STOP_ADDR               : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(68,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant CONFIG_VALID_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(72,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant NB_SEQ_IN_MEM_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(76,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant FSM_ERROR_WR_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(80,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant FSM_ERROR_RD_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(84,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant MEM_READY_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(88,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant MEMORY_BASE_ADDR_LSB_ADDR   : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(0,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant MEMORY_BASE_ADDR_MSB_ADDR   : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(4,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant NB_SEQUENCE_MAX_ADDR        : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(8,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant SEQ_IMG_TOTAL_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(12,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant FRAME_SIZE_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(16,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant BUFFER_MODE_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(20,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant HDR_BYTESSIZE_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(24,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant IMG_BYTESSIZE_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(28,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant NB_IMG_PRE_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(32,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant NB_IMG_POST_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(36,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant RD_SEQ_ID_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(40,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant RD_START_ID_ADDR            : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(44,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant RD_STOP_ID_ADDR             : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(48,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant CLEAR_MEMORY_CONTENT_ADDR   : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(52,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant ACQ_STOP_ADDR               : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(56,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant CONFIG_VALID_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(60,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant NB_SEQ_IN_MEM_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(64,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant FSM_ERROR_WR_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(68,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant FSM_ERROR_RD_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(72,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant MEM_READY_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(76,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    
 
    
@@ -153,7 +154,10 @@ architecture RTL of Buffering_Ctrl is
     signal fsm_rd_err_i     : std_logic_vector(3 downto 0); --! nb_seq_in_mem_register
 
     --! User Output Register Declarations
-    signal memorybaseaddr_o  : std_logic_vector(31 downto 0);     
+    signal memorybaseaddr_o  : std_logic_vector(63 downto 0);
+    signal memorybaseaddr_lsb_o  : std_logic_vector(31 downto 0);
+    signal memorybaseaddr_msb_o  : std_logic_vector(31 downto 0);
+    
     signal nb_seq_max_o  : std_logic_vector(7 downto 0);
     signal nb_seq_max_b  : std_logic_vector(7 downto 0);
     
@@ -227,7 +231,7 @@ begin
     RD_START_ID     <= unsigned(rd_start_id_b);
     RD_STOP_ID     <= unsigned(rd_stop_id_b);
 
-
+    memorybaseaddr_o <= memorybaseaddr_msb_o & memorybaseaddr_lsb_o;
 
     --BufferMode Assignment
 
@@ -327,7 +331,8 @@ begin
    begin
       if rising_edge(CLK_CTRL) then 
          if sresetn = '0' then
-            memorybaseaddr_o <= (others => '0');
+            memorybaseaddr_lsb_o <= (others => '0');
+            memorybaseaddr_msb_o <= (others => '0');
             nb_seq_max_o <= std_logic_vector(to_unsigned(1,nb_seq_max_o'length));
             seq_img_total_o <= (others => '0');
             framesize_o <= (others => '0');
@@ -345,7 +350,8 @@ begin
          else
             if (slv_reg_wren = '1') and axi_wstrb = "1111" then
                case axi_awaddr(OPT_MEM_ADDR_BITS+ADDR_LSB downto 0) is      
-                  when MEMORY_BASE_ADDR_ADDR    =>  memorybaseaddr_o  <= AXI4_LITE_MOSI.WDATA(memorybaseaddr_o'length-1 downto 0);
+                  when MEMORY_BASE_ADDR_LSB_ADDR    =>  memorybaseaddr_lsb_o  <= AXI4_LITE_MOSI.WDATA(memorybaseaddr_lsb_o'length-1 downto 0);
+                  when MEMORY_BASE_ADDR_MSB_ADDR    =>  memorybaseaddr_msb_o  <= AXI4_LITE_MOSI.WDATA(memorybaseaddr_msb_o'length-1 downto 0);
                   when NB_SEQUENCE_MAX_ADDR     =>  nb_seq_max_o      <= AXI4_LITE_MOSI.WDATA(nb_seq_max_o'length-1 downto 0);
                   when SEQ_IMG_TOTAL_ADDR       =>  seq_img_total_o   <= AXI4_LITE_MOSI.WDATA(seq_img_total_o'length-1 downto 0); 
                   when FRAME_SIZE_ADDR          =>  framesize_o       <= AXI4_LITE_MOSI.WDATA(framesize_o'length-1 downto 0);

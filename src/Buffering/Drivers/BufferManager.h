@@ -38,26 +38,26 @@
 
 //BUFFER CTRL ADDRESS MAP
 #define BM_BASE_ADDR_LSB		0x0     //MEMORY BASE ADDR LSB
-#define BM_BASE_ADDR_MSB        0x0     //MEMORY BASE ADDR MSB
-#define NB_SEQUENCE_MAX			0x4		//SEQUENCE
-#define BM_NB_IMG_PER_SEQ 		0x8		//IMAGES
-#define BM_FRAME_SIZE 			0xC		//pIXEL
-#define BM_BUFFER_MODE			0x10	//BM_OFF - BMWRITE - BMREAD
-#define BM_HDR_SIZE 			0x14	//BYTES
-#define BM_IMG_SIZE 			0x18	//BYTES
-#define BM_NB_IMG_PRE 			0x1C	//PRE = 0 -> no PREMOI
-#define BM_NB_IMG_POST 			0x20	//NB image including MOI to the end
-#define BM_READ_SEQUENCE_ID 	0x24	//READ seq ID
-#define BM_READ_START_ID		0x28	//READ Start image ID(in buffer memory)
-#define BM_READ_STOP_ID			0x2C	//READ STOP image ID(in buffer memory)
-#define BM_CLEAR_MEMORY			0x30	//Pulse to clear memory
-#define BM_ACQ_STOP				0X44	//When acquisition is stop assert this signal.
-#define BM_CONFIG_VALID			0x48	//Hold at 1 when valid. Do not change param when valid
+#define BM_BASE_ADDR_MSB        0x4     //MEMORY BASE ADDR MSB
+#define NB_SEQUENCE_MAX			0x8		//SEQUENCE
+#define BM_NB_IMG_PER_SEQ 		0xC		//IMAGES
+#define BM_FRAME_SIZE 			0x10	//pIXEL
+#define BM_BUFFER_MODE			0x14	//BM_OFF - BMWRITE - BMREAD
+#define BM_HDR_SIZE 			0x18	//BYTES
+#define BM_IMG_SIZE 			0x1C	//BYTES
+#define BM_NB_IMG_PRE 			0x20	//PRE = 0 -> no PREMOI
+#define BM_NB_IMG_POST 			0x24	//NB image including MOI to the end
+#define BM_READ_SEQUENCE_ID 	0x28	//READ seq ID
+#define BM_READ_START_ID		0x2C	//READ Start image ID(in buffer memory)
+#define BM_READ_STOP_ID			0x30	//READ STOP image ID(in buffer memory)
+#define BM_CLEAR_MEMORY			0x34	//Pulse to clear memory
+#define BM_ACQ_STOP				0X38	//When acquisition is stop assert this signal.
+#define BM_CONFIG_VALID			0x3C	//Hold at 1 when valid. Do not change param when valid
 
-#define BM_NB_SEQ_IN_MEM		0x4C	//Return number of sequence int the buffer
-#define BM_WRITE_ERR 			0x50	//Return write error (Not implemented yet)
-#define BM_READ_ERR 			0x54	//Return read error (Not implemented yet)
-#define BM_MEM_READY            0x58    //Return status of memory interface
+#define BM_NB_SEQ_IN_MEM		0x40	//Return number of sequence int the buffer
+#define BM_WRITE_ERR 			0x44	//Return write error
+#define BM_READ_ERR 			0x48	//Return read error
+#define BM_MEM_READY            0x4C    //Return status of memory interface
 
 //BUFFER TABLE ADDRESS MAP
 #define BT_START_IMG_OFFSET		0
