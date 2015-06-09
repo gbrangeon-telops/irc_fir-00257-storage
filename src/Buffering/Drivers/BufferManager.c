@@ -21,6 +21,7 @@
 #include "irc_status.h"
 #include "mb_axi4l_bridge.h"
 #include "utils.h"
+#include "IRCamHeader.h"
 
 
 // Global variables
@@ -485,7 +486,6 @@ static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t 
 {
     uint64_t readAddrLoc;
     uint32_t AXI4L_addrVal;
-    const uint32_t FrameIDHdrAddr = 0x08;
     const uint32_t FrameSizeInBytes = pBufferCtrl->FrameSize * 2;
 
     // readAddrLoc = BaseAddr + sequence offset + image offset + FrameIdReg offset
