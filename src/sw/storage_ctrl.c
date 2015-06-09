@@ -15,10 +15,12 @@
 
 #include <stdint.h>
 #include "tel2000_param.h"
+#include "mgt_ctrl.h"
 #include "BufferManager.h"
 
 
 // Global variables
+t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
 t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
 
 /*--------------------------------------------------------------------------------------*/
@@ -30,8 +32,15 @@ int main()  // Defining the standard main() function
     uint32_t read_data;
     const uint32_t data = 0xAA55AA55;
 
-    BufferManager_Init(&gBufManager, &gcRegsData);
+    // Init MGT module
+    MGT_Init(&gMGT);
+    MGT_DisableMGT(&gMGT, DATA_MGT);
+    MGT_DisableMGT(&gMGT, VIDEO_MGT);
+    MGT_ReadCoreStatus(&gMGT);
+    MGT_ReadPLLStatus(&gMGT);
 
+    // Init Buffer Manager module
+    BufferManager_Init(&gBufManager, &gcRegsData);
     BufferManager_WaitMemReady(&gBufManager);
 
     while(1)

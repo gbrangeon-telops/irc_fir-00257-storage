@@ -60,6 +60,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/GC_Registers.h</locationURI>
 		</link>
 		<link>
+			<name>src/MGT</name>
+			<type>2</type>
+			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/MGT/Driver</locationURI>
+		</link>
+		<link>
 			<name>src/USART</name>
 			<type>2</type>
 			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/USART/driver</locationURI>
