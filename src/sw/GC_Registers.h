@@ -55,11 +55,16 @@ struct gcRegistersDataStruct {
  */
 typedef struct gcRegistersDataStruct gcRegistersData_t;
 
+// GenICam global variables declaration
+////////////////////////////////////////////////////////////////////////////////
 
+extern gcRegistersData_t gcRegsDataFactory;
 extern gcRegistersData_t gcRegsData;
+
+void GC_Registers_Init();
 
 /* AUTO-CODE END */
 
-
+void GC_UpdateLockedFlag();
 
 #endif // GC_REGISTERS_H

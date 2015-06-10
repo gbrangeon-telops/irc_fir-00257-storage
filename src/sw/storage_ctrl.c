@@ -15,6 +15,8 @@
 
 #include <stdint.h>
 #include "tel2000_param.h"
+#include "storage_init.h"
+#include "GC_Manager.h"
 #include "mgt_ctrl.h"
 #include "BufferManager.h"
 
@@ -32,19 +34,25 @@ int main()  // Defining the standard main() function
     uint32_t read_data;
     const uint32_t data = 0xAA55AA55;
 
+    // Init interrupt controller
+    Storage_Intc_Init();
+
+    // GenICam initialization
+    //Storage_GC_Init();
+
+    // Start interrupt controller
+    Storage_Intc_Start();
+
     // Init MGT module
-    MGT_Init(&gMGT);
-    MGT_DisableMGT(&gMGT, DATA_MGT);
-    MGT_DisableMGT(&gMGT, VIDEO_MGT);
-    MGT_ReadCoreStatus(&gMGT);
-    MGT_ReadPLLStatus(&gMGT);
+    Storage_MGT_Init(&gMGT);
 
     // Init Buffer Manager module
-    BufferManager_Init(&gBufManager, &gcRegsData);
-    BufferManager_WaitMemReady(&gBufManager);
+    // @attention This function contains a wait loop.
+    Storage_BufferManager_Init(&gBufManager);
 
     while(1)
     {
+        //GC_Manager_SM();
         BufferManager_UpdateErrorFlags(&gBufManager);
         temp_mem_write(addr, data);
         read_data = 0;

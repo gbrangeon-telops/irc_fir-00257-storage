@@ -31,6 +31,11 @@
 // Generated from XML camera definition file version 10.3.0
 // using updateGenICamCallback.m Matlab script.
 
-
+/**
+ * GenICam registers callback function initialization.
+ */
+void GC_Callback_Init()
+{
+}
 
 /* AUTO-CODE END */
