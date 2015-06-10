@@ -3,9 +3,85 @@
   <probeset name="EDA_PROBESET" active="true">
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq5&apos;hXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
         <Option Id="CORE_LOCATION" value="1:0"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="0"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="64"/>
+      </probeOptions>
+      <nets>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[63]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[62]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[61]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[60]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[59]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[58]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[57]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[56]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[55]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[54]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[53]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[52]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[51]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[50]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[49]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[48]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[47]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[46]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[45]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[44]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[43]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[42]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[41]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[40]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[39]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[38]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[37]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[36]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[35]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[34]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[33]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[32]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[31]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[30]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[29]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[28]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[27]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[26]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[25]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[24]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[23]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[22]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[21]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[20]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[19]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[18]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[17]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[16]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[15]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[14]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[13]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[12]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[11]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[10]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[9]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[8]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[7]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[6]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[5]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[4]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[3]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[2]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[1]"/>
+        <net name="BUFFER_INST/MEMORY_BASED_ADDR[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq5&apos;hXX"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="5"/>
@@ -20,57 +96,15 @@
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq31&apos;hXXXX_XXXX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="1"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="31"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][30]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][29]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][28]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][27]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][26]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][25]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][24]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][23]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][22]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][21]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][20]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][19]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][18]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][17]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][16]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][15]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][14]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][13]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][12]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][11]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][10]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][9]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][8]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][7]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][6]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][5]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][4]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][3]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][2]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][1]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][0]"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq31&apos;hXXXX_XXXX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="2"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="31"/>
-      </probeOptions>
-      <nets>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][31]"/>
         <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][30]"/>
         <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][29]"/>
         <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][28]"/>
@@ -107,8 +141,52 @@
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
+        <Option Id="PROBE_PORT" value="2"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
+      </probeOptions>
+      <nets>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][31]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][30]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][29]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][28]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][27]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][26]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][25]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][24]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][23]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][22]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][21]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][20]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][19]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][18]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][17]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][16]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][15]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][14]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][13]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][12]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][11]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][10]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][9]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][8]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][7]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][6]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][5]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][4]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][3]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][2]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][1]"/>
+        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="3"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
@@ -151,8 +229,8 @@
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="4"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
@@ -195,8 +273,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="5"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -208,8 +286,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="6"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -221,8 +299,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="7"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -234,8 +312,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="8"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -247,8 +325,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="9"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -260,8 +338,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="10"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -273,8 +351,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="11"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -286,8 +364,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="12"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -299,8 +377,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="13"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -312,8 +390,8 @@
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:0"/>
-        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="14"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
@@ -327,7 +405,7 @@
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
         <Option Id="CORE_LOCATION" value="1:1"/>
         <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="0"/>
+        <Option Id="PROBE_PORT" value="15"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
