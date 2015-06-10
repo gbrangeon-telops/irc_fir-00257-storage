@@ -107,15 +107,15 @@ architecture rtl of BUFFERING_FSM is
    --WR CONFIG
    signal nb_img_pre_u : unsigned(NB_IMG_PRE'length-1 downto 0);
    signal nb_img_post_u : unsigned(NB_IMG_POST'length-1 downto 0);
-   signal SeqSizeMax_bytes_u : unsigned(31 downto 0); 
-   signal wr_sequence_offset : unsigned(31 downto 0);
-   signal wr_frame_offset : unsigned(31 downto 0);
-   signal wr_frame_offset_temp : unsigned(31 downto 0);
+   signal SeqSizeMax_bytes_u : unsigned(63 downto 0); 
+   signal wr_sequence_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal wr_frame_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal wr_frame_offset_temp : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
    
-   signal rd_sequence_offset : unsigned(31 downto 0);
-   signal rd_image_offset : unsigned(31 downto 0);
-   signal rd_image_offset_temp : unsigned(31 downto 0);
-   signal rd_start_image : unsigned(31 downto 0);
+   signal rd_sequence_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal rd_image_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal rd_image_offset_temp : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal rd_start_image : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
 
    
    --RD CONFIG
