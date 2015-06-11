@@ -47,16 +47,20 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr);
  */
 IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs)
 {
-	// Reset error flags
+	// During init, width and height are not valid (=0) so use defaults
+    const uint32_t default_width = 320;
+	const uint32_t default_height = 256;
+
+    // Reset error flags
     *(uint32_t *)&gBufManagerError = 0;
 
     // Default control values
     pBufferCtrl->Buffer_base_addr = MEMORY_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
 	pBufferCtrl->nbSequenceMax = 1;
-	pBufferCtrl->FrameSize = pGCRegs->Width*(pGCRegs->Height+2); // In pixel (+2 for header lines)
-	pBufferCtrl->HDR_Size = pGCRegs->Width*4; // In bytes (2 lines * 2 bytes/pixel)
-	pBufferCtrl->IMG_Size = pGCRegs->Width*pGCRegs->Height*2; // In bytes (2 bytes/pixel)
-	pBufferCtrl->nbImagePerSeq = BufferManager_GetNbImageMax(pGCRegs);
+	pBufferCtrl->FrameSize = default_width*(default_height+2); // In pixel (+2 for header lines)
+	pBufferCtrl->HDR_Size = default_width*4; // In bytes (2 lines * 2 bytes/pixel)
+	pBufferCtrl->IMG_Size = default_width*default_height*2; // In bytes (2 bytes/pixel)
+	pBufferCtrl->nbImagePerSeq = 1;
 	pBufferCtrl->BufferMode = BM_OFF;
 	pBufferCtrl->nb_img_pre = 0;
 	pBufferCtrl->nb_img_post = pBufferCtrl->nbImagePerSeq;
@@ -256,6 +260,8 @@ void BufferManager_DisableBuffer(t_bufferManager *pBufferCtrl)
  */
 uint32_t BufferManager_GetNbImageMax(const gcRegistersData_t *pGCRegs)
 {
+    if (pGCRegs->Width == 0)
+        return 0;
     return (uint32_t)( MEMORY_BUFFER_SIZE / (pGCRegs->Width * (pGCRegs->Height+2) * 2) );   //(image + header) * 2 bytes/pixel
 }
 

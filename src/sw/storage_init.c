@@ -50,10 +50,6 @@ IRC_Status_t Storage_GC_Init()
    // Initialize GenICam register data
    gcRegsData = gcRegsDataFactory;
 
-   // Memory buffer GenICam registers initialization
-   GC_MemoryBufferNumberOfImagesMaxCallback(GCCP_BEFORE, GCCA_READ);
-   GC_MemoryBufferNumberOfSequencesMaxCallback(GCCP_BEFORE, GCCA_READ);
-
    // Initialize Inter-FPGA GenICam master control interface
    // TODO: AddMaster or AddSlave?
    status = GC_Manager_AddMaster(&gFpgaCtrlIntf,
