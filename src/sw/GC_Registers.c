@@ -19,7 +19,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.3.0
+// Generated from XML camera definition file version 10.4.1
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -28,7 +28,26 @@
 /**
  * Factory registers data
  */
-gcRegistersData_t gcRegsDataFactory;
+gcRegistersData_t gcRegsDataFactory = {
+   /* AcquisitionStop = */ 0,
+   /* Height = */ 0,
+   /* MemoryBufferMode = */ MBM_Off,
+   /* MemoryBufferNumberOfImagesMax = */ 0,
+   /* MemoryBufferNumberOfSequences = */ 1,
+   /* MemoryBufferNumberOfSequencesMax = */ 0,
+   /* MemoryBufferSequenceClearAll = */ 0,
+   /* MemoryBufferSequenceCount = */ 0,
+   /* MemoryBufferSequenceDownloadImageFrameID = */ 0,
+   /* MemoryBufferSequenceDownloadMode = */ MBSDM_Off,
+   /* MemoryBufferSequenceFirstFrameID = */ 0,
+   /* MemoryBufferSequenceMOIFrameID = */ 0,
+   /* MemoryBufferSequencePreMOISize = */ 0,
+   /* MemoryBufferSequenceRecordedSize = */ 0,
+   /* MemoryBufferSequenceSelector = */ 0,
+   /* MemoryBufferSequenceSize = */ 1,
+   /* MemoryBufferSequenceSizeMax = */ 0,
+   /* Width = */ 0
+};
 
 /**
  * Registers data
@@ -40,6 +59,24 @@ gcRegistersData_t gcRegsData;
  */
 void GC_Registers_Init()
 {
+   gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
+   gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
+   gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;
+   gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfImagesMax;
+   gcRegsDef[MemoryBufferNumberOfSequencesIdx].p_data = &gcRegsData.MemoryBufferNumberOfSequences;
+   gcRegsDef[MemoryBufferNumberOfSequencesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfSequencesMax;
+   gcRegsDef[MemoryBufferSequenceClearAllIdx].p_data = &gcRegsData.MemoryBufferSequenceClearAll;
+   gcRegsDef[MemoryBufferSequenceCountIdx].p_data = &gcRegsData.MemoryBufferSequenceCount;
+   gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
+   gcRegsDef[MemoryBufferSequenceDownloadModeIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadMode;
+   gcRegsDef[MemoryBufferSequenceFirstFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceFirstFrameID;
+   gcRegsDef[MemoryBufferSequenceMOIFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceMOIFrameID;
+   gcRegsDef[MemoryBufferSequencePreMOISizeIdx].p_data = &gcRegsData.MemoryBufferSequencePreMOISize;
+   gcRegsDef[MemoryBufferSequenceRecordedSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceRecordedSize;
+   gcRegsDef[MemoryBufferSequenceSelectorIdx].p_data = &gcRegsData.MemoryBufferSequenceSelector;
+   gcRegsDef[MemoryBufferSequenceSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceSize;
+   gcRegsDef[MemoryBufferSequenceSizeMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMax;
+   gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
 
 /* AUTO-CODE END */

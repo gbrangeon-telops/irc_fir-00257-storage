@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.3.0
+// Generated from XML camera definition file version 10.4.1
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -39,6 +39,64 @@ extern t_bufferManager gBufManager;
  */
 void GC_Callback_Init()
 {
+   gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
+   gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
+   gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
+   gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].callback =            &GC_MemoryBufferNumberOfImagesMaxCallback;
+   gcRegsDef[MemoryBufferNumberOfSequencesIdx].callback =            &GC_MemoryBufferNumberOfSequencesCallback;
+   gcRegsDef[MemoryBufferNumberOfSequencesMaxIdx].callback =         &GC_MemoryBufferNumberOfSequencesMaxCallback;
+   gcRegsDef[MemoryBufferSequenceClearAllIdx].callback =             &GC_MemoryBufferSequenceClearAllCallback;
+   gcRegsDef[MemoryBufferSequenceCountIdx].callback =                &GC_MemoryBufferSequenceCountCallback;
+   gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx].callback = &GC_MemoryBufferSequenceDownloadImageFrameIDCallback;
+   gcRegsDef[MemoryBufferSequenceDownloadModeIdx].callback =         &GC_MemoryBufferSequenceDownloadModeCallback;
+   gcRegsDef[MemoryBufferSequenceFirstFrameIDIdx].callback =         &GC_MemoryBufferSequenceFirstFrameIDCallback;
+   gcRegsDef[MemoryBufferSequenceMOIFrameIDIdx].callback =           &GC_MemoryBufferSequenceMOIFrameIDCallback;
+   gcRegsDef[MemoryBufferSequencePreMOISizeIdx].callback =           &GC_MemoryBufferSequencePreMOISizeCallback;
+   gcRegsDef[MemoryBufferSequenceRecordedSizeIdx].callback =         &GC_MemoryBufferSequenceRecordedSizeCallback;
+   gcRegsDef[MemoryBufferSequenceSelectorIdx].callback =             &GC_MemoryBufferSequenceSelectorCallback;
+   gcRegsDef[MemoryBufferSequenceSizeIdx].callback =                 &GC_MemoryBufferSequenceSizeCallback;
+   gcRegsDef[MemoryBufferSequenceSizeMaxIdx].callback =              &GC_MemoryBufferSequenceSizeMaxCallback;
+   gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
+}
+
+/**
+ * AcquisitionStop GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * Height GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
 }
 
 /**
@@ -378,6 +436,26 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
    {
       // Before read
       gcRegsData.MemoryBufferSequenceSizeMax = BufferManager_GetNbImageMax(&gcRegsData);
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * Width GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))

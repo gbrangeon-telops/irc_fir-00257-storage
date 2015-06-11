@@ -39,8 +39,7 @@ IRC_Status_t Storage_GC_Init()
    IRC_Status_t status;
 
    // Initialize GenICam Manager
-   //TODO: Change for REG_STORAGE_FPGA
-   GC_Manager_Init(REG_OUTPUT_FPGA);
+   GC_Manager_Init(ID_STORAGE_FPGA);
 
    // Initialize GenICam registers data pointer
    GC_Registers_Init();
