@@ -394,38 +394,21 @@ uint32_t BufferManager_GetNumberOfSequenceMax()
 
 
 /**
- * Set the number of sequences of the Buffer Manager module.
+ * Set the number of sequences and number of images per sequence of the Buffer Manager module.
  *
  * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
  * @param pGCRegs Pointer to the Genicam registers.
  *
  * @return void.
  */
-void BufferManager_SetNumberOfSequence(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs )
+void BufferManager_SetSequenceParams(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs )
 {
 	BufferManager_DisableBuffer(pBufferCtrl);
 
 	pBufferCtrl->nbSequenceMax = pGCRegs->MemoryBufferNumberOfSequences;
-	AXI4L_write32(pBufferCtrl->nbSequenceMax, 	pBufferCtrl->ADD + NB_SEQUENCE_MAX);
-
-	BufferManager_EnableBuffer(pBufferCtrl);
-}
-
-
-/**
- * Set the number of images per sequence of the Buffer Manager module.
- *
- * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
- * @param pGCRegs Pointer to the Genicam registers.
- *
- * @return void.
- */
-void BufferManager_SetNumberOfImagePerSeq(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs )
-{
-	BufferManager_DisableBuffer(pBufferCtrl);
-
 	pBufferCtrl->nbImagePerSeq = pGCRegs->MemoryBufferSequenceSize;
-	AXI4L_write32(pBufferCtrl->nbImagePerSeq, 	pBufferCtrl->ADD + BM_NB_IMG_PER_SEQ);
+	AXI4L_write32(pBufferCtrl->nbSequenceMax, 	pBufferCtrl->ADD + NB_SEQUENCE_MAX);
+    AXI4L_write32(pBufferCtrl->nbImagePerSeq,   pBufferCtrl->ADD + BM_NB_IMG_PER_SEQ);
 
 	BufferManager_EnableBuffer(pBufferCtrl);
 }

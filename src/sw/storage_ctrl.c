@@ -38,6 +38,7 @@ int main()  // Defining the standard main() function
     Storage_Intc_Init();
 
     // GenICam initialization
+    // TODO: De-comment when GC is all coded
     //Storage_GC_Init();
 
     // Start interrupt controller
@@ -52,6 +53,7 @@ int main()  // Defining the standard main() function
 
     while(1)
     {
+        // TODO: De-comment when GC is all coded
         //GC_Manager_SM();
         BufferManager_UpdateErrorFlags(&gBufManager);
         temp_mem_write(addr, data);

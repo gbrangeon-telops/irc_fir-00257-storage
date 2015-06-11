@@ -134,8 +134,7 @@ void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegister
 void BufferManager_EnableBuffer(t_bufferManager *pBufferCtrl);
 void BufferManager_DisableBuffer(t_bufferManager *pBufferCtrl);
 void BufferManager_SetBufferMode(t_bufferManager *pBufferCtrl, t_bufferMode Mode, const gcRegistersData_t *pGCRegs );
-void BufferManager_SetNumberOfSequence(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs );
-void BufferManager_SetNumberOfImagePerSeq(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs );
+void BufferManager_SetSequenceParams(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs );
 void BufferManager_SetPreMoi(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs );
 
 uint32_t BufferManager_GetNbImageMax(const gcRegistersData_t *pGCRegs);
