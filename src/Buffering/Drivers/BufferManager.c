@@ -501,10 +501,10 @@ static IRC_Status_t BufferManager_MemAddrGPIO_Init()
     status = XGpio_Initialize(&memAddrGPIO, XPAR_AXI_GPIO_MEM_ADDR_DEVICE_ID);
 
     // Set GPIO direction (0 for output, 1 for input)
-    XGpio_SetDataDirection(&memAddrGPIO, GPIO_CHANNEL_ID, 0);
+    XGpio_SetDataDirection(&memAddrGPIO, MEM_ADDR_GPIO_CH_ID, 0);
 
     // Set GPIO initial values
-    XGpio_DiscreteWrite(&memAddrGPIO, GPIO_CHANNEL_ID, 0);
+    XGpio_DiscreteWrite(&memAddrGPIO, MEM_ADDR_GPIO_CH_ID, 0);
 
     return (status == XST_SUCCESS) ? IRC_SUCCESS : IRC_FAILURE;
 }
@@ -526,7 +526,7 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
     uint32_t AXI4L_addrVal = (uint32_t)(memAddr % AXI4L_addrSpace + TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR);
 
     // Set GPIO values with the part that multiplies the address space
-    XGpio_DiscreteWrite(&memAddrGPIO, GPIO_CHANNEL_ID, (uint32_t)(memAddr / AXI4L_addrSpace));
+    XGpio_DiscreteWrite(&memAddrGPIO, MEM_ADDR_GPIO_CH_ID, (uint32_t)(memAddr / AXI4L_addrSpace));
 
     // Return the address to be used on the AXI4L
     return AXI4L_addrVal;

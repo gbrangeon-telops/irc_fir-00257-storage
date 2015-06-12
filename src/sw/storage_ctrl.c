@@ -15,8 +15,10 @@
 
 #include <stdint.h>
 #include "tel2000_param.h"
+#include "Timer.h"
 #include "storage_init.h"
 #include "GC_Manager.h"
+#include "test_point.h"
 #include "mgt_ctrl.h"
 #include "BufferManager.h"
 
@@ -33,6 +35,10 @@ int main()  // Defining the standard main() function
     uint64_t addr = MEMORY_BUFFER_BASEADDR;
     uint32_t read_data;
     const uint32_t data = 0xAA55AA55;
+
+    // Init timer
+    Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
+    WAIT_US(30);
 
     // Init interrupt controller
     Storage_Intc_Init();
@@ -51,11 +57,15 @@ int main()  // Defining the standard main() function
     // @attention This function contains a wait loop.
     Storage_BufferManager_Init(&gBufManager);
 
+    // Init test point controller
+    TP_Init();
+
     while(1)
     {
         // TODO: De-comment when GC is all coded
         //GC_Manager_SM();
         BufferManager_UpdateErrorFlags(&gBufManager);
+        TP_TP11_Heartbeat_SM();
         temp_mem_write(addr, data);
         read_data = 0;
         read_data = temp_mem_read(addr);
