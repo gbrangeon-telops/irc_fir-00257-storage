@@ -88,15 +88,16 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
  */
 void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl)
 {
-    uint32_t cnt = 100e06;
+    const uint32_t loop_time_in_us = 1000;
+    uint32_t loop_cnt = MEM_READY_TIMEOUT_IN_S * TIME_ONE_SECOND_US / loop_time_in_us;
 
     // Set error flag by default
     gBufManagerError.memReadyErr = 1;
 
-    // TODO: implement using a real timer
-
-    for (; cnt > 0; cnt--)
+    while (loop_cnt--)
     {
+        WAIT_US(loop_time_in_us);
+
         // Get Mem Ready signal from Buffer Manager module
         if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 )
         {
