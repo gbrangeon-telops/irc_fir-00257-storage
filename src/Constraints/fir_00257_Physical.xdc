@@ -134,9 +134,11 @@ set_property PACKAGE_PIN Y20 [get_ports SDXC_PIN15]
 set_property IOSTANDARD LVCMOS33 [get_ports SDXC_PIN*]
 
 ################### OTHERS  ###########################
-set_property PACKAGE_PIN AB21 [get_ports CALIB_COMPLETE]
-set_property IOSTANDARD LVCMOS33 [get_ports CALIB_COMPLETE]
+set_property PACKAGE_PIN AB21 [get_ports CALIB_COMPLETE_TP13]
+set_property IOSTANDARD LVCMOS33 [get_ports CALIB_COMPLETE_TP13]
 
-set_property PACKAGE_PIN AB22 [get_ports TG_COMPARE_ERROR]
-set_property IOSTANDARD LVCMOS33 [get_ports TG_COMPARE_ERROR]
+set_property PACKAGE_PIN AB22 [get_ports TP12]
+set_property IOSTANDARD LVCMOS33 [get_ports TP12]
 
+set_property PACKAGE_PIN AA25 [get_ports TP11]
+set_property IOSTANDARD LVCMOS33 [get_ports TP11]

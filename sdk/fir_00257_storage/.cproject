@@ -100,7 +100,7 @@
 					</folderInfo>
 					<fileInfo id="xilinx.gnu.mb.exe.debug.36748601.1632819904" name="USART_Utils.h" rcbsApplicability="disable" resourcePath="src/Common/USART_Utils.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="src/Common/Timer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -205,7 +205,7 @@
 					</folderInfo>
 					<fileInfo id="xilinx.gnu.mb.exe.release.1257917207.389656871" name="USART_Utils.h" rcbsApplicability="disable" resourcePath="src/Common/USART_Utils.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="src/Common/Timer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

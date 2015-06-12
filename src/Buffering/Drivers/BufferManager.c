@@ -498,7 +498,7 @@ static IRC_Status_t BufferManager_MemAddrGPIO_Init()
     XStatus status;
 
     // Initialize memory address GPIO
-    status = XGpio_Initialize(&memAddrGPIO, XPAR_AXI_GPIO_0_DEVICE_ID);
+    status = XGpio_Initialize(&memAddrGPIO, XPAR_AXI_GPIO_MEM_ADDR_DEVICE_ID);
 
     // Set GPIO direction (0 for output, 1 for input)
     XGpio_SetDataDirection(&memAddrGPIO, GPIO_CHANNEL_ID, 0);

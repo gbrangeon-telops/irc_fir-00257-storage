@@ -120,6 +120,7 @@ entity bd_wrapper is
     QSPI_SS    :   inout STD_LOGIC;
     
     --debug
+    TEST_POINT :   OUT STD_LOGIC_VECTOR ( 1 downto 0 );
     INIT_CALIB_COMPLETE :   OUT STD_LOGIC
 
 	);
@@ -388,7 +389,8 @@ component core_wrapper
       qspi_io1_io : inout STD_LOGIC;
       qspi_io2_io : inout STD_LOGIC;
       qspi_io3_io : inout STD_LOGIC;
-      qspi_ss_io : inout STD_LOGIC_VECTOR ( 0 to 0 )
+      qspi_ss_io : inout STD_LOGIC_VECTOR ( 0 to 0 );
+      test_point_tri_o : out STD_LOGIC_VECTOR ( 1 downto 0 )
   );
 end component core_wrapper;
 
@@ -412,8 +414,6 @@ port map (
     UART_dcdn           => '0',
     UART_dsrn           => '0',
     UART_ri             => '0',
-    
-    --gpio_tri_i          => GPIO,
    
     --Code Mem
     DIMM0_addr       => DIMM0_addr,
@@ -678,7 +678,9 @@ port map (
     qspi_ss_io(0)  => QSPI_SS,
     
     DIMM0_INIT_CALIB_COMPLETE =>  init_calib(0),
-    DIMM1_INIT_CALIB_COMPLETE =>  init_calib(1)
+    DIMM1_INIT_CALIB_COMPLETE =>  init_calib(1),
+    
+    test_point_tri_o => TEST_POINT
 
 );											
 
