@@ -51,7 +51,6 @@ IRC_Status_t Storage_GC_Init()
    gcRegsData = gcRegsDataFactory;
 
    // Initialize Inter-FPGA GenICam master control interface
-   // TODO: AddMaster or AddSlave?
    status = GC_Manager_AddMaster(&gFpgaCtrlIntf,
 		 CIP_F1F2,
          XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
