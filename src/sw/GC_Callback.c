@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.4.1
+// Generated from XML camera definition file version 10.5.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -39,6 +39,8 @@ extern t_bufferManager gBufManager;
  */
 void GC_Callback_Init()
 {
+   gcRegsDef[AcquisitionFrameRateIdx].callback =                     &GC_AcquisitionFrameRateCallback;
+   gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
    gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
    gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
@@ -57,6 +59,46 @@ void GC_Callback_Init()
    gcRegsDef[MemoryBufferSequenceSizeIdx].callback =                 &GC_MemoryBufferSequenceSizeCallback;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].callback =              &GC_MemoryBufferSequenceSizeMaxCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
+}
+
+/**
+ * AcquisitionFrameRate GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_AcquisitionFrameRateCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * AcquisitionStart GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
 }
 
 /**

@@ -19,7 +19,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.4.1
+// Generated from XML camera definition file version 10.5.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -29,6 +29,8 @@
  * Factory registers data
  */
 gcRegistersData_t gcRegsDataFactory = {
+   /* AcquisitionFrameRate = */ 0.0F,
+   /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
    /* Height = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
@@ -59,6 +61,8 @@ gcRegistersData_t gcRegsData;
  */
 void GC_Registers_Init()
 {
+   gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
+   gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;

@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.4.1
+// Generated from XML camera definition file version 10.5.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -31,6 +31,8 @@
  * Registers data structure
  */
 struct gcRegistersDataStruct {
+   float AcquisitionFrameRate;
+   uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
    uint32_t Height;
    uint32_t MemoryBufferMode;

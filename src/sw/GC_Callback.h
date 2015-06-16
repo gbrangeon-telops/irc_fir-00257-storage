@@ -20,11 +20,13 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.4.1
+// Generated from XML camera definition file version 10.5.0
 // using updateGenICamCallback.m Matlab script.
 
 void GC_Callback_Init();
 
+void GC_AcquisitionFrameRateCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
