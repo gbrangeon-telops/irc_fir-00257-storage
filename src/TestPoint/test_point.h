@@ -17,6 +17,7 @@
 #define TEST_POINT_H
 
 /***************************** Include Files ********************************/
+#include "xgpio.h"
 #include "IRC_Status.h"
 
 
@@ -34,6 +35,16 @@ enum TP_Id_enum {
    TP12 = 1
 };
 typedef enum TP_Id_enum t_TP_Id;
+
+/*
+ * Test point controller structure.
+ */
+struct s_TP_Ctrl
+{
+   XGpio tpGPIO;
+   uint32_t tpValue;
+};
+typedef struct s_TP_Ctrl t_TP_Ctrl;
 
 
 /************************** Function Prototypes *****************************/

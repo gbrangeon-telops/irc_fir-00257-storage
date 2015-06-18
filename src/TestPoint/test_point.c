@@ -14,13 +14,12 @@
  */
 
 #include "test_point.h"
-#include "xgpio.h"
 #include "xparameters.h"
 #include "utils.h"
 
 
 // Global variables
-static XGpio tpCtrl;
+static t_TP_Ctrl tpCtrl;
 
 
 /**
@@ -34,13 +33,14 @@ IRC_Status_t TP_Init()
     XStatus status;
 
     // Initialize test point GPIO controller
-    status = XGpio_Initialize(&tpCtrl, XPAR_AXI_GPIO_TP_DEVICE_ID);
+    status = XGpio_Initialize(&tpCtrl.tpGPIO, XPAR_AXI_GPIO_TP_DEVICE_ID);
 
     // Set GPIO direction (0 for output, 1 for input)
-    XGpio_SetDataDirection(&tpCtrl, TP_GPIO_CH_ID, 0);
+    XGpio_SetDataDirection(&tpCtrl.tpGPIO, TP_GPIO_CH_ID, 0);
 
     // Set test point initial values
-    XGpio_DiscreteWrite(&tpCtrl, TP_GPIO_CH_ID, 0);
+    tpCtrl.tpValue = 0;
+    XGpio_DiscreteWrite(&tpCtrl.tpGPIO, TP_GPIO_CH_ID, tpCtrl.tpValue);
 
     return (status == XST_SUCCESS) ? IRC_SUCCESS : IRC_FAILURE;
 }
@@ -55,12 +55,9 @@ IRC_Status_t TP_Init()
  */
 void TP_Set(t_TP_Id tpId)
 {
-    uint32_t tp_val;
-
     // Set the TP value without changing the others
-    tp_val = XGpio_DiscreteRead(&tpCtrl, TP_GPIO_CH_ID);
-    BitSet(tp_val, tpId);
-    XGpio_DiscreteWrite(&tpCtrl, TP_GPIO_CH_ID, tp_val);
+    BitSet(tpCtrl.tpValue, tpId);
+    XGpio_DiscreteWrite(&tpCtrl.tpGPIO, TP_GPIO_CH_ID, tpCtrl.tpValue);
 }
 
 
@@ -73,12 +70,9 @@ void TP_Set(t_TP_Id tpId)
  */
 void TP_Clear(t_TP_Id tpId)
 {
-    uint32_t tp_val;
-
     // Clear the TP value without changing the others
-    tp_val = XGpio_DiscreteRead(&tpCtrl, TP_GPIO_CH_ID);
-    BitClr(tp_val, tpId);
-    XGpio_DiscreteWrite(&tpCtrl, TP_GPIO_CH_ID, tp_val);
+    BitClr(tpCtrl.tpValue, tpId);
+    XGpio_DiscreteWrite(&tpCtrl.tpGPIO, TP_GPIO_CH_ID, tpCtrl.tpValue);
 }
 
 
@@ -91,12 +85,9 @@ void TP_Clear(t_TP_Id tpId)
  */
 void TP_Toggle(t_TP_Id tpId)
 {
-    uint32_t tp_val;
-
     // Toggle the TP value without changing the others
-    tp_val = XGpio_DiscreteRead(&tpCtrl, TP_GPIO_CH_ID);
-    BitFlp(tp_val, tpId);
-    XGpio_DiscreteWrite(&tpCtrl, TP_GPIO_CH_ID, tp_val);
+    BitFlp(tpCtrl.tpValue, tpId);
+    XGpio_DiscreteWrite(&tpCtrl.tpGPIO, TP_GPIO_CH_ID, tpCtrl.tpValue);
 }
 
 
