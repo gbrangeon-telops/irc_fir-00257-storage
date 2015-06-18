@@ -1,97 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <probeData version="1" minor="1">
   <probeset name="EDA_PROBESET" active="true">
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
         <Option Id="CORE_LOCATION" value="1:0"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="64"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[63]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[62]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[61]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[60]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[59]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[58]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[57]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[56]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[55]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[54]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[53]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[52]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[51]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[50]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[49]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[48]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[47]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[46]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[45]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[44]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[43]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[42]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[41]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[40]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[39]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[38]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[37]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[36]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[35]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[34]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[33]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[32]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[31]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[30]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[29]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[28]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[27]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[26]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[25]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[24]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[23]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[22]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[21]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[20]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[19]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[18]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[17]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[16]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[15]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[14]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[13]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[12]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[11]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[10]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[9]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[8]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[7]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[6]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[5]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[4]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[3]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[2]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[1]"/>
-        <net name="BUFFER_INST/MEMORY_BASED_ADDR[0]"/>
+        <net name="BUFFER_INST/MOI"/>
       </nets>
     </probe>
-    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq5&apos;hXX"/>
-        <Option Id="CORE_LOCATION" value="1:1"/>
-        <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="0"/>
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="CORE_LOCATION" value="1:0"/>
+        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="1"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="5"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/ADDR_MSB[4]"/>
-        <net name="AXIL_MEM/ADDR_MSB[3]"/>
-        <net name="AXIL_MEM/ADDR_MSB[2]"/>
-        <net name="AXIL_MEM/ADDR_MSB[1]"/>
-        <net name="AXIL_MEM/ADDR_MSB[0]"/>
+        <net name="BUFFER_INST/WATER_LEVEL"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -99,43 +32,119 @@
         <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
         <Option Id="CORE_LOCATION" value="1:1"/>
         <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="1"/>
+        <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][31]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][30]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][29]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][28]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][27]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][26]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][25]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][24]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][23]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][22]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][21]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][20]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][19]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][18]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][17]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][16]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][15]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][14]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][13]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][12]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][11]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][10]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][9]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][8]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][7]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][6]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][5]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][4]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][3]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][2]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][1]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWADDR][0]"/>
+        <net name="AXIL_MEM_IN_MISO[31]"/>
+        <net name="AXIL_MEM_IN_MISO[30]"/>
+        <net name="AXIL_MEM_IN_MISO[29]"/>
+        <net name="AXIL_MEM_IN_MISO[28]"/>
+        <net name="AXIL_MEM_IN_MISO[27]"/>
+        <net name="AXIL_MEM_IN_MISO[26]"/>
+        <net name="AXIL_MEM_IN_MISO[25]"/>
+        <net name="AXIL_MEM_IN_MISO[24]"/>
+        <net name="AXIL_MEM_IN_MISO[23]"/>
+        <net name="AXIL_MEM_IN_MISO[22]"/>
+        <net name="AXIL_MEM_IN_MISO[21]"/>
+        <net name="AXIL_MEM_IN_MISO[20]"/>
+        <net name="AXIL_MEM_IN_MISO[19]"/>
+        <net name="AXIL_MEM_IN_MISO[18]"/>
+        <net name="AXIL_MEM_IN_MISO[17]"/>
+        <net name="AXIL_MEM_IN_MISO[16]"/>
+        <net name="AXIL_MEM_IN_MISO[15]"/>
+        <net name="AXIL_MEM_IN_MISO[14]"/>
+        <net name="AXIL_MEM_IN_MISO[13]"/>
+        <net name="AXIL_MEM_IN_MISO[12]"/>
+        <net name="AXIL_MEM_IN_MISO[11]"/>
+        <net name="AXIL_MEM_IN_MISO[10]"/>
+        <net name="AXIL_MEM_IN_MISO[9]"/>
+        <net name="AXIL_MEM_IN_MISO[8]"/>
+        <net name="AXIL_MEM_IN_MISO[7]"/>
+        <net name="AXIL_MEM_IN_MISO[6]"/>
+        <net name="AXIL_MEM_IN_MISO[5]"/>
+        <net name="AXIL_MEM_IN_MISO[4]"/>
+        <net name="AXIL_MEM_IN_MISO[3]"/>
+        <net name="AXIL_MEM_IN_MISO[2]"/>
+        <net name="AXIL_MEM_IN_MISO[1]"/>
+        <net name="AXIL_MEM_IN_MISO[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
+        <Option Id="PROBE_PORT" value="1"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="64"/>
+      </probeOptions>
+      <nets>
+        <net name="AXIL_MEM_IN_MOSI[63]"/>
+        <net name="AXIL_MEM_IN_MOSI[62]"/>
+        <net name="AXIL_MEM_IN_MOSI[61]"/>
+        <net name="AXIL_MEM_IN_MOSI[60]"/>
+        <net name="AXIL_MEM_IN_MOSI[59]"/>
+        <net name="AXIL_MEM_IN_MOSI[58]"/>
+        <net name="AXIL_MEM_IN_MOSI[57]"/>
+        <net name="AXIL_MEM_IN_MOSI[56]"/>
+        <net name="AXIL_MEM_IN_MOSI[55]"/>
+        <net name="AXIL_MEM_IN_MOSI[54]"/>
+        <net name="AXIL_MEM_IN_MOSI[53]"/>
+        <net name="AXIL_MEM_IN_MOSI[52]"/>
+        <net name="AXIL_MEM_IN_MOSI[51]"/>
+        <net name="AXIL_MEM_IN_MOSI[50]"/>
+        <net name="AXIL_MEM_IN_MOSI[49]"/>
+        <net name="AXIL_MEM_IN_MOSI[48]"/>
+        <net name="AXIL_MEM_IN_MOSI[47]"/>
+        <net name="AXIL_MEM_IN_MOSI[46]"/>
+        <net name="AXIL_MEM_IN_MOSI[45]"/>
+        <net name="AXIL_MEM_IN_MOSI[44]"/>
+        <net name="AXIL_MEM_IN_MOSI[43]"/>
+        <net name="AXIL_MEM_IN_MOSI[42]"/>
+        <net name="AXIL_MEM_IN_MOSI[41]"/>
+        <net name="AXIL_MEM_IN_MOSI[40]"/>
+        <net name="AXIL_MEM_IN_MOSI[39]"/>
+        <net name="AXIL_MEM_IN_MOSI[38]"/>
+        <net name="AXIL_MEM_IN_MOSI[37]"/>
+        <net name="AXIL_MEM_IN_MOSI[36]"/>
+        <net name="AXIL_MEM_IN_MOSI[35]"/>
+        <net name="AXIL_MEM_IN_MOSI[34]"/>
+        <net name="AXIL_MEM_IN_MOSI[33]"/>
+        <net name="AXIL_MEM_IN_MOSI[32]"/>
+        <net name="AXIL_MEM_IN_MOSI[31]"/>
+        <net name="AXIL_MEM_IN_MOSI[30]"/>
+        <net name="AXIL_MEM_IN_MOSI[29]"/>
+        <net name="AXIL_MEM_IN_MOSI[28]"/>
+        <net name="AXIL_MEM_IN_MOSI[27]"/>
+        <net name="AXIL_MEM_IN_MOSI[26]"/>
+        <net name="AXIL_MEM_IN_MOSI[25]"/>
+        <net name="AXIL_MEM_IN_MOSI[24]"/>
+        <net name="AXIL_MEM_IN_MOSI[23]"/>
+        <net name="AXIL_MEM_IN_MOSI[22]"/>
+        <net name="AXIL_MEM_IN_MOSI[21]"/>
+        <net name="AXIL_MEM_IN_MOSI[20]"/>
+        <net name="AXIL_MEM_IN_MOSI[19]"/>
+        <net name="AXIL_MEM_IN_MOSI[18]"/>
+        <net name="AXIL_MEM_IN_MOSI[17]"/>
+        <net name="AXIL_MEM_IN_MOSI[16]"/>
+        <net name="AXIL_MEM_IN_MOSI[15]"/>
+        <net name="AXIL_MEM_IN_MOSI[14]"/>
+        <net name="AXIL_MEM_IN_MOSI[13]"/>
+        <net name="AXIL_MEM_IN_MOSI[12]"/>
+        <net name="AXIL_MEM_IN_MOSI[11]"/>
+        <net name="AXIL_MEM_IN_MOSI[10]"/>
+        <net name="AXIL_MEM_IN_MOSI[9]"/>
+        <net name="AXIL_MEM_IN_MOSI[8]"/>
+        <net name="AXIL_MEM_IN_MOSI[7]"/>
+        <net name="AXIL_MEM_IN_MOSI[6]"/>
+        <net name="AXIL_MEM_IN_MOSI[5]"/>
+        <net name="AXIL_MEM_IN_MOSI[4]"/>
+        <net name="AXIL_MEM_IN_MOSI[3]"/>
+        <net name="AXIL_MEM_IN_MOSI[2]"/>
+        <net name="AXIL_MEM_IN_MOSI[1]"/>
+        <net name="AXIL_MEM_IN_MOSI[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -148,38 +157,38 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][31]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][30]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][29]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][28]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][27]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][26]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][25]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][24]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][23]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][22]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][21]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][20]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][19]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][18]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][17]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][16]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][15]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][14]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][13]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][12]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][11]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][10]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][9]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][8]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][7]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][6]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][5]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][4]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][3]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][2]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][1]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARADDR][0]"/>
+        <net name="AXIL_MEM_OUT_MOSI[31]"/>
+        <net name="AXIL_MEM_OUT_MOSI[30]"/>
+        <net name="AXIL_MEM_OUT_MOSI[29]"/>
+        <net name="AXIL_MEM_OUT_MOSI[28]"/>
+        <net name="AXIL_MEM_OUT_MOSI[27]"/>
+        <net name="AXIL_MEM_OUT_MOSI[26]"/>
+        <net name="AXIL_MEM_OUT_MOSI[25]"/>
+        <net name="AXIL_MEM_OUT_MOSI[24]"/>
+        <net name="AXIL_MEM_OUT_MOSI[23]"/>
+        <net name="AXIL_MEM_OUT_MOSI[22]"/>
+        <net name="AXIL_MEM_OUT_MOSI[21]"/>
+        <net name="AXIL_MEM_OUT_MOSI[20]"/>
+        <net name="AXIL_MEM_OUT_MOSI[19]"/>
+        <net name="AXIL_MEM_OUT_MOSI[18]"/>
+        <net name="AXIL_MEM_OUT_MOSI[17]"/>
+        <net name="AXIL_MEM_OUT_MOSI[16]"/>
+        <net name="AXIL_MEM_OUT_MOSI[15]"/>
+        <net name="AXIL_MEM_OUT_MOSI[14]"/>
+        <net name="AXIL_MEM_OUT_MOSI[13]"/>
+        <net name="AXIL_MEM_OUT_MOSI[12]"/>
+        <net name="AXIL_MEM_OUT_MOSI[11]"/>
+        <net name="AXIL_MEM_OUT_MOSI[10]"/>
+        <net name="AXIL_MEM_OUT_MOSI[9]"/>
+        <net name="AXIL_MEM_OUT_MOSI[8]"/>
+        <net name="AXIL_MEM_OUT_MOSI[7]"/>
+        <net name="AXIL_MEM_OUT_MOSI[6]"/>
+        <net name="AXIL_MEM_OUT_MOSI[5]"/>
+        <net name="AXIL_MEM_OUT_MOSI[4]"/>
+        <net name="AXIL_MEM_OUT_MOSI[3]"/>
+        <net name="AXIL_MEM_OUT_MOSI[2]"/>
+        <net name="AXIL_MEM_OUT_MOSI[1]"/>
+        <net name="AXIL_MEM_OUT_MOSI[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -192,38 +201,114 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][31]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][30]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][29]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][28]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][27]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][26]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][25]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][24]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][23]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][22]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][21]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][20]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][19]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][18]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][17]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][16]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][15]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][14]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][13]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][12]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][11]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][10]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][9]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][8]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][7]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][6]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][5]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][4]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][3]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][2]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][1]"/>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WDATA][0]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][31]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][30]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][29]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][28]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][27]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][26]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][25]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][24]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][23]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][22]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][21]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][20]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][19]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][18]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][17]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][16]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][15]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][14]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][13]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][12]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][11]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][10]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][9]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][8]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][7]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][6]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][5]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][4]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][3]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][2]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][1]"/>
+        <net name="AXIL_MEM_IN_MOSI[WDATA][0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq64&apos;hXXXX_XXXX_XXXX_XXXX"/>
+        <Option Id="CORE_LOCATION" value="1:1"/>
+        <Option Id="HW_ILA" value="u_ila_1"/>
+        <Option Id="PROBE_PORT" value="4"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="64"/>
+      </probeOptions>
+      <nets>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][63]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][62]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][61]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][60]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][59]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][58]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][57]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][56]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][55]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][54]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][53]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][52]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][51]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][50]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][49]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][48]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][47]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][46]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][45]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][44]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][43]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][42]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][41]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][40]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][39]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][38]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][37]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][36]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][35]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][34]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][33]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][32]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][31]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][30]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][29]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][28]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][27]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][26]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][25]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][24]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][23]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][22]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][21]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][20]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][19]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][18]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][17]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][16]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][15]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][14]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][13]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][12]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][11]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][10]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][9]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][8]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][7]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][6]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][5]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][4]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][3]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][2]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][1]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWADDR][0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
@@ -231,69 +316,60 @@
         <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
         <Option Id="CORE_LOCATION" value="1:1"/>
         <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="4"/>
+        <Option Id="PROBE_PORT" value="5"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][31]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][30]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][29]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][28]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][27]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][26]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][25]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][24]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][23]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][22]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][21]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][20]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][19]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][18]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][17]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][16]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][15]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][14]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][13]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][12]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][11]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][10]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][9]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][8]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][7]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][6]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][5]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][4]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][3]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][2]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][1]"/>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RDATA][0]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][31]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][30]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][29]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][28]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][27]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][26]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][25]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][24]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][23]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][22]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][21]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][20]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][19]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][18]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][17]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][16]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][15]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][14]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][13]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][12]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][11]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][10]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][9]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][8]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][7]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][6]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][5]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][4]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][3]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][2]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][1]"/>
+        <net name="AXIL_MEM_OUT_MOSI[ARADDR][0]"/>
       </nets>
     </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:1"/>
-        <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="5"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[ARVALID]"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq5&apos;hXX"/>
         <Option Id="CORE_LOCATION" value="1:1"/>
         <Option Id="HW_ILA" value="u_ila_1"/>
         <Option Id="PROBE_PORT" value="6"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="5"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[AWVALID]"/>
+        <net name="MEM_ADDR_MSB[4]"/>
+        <net name="MEM_ADDR_MSB[3]"/>
+        <net name="MEM_ADDR_MSB[2]"/>
+        <net name="MEM_ADDR_MSB[1]"/>
+        <net name="MEM_ADDR_MSB[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -306,7 +382,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[BREADY]"/>
+        <net name="AXIL_MEM_IN_MISO[ARREADY]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -319,7 +395,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[RREADY]"/>
+        <net name="AXIL_MEM_IN_MISO[AWREADY]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -332,7 +408,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_32B_IN_MOSI[WVALID]"/>
+        <net name="AXIL_MEM_IN_MISO[RVALID]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -345,7 +421,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[ARREADY]"/>
+        <net name="AXIL_MEM_IN_MISO[WREADY]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -358,7 +434,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[AWREADY]"/>
+        <net name="AXIL_MEM_IN_MOSI[ARVALID]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -371,7 +447,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[BVALID]"/>
+        <net name="AXIL_MEM_IN_MOSI[AWVALID]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -384,7 +460,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[RVALID]"/>
+        <net name="AXIL_MEM_IN_MOSI[RREADY]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -397,20 +473,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="AXIL_MEM/AXIL_64B_OUT_MISO[WREADY]"/>
-      </nets>
-    </probe>
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
-      <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
-        <Option Id="CORE_LOCATION" value="1:1"/>
-        <Option Id="HW_ILA" value="u_ila_1"/>
-        <Option Id="PROBE_PORT" value="15"/>
-        <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
-      </probeOptions>
-      <nets>
-        <net name="BUFFER_INST/MEM_READY"/>
+        <net name="AXIL_MEM_IN_MOSI[WVALID]"/>
       </nets>
     </probe>
   </probeset>
