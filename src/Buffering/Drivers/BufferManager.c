@@ -52,7 +52,7 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 	const uint32_t default_height = 256;
 
     // Reset error flags
-    *(uint32_t *)&gBufManagerError = 0;
+    gBufManagerError = (t_bufferManagerError)0;
 
     // Default control values
     pBufferCtrl->Buffer_base_addr = MEMORY_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
@@ -92,7 +92,7 @@ void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl)
     uint32_t loop_cnt = MEM_READY_TIMEOUT_IN_S * TIME_ONE_SECOND_US / loop_time_in_us;
 
     // Set error flag by default
-    gBufManagerError.memReadyErr = 1;
+    BitMaskSet(gBufManagerError, memReadyErrMask);
 
     while (loop_cnt--)
     {
@@ -101,8 +101,8 @@ void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl)
         // Get Mem Ready signal from Buffer Manager module
         if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 )
         {
-            // Reset error flag and exit
-            gBufManagerError.memReadyErr = 0;
+            // Clear error flag and exit
+            BitMaskClr(gBufManagerError, memReadyErrMask);
             return;
         }
     }
@@ -118,10 +118,14 @@ void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl)
  */
 void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl)
 {
+    // Reset error flags
+    BitMaskClr(gBufManagerError, bufWriteErrMask | bufReadErrMask | memReadyErrMask);
+
     // Update error flags
-    gBufManagerError.bufWriteErr = AXI4L_read32(pBufferCtrl->ADD + BM_WRITE_ERR);
-    gBufManagerError.bufReadErr  = AXI4L_read32(pBufferCtrl->ADD + BM_READ_ERR);
-    gBufManagerError.memReadyErr = ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 ) ? 0 : 1;
+    gBufManagerError |= (t_bufferManagerError)(AXI4L_read32(pBufferCtrl->ADD + BM_WRITE_ERR) << bufWriteErrBitPos) & bufWriteErrMask;
+    gBufManagerError |= (t_bufferManagerError)(AXI4L_read32(pBufferCtrl->ADD + BM_READ_ERR) << bufReadErrBitPos) & bufReadErrMask;
+    if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 )
+        BitMaskSet(gBufManagerError, memReadyErrMask);
 }
 
 

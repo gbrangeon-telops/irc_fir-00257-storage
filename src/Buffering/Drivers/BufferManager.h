@@ -65,16 +65,24 @@
 #define BT_MOI_IMG_OFFSET		1
 #define BT_END_IMG_OFFSET		2
 
+//BUFFER MANAGER ERROR MASKS
+#define bufWriteErrMask         ((t_bufferManagerError)0x0000000F)
+#define bufWriteErrBitPos       0
+#define bufReadErrMask          ((t_bufferManagerError)0x000000F0)
+#define bufReadErrBitPos        4
+#define memReadyErrMask         ((t_bufferManagerError)0x00000100)
+#define memReadyErrBitPos       8
+
 
 /**************************** Type Definitions ******************************/
 /**
  * BUFFER MANAGER STRUCT
  */
 struct s_bufferManagerStruct {
-	uint32_t SIZE;                     // Number of config elements (uint64_t counts as 2), excluding SIZE and ADD.
+	uint32_t SIZE;      // Number of config elements (uint64_t counts as 2), excluding SIZE and ADD.
 	uint32_t ADD;
 
-	uint64_t Buffer_base_addr;
+	uint64_t Buffer_base_addr;  // 32bit-LSB is sent first
 	uint32_t nbSequenceMax;
 	uint32_t nbImagePerSeq;
 	uint32_t FrameSize;
@@ -112,13 +120,10 @@ struct s_bufferTable {
 };
 typedef struct s_bufferTable t_bufferTable;
 
-struct s_bufferManagerError {
-    uint32_t bufWriteErr    : 4;
-    uint32_t bufReadErr     : 4;
-    uint32_t memReadyErr    : 1;
-    uint32_t reserved       : 23;
-};
-typedef struct s_bufferManagerError t_bufferManagerError;
+/**
+ * BUFFER MANAGER ERROR TYPE
+ */
+typedef uint32_t t_bufferManagerError;
 
 
 /***************** Macros (Inline Functions) Definitions ********************/
