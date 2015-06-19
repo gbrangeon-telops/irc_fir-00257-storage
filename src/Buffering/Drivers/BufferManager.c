@@ -124,7 +124,7 @@ void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl)
     // Update error flags
     gBufManagerError |= (t_bufferManagerError)(AXI4L_read32(pBufferCtrl->ADD + BM_WRITE_ERR) << bufWriteErrBitPos) & bufWriteErrMask;
     gBufManagerError |= (t_bufferManagerError)(AXI4L_read32(pBufferCtrl->ADD + BM_READ_ERR) << bufReadErrBitPos) & bufReadErrMask;
-    if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 1 )
+    if ( AXI4L_read32(pBufferCtrl->ADD + BM_MEM_READY) == 0 )
         BitMaskSet(gBufManagerError, memReadyErrMask);
 }
 
