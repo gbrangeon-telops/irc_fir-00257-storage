@@ -3,9 +3,6 @@ call D:\Telops\FIR-00257-Storage\bin\scripts\setEnvironment.bat
 rem Clean up
 del %buildInfoFile%
 
-rem Fetch hw and sw files
-call %scriptsDir%\fetchHwSwFiles.bat
-
 echo #ifndef BUILDINFO_H> %buildInfoFile%
 echo #define BUILDINFO_H>> %buildInfoFile%
 
