@@ -387,7 +387,7 @@ void BufferManager_SetBufferMode(t_bufferManager *pBufferCtrl, t_bufferMode Mode
 	// Write values
 	WriteStruct(pBufferCtrl);
 
-	// Re-enable only in write mode (in read mode wait for read command)
+	// Re-enable only in write mode (in read mode wait for read command triggered by acq start)
 	if (Mode == BM_WRITE)
 	    BufferManager_EnableBuffer(pBufferCtrl);
 }

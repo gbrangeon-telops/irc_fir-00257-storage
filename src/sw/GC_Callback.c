@@ -98,6 +98,19 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
+      //Check if it a Buffer read or a ACQ start from a stop
+      if (gcRegsData.AcquisitionStart && gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off)
+      {
+         //Read image or sequence
+         if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
+         {
+            BufferManager_ReadSequence(&gBufManager,&gcRegsData);
+         }
+         else if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
+         {
+            BufferManager_ReadImage(&gBufManager,&gcRegsData);
+         }
+      }
    }
 }
 
