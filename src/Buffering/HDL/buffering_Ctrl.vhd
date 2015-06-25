@@ -65,6 +65,7 @@ entity Buffering_Ctrl is
     -------------------------------- 
     FSM_ERROR       : in std_logic_vector(7 downto 0);
     ACQ_STOP        : out std_logic;
+    SKIP_DATA       : out std_logic;
     MEM_READY       : in  std_logic;
 
     -- CLK_CTRL
@@ -282,12 +283,16 @@ begin
       case buffermode_b is
          when "0000" => 
             BUFFER_MODE <= BUF_OFF;
+            SKIP_DATA <= '1';
          when "0001" => 
             BUFFER_MODE <= BUF_WR_SEQ;
+            SKIP_DATA <= '0';
          when "0010" => 
             BUFFER_MODE <= BUF_RD_IMG;
+            SKIP_DATA <= '0';
          when others => 
             BUFFER_MODE <= BUF_OFF;
+            SKIP_DATA <= '1';
       end case;
    end process;
 
