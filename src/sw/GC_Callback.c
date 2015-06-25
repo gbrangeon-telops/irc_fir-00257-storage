@@ -138,6 +138,8 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
+      // Remove 2 header lines (added for the NTx-Mini)
+      gcRegsData.Height -= 2;
    }
 }
 
