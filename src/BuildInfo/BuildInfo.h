@@ -1,10 +1,10 @@
 #ifndef BUILDINFO_H
 #define BUILDINFO_H
 
-#define SVN_STORAGE_HARDWARE_REV           15824
+#define SVN_STORAGE_HARDWARE_REV           16112
 #define SVN_STORAGE_HARDWARE_MODIFIED      0
 
-#define SVN_STORAGE_SOFTWARE_REV           15868
+#define SVN_STORAGE_SOFTWARE_REV           16112
 #define SVN_STORAGE_SOFTWARE_MODIFIED      0
 
 #define SVN_COMMON_REV                  16083
