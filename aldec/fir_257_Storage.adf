@@ -114,5 +114,5 @@ MGT/..\..\compile\mgt_block.vhd=-1
 MGT/..\..\compile\storage_mgt_wrapper.vhd=-1
 
 [file_out:Buffering/..\..\..\src\Buffering\HDL\Buffering.bde]
-Buffering/..\..\compile\buffering.vhd=-1
+Buffering/..\..\compile\Buffering.vhd=-1
 

@@ -1,17 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <probeData version="1" minor="1">
   <probeset name="EDA_PROBESET" active="true">
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
         <Option Id="CORE_LOCATION" value="1:0"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="UART_RX_IBUF"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[31]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[30]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[29]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[28]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[27]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[26]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[25]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[24]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[23]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[22]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[21]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[20]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[19]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[18]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[17]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[16]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[15]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[14]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[13]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[12]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[11]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[10]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[9]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[8]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[7]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[6]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[5]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[4]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[3]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[2]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[1]"/>
+        <net name="BUFFER_INST/TX_DATA_MOSI[0]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
+        <Option Id="CORE_LOCATION" value="1:0"/>
+        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="1"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
+      </probeOptions>
+      <nets>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][31]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][30]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][29]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][28]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][27]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][26]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][25]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][24]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][23]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][22]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][21]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][20]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][19]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][18]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][17]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][16]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][15]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][14]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][13]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][12]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][11]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][10]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][9]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][8]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][7]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][6]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][5]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][4]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][3]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][2]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][1]"/>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TDATA][0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -19,12 +94,38 @@
         <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
         <Option Id="CORE_LOCATION" value="1:0"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
-        <Option Id="PROBE_PORT" value="1"/>
+        <Option Id="PROBE_PORT" value="2"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="UART_TX_OBUF"/>
+        <net name="BUFFER_INST/CLEAR_MEMORY_CONTENT"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="CORE_LOCATION" value="1:0"/>
+        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="3"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
+      </probeOptions>
+      <nets>
+        <net name="BUFFER_INST/RX_DATA_MOSI_buf[TVALID]"/>
+      </nets>
+    </probe>
+    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+      <probeOptions Id="DebugProbeParams">
+        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="CORE_LOCATION" value="1:0"/>
+        <Option Id="HW_ILA" value="u_ila_0"/>
+        <Option Id="PROBE_PORT" value="4"/>
+        <Option Id="PROBE_PORT_BITS" value="0"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
+      </probeOptions>
+      <nets>
+        <net name="BUFFER_INST/TX_DATA_MISO"/>
       </nets>
     </probe>
   </probeset>
