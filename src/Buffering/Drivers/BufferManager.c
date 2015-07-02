@@ -67,7 +67,7 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 	pBufferCtrl->rd_sequence_id = 0;
 	pBufferCtrl->rd_start_img = 0;
 	pBufferCtrl->rd_stop_img = 0;
-	pBufferCtrl->clear_memory = 1;
+	pBufferCtrl->clear_memory = 0;
 	pBufferCtrl->acq_stop = 0;
 	pBufferCtrl->ConfigValid = 0;
 

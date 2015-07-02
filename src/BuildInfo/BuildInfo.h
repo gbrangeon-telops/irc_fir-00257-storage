@@ -7,8 +7,8 @@
 #define SVN_STORAGE_SOFTWARE_REV           16112
 #define SVN_STORAGE_SOFTWARE_MODIFIED      0
 
-#define SVN_COMMON_REV                  16144
-#define SVN_COMMON_MODIFIED             1
+#define SVN_COMMON_REV                  16127
+#define SVN_COMMON_MODIFIED             0
 
 #define SVN_UNCOMMITTED_CHANGES         ((SVN_STORAGE_SOFTWARE_MODIFIED == 1) || (SVN_STORAGE_HARDWARE_MODIFIED == 1) || (SVN_COMMON_MODIFIED == 1))
 
