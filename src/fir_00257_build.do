@@ -13,8 +13,8 @@ do 		"$COMMON\compile_all_common.do"
 
 #MGT
 acom  \
-  "$MGT\hdl\mgt_block.bde" \
-  "$MGT\hdl\storage_mgt_wrapper.bde" 
+  "$FIR257STORAGE\src\MGT\hdl\mgt_block.bde" \
+  "$FIR257STORAGE\src\MGT\hdl\storage_mgt_wrapper.bde" 
 
 #Buffering
 do 		"$FIR257STORAGE\src\Buffering\HDL\build_buffering_intf.do"
