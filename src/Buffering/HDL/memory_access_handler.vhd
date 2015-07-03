@@ -24,6 +24,7 @@ use work.TEL2000.all;
 
 entity memory_access_handler is
    port(
+      AXIL_IN_ADDR_WIDTH: in  integer := 31;   --AXIL base address is 0x8000_0000 so we don't keep the msb
       AXIL_32B_IN_MOSI  : in  t_axi4_lite_mosi;
       AXIL_32B_IN_MISO  : out t_axi4_lite_miso;
       ADDR_MSB          : in  STD_LOGIC_VECTOR ( 4 downto 0 );
@@ -36,15 +37,24 @@ end memory_access_handler;
 
 architecture rtl of memory_access_handler is
 
-   constant IN_ADDR_WIDTH : integer := 31;   --AXIL base address is 0x8000_0000 so we don't keep the msb
-
    signal awaddr : unsigned(63 downto 0) := (others => '0');
    signal araddr : unsigned(63 downto 0) := (others => '0');
 
 begin
    --Address handling
-   awaddr <= resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(IN_ADDR_WIDTH-1 downto 0)), awaddr'length);
-   araddr <= resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(IN_ADDR_WIDTH-1 downto 0)), araddr'length);
+   with AXIL_IN_ADDR_WIDTH select
+      awaddr <= 
+         --keep only the lsb
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(AXIL_IN_ADDR_WIDTH-1 downto 0)), awaddr'length) when 1 to AXIL_32B_IN_MOSI.AWADDR'length-1,
+         --keep all bits
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR), awaddr'length) when others;
+
+   with AXIL_IN_ADDR_WIDTH select
+      araddr <= 
+         --keep only the lsb
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(AXIL_IN_ADDR_WIDTH-1 downto 0)), araddr'length) when 1 to AXIL_32B_IN_MOSI.ARADDR'length-1,
+         --keep all bits
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR), araddr'length) when others;
    
    --MOSI output
    AXIL_64B_OUT_MOSI.AWVALID  <= AXIL_32B_IN_MOSI.AWVALID;

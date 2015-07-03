@@ -22,6 +22,7 @@
 #include "mb_axi4l_bridge.h"
 #include "utils.h"
 #include "IRCamHeader.h"
+#include <math.h>
 
 
 // Global variables
@@ -70,6 +71,7 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 	pBufferCtrl->clear_memory = 0;
 	pBufferCtrl->acq_stop = 0;
 	pBufferCtrl->ConfigValid = 0;
+	pBufferCtrl->axilMemAddrWidth = (uint32_t)log2((double)AXIL_MEM_ADDR_SPACE);
 
 	// Write values
 	WriteStruct(pBufferCtrl);
@@ -524,14 +526,11 @@ static IRC_Status_t BufferManager_MemAddrGPIO_Init()
  */
 static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
 {
-    // Calculate address space of this peripheral
-    const uint32_t AXI4L_addrSpace = TEL_PAR_TEL_AXIL_MEM_OUT_HIGHADDR - TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR + 1;
-
     // Take only the part that fits in the address space
-    uint32_t AXI4L_addrVal = (uint32_t)(memAddr % AXI4L_addrSpace + TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR);
+    uint32_t AXI4L_addrVal = (uint32_t)(memAddr % AXIL_MEM_ADDR_SPACE + TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR);
 
     // Set GPIO values with the part that multiplies the address space
-    XGpio_DiscreteWrite(&memAddrGPIO, MEM_ADDR_GPIO_CH_ID, (uint32_t)(memAddr / AXI4L_addrSpace));
+    XGpio_DiscreteWrite(&memAddrGPIO, MEM_ADDR_GPIO_CH_ID, (uint32_t)(memAddr / AXIL_MEM_ADDR_SPACE));
 
     // Return the address to be used on the AXI4L
     return AXI4L_addrVal;

@@ -89,9 +89,9 @@ Buffering/..\..\..\src\Buffering\HDL\memory_access_handler.vhd=-1
 .\..\src\Buffering\HDL\buffering_fsm.vhd=VHDL Source Code
 .\..\src\Buffering\HDL\build_buffering_intf.do=Macro
 .\..\src\Buffering\HDL\memory_access_handler.vhd=VHDL Source Code
-.\compile\buffering.vhd=VHDL Source Code
-.\compile\fir_257_top.vhd=VHDL Source Code
 
+[file_out:/..\..\src\fir_257_top.bde]
+/..\compile\fir_257_top.vhd=-1
 
 [file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
 MGT/..\..\compile\mgt_block.vhd=-1
@@ -101,5 +101,4 @@ MGT/..\..\compile\storage_mgt_wrapper.vhd=-1
 
 [file_out:Buffering/..\..\..\src\Buffering\HDL\Buffering.bde]
 Buffering/..\..\compile\buffering.vhd=-1
-[file_out:/..\..\src\fir_257_top.bde]
-/..\compile\fir_257_top.vhd=-1
+

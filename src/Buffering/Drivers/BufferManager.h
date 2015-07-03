@@ -37,6 +37,11 @@
 #define MEMORY_BUFFER_HIGHADDR  ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR)
 #define MEMORY_BUFFER_SIZE      ((uint64_t)(MEMORY_BUFFER_HIGHADDR - MEMORY_BUFFER_BASEADDR + 1))
 
+/**
+ * AXI4 Lite memory access address space.
+ */
+#define AXIL_MEM_ADDR_SPACE     ((uint32_t)(TEL_PAR_TEL_AXIL_MEM_OUT_HIGHADDR - TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR + 1))
+
 //BUFFER CTRL ADDRESS MAP
 #define BM_BASE_ADDR_LSB		0x0     //MEMORY BASE ADDR LSB
 #define BM_BASE_ADDR_MSB        0x4     //MEMORY BASE ADDR MSB
@@ -54,11 +59,12 @@
 #define BM_CLEAR_MEMORY			0x34	//Pulse to clear memory
 #define BM_ACQ_STOP				0X38	//When acquisition is stop assert this signal.
 #define BM_CONFIG_VALID			0x3C	//Hold at 1 when valid. Do not change param when valid
+#define BM_AXIL_MEM_ADDR_WIDTH  0x40    //nb of bits kept in the AXIL memory address
 
-#define BM_NB_SEQ_IN_MEM		0x40	//Return number of sequence int the buffer
-#define BM_WRITE_ERR 			0x44	//Return write error
-#define BM_READ_ERR 			0x48	//Return read error
-#define BM_MEM_READY            0x4C    //Return status of memory interface
+#define BM_NB_SEQ_IN_MEM		0x44	//Return number of sequence int the buffer
+#define BM_WRITE_ERR 			0x48	//Return write error
+#define BM_READ_ERR 			0x4C	//Return read error
+#define BM_MEM_READY            0x50    //Return status of memory interface
 
 //BUFFER TABLE ADDRESS MAP
 #define BT_START_IMG_OFFSET		0
@@ -97,6 +103,7 @@ struct s_bufferManagerStruct {
 	uint32_t clear_memory;
 	uint32_t acq_stop;
 	uint32_t ConfigValid;
+	uint32_t axilMemAddrWidth;
 };
 typedef struct s_bufferManagerStruct t_bufferManager;
 
@@ -127,7 +134,7 @@ typedef uint32_t t_bufferManagerError;
 
 
 /***************** Macros (Inline Functions) Definitions ********************/
-#define Buffering_Intf_Ctor(add) {sizeof(t_bufferManager)/4 - 2, add, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+#define Buffering_Intf_Ctor(add) {sizeof(t_bufferManager)/4 - 2, add, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 
 /************************** Function Prototypes *****************************/

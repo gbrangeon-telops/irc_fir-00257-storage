@@ -67,6 +67,8 @@ entity Buffering_Ctrl is
     ACQ_STOP        : out std_logic;
     SKIP_DATA       : out std_logic;
     MEM_READY       : in  std_logic;
+    
+    AXIL_MEM_ADDR_WIDTH : out integer;    -- 1 to 32
 
     -- CLK_CTRL
     ARESETN         : in  std_logic;
@@ -103,10 +105,11 @@ architecture RTL of Buffering_Ctrl is
    constant CLEAR_MEMORY_CONTENT_ADDR   : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(52,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    constant ACQ_STOP_ADDR               : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(56,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    constant CONFIG_VALID_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(60,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant NB_SEQ_IN_MEM_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(64,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant FSM_ERROR_WR_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(68,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant FSM_ERROR_RD_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(72,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
-   constant MEM_READY_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(76,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant AXIL_MEM_ADDR_WIDTH_ADDR    : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(64,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant NB_SEQ_IN_MEM_ADDR          : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(68,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant FSM_ERROR_WR_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(72,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant FSM_ERROR_RD_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(76,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant MEM_READY_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(80,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    
 
    
@@ -193,6 +196,8 @@ architecture RTL of Buffering_Ctrl is
     signal clear_mem_o  : std_logic;
     signal config_valid_o  : std_logic;
     signal acq_stop_o    : std_logic;
+    
+    signal axil_mem_addr_width_o  : std_logic_vector(5 downto 0);
 
 
  
@@ -231,6 +236,7 @@ begin
     RD_SEQ_ID      <= unsigned(rd_seq_id_b);
     RD_START_ID     <= unsigned(rd_start_id_b);
     RD_STOP_ID     <= unsigned(rd_stop_id_b);
+    AXIL_MEM_ADDR_WIDTH <= to_integer(unsigned(axil_mem_addr_width_o));
 
     memorybaseaddr_o <= memorybaseaddr_msb_o & memorybaseaddr_lsb_o;
 
@@ -352,6 +358,7 @@ begin
             clear_mem_o <= '0';
             config_valid_o <='0';
             acq_stop_o      <='0';
+            axil_mem_addr_width_o <= (others => '0');
          else
             if (slv_reg_wren = '1') and axi_wstrb = "1111" then
                case axi_awaddr(OPT_MEM_ADDR_BITS+ADDR_LSB downto 0) is      
@@ -371,6 +378,7 @@ begin
                   when CLEAR_MEMORY_CONTENT_ADDR    =>  clear_mem_o     <= AXI4_LITE_MOSI.WDATA(0);
                   when CONFIG_VALID_ADDR            =>  config_valid_o  <= AXI4_LITE_MOSI.WDATA(0);
                   when ACQ_STOP_ADDR            =>  acq_stop_o  <= AXI4_LITE_MOSI.WDATA(0);
+                  when AXIL_MEM_ADDR_WIDTH_ADDR     =>  axil_mem_addr_width_o         <= AXI4_LITE_MOSI.WDATA(axil_mem_addr_width_o'length-1 downto 0);
                   when others  =>                  
                end case;                                                                                          
             end if;                                        
