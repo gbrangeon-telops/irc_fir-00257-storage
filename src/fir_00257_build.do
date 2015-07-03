@@ -12,7 +12,9 @@ setenv COMMON "D:\Telops\FIR-00251-Common"
 do 		"$COMMON\compile_all_common.do"
 
 #MGT
-do  	"$FIR257STORAGE\src\MGT\hdl\compile_mgt.do" 
+acom  \
+  "$MGT\hdl\mgt_block.bde" \
+  "$MGT\hdl\storage_mgt_wrapper.bde" 
 
 #Buffering
 do 		"$FIR257STORAGE\src\Buffering\HDL\build_buffering_intf.do"
