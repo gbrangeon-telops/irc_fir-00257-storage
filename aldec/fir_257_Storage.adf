@@ -25,7 +25,7 @@ LANGUAGE=VHDL
 REFRESH_FLOW=1
 FLOWTOOLS=NONE
 FAMILY=
-fileopenfolder=D:\Telops\FIR-00251-Common\VHDL\MGT\Hdl
+fileopenfolder=D:\Telops\FIR-00257-Storage\src\Buffering\HDL
 
 [LocalVerilogSets]
 EnableSLP=1
@@ -47,36 +47,6 @@ HierarchyInformation=
 ShowHide=ShowTopLevel
 Selected=
 
-[Files.Data]
-.\..\src\fir_257_top.bde=Block Diagram
-.\..\src\fir_00257_build.do=Macro
-.\..\src\BD\HDL\bd_wrapper.vhd=VHDL Source Code
-.\..\src\BD\HDL\memory_access_handler.vhd=VHDL Source Code
-.\..\..\FIR-00251-Common\VHDL\tel2000pkg.vhd=VHDL Source Code
-.\..\src\MGT\HDL\mgt_block.bde=Block Diagram
-.\..\src\MGT\HDL\storage_mgt_wrapper.bde=Block Diagram
-.\..\..\FIR-00251-Common\VHDL\MGT\Hdl\mgt_ctrl.vhd=VHDL Source Code
-.\..\IP\AXI4_Stream32_to_64\AXI4_Stream32_to_64_funcsim.vhdl=VHDL Source Code
-.\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_funcsim.vhdl=VHDL Source Code
-.\..\IP\AXI4_Stream32_to_64\AXI4_Stream32_to_64_wrapper.vhd=VHDL Source Code
-.\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_wrapper.vhd=VHDL Source Code
-.\..\src\Buffering\HDL\Buffering.bde=Block Diagram
-.\..\src\Buffering\HDL\buffering_Ctrl.vhd=VHDL Source Code
-.\..\src\Buffering\HDL\buffering_fsm.vhd=VHDL Source Code
-.\..\src\Buffering\HDL\build_buffering_intf.do=Macro
-
-[file_out:/..\..\src\fir_257_top.bde]
-/..\compile\fir_257_top.vhd=-1
-
-[file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
-MGT/..\..\compile\mgt_block.vhd=-1
-
-[file_out:MGT/..\..\..\src\MGT\HDL\storage_mgt_wrapper.bde]
-MGT/..\..\compile\storage_mgt_wrapper.vhd=-1
-
-[file_out:Buffering/..\..\..\src\Buffering\HDL\Buffering.bde]
-Buffering/..\..\compile\buffering.vhd=-1
-
 [Groups]
 BD=1
 TEL2000=1
@@ -88,7 +58,6 @@ Buffering=1
 /..\..\src\fir_257_top.bde=-1
 /..\..\src\fir_00257_build.do=-1
 BD/..\..\..\src\BD\HDL\bd_wrapper.vhd=-1
-BD/..\..\..\src\BD\HDL\memory_access_handler.vhd=-1
 TEL2000/..\..\..\..\FIR-00251-Common\VHDL\tel2000pkg.vhd=-1
 MGT/..\..\..\..\FIR-00251-Common\VHDL\MGT\Hdl\mgt_ctrl.vhd=-1
 MGT/..\..\..\src\MGT\HDL\mgt_block.bde=-1
@@ -101,4 +70,36 @@ Buffering/..\..\..\src\Buffering\HDL\Buffering.bde=-1
 Buffering/..\..\..\src\Buffering\HDL\buffering_Ctrl.vhd=-1
 Buffering/..\..\..\src\Buffering\HDL\buffering_fsm.vhd=-1
 Buffering/..\..\..\src\Buffering\HDL\build_buffering_intf.do=-1
+Buffering/..\..\..\src\Buffering\HDL\memory_access_handler.vhd=-1
 
+[Files.Data]
+.\..\src\fir_257_top.bde=Block Diagram
+.\..\src\fir_00257_build.do=Macro
+.\..\src\BD\HDL\bd_wrapper.vhd=VHDL Source Code
+.\..\..\FIR-00251-Common\VHDL\tel2000pkg.vhd=VHDL Source Code
+.\..\..\FIR-00251-Common\VHDL\MGT\Hdl\mgt_ctrl.vhd=VHDL Source Code
+.\..\src\MGT\HDL\mgt_block.bde=Block Diagram
+.\..\src\MGT\HDL\storage_mgt_wrapper.bde=Block Diagram
+.\..\IP\AXI4_Stream32_to_64\AXI4_Stream32_to_64_funcsim.vhdl=VHDL Source Code
+.\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_funcsim.vhdl=VHDL Source Code
+.\..\IP\AXI4_Stream32_to_64\AXI4_Stream32_to_64_wrapper.vhd=VHDL Source Code
+.\..\IP\AXI4_Stream64_to_32\AXI4_Stream64_to_32_wrapper.vhd=VHDL Source Code
+.\..\src\Buffering\HDL\Buffering.bde=Block Diagram
+.\..\src\Buffering\HDL\buffering_Ctrl.vhd=VHDL Source Code
+.\..\src\Buffering\HDL\buffering_fsm.vhd=VHDL Source Code
+.\..\src\Buffering\HDL\build_buffering_intf.do=Macro
+.\..\src\Buffering\HDL\memory_access_handler.vhd=VHDL Source Code
+.\compile\buffering.vhd=VHDL Source Code
+.\compile\fir_257_top.vhd=VHDL Source Code
+
+
+[file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
+MGT/..\..\compile\mgt_block.vhd=-1
+
+[file_out:MGT/..\..\..\src\MGT\HDL\storage_mgt_wrapper.bde]
+MGT/..\..\compile\storage_mgt_wrapper.vhd=-1
+
+[file_out:Buffering/..\..\..\src\Buffering\HDL\Buffering.bde]
+Buffering/..\..\compile\buffering.vhd=-1
+[file_out:/..\..\src\fir_257_top.bde]
+/..\compile\fir_257_top.vhd=-1

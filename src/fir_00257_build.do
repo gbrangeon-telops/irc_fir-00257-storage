@@ -21,7 +21,6 @@ do 		"$FIR257STORAGE\src\Buffering\HDL\build_buffering_intf.do"
 								 
 #CORE
 acom  	"$FIR257STORAGE\src\BD\HDL\bd_wrapper.vhd"
-acom  	"$FIR257STORAGE\src\BD\HDL\memory_access_handler.vhd"
 
 #top
 acom  	"$FIR257STORAGE\src\fir_257_top.bde"

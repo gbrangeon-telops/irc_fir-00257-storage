@@ -46,7 +46,8 @@ acom  \
   "$BUF_INTF\buffering_fsm.vhd" \
   "$STORAGE\IP\buffer_table_ram\buffer_table_ram_funcsim.vhdl" \
   "$COMMON\VHDL\buffering\axis32_img_sof.vhd" \
-  "$COMMON\VHDL\buffering\axis32_img_eof.vhd"
+  "$COMMON\VHDL\buffering\axis32_img_eof.vhd" \
+  "$BUF_INTF\memory_access_handler.vhd"
 acom -relax "$BUF_INTF\buffering_Ctrl.vhd"
 
 #Top
