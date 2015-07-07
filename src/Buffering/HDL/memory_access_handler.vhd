@@ -44,15 +44,79 @@ begin
    --Address handling
    with AXIL_IN_ADDR_WIDTH select
       awaddr <= 
+         --keep nothing
+         resize(unsigned(ADDR_MSB), awaddr'length) when 0,
          --keep only the lsb
-         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(AXIL_IN_ADDR_WIDTH-1 downto 0)), awaddr'length) when 1 to AXIL_32B_IN_MOSI.AWADDR'length-1,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(0)), awaddr'length) when 1,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 1 downto 0)), awaddr'length) when  2,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 2 downto 0)), awaddr'length) when  3,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 3 downto 0)), awaddr'length) when  4,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 4 downto 0)), awaddr'length) when  5,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 5 downto 0)), awaddr'length) when  6,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 6 downto 0)), awaddr'length) when  7,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 7 downto 0)), awaddr'length) when  8,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 8 downto 0)), awaddr'length) when  9,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR( 9 downto 0)), awaddr'length) when 10,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(10 downto 0)), awaddr'length) when 11,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(11 downto 0)), awaddr'length) when 12,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(12 downto 0)), awaddr'length) when 13,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(13 downto 0)), awaddr'length) when 14,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(14 downto 0)), awaddr'length) when 15,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(15 downto 0)), awaddr'length) when 16,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(16 downto 0)), awaddr'length) when 17,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(17 downto 0)), awaddr'length) when 18,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(18 downto 0)), awaddr'length) when 19,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(19 downto 0)), awaddr'length) when 20,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(20 downto 0)), awaddr'length) when 21,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(21 downto 0)), awaddr'length) when 22,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(22 downto 0)), awaddr'length) when 23,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(23 downto 0)), awaddr'length) when 24,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(24 downto 0)), awaddr'length) when 25,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(25 downto 0)), awaddr'length) when 26,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(26 downto 0)), awaddr'length) when 27,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(27 downto 0)), awaddr'length) when 28,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(28 downto 0)), awaddr'length) when 29,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(29 downto 0)), awaddr'length) when 30,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR(30 downto 0)), awaddr'length) when 31,
          --keep all bits
          resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.AWADDR), awaddr'length) when others;
 
    with AXIL_IN_ADDR_WIDTH select
       araddr <= 
+         --keep nothing
+         resize(unsigned(ADDR_MSB), araddr'length) when 0,
          --keep only the lsb
-         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(AXIL_IN_ADDR_WIDTH-1 downto 0)), araddr'length) when 1 to AXIL_32B_IN_MOSI.ARADDR'length-1,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(0)), araddr'length) when 1,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 1 downto 0)), araddr'length) when  2,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 2 downto 0)), araddr'length) when  3,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 3 downto 0)), araddr'length) when  4,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 4 downto 0)), araddr'length) when  5,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 5 downto 0)), araddr'length) when  6,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 6 downto 0)), araddr'length) when  7,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 7 downto 0)), araddr'length) when  8,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 8 downto 0)), araddr'length) when  9,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR( 9 downto 0)), araddr'length) when 10,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(10 downto 0)), araddr'length) when 11,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(11 downto 0)), araddr'length) when 12,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(12 downto 0)), araddr'length) when 13,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(13 downto 0)), araddr'length) when 14,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(14 downto 0)), araddr'length) when 15,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(15 downto 0)), araddr'length) when 16,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(16 downto 0)), araddr'length) when 17,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(17 downto 0)), araddr'length) when 18,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(18 downto 0)), araddr'length) when 19,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(19 downto 0)), araddr'length) when 20,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(20 downto 0)), araddr'length) when 21,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(21 downto 0)), araddr'length) when 22,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(22 downto 0)), araddr'length) when 23,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(23 downto 0)), araddr'length) when 24,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(24 downto 0)), araddr'length) when 25,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(25 downto 0)), araddr'length) when 26,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(26 downto 0)), araddr'length) when 27,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(27 downto 0)), araddr'length) when 28,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(28 downto 0)), araddr'length) when 29,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(29 downto 0)), araddr'length) when 30,
+         resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR(30 downto 0)), araddr'length) when 31,
          --keep all bits
          resize(unsigned(ADDR_MSB & AXIL_32B_IN_MOSI.ARADDR), araddr'length) when others;
    
