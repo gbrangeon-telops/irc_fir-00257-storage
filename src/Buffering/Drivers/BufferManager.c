@@ -149,12 +149,10 @@ void BufferManager_ReadSequence(t_bufferManager *pBufferCtrl, 	const gcRegisters
 	BufferManager_DisableBuffer(pBufferCtrl);
 
 	// Set read mode control values
-	pBufferCtrl->BufferMode = BM_READ;
 	pBufferCtrl->rd_sequence_id = pGCRegs->MemoryBufferSequenceSelector;
 	pBufferCtrl->rd_start_img = SequenceTable.start_img;
 	pBufferCtrl->rd_stop_img = SequenceTable.stop_img;
 
-	AXI4L_write32(pBufferCtrl->BufferMode, 		pBufferCtrl->ADD + BM_BUFFER_MODE);
 	AXI4L_write32(pBufferCtrl->rd_sequence_id, 	pBufferCtrl->ADD + BM_READ_SEQUENCE_ID);
 	AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
 	AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
@@ -193,12 +191,10 @@ void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersDat
 	BufferManager_DisableBuffer(pBufferCtrl);
 
 	// Set read mode control values
-	pBufferCtrl->BufferMode = BM_READ;
     pBufferCtrl->rd_sequence_id = pGCRegs->MemoryBufferSequenceSelector;
 	pBufferCtrl->rd_start_img = download_img_loc;
 	pBufferCtrl->rd_stop_img = download_img_loc;
 
-	AXI4L_write32(pBufferCtrl->BufferMode, 		pBufferCtrl->ADD + BM_BUFFER_MODE);
 	AXI4L_write32(pBufferCtrl->rd_sequence_id, 	pBufferCtrl->ADD + BM_READ_SEQUENCE_ID);
 	AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
 	AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
@@ -224,9 +220,6 @@ void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegister
 
 	pBufferCtrl->clear_memory = 0;
 	AXI4L_write32(pBufferCtrl->clear_memory, 		pBufferCtrl->ADD + BM_CLEAR_MEMORY);
-
-	// Put back in Write Mode
-	BufferManager_SetBufferMode(pBufferCtrl, BM_WRITE , pGCRegs );
 }
 
 
