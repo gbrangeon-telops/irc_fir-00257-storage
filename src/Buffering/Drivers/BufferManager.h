@@ -157,7 +157,4 @@ uint32_t BufferManager_GetSequenceFirstFrameId(t_bufferManager *pBufferCtrl, uin
 uint32_t BufferManager_GetSequenceMOIFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 
-void temp_mem_write(uint64_t memAddr, uint32_t data);
-uint32_t temp_mem_read(uint64_t memAddr);
-
 #endif // BUFFERMANAGER_H

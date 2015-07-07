@@ -32,10 +32,6 @@ t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR)
 /*--------------------------------------------------------------------------------------*/
 int main()  // Defining the standard main() function
 {
-    uint64_t addr = MEMORY_BUFFER_BASEADDR;
-    uint32_t read_data;
-    const uint32_t data = 0xAA55AA55;
-
     // Init timer
     Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
     WAIT_US(30);
@@ -64,14 +60,5 @@ int main()  // Defining the standard main() function
         GC_Manager_SM();
         BufferManager_UpdateErrorFlags(&gBufManager);
         TP_TP11_Heartbeat_SM();
-
-        temp_mem_write(addr, data);
-        read_data = 0;
-        read_data = temp_mem_read(addr);
-        if (read_data != data)
-            break;
-        addr += 0x100;
-        if (addr >= MEMORY_BUFFER_HIGHADDR)
-            addr = MEMORY_BUFFER_BASEADDR;
     }
 }

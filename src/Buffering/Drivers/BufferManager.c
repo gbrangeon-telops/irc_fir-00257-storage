@@ -528,19 +528,3 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
     // Return the address to be used on the AXI4L
     return AXI4L_addrVal;
 }
-
-
-void temp_mem_write(uint64_t memAddr, uint32_t data)
-{
-    uint32_t AXI4L_addrVal;
-    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(memAddr);
-    AXI4L_write32(data, AXI4L_addrVal);
-}
-
-
-uint32_t temp_mem_read(uint64_t memAddr)
-{
-    uint32_t AXI4L_addrVal;
-    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(memAddr);
-    return AXI4L_read32(AXI4L_addrVal);
-}
