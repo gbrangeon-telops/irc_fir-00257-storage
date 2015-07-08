@@ -78,5 +78,6 @@ void GC_Registers_Init();
 void GC_UpdateLockedFlag();
 void GC_UpdateMemoryBufferSequenceSizeLimits();
 void GC_UpdateMemoryBufferNumberOfSequenceLimits();
+void GC_UpdateMemoryBufferSequencePreMOISizeLimits();
 
 #endif // GC_REGISTERS_H

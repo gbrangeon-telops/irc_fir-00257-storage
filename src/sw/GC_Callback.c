@@ -426,11 +426,8 @@ void GC_MemoryBufferSequencePreMOISizeCallback(gcCallbackPhase_t phase, gcCallba
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-      if(gcRegsData.MemoryBufferSequencePreMOISize > (gcRegsData.MemoryBufferSequenceSize -1) )
-      {
-         gcRegsData.MemoryBufferSequencePreMOISize =  (gcRegsData.MemoryBufferSequenceSize -1);
-      }
-      BufferManager_SetPreMoi(&gBufManager, &gcRegsData);
+      GC_UpdateMemoryBufferSequencePreMOISizeLimits();
+      BufferManager_SetSequenceParams(&gBufManager, &gcRegsData);
 
    }
 }

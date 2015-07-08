@@ -117,6 +117,8 @@ void GC_UpdateMemoryBufferSequenceSizeLimits()
    {
       gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize;
    }
+
+   GC_UpdateMemoryBufferSequencePreMOISizeLimits();
 }
 
 void GC_UpdateMemoryBufferNumberOfSequenceLimits()
@@ -130,5 +132,16 @@ void GC_UpdateMemoryBufferNumberOfSequenceLimits()
    if( (gcRegsData.MemoryBufferNumberOfSequences * gcRegsData.MemoryBufferSequenceSize) > gcRegsData.MemoryBufferNumberOfImagesMax  )
    {
       gcRegsData.MemoryBufferSequenceSize = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences;
+   }
+
+   GC_UpdateMemoryBufferSequencePreMOISizeLimits();
+}
+
+void GC_UpdateMemoryBufferSequencePreMOISizeLimits()
+{
+   //Limit the Pre MOI size
+   if(gcRegsData.MemoryBufferSequencePreMOISize > (gcRegsData.MemoryBufferSequenceSize -1) )
+   {
+      gcRegsData.MemoryBufferSequencePreMOISize =  (gcRegsData.MemoryBufferSequenceSize -1);
    }
 }

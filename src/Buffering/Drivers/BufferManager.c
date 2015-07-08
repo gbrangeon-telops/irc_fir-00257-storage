@@ -413,29 +413,12 @@ void BufferManager_SetSequenceParams(t_bufferManager *pBufferCtrl, const gcRegis
 
 	pBufferCtrl->nbSequenceMax = pGCRegs->MemoryBufferNumberOfSequences;
 	pBufferCtrl->nbImagePerSeq = pGCRegs->MemoryBufferSequenceSize;
+	pBufferCtrl->nb_img_pre = pGCRegs->MemoryBufferSequencePreMOISize;
+    pBufferCtrl->nb_img_post = pBufferCtrl->nbImagePerSeq - pBufferCtrl->nb_img_pre;
 	AXI4L_write32(pBufferCtrl->nbSequenceMax, 	pBufferCtrl->ADD + NB_SEQUENCE_MAX);
     AXI4L_write32(pBufferCtrl->nbImagePerSeq,   pBufferCtrl->ADD + BM_NB_IMG_PER_SEQ);
-
-	BufferManager_EnableBuffer(pBufferCtrl);
-}
-
-
-/**
- * Set the MOI location in the sequence of the Buffer Manager module.
- *
- * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
- * @param pGCRegs Pointer to the Genicam registers.
- *
- * @return void.
- */
-void BufferManager_SetPreMoi(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs )
-{
-	BufferManager_DisableBuffer(pBufferCtrl);
-
-	pBufferCtrl->nb_img_pre = pGCRegs->MemoryBufferSequencePreMOISize;
-	pBufferCtrl->nb_img_post = pBufferCtrl->nbImagePerSeq - pBufferCtrl->nb_img_pre;
-	AXI4L_write32(pBufferCtrl->nb_img_pre, 	pBufferCtrl->ADD + BM_NB_IMG_PRE);
-	AXI4L_write32(pBufferCtrl->nb_img_post, pBufferCtrl->ADD + BM_NB_IMG_POST);
+    AXI4L_write32(pBufferCtrl->nb_img_pre,      pBufferCtrl->ADD + BM_NB_IMG_PRE);
+    AXI4L_write32(pBufferCtrl->nb_img_post,     pBufferCtrl->ADD + BM_NB_IMG_POST);
 
 	BufferManager_EnableBuffer(pBufferCtrl);
 }
