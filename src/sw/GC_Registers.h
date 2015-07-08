@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.6.1
+// Generated from XML camera definition file version 10.7.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -32,6 +32,7 @@
  */
 struct gcRegistersDataStruct {
    float AcquisitionFrameRate;
+   uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
    uint32_t Height;
@@ -50,6 +51,8 @@ struct gcRegistersDataStruct {
    uint32_t MemoryBufferSequenceSelector;
    uint32_t MemoryBufferSequenceSize;
    uint32_t MemoryBufferSequenceSizeMax;
+   uint32_t TriggerMode;
+   uint32_t TriggerSelector;
    uint32_t Width;
 };
 
@@ -64,6 +67,9 @@ typedef struct gcRegistersDataStruct gcRegistersData_t;
 extern gcRegistersData_t gcRegsDataFactory;
 
 extern gcRegistersData_t gcRegsData;
+
+#define TriggerModeAryLen 2
+extern uint32_t TriggerModeAry[TriggerModeAryLen];
 
 void GC_Registers_Init();
 

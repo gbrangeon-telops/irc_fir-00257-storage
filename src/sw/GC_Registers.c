@@ -19,7 +19,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.6.1
+// Generated from XML camera definition file version 10.7.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -30,6 +30,7 @@
  */
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
+   /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
    /* Height = */ 0,
@@ -48,6 +49,8 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferSequenceSelector = */ 0,
    /* MemoryBufferSequenceSize = */ 1,
    /* MemoryBufferSequenceSizeMax = */ 0,
+   /* TriggerMode = */ 0,
+   /* TriggerSelector = */ 0,
    /* Width = */ 0
 };
 
@@ -57,11 +60,17 @@ gcRegistersData_t gcRegsDataFactory = {
 gcRegistersData_t gcRegsData;
 
 /**
+ * TriggerMode data array
+ */
+uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
+
+/**
  * GenICam registers data pointer initialization.
  */
 void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
+   gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
@@ -80,6 +89,8 @@ void GC_Registers_Init()
    gcRegsDef[MemoryBufferSequenceSelectorIdx].p_data = &gcRegsData.MemoryBufferSequenceSelector;
    gcRegsDef[MemoryBufferSequenceSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceSize;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMax;
+   gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
+   gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
 
