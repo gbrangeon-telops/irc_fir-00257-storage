@@ -66,10 +66,10 @@ begin
             SOF <= '0'; -- Busy at reset             
          else
             --find eof
-            if(eof_s = '0' and RX_MOSI.TVALID = '1' and RX_MOSI.TLAST = '1' and RX_MOSI.TID = "0" and RX_MISO.TREADY = '1') then-- end of image
+            if(eof_s = '0' and RX_MOSI.TVALID = '1' and RX_MOSI.TLAST = '1' and RX_MISO.TREADY = '1') then-- end of frame
                 eof_s <= '1';
                 SOF <= '0';
-            elsif(eof_s = '1' and RX_MOSI.TVALID = '1' and RX_MOSI.TLAST = '0' and RX_MOSI.TID = "1" and RX_MISO.TREADY = '1') then-- Start of image 
+            elsif(eof_s = '1' and RX_MOSI.TVALID = '1' and RX_MOSI.TLAST = '0' and RX_MISO.TREADY = '1') then-- Start of frame 
                 eof_s <= '0';
                 SOF <= '1';
             else
