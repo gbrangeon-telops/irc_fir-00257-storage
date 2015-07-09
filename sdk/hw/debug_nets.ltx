@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <probeData version="1" minor="1">
   <probeset name="EDA_PROBESET" active="true">
-    <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
+    <probe type="ila" busType="bus" source="netlist" spec="ILA_V2_RT">
       <probeOptions Id="DebugProbeParams">
-        <Option Id="COMPARE_VALUE.0" value="eq1&apos;bX"/>
+        <Option Id="COMPARE_VALUE.0" value="eq32&apos;hXXXX_XXXX"/>
         <Option Id="CORE_LOCATION" value="1:0"/>
         <Option Id="HW_ILA" value="u_ila_0"/>
         <Option Id="PROBE_PORT" value="0"/>
         <Option Id="PROBE_PORT_BITS" value="0"/>
-        <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
+        <Option Id="PROBE_PORT_BIT_COUNT" value="32"/>
       </probeOptions>
       <nets>
-        <net name="UART_RX_IBUF"/>
+        <net name="BUFFER_INST/U13/cnt[31]"/>
+        <net name="BUFFER_INST/U13/cnt[30]"/>
+        <net name="BUFFER_INST/U13/cnt[29]"/>
+        <net name="BUFFER_INST/U13/cnt[28]"/>
+        <net name="BUFFER_INST/U13/cnt[27]"/>
+        <net name="BUFFER_INST/U13/cnt[26]"/>
+        <net name="BUFFER_INST/U13/cnt[25]"/>
+        <net name="BUFFER_INST/U13/cnt[24]"/>
+        <net name="BUFFER_INST/U13/cnt[23]"/>
+        <net name="BUFFER_INST/U13/cnt[22]"/>
+        <net name="BUFFER_INST/U13/cnt[21]"/>
+        <net name="BUFFER_INST/U13/cnt[20]"/>
+        <net name="BUFFER_INST/U13/cnt[19]"/>
+        <net name="BUFFER_INST/U13/cnt[18]"/>
+        <net name="BUFFER_INST/U13/cnt[17]"/>
+        <net name="BUFFER_INST/U13/cnt[16]"/>
+        <net name="BUFFER_INST/U13/cnt[15]"/>
+        <net name="BUFFER_INST/U13/cnt[14]"/>
+        <net name="BUFFER_INST/U13/cnt[13]"/>
+        <net name="BUFFER_INST/U13/cnt[12]"/>
+        <net name="BUFFER_INST/U13/cnt[11]"/>
+        <net name="BUFFER_INST/U13/cnt[10]"/>
+        <net name="BUFFER_INST/U13/cnt[9]"/>
+        <net name="BUFFER_INST/U13/cnt[8]"/>
+        <net name="BUFFER_INST/U13/cnt[7]"/>
+        <net name="BUFFER_INST/U13/cnt[6]"/>
+        <net name="BUFFER_INST/U13/cnt[5]"/>
+        <net name="BUFFER_INST/U13/cnt[4]"/>
+        <net name="BUFFER_INST/U13/cnt[3]"/>
+        <net name="BUFFER_INST/U13/cnt[2]"/>
+        <net name="BUFFER_INST/U13/cnt[1]"/>
+        <net name="BUFFER_INST/U13/cnt[0]"/>
       </nets>
     </probe>
     <probe type="ila" busType="net" source="netlist" spec="ILA_V2_RT">
@@ -24,7 +55,7 @@
         <Option Id="PROBE_PORT_BIT_COUNT" value="1"/>
       </probeOptions>
       <nets>
-        <net name="UART_TX_OBUF"/>
+        <net name="BUFFER_INST/SOF"/>
       </nets>
     </probe>
   </probeset>
