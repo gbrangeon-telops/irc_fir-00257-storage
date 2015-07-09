@@ -35,7 +35,7 @@ set filelist  [concat $filelist [glob  $aldec_dir/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Fifo/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Utilities/*.vhd]]
-set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Buffering/*.vhd]]
+set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/Buffering/BufferingDefine.vhd]]
 
 # BD
 set filelist  [concat $filelist [glob  $src_dir/BD/hdl/*.vhd]]
