@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include "tel2000_param.h"
 #include "Timer.h"
+#include "utils.h"
 #include "storage_init.h"
 #include "GC_Manager.h"
 #include "test_point.h"

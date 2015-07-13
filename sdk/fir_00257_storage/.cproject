@@ -43,6 +43,13 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/TestPoint}&quot;"/>
 								</option>
+								<option id="xilinx.gnu.compiler.symbols.defined.1669916499" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="FPGA_STORAGE"/>
+									<listOptionValue builtIn="false" value="DEBUG"/>
+								</option>
+								<option id="xilinx.gnu.compiler.symbols.undefined.54029551" name="Undefined symbols (-U)" superClass="xilinx.gnu.compiler.symbols.undefined" valueType="undefDefinedSymbols">
+									<listOptionValue builtIn="false" value="ENABLE_PRINTF"/>
+								</option>
 								<inputType id="xilinx.gnu.compiler.input.213317003" name="C source files" superClass="xilinx.gnu.compiler.input"/>
 							</tool>
 							<tool id="xilinx.gnu.mb.cxx.toolchain.compiler.debug.707283543" name="MicroBlaze g++ compiler" superClass="xilinx.gnu.mb.cxx.toolchain.compiler.debug">
@@ -150,6 +157,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/TestPoint}&quot;"/>
+								</option>
+								<option id="xilinx.gnu.compiler.symbols.defined.619618103" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="FPGA_STORAGE"/>
+								</option>
+								<option id="xilinx.gnu.compiler.symbols.undefined.1043303196" name="Undefined symbols (-U)" superClass="xilinx.gnu.compiler.symbols.undefined" valueType="undefDefinedSymbols">
+									<listOptionValue builtIn="false" value="ENABLE_PRINTF"/>
 								</option>
 								<inputType id="xilinx.gnu.compiler.input.197855991" name="C source files" superClass="xilinx.gnu.compiler.input"/>
 							</tool>
