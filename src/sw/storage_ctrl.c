@@ -33,33 +33,33 @@ t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR)
 /*--------------------------------------------------------------------------------------*/
 int main()  // Defining the standard main() function
 {
-    // Init timer
-    Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
-    WAIT_US(30);
+   // Init timer
+   Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
+   WAIT_US(30);
 
-    // Init interrupt controller
-    Storage_Intc_Init();
+   // Init interrupt controller
+   Storage_Intc_Init();
 
-    // GenICam initialization
-    Storage_GC_Init();
+   // GenICam initialization
+   Storage_GC_Init();
 
-    // Start interrupt controller
-    Storage_Intc_Start();
+   // Start interrupt controller
+   Storage_Intc_Start();
 
-    // Init MGT module
-    Storage_MGT_Init(&gMGT);
+   // Init MGT module
+   Storage_MGT_Init(&gMGT);
 
-    // Init Buffer Manager module
-    // @attention This function contains a wait loop.
-    Storage_BufferManager_Init(&gBufManager);
+   // Init Buffer Manager module
+   // @attention This function contains a wait loop.
+   Storage_BufferManager_Init(&gBufManager);
 
-    // Init test point controller
-    TP_Init();
+   // Init test point controller
+   TP_Init();
 
-    while(1)
-    {
-        GC_Manager_SM();
-        BufferManager_UpdateErrorFlags(&gBufManager);
-        TP_TP11_Heartbeat_SM();
-    }
+   while(1)
+   {
+      GC_Manager_SM();
+      BufferManager_UpdateErrorFlags(&gBufManager);
+      TP_TP11_Heartbeat_SM();
+   }
 }

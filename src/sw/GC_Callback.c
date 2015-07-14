@@ -198,11 +198,11 @@ void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
       // After write
       if(gcRegsData.MemoryBufferMode == MBM_Off)
       {
-          BufferManager_SetBufferMode(&gBufManager, BM_OFF,  &gcRegsData);
+         BufferManager_SetBufferMode(&gBufManager, BM_OFF,  &gcRegsData);
       }
       else if(gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off)
       {
-          BufferManager_SetBufferMode(&gBufManager, BM_WRITE,  &gcRegsData);
+         BufferManager_SetBufferMode(&gBufManager, BM_WRITE,  &gcRegsData);
       }
       else
       {
@@ -224,7 +224,7 @@ void GC_MemoryBufferNumberOfImagesMaxCallback(gcCallbackPhase_t phase, gcCallbac
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-       gcRegsData.MemoryBufferNumberOfImagesMax = BufferManager_GetNbImageMax(&gcRegsData);
+      gcRegsData.MemoryBufferNumberOfImagesMax = BufferManager_GetNbImageMax(&gcRegsData);
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
@@ -270,7 +270,7 @@ void GC_MemoryBufferNumberOfSequencesMaxCallback(gcCallbackPhase_t phase, gcCall
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-       gcRegsData.MemoryBufferNumberOfSequencesMax = MIN(BufferManager_GetNumberOfSequenceMax(), (gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize) );
+      gcRegsData.MemoryBufferNumberOfSequencesMax = MIN(BufferManager_GetNumberOfSequenceMax(), (gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize) );
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
@@ -296,7 +296,7 @@ void GC_MemoryBufferSequenceClearAllCallback(gcCallbackPhase_t phase, gcCallback
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-       BufferManager_ClearSequence(&gBufManager,    &gcRegsData);
+      BufferManager_ClearSequence(&gBufManager,    &gcRegsData);
    }
 }
 
@@ -355,14 +355,12 @@ void GC_MemoryBufferSequenceDownloadModeCallback(gcCallbackPhase_t phase, gcCall
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
       GC_MemoryBufferModeCallback(GCCP_AFTER, GCCA_WRITE);
-
    }
 }
 
@@ -420,7 +418,6 @@ void GC_MemoryBufferSequencePreMOISizeCallback(gcCallbackPhase_t phase, gcCallba
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
@@ -428,7 +425,6 @@ void GC_MemoryBufferSequencePreMOISizeCallback(gcCallbackPhase_t phase, gcCallba
       // After write
       GC_UpdateMemoryBufferSequencePreMOISizeLimits();
       BufferManager_SetSequenceParams(&gBufManager, &gcRegsData);
-
    }
 }
 
@@ -450,7 +446,6 @@ void GC_MemoryBufferSequenceRecordedSizeCallback(gcCallbackPhase_t phase, gcCall
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-
    }
 }
 
@@ -466,7 +461,6 @@ void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallback
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))

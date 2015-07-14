@@ -28,7 +28,6 @@
 IRC_Status_t Storage_GC_Init();
 IRC_Status_t Storage_Intc_Init();
 IRC_Status_t Storage_Intc_Start();
-
 IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl);
 IRC_Status_t Storage_BufferManager_Init(t_bufferManager *pBufferCtrl);
 

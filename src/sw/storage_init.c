@@ -52,7 +52,7 @@ IRC_Status_t Storage_GC_Init()
 
    // Initialize Inter-FPGA GenICam master control interface
    status = GC_Manager_AddMaster(&gFpgaCtrlIntf,
-		 CIP_F1F2,
+         CIP_F1F2,
          XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
          &gStorageIntc,
          XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR,
@@ -130,8 +130,8 @@ IRC_Status_t Storage_Intc_Start()
     * Register the interrupt controller handler with the exception table.
     */
    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
-          (Xil_ExceptionHandler)XIntc_InterruptHandler,
-          &gStorageIntc);
+         (Xil_ExceptionHandler)XIntc_InterruptHandler,
+         &gStorageIntc);
 
    /*
     * Enable exceptions.
@@ -152,17 +152,17 @@ IRC_Status_t Storage_Intc_Start()
  */
 IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl)
 {
-    MGT_Init(pMgtCtrl);
+   MGT_Init(pMgtCtrl);
 
-    // Disable Data and Video MGT (not used on this board)
-    MGT_DisableMGT(pMgtCtrl, DATA_MGT);
-    MGT_DisableMGT(pMgtCtrl, VIDEO_MGT);
+   // Disable Data and Video MGT (not used on this board)
+   MGT_DisableMGT(pMgtCtrl, DATA_MGT);
+   MGT_DisableMGT(pMgtCtrl, VIDEO_MGT);
 
-    // Read statuses
-    MGT_ReadCoreStatus(pMgtCtrl);
-    MGT_ReadPLLStatus(pMgtCtrl);
+   // Read statuses
+   MGT_ReadCoreStatus(pMgtCtrl);
+   MGT_ReadPLLStatus(pMgtCtrl);
 
-    return IRC_SUCCESS;
+   return IRC_SUCCESS;
 }
 
 
@@ -176,11 +176,11 @@ IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl)
  */
 IRC_Status_t Storage_BufferManager_Init(t_bufferManager *pBufferCtrl)
 {
-    IRC_Status_t status;
+   IRC_Status_t status;
 
-    // Init module and wait for memory to be ready
-    status = BufferManager_Init(pBufferCtrl, &gcRegsData);
-    BufferManager_WaitMemReady(pBufferCtrl);
+   // Init module and wait for memory to be ready
+   status = BufferManager_Init(pBufferCtrl, &gcRegsData);
+   BufferManager_WaitMemReady(pBufferCtrl);
 
-    return status;
+   return status;
 }

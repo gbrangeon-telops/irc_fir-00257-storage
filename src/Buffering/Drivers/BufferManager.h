@@ -85,25 +85,25 @@
  * BUFFER MANAGER STRUCT
  */
 struct s_bufferManagerStruct {
-	uint32_t SIZE;      // Number of config elements (uint64_t counts as 2), excluding SIZE and ADD.
-	uint32_t ADD;
+   uint32_t SIZE;      // Number of config elements (uint64_t counts as 2), excluding SIZE and ADD.
+   uint32_t ADD;
 
-	uint64_t Buffer_base_addr;  // 32bit-LSB is sent first
-	uint32_t nbSequenceMax;
-	uint32_t nbImagePerSeq;
-	uint32_t FrameSize;
-	uint32_t BufferMode;
-	uint32_t HDR_Size;
-	uint32_t IMG_Size;
-	uint32_t nb_img_pre; //exluding MOI
-	uint32_t nb_img_post; //including MOI
-	uint32_t rd_sequence_id;
-	uint32_t rd_start_img; 	
-	uint32_t rd_stop_img;
-	uint32_t clear_memory;
-	uint32_t acq_stop;
-	uint32_t ConfigValid;
-	uint32_t axilMemAddrWidth;
+   uint64_t Buffer_base_addr;  // 32bit-LSB is sent first
+   uint32_t nbSequenceMax;
+   uint32_t nbImagePerSeq;
+   uint32_t FrameSize;
+   uint32_t BufferMode;
+   uint32_t HDR_Size;
+   uint32_t IMG_Size;
+   uint32_t nb_img_pre; //exluding MOI
+   uint32_t nb_img_post; //including MOI
+   uint32_t rd_sequence_id;
+   uint32_t rd_start_img;
+   uint32_t rd_stop_img;
+   uint32_t clear_memory;
+   uint32_t acq_stop;
+   uint32_t ConfigValid;
+   uint32_t axilMemAddrWidth;
 };
 typedef struct s_bufferManagerStruct t_bufferManager;
 
@@ -121,9 +121,9 @@ typedef enum BufferMode_enum t_bufferMode;
  * BUFFER TABLE STRUCT
  */
 struct s_bufferTable {
-	uint32_t start_img;
-	uint32_t moi_img;
-	uint32_t stop_img;
+   uint32_t start_img;
+   uint32_t moi_img;
+   uint32_t stop_img;
 };
 typedef struct s_bufferTable t_bufferTable;
 
