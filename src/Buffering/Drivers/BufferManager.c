@@ -220,6 +220,8 @@ void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegister
 
    pBufferCtrl->clear_memory = 0;
    AXI4L_write32(pBufferCtrl->clear_memory, 		pBufferCtrl->ADD + BM_CLEAR_MEMORY);
+
+   BufferManager_EnableBuffer(pBufferCtrl);
 }
 
 
