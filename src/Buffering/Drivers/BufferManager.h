@@ -25,17 +25,23 @@
 
 
 /************************** Constant Definitions ****************************/
-#define BUF_MAX_SEQUENCE 		255
+#define BUF_MAX_SEQUENCE        255
 #define MEM_ADDR_GPIO_CH_ID     1
 #define MEM_READY_TIMEOUT_IN_S  10
 
 /**
- * Memory address map.
- * @attention Multiple address spaces must be contiguous.
+ * Memory 0 address map.
  */
-#define MEMORY_BUFFER_BASEADDR  ((uint64_t)TEL_PAR_TEL_dimm0_ctrl_memaddr_BASEADDR)
-#define MEMORY_BUFFER_HIGHADDR  ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR)
-#define MEMORY_BUFFER_SIZE      ((uint64_t)(MEMORY_BUFFER_HIGHADDR - MEMORY_BUFFER_BASEADDR + 1))
+#define MEM0_BUFFER_BASEADDR    ((uint64_t)TEL_PAR_TEL_dimm0_ctrl_memaddr_BASEADDR)
+#define MEM0_BUFFER_HIGHADDR    ((uint64_t)TEL_PAR_TEL_dimm0_ctrl_memaddr_HIGHADDR)
+#define MEM0_BUFFER_SIZE        ((uint64_t)(MEM0_BUFFER_HIGHADDR - MEM0_BUFFER_BASEADDR + 1))
+
+/**
+ * Memory 1 address map.
+ */
+#define MEM1_BUFFER_BASEADDR    ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_BASEADDR)
+#define MEM1_BUFFER_HIGHADDR    ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR)
+#define MEM1_BUFFER_SIZE        ((uint64_t)(MEM0_BUFFER_HIGHADDR - MEM0_BUFFER_BASEADDR + 1))
 
 /**
  * AXI4 Lite memory access address space.

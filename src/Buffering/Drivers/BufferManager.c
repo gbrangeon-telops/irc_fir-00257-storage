@@ -56,7 +56,7 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
    gBufManagerError = (t_bufferManagerError)0;
 
    // Default control values
-   pBufferCtrl->Buffer_base_addr = MEMORY_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
+   pBufferCtrl->Buffer_base_addr = MEM0_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
    pBufferCtrl->nbSequenceMax = 1;
    pBufferCtrl->FrameSize = default_width*(default_height+2); // In pixel (+2 for header lines)
    pBufferCtrl->HDR_Size = default_width*4; // In bytes (2 lines * 2 bytes/pixel)
@@ -262,9 +262,13 @@ void BufferManager_DisableBuffer(t_bufferManager *pBufferCtrl)
  */
 uint32_t BufferManager_GetNbImageMax(const gcRegistersData_t *pGCRegs)
 {
-   if (pGCRegs->Width == 0)
+   const uint32_t FrameSizeInBytes = pGCRegs->Width * (pGCRegs->Height+2) * 2;   //(image + header) * 2 bytes/pixel
+
+   if (FrameSizeInBytes == 0)
       return 0;
-   return (uint32_t)( MEMORY_BUFFER_SIZE / (pGCRegs->Width * (pGCRegs->Height+2) * 2) );   //(image + header) * 2 bytes/pixel
+
+   // Integer division on each memory to take care of incomplete frame at the end of each memory
+   return (uint32_t)(MEM0_BUFFER_SIZE / FrameSizeInBytes) + (uint32_t)(MEM1_BUFFER_SIZE / FrameSizeInBytes);
 }
 
 
@@ -340,9 +344,9 @@ uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t 
    // Calculate sequence length
    // Check for rollover
    if(SequenceTable.start_img > SequenceTable.stop_img )
-   SequenceLength = pBufferCtrl->nbImagePerSeq - SequenceTable.start_img + SequenceTable.stop_img + 1;
+      SequenceLength = pBufferCtrl->nbImagePerSeq - SequenceTable.start_img + SequenceTable.stop_img + 1;
    else
-   SequenceLength = SequenceTable.stop_img - SequenceTable.start_img + 1;
+      SequenceLength = SequenceTable.stop_img - SequenceTable.start_img + 1;
 
    return SequenceLength;
 }
