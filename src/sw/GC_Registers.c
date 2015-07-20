@@ -107,9 +107,9 @@ void GC_UpdateLockedFlag()
 
 void GC_UpdateMemoryBufferSequenceSizeLimits()
 {
-   if( gcRegsData.MemoryBufferSequenceSize > gcRegsData.MemoryBufferNumberOfImagesMax  )
+   if( gcRegsData.MemoryBufferSequenceSize > gcRegsData.MemoryBufferSequenceSizeMax  )
    {
-      gcRegsData.MemoryBufferSequenceSize = gcRegsData.MemoryBufferNumberOfImagesMax;
+      gcRegsData.MemoryBufferSequenceSize = gcRegsData.MemoryBufferSequenceSizeMax;
    }
 
    // Limit the number of sequences
