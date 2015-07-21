@@ -103,6 +103,20 @@ void GC_Registers_Init()
  */
 void GC_UpdateLockedFlag()
 {
+   // Lock buffering config registers when buffering is in progress
+   // TODO: lock also when acq are started
+   if (gcRegsData.MemoryBufferSequenceCount > 0)
+   {
+      RegLock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
+      RegLock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
+      RegLock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
+   }
+   else
+   {
+      RegUnlock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
+      RegUnlock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
+      RegUnlock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
+   }
 }
 
 void GC_UpdateMemoryBufferSequenceSizeLimits()
