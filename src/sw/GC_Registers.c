@@ -19,7 +19,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.8.0
+// Generated from XML camera definition file version 10.8.1
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -30,6 +30,7 @@
  */
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
+   /* AcquisitionArm = */ 0,
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
@@ -70,6 +71,7 @@ uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
 void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
+   gcRegsDef[AcquisitionArmIdx].p_data = &gcRegsData.AcquisitionArm;
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;

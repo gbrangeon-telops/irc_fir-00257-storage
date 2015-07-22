@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.8.0
+// Generated from XML camera definition file version 10.8.1
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -39,6 +39,7 @@ extern t_bufferManager gBufManager;
  */
 void GC_Callback_Init()
 {
+   gcRegsDef[AcquisitionArmIdx].callback =                           &GC_AcquisitionArmCallback;
    gcRegsDef[AcquisitionFrameRateIdx].callback =                     &GC_AcquisitionFrameRateCallback;
    gcRegsDef[AcquisitionFrameRateModeIdx].callback =                 &GC_AcquisitionFrameRateModeCallback;
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
@@ -62,6 +63,26 @@ void GC_Callback_Init()
    gcRegsDef[TriggerModeIdx].callback =                              &GC_TriggerModeCallback;
    gcRegsDef[TriggerSelectorIdx].callback =                          &GC_TriggerSelectorCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
+}
+
+/**
+ * AcquisitionArm GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_AcquisitionArmCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
 }
 
 /**
