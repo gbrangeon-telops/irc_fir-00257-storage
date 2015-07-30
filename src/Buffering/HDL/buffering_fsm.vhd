@@ -90,9 +90,22 @@ architecture rtl of BUFFERING_FSM is
          SRESETN : out std_logic
        );
    end component;
+   
+   component double_sync
+      generic(
+         INIT_VALUE : bit := '0'
+      );
+	   port(
+   		D : in STD_LOGIC;
+   		Q : out STD_LOGIC := '0';
+   		RESET : in STD_LOGIC;
+   		CLK : in STD_LOGIC
+		);
+   end component;
 
    --RESET
    signal sresetn     : std_logic;
+   signal sreset      : std_logic;
 
    --Config
    signal buffer_mode_s : BufferMode;
@@ -130,7 +143,7 @@ architecture rtl of BUFFERING_FSM is
    --signal read_img_id_u : unsigned(READ_IMG_ID'length-1 downto 0);
    signal read_start_id_u : unsigned(READ_START_ID'length-1 downto 0);
    signal read_stop_id_u : unsigned(READ_STOP_ID'length-1 downto 0);
-   signal water_level_i : std_logic_vector(2 downto 0);
+   signal water_level_i : std_logic_vector;
    signal img_read_eof_i : std_logic;
    signal new_image_detect_i : std_logic;
    
@@ -201,8 +214,12 @@ architecture rtl of BUFFERING_FSM is
 
 begin
 
+sreset <= not  sresetn;
+
 -- resync reset
 inst_sync_reset : sync_resetn port map(ARESETN => ARESETN, SRESETN => sresetn, CLK => CLK_DATA);
+WL_sync : double_sync port map(D => WATER_LEVEL, Q => water_level_i, RESET => sreset, CLK => CLK_DATA);
+
 baseaddr_u <= unsigned(MEMORY_BASED_ADDR);
 
 frame_size_u <= FRAME_SIZE;
@@ -725,8 +742,6 @@ img_read : process(CLK_DATA)
 begin
     if rising_edge(CLK_DATA) then
         
-        water_level_i <= water_level_i(1 downto 0) & WATER_LEVEL;    
-    
         if sresetn = '0' or config_valid_s = '0' then
             read_state <= STANDBY_RD;
             --signal/output to assigned during the process
@@ -743,7 +758,7 @@ begin
         else
             case read_state is
                 when STANDBY_RD =>
-                    if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then --Mode Gige standard and image available
+                    if(buffer_mode_s = BUF_RD_IMG and water_level_i = '0') then --Mode Gige standard and image available
                         --change state
                         read_state <= WAIT_RD_HDR_ACK;
 
@@ -781,7 +796,7 @@ begin
                     end if;
           
                when RD_IMG =>
-                   if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then --Mode Gige standard and image available
+                   if(buffer_mode_s = BUF_RD_IMG and water_level_i = '0') then --Mode Gige standard and image available
                                          
                         read_state <= WAIT_RD_HDR_ACK;
                         --fill the tag with the img position
@@ -805,7 +820,7 @@ begin
                             read_img_loc <= read_img_loc + 1; --increase counter position
                         end if;
                    else
-                        if(water_level_i(2) = '1') then
+                        if(water_level_i = '1') then
                             read_state <= RD_WAIT_SINK_RDY;
                         else
                             read_state <= read_state;
@@ -823,7 +838,7 @@ begin
                    end if; 
                
                when RD_WAIT_SINK_RDY =>
-                   if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then -- EXIT PAUSE MODE
+                   if(buffer_mode_s = BUF_RD_IMG and water_level_i = '0') then -- EXIT PAUSE MODE
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
