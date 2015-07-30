@@ -221,7 +221,9 @@ void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegister
    pBufferCtrl->clear_memory = 0;
    AXI4L_write32(pBufferCtrl->clear_memory, 		pBufferCtrl->ADD + BM_CLEAR_MEMORY);
 
-   BufferManager_EnableBuffer(pBufferCtrl);
+   // Re-enable only in write mode (in read mode wait for read command triggered by acq start)
+   if (pBufferCtrl->BufferMode == BM_WRITE)
+      BufferManager_EnableBuffer(pBufferCtrl);
 }
 
 
@@ -468,6 +470,12 @@ static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t 
 
    // readAddrLoc = BaseAddr + sequence offset + image offset + FrameIdReg offset
    readAddrLoc = pBufferCtrl->Buffer_base_addr + (SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) * FrameSizeInBytes + FrameIDHdrAddr;
+
+   // readAddrLoc = BaseAddr + dimmSelect + sequence offset + image offset + FrameIdReg offset
+   if(ImageLocation % 2) //impair
+      readAddrLoc = pBufferCtrl->Buffer_base_addr + 0x200000000 + (((SequenceID * pBufferCtrl->nbImagePerSeq)/2) + (ImageLocation >> 1)) * FrameSizeInBytes + FrameIDHdrAddr;
+   else // pair
+      readAddrLoc = pBufferCtrl->Buffer_base_addr + (((SequenceID * pBufferCtrl->nbImagePerSeq)/2) + (ImageLocation >> 1)) * FrameSizeInBytes + FrameIDHdrAddr;
 
    // Convert address location to GPIO + AXI4L_32
    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(readAddrLoc);

@@ -99,7 +99,7 @@ architecture rtl of BUFFERING_FSM is
    signal frame_size_u :unsigned(FRAME_SIZE'length-1 downto 0);
    signal img_bytessize_u :unsigned(IMG_BYTESSIZE'length-1 downto 0);
    signal hdr_bytessize_u :unsigned(HDR_BYTESSIZE'length-1 downto 0);
-   signal baseaddr_u : unsigned(MEMORY_BASED_ADDR'length-1 downto 0);
+   signal baseaddr_u : unsigned(MEMORY_BASED_ADDR'length-1 downto 0);	
    signal nb_sequence_u : unsigned(NB_SEQUENCE'length-1 downto 0);
    signal total_img_per_seq_u : unsigned(SEQ_IMG_TOTAL'length-1 downto 0);
    signal config_valid_s : std_logic; 
@@ -110,22 +110,29 @@ architecture rtl of BUFFERING_FSM is
    signal SeqSizeMax_bytes_u : unsigned(63 downto 0); 
    signal wr_sequence_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
    signal wr_frame_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
-   signal wr_frame_offset_temp : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal wr_frame_offset_temp : unsigned(SeqSizeMax_bytes_u'length-1 downto 0); 
+   signal wr_dimm_select : unsigned(34 downto 0);
+   signal wr_time_between_images : unsigned(31 downto 0);
+   signal wr_time_between_images_reg : unsigned(31 downto 0);
+   signal wr_start_of_images_i : std_logic_vector(2 downto 0);
    
    signal rd_sequence_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
    signal rd_image_offset : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
    signal rd_image_offset_temp : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
-   signal rd_start_image : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);
+   signal rd_start_image : unsigned(SeqSizeMax_bytes_u'length-1 downto 0);	   
+   --signal rd_dimm_select : unsigned(MEMORY_BASED_ADDR'length-1 downto 0);
+   signal rd_dimm_select : unsigned(34 downto 0);
+   signal rd_compteur_delay : unsigned(31 downto 0);
 
-   
    --RD CONFIG
    signal nb_seq_in_mem_u : unsigned(NB_SEQUENCE_IN_MEM'length-1 downto 0) := to_unsigned(0,NB_SEQUENCE_IN_MEM'length);
    signal read_seq_id_u : unsigned(READ_SEQUENCE_ID'length-1 downto 0);   
    --signal read_img_id_u : unsigned(READ_IMG_ID'length-1 downto 0);
    signal read_start_id_u : unsigned(READ_START_ID'length-1 downto 0);
    signal read_stop_id_u : unsigned(READ_STOP_ID'length-1 downto 0);
-   signal water_level_i : std_logic;
+   signal water_level_i : std_logic_vector(2 downto 0);
    signal img_read_eof_i : std_logic;
+   signal new_image_detect_i : std_logic;
    
    -- buffertable management
    signal seq_id : unsigned(NB_SEQUENCE_IN_MEM'length-1 downto 0) := to_unsigned(0,NB_SEQUENCE_IN_MEM'length);
@@ -255,24 +262,31 @@ begin
             wr_sequence_offset <= to_unsigned(0, wr_sequence_offset'length);
             wr_frame_offset <= to_unsigned(0, wr_frame_offset'length);
             wr_frame_offset_temp <= to_unsigned(0, wr_frame_offset_temp'length);
+			wr_dimm_select  <= to_unsigned(0, wr_dimm_select'length);
             
             rd_sequence_offset <= to_unsigned(0, rd_sequence_offset'length);
             rd_image_offset <= to_unsigned(0, rd_image_offset'length);
-            rd_image_offset_temp <= to_unsigned(0, rd_image_offset_temp'length);
+            rd_image_offset_temp <= to_unsigned(0, rd_image_offset_temp'length); 
+			rd_dimm_select  <= to_unsigned(0, rd_dimm_select'length);
             
             rd_start_image <= to_unsigned(0, rd_start_image'length);
         else
-            SeqSizeMax_bytes_u <= resize(shift_left(frame_size_u,1) * total_img_per_seq_u, SeqSizeMax_bytes_u'length);
+            SeqSizeMax_bytes_u <= resize(shift_left(frame_size_u,1) * total_img_per_seq_u, SeqSizeMax_bytes_u'length);	
             
-            wr_sequence_offset <= resize( (nb_seq_in_mem_u * SeqSizeMax_bytes_u), wr_sequence_offset'length);
-            wr_frame_offset_temp <= resize( (write_img_loc * shift_left(frame_size_u,1)), wr_frame_offset_temp'length);
-            wr_frame_offset <= wr_frame_offset_temp;
+            wr_sequence_offset <= resize( (nb_seq_in_mem_u * shift_right(SeqSizeMax_bytes_u,1)), wr_sequence_offset'length);	         --seq offset div. 2
+			wr_frame_offset_temp <= resize( (shift_right(write_img_loc,1) * shift_left(frame_size_u,1)), wr_frame_offset_temp'length);   --frame_offset div. 2
+            wr_frame_offset <= wr_frame_offset_temp; 
+			wr_dimm_select  <= 	wr_dimm_select(34) & write_img_loc(0) &  wr_dimm_select(32 downto 0);   --33 address lines = 8GB adressing
             
-            rd_sequence_offset <= resize( (read_seq_id_u * SeqSizeMax_bytes_u), rd_sequence_offset'length);
-            rd_image_offset_temp <= resize( (read_img_loc * shift_left(frame_size_u,1)), rd_image_offset_temp'length);
+            rd_sequence_offset <= resize( (read_seq_id_u * shift_right(SeqSizeMax_bytes_u,1)), rd_sequence_offset'length);              --seq offset div. 2
+            rd_image_offset_temp <= resize( (shift_right(read_img_loc,1) * shift_left(frame_size_u,1)), rd_image_offset_temp'length);    --frame_offset div. 2
             rd_image_offset <= rd_image_offset_temp;
-            
-            rd_start_image <= resize(read_start_id_u * shift_left(frame_size_u,1), rd_start_image'length);
+            if read_state = STANDBY_RD then                 --rd_start_image is used for address in STANDBY_RD, need to select the correct DIMM 
+                rd_dimm_select  <= 	rd_dimm_select(34) & read_start_id_u(0) &  rd_dimm_select(32 downto 0);    --33 address lines = 8GB adressing
+            else
+                rd_dimm_select  <= 	rd_dimm_select(34) & read_img_loc(0) &  rd_dimm_select(32 downto 0);       --33 address lines = 8GB adressing
+            end if;
+            rd_start_image <= resize( shift_right(read_start_id_u,1) * shift_left(frame_size_u,1), rd_start_image'length);              --frame_offset div. 2
             
         end if;
         
@@ -285,8 +299,15 @@ img_write : process(CLK_DATA)
 begin
     if rising_edge(CLK_DATA) then
         
-        --Multiplication register
-
+        -- measuge time between image for playback at the same FPS
+        wr_start_of_images_i <= wr_start_of_images_i(1 downto 0) & NEW_IMAGE_DETECT;
+        if wr_start_of_images_i(2) = '0' and wr_start_of_images_i(1) = '1' then
+            wr_time_between_images <= (others => '0');
+            wr_time_between_images_reg <= wr_time_between_images;
+        else
+            wr_time_between_images <= wr_time_between_images + 1;
+            wr_time_between_images_reg <= wr_time_between_images_reg;
+        end if;  
        
         if sresetn = '0' or config_valid_s = '0' then
             write_state <= STANDBY_WR;
@@ -309,10 +330,17 @@ begin
             write_buftable <= '0';
             moi_i <= '0';
             seq_id <= (others => '0');
+            
+            new_image_detect_i <= '0';
+            
         else
             --CHECK MOI
             if(MOI = '1') then
                 moi_i <= '1';
+            end if;
+            
+            if(NEW_IMAGE_DETECT = '1') then
+                new_image_detect_i <= '1';
             end if;
             
             --Process state machine
@@ -320,7 +348,8 @@ begin
                --type BufferMode is (BUF_OFF, BUF_WR_SEQ, BUF_RD_SEQ, BUF_RD_IMG);
                --type BufferWrState is (STANDBY_WR, WR_PRE_MOI, WR_WAIT_MOI, WR_POST_MOI, ERROR_WR);
                 when STANDBY_WR =>
-                    if(buffer_mode_s = BUF_WR_SEQ and NEW_IMAGE_DETECT = '1' and nb_seq_in_mem_u < nb_sequence_u and ACQUISITION_STOP = '0') then --Mode Gige standard
+                    if(buffer_mode_s = BUF_WR_SEQ and new_image_detect_i = '1' and nb_seq_in_mem_u < nb_sequence_u and ACQUISITION_STOP = '0') then --Mode Gige standard
+                        new_image_detect_i <= '0';
                         --change state
                         if(moi_i = '1') then
                             next_write_state <= WR_POST_MOI;
@@ -334,13 +363,14 @@ begin
                         write_state <= WAIT_WR_HDR_CMD_ACK;
                         --fill the tag with the img position
                         s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length);                        
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset +  wr_frame_offset), s_s2mm_saddr'length); -- base +sequenceoffset + imageoffset
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_dimm_select +  wr_sequence_offset +  wr_frame_offset), s_s2mm_saddr'length); -- base +sequenceoffset + imageoffset
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes 
                         s2mm_cmd_mosi.tvalid <= '1';
                         
                         write_img_loc <= write_img_loc + 1;
                         --s2mm_err_o <= s2mm_err_o;
+
                     else
                         write_state <= STANDBY_WR;
                         --signal/output to assigned during the process
@@ -351,9 +381,10 @@ begin
                         s2mm_cmd_mosi.tvalid <= '0';
                         
                         write_img_loc <= write_img_loc;
-                        --s2mm_err_o <= s2mm_err_o;
+                        --s2mm_err_o <= s2mm_err_o;                                       
                     end if;
                     write_buftable <= '0';
+                    
                 when WAIT_WR_HDR_CMD_ACK =>
                     if(s2mm_cmd_miso.tready = '1') then -- CMD transaction completed
                         --end wr_cmd transaction and move to next state
@@ -427,7 +458,8 @@ begin
                         
                         write_img_loc <= to_unsigned(0,write_img_loc'length);
                         --s2mm_err_o <= s2mm_err_o;
-                    elsif(NEW_IMAGE_DETECT = '1') then
+                    elsif(new_image_detect_i = '1') then
+                        new_image_detect_i <= '0';
                         if(moi_i = '1') then
                             next_write_state <= WR_POST_MOI;
                             start_loc_s <= to_unsigned(0,start_loc_s'length);
@@ -443,7 +475,7 @@ begin
                         
                         --fill the tag with the img position
                         s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_dimm_select + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -480,7 +512,8 @@ begin
                         write_img_loc <= to_unsigned(0,write_img_loc'length);
                         --s2mm_err_o <= s2mm_err_o;
                         write_buftable <= '0';
-                    elsif(NEW_IMAGE_DETECT = '1') then
+                    elsif(new_image_detect_i = '1') then
+                        new_image_detect_i <= '0';
                         --wait for the last cmd to be process then wait for the 2 cmd sts
                         --change state
                         if(moi_i = '1') then
@@ -539,7 +572,7 @@ begin
                         
                         --fill the tag with the img position
                         s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_dimm_select + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -561,8 +594,8 @@ begin
                     
                 when WR_POST_MOI =>
                     moi_i <= '0';
-                    if(NEW_IMAGE_DETECT = '1') then
-                        
+                    if( new_image_detect_i = '1') then
+                        new_image_detect_i <= '0';
                         if( write_img_loc = end_loc_s or ACQUISITION_STOP = '1') then
                             next_write_state <= STANDBY_WR;
                             end_loc_s <= write_img_loc;
@@ -585,7 +618,7 @@ begin
                         
                         --fill the tag with the img position
                         s_s2mm_cmd_tag <= resize(std_logic_vector(write_img_loc), s_s2mm_cmd_tag'length); 
-                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
+                        s_s2mm_saddr <= resize(std_logic_vector(baseaddr_u + wr_dimm_select +  wr_sequence_offset + wr_frame_offset), s_s2mm_saddr'length);
                         s_s2mm_eof <=  '1';
                         s_s2mm_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- in Bytes 
                         s2mm_cmd_mosi.tvalid <= '1'; --invalidate de data
@@ -691,6 +724,9 @@ end process;
 img_read : process(CLK_DATA)
 begin
     if rising_edge(CLK_DATA) then
+        
+        water_level_i <= water_level_i(1 downto 0) & WATER_LEVEL;    
+    
         if sresetn = '0' or config_valid_s = '0' then
             read_state <= STANDBY_RD;
             --signal/output to assigned during the process
@@ -703,17 +739,17 @@ begin
             mm2s_err_o <= (others => '0');
             mm2s_sts_miso.tready <= '0';
             
-            
+            rd_compteur_delay <= (others => '0');       
         else
             case read_state is
                 when STANDBY_RD =>
-                    if(buffer_mode_s = BUF_RD_IMG and WATER_LEVEL = '0') then --Mode Gige standard and image available
+                    if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then --Mode Gige standard and image available
                         --change state
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
                         s_mm2s_cmd_tag <= resize(std_logic_vector(read_start_id_u), s_mm2s_cmd_tag'length);                        
-                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_start_image), s_mm2s_saddr'length);
+                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_dimm_select + rd_sequence_offset + rd_start_image), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
@@ -730,8 +766,7 @@ begin
                             next_read_state <= RD_IMG;
                             read_img_loc <= read_start_id_u + 1; --increase counter position
                         end if;
-                       
-                       
+ 
                     else
                         read_state <= STANDBY_RD;
                         --signal/output to assigned during the process
@@ -743,16 +778,15 @@ begin
                         mm2s_sts_miso.tready <= '0';
                         
                         read_img_loc <= read_img_loc;
-                        
                     end if;
           
                when RD_IMG =>
-                   if(buffer_mode_s = BUF_RD_IMG and WATER_LEVEL = '0') then --Mode Gige standard and image available
+                   if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then --Mode Gige standard and image available
+                                         
                         read_state <= WAIT_RD_HDR_ACK;
-
                         --fill the tag with the img position
                         s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc), s_mm2s_cmd_tag'length);                        
-                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_sequence_offset + rd_image_offset), s_mm2s_saddr'length);
+                        s_mm2s_saddr <= resize(std_logic_vector(baseaddr_u + rd_dimm_select + rd_sequence_offset + rd_image_offset), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
@@ -771,7 +805,7 @@ begin
                             read_img_loc <= read_img_loc + 1; --increase counter position
                         end if;
                    else
-                        if(WATER_LEVEL = '1') then
+                        if(water_level_i(2) = '1') then
                             read_state <= RD_WAIT_SINK_RDY;
                         else
                             read_state <= read_state;
@@ -786,16 +820,15 @@ begin
                        mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if; 
                
                when RD_WAIT_SINK_RDY =>
-                   if(buffer_mode_s = BUF_RD_IMG and WATER_LEVEL = '0') then -- EXIT PAUSE MODE
+                   if(buffer_mode_s = BUF_RD_IMG and water_level_i(2) = '0') then -- EXIT PAUSE MODE
                         read_state <= WAIT_RD_HDR_ACK;
 
                         --fill the tag with the img position
                         s_mm2s_cmd_tag <= resize(std_logic_vector(read_img_loc), s_mm2s_cmd_tag'length);                        
-                        s_mm2s_saddr <= resize(std_logic_vector( baseaddr_u + rd_sequence_offset + rd_image_offset ), s_mm2s_saddr'length);
+                        s_mm2s_saddr <= resize(std_logic_vector( baseaddr_u + rd_dimm_select + rd_sequence_offset + rd_image_offset ), s_mm2s_saddr'length);
                         s_mm2s_eof <=  '1';
                         s_mm2s_btt <= resize(std_logic_vector(hdr_bytessize_u),s_s2mm_btt'length); -- Transfert of the hdr data 
                         mm2s_cmd_mosi.tvalid <= '1';
@@ -824,7 +857,6 @@ begin
                        mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if;
                    
                when WAIT_RD_HDR_ACK =>
@@ -839,7 +871,6 @@ begin
                        mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
-                       
                    else
                        read_state <= read_state;
                        --signal/output to assigned during the process
@@ -851,7 +882,6 @@ begin
                        mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if;
                    
                when WAIT_RD_IMG_ACK =>
@@ -866,7 +896,6 @@ begin
                        mm2s_sts_miso.tready <= '1';
                        
                        read_img_loc <= read_img_loc;
-                       
                    else
                        read_state <= read_state;
                        --signal/output to assigned during the process
@@ -877,7 +906,6 @@ begin
                        mm2s_cmd_mosi.tvalid <= mm2s_cmd_mosi.tvalid;
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if;
                    
                when WAIT_RD_HDR_STS_ACK =>
@@ -896,9 +924,11 @@ begin
                        s_mm2s_eof <=s_mm2s_eof; 
                        s_mm2s_btt <= s_mm2s_btt;
                        mm2s_cmd_mosi.tvalid <= '0';
-                       mm2s_sts_miso.tready <= '1';
+                       --mm2s_sts_miso.tready <= '1';
+                       mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
+                       rd_compteur_delay <= x"00000000";
                        
                    else
                        read_state <= read_state;
@@ -910,12 +940,20 @@ begin
                        mm2s_cmd_mosi.tvalid <= mm2s_cmd_mosi.tvalid;
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if;
                    
                 when WAIT_RD_IMG_STS_ACK =>
                    if(mm2s_sts_mosi.tvalid = '1') then --Mode Gige standard and image available
-                       read_state <= next_read_state;
+                      if rd_compteur_delay > ((wr_time_between_images_reg + 7000) - frame_size_u) then    --same FPS  as write FPS  frame_size_u
+                      --if rd_compteur_delay >= x"00000000" then   --FPS limited by water_level
+                        read_state <= next_read_state;
+                        rd_compteur_delay <= x"00000000";
+                        mm2s_sts_miso.tready <= '1';    -- *****ne pas oublier de décomenter la ligne plus bas*****
+                       else
+                        read_state <= read_state;
+                        rd_compteur_delay <= rd_compteur_delay + 1;
+                        mm2s_sts_miso.tready <= '0';     -- *****ne pas oublier de décomenter la ligne plus bas*****
+                       end if;
                        
                         -- Check for error
                         if(mm2s_sts_mosi.tdata(6 downto 4) /= "000") then
@@ -930,12 +968,14 @@ begin
                        s_mm2s_eof <=s_mm2s_eof; 
                        s_mm2s_btt <= s_mm2s_btt;
                        mm2s_cmd_mosi.tvalid <= '0';
-                       mm2s_sts_miso.tready <= '1';
+                       --mm2s_sts_miso.tready <= '1';
                        
                        read_img_loc <= read_img_loc;
-                       
                    else
                        read_state <= read_state;
+                       
+                       rd_compteur_delay <= rd_compteur_delay;
+                       
                        --signal/output to assigned during the process
                        s_mm2s_cmd_tag <= s_mm2s_cmd_tag;
                        s_mm2s_saddr <=s_mm2s_saddr;
@@ -944,7 +984,6 @@ begin
                        mm2s_cmd_mosi.tvalid <= mm2s_cmd_mosi.tvalid;
                        
                        read_img_loc <= read_img_loc;
-                       
                    end if;
                    
                 when RD_SEQ_END =>
@@ -957,7 +996,6 @@ begin
                    mm2s_cmd_mosi.tvalid <= '0';
                    
                    read_img_loc <= read_img_loc;
-                   
 
                when ERROR_RD =>
                    read_state <= STANDBY_RD;
