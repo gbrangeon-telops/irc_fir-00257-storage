@@ -696,7 +696,7 @@ proc create_hier_cell_MemoryBuffer { parentCell nameHier } {
 
   # Create instance: axi_dm_buffer, and set properties
   set axi_dm_buffer [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_datamover:5.1 axi_dm_buffer ]
-  set_property -dict [ list CONFIG.c_m_axi_mm2s_addr_width {64} CONFIG.c_m_axi_mm2s_data_width {256} CONFIG.c_m_axi_s2mm_addr_width {64} CONFIG.c_m_axi_s2mm_data_width {256} CONFIG.c_m_axis_mm2s_tdata_width {16} CONFIG.c_mm2s_btt_used {23} CONFIG.c_mm2s_burst_size {64} CONFIG.c_s2mm_btt_used {23} CONFIG.c_s2mm_burst_size {64}  ] $axi_dm_buffer
+  set_property -dict [ list CONFIG.c_include_mm2s_dre {true} CONFIG.c_include_s2mm_dre {true} CONFIG.c_m_axi_mm2s_addr_width {64} CONFIG.c_m_axi_mm2s_data_width {256} CONFIG.c_m_axi_s2mm_addr_width {64} CONFIG.c_m_axi_s2mm_data_width {256} CONFIG.c_m_axis_mm2s_tdata_width {16} CONFIG.c_mm2s_btt_used {23} CONFIG.c_mm2s_burst_size {16} CONFIG.c_s2mm_btt_used {23} CONFIG.c_s2mm_burst_size {16}  ] $axi_dm_buffer
 
   # Create instance: buffer_interconnect_0, and set properties
   set buffer_interconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 buffer_interconnect_0 ]
