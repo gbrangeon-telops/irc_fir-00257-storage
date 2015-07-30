@@ -56,7 +56,8 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
    gBufManagerError = (t_bufferManagerError)0;
 
    // Default control values
-   pBufferCtrl->Buffer_base_addr = MEM0_BUFFER_BASEADDR; // DDR Base ADDR used by Buffering FSM
+   pBufferCtrl->Mem0_base_addr = MEM0_BUFFER_BASEADDR; // Mem0 Base ADDR used by Buffering FSM
+   pBufferCtrl->Mem1_base_addr = MEM1_BUFFER_BASEADDR; // Mem1 Base ADDR used by Buffering FSM
    pBufferCtrl->nbSequenceMax = 1;
    pBufferCtrl->FrameSize = default_width*(default_height+2); // In pixel (+2 for header lines)
    pBufferCtrl->HDR_Size = default_width*4; // In bytes (2 lines * 2 bytes/pixel)
@@ -468,14 +469,16 @@ static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t 
    uint32_t AXI4L_addrVal;
    const uint32_t FrameSizeInBytes = pBufferCtrl->FrameSize * 2;
 
-   // readAddrLoc = BaseAddr + sequence offset + image offset + FrameIdReg offset
-   readAddrLoc = pBufferCtrl->Buffer_base_addr + (SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) * FrameSizeInBytes + FrameIDHdrAddr;
+   //readAddrLoc = BaseAddr + sequence offset + image offset + FrameIdReg offset
 
-   // readAddrLoc = BaseAddr + dimmSelect + sequence offset + image offset + FrameIdReg offset
-   if(ImageLocation % 2) //impair
-      readAddrLoc = pBufferCtrl->Buffer_base_addr + 0x200000000 + (((SequenceID * pBufferCtrl->nbImagePerSeq)/2) + (ImageLocation >> 1)) * FrameSizeInBytes + FrameIDHdrAddr;
-   else // pair
-      readAddrLoc = pBufferCtrl->Buffer_base_addr + (((SequenceID * pBufferCtrl->nbImagePerSeq)/2) + (ImageLocation >> 1)) * FrameSizeInBytes + FrameIDHdrAddr;
+   // Memory 0 contains even images and memory 1 contains odd images, so begin with the right base address
+   if (ImageLocation % 2) // odd
+      readAddrLoc = pBufferCtrl->Mem1_base_addr;
+   else // even
+      readAddrLoc = pBufferCtrl->Mem0_base_addr;
+
+   // Since sequences are divided in the 2 memories, sequence offset and image offset are divided by 2
+   readAddrLoc += (SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) / 2 * FrameSizeInBytes + FrameIDHdrAddr;
 
    // Convert address location to GPIO + AXI4L_32
    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(readAddrLoc);

@@ -49,28 +49,30 @@
 #define AXIL_MEM_ADDR_SPACE     ((uint32_t)(TEL_PAR_TEL_AXIL_MEM_OUT_HIGHADDR - TEL_PAR_TEL_AXIL_MEM_OUT_BASEADDR + 1))
 
 //BUFFER CTRL ADDRESS MAP
-#define BM_BASE_ADDR_LSB		0x0     //MEMORY BASE ADDR LSB
-#define BM_BASE_ADDR_MSB        0x4     //MEMORY BASE ADDR MSB
-#define NB_SEQUENCE_MAX			0x8		//SEQUENCE
-#define BM_NB_IMG_PER_SEQ 		0xC		//IMAGES
-#define BM_FRAME_SIZE 			0x10	//pIXEL
-#define BM_BUFFER_MODE			0x14	//BM_OFF - BMWRITE - BMREAD
-#define BM_HDR_SIZE 			0x18	//BYTES
-#define BM_IMG_SIZE 			0x1C	//BYTES
-#define BM_NB_IMG_PRE 			0x20	//PRE = 0 -> no PREMOI
-#define BM_NB_IMG_POST 			0x24	//NB image including MOI to the end
-#define BM_READ_SEQUENCE_ID 	0x28	//READ seq ID
-#define BM_READ_START_ID		0x2C	//READ Start image ID(in buffer memory)
-#define BM_READ_STOP_ID			0x30	//READ STOP image ID(in buffer memory)
-#define BM_CLEAR_MEMORY			0x34	//Pulse to clear memory
-#define BM_ACQ_STOP				0X38	//When acquisition is stop assert this signal.
-#define BM_CONFIG_VALID			0x3C	//Hold at 1 when valid. Do not change param when valid
-#define BM_AXIL_MEM_ADDR_WIDTH  0x40    //nb of bits kept in the AXIL memory address
+#define BM_MEM0_BASE_ADDR_LSB 0x0     //MEMORY 0 BASE ADDR LSB
+#define BM_MEM0_BASE_ADDR_MSB 0x4     //MEMORY 0 BASE ADDR MSB
+#define BM_MEM1_BASE_ADDR_LSB 0x8     //MEMORY 1 BASE ADDR LSB
+#define BM_MEM1_BASE_ADDR_MSB 0xC     //MEMORY 1 BASE ADDR MSB
+#define NB_SEQUENCE_MAX			0x10		//SEQUENCE
+#define BM_NB_IMG_PER_SEQ 		0x14		//IMAGES
+#define BM_FRAME_SIZE 			0x18	//pIXEL
+#define BM_BUFFER_MODE			0x1C	//BM_OFF - BMWRITE - BMREAD
+#define BM_HDR_SIZE 			   0x20	//BYTES
+#define BM_IMG_SIZE 			   0x24	//BYTES
+#define BM_NB_IMG_PRE 			0x28	//PRE = 0 -> no PREMOI
+#define BM_NB_IMG_POST 			0x2C	//NB image including MOI to the end
+#define BM_READ_SEQUENCE_ID 	0x30	//READ seq ID
+#define BM_READ_START_ID		0x34	//READ Start image ID(in buffer memory)
+#define BM_READ_STOP_ID			0x38	//READ STOP image ID(in buffer memory)
+#define BM_CLEAR_MEMORY			0x3C	//Pulse to clear memory
+#define BM_ACQ_STOP				0x40	//When acquisition is stop assert this signal.
+#define BM_CONFIG_VALID			0x44	//Hold at 1 when valid. Do not change param when valid
+#define BM_AXIL_MEM_ADDR_WIDTH  0x48    //nb of bits kept in the AXIL memory address
 
-#define BM_NB_SEQ_IN_MEM		0x44	//Return number of sequence int the buffer
-#define BM_WRITE_ERR 			0x48	//Return write error
-#define BM_READ_ERR 			0x4C	//Return read error
-#define BM_MEM_READY            0x50    //Return status of memory interface
+#define BM_NB_SEQ_IN_MEM		0x4C	//Return number of sequence int the buffer
+#define BM_WRITE_ERR 			0x50	//Return write error
+#define BM_READ_ERR 			   0x54	//Return read error
+#define BM_MEM_READY          0x58    //Return status of memory interface
 
 //BUFFER TABLE ADDRESS MAP
 #define BT_START_IMG_OFFSET		0
@@ -94,7 +96,8 @@ struct s_bufferManagerStruct {
    uint32_t SIZE;      // Number of config elements (uint64_t counts as 2), excluding SIZE and ADD.
    uint32_t ADD;
 
-   uint64_t Buffer_base_addr;  // 32bit-LSB is sent first
+   uint64_t Mem0_base_addr;  // 32bit-LSB is sent first
+   uint64_t Mem1_base_addr;  // 32bit-LSB is sent first
    uint32_t nbSequenceMax;
    uint32_t nbImagePerSeq;
    uint32_t FrameSize;
@@ -140,7 +143,7 @@ typedef uint32_t t_bufferManagerError;
 
 
 /***************** Macros (Inline Functions) Definitions ********************/
-#define Buffering_Intf_Ctor(add) {sizeof(t_bufferManager)/4 - 2, add, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+#define Buffering_Intf_Ctor(add) {sizeof(t_bufferManager)/4 - 2, add, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 
 /************************** Function Prototypes *****************************/
