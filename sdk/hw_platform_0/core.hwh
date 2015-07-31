@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Jul 03 16:50:42 2015" VIVADOVERSION="2014.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Jul 30 16:59:29 2015" VIVADOVERSION="2014.4">
 
   <SYSTEMINFO ARCH="kintex7" DEVICE="7k160t" NAME="core_imp" PACKAGE="fbg676" SPEEDGRADE="-1"/>
 
@@ -2600,8 +2600,8 @@
         <PARAMETER NAME="C_INCLUDE_MM2S_STSFIFO" VALUE="1"/>
         <PARAMETER NAME="C_MM2S_STSCMD_FIFO_DEPTH" VALUE="4"/>
         <PARAMETER NAME="C_MM2S_STSCMD_IS_ASYNC" VALUE="0"/>
-        <PARAMETER NAME="C_INCLUDE_MM2S_DRE" VALUE="0"/>
-        <PARAMETER NAME="C_MM2S_BURST_SIZE" VALUE="64"/>
+        <PARAMETER NAME="C_INCLUDE_MM2S_DRE" VALUE="1"/>
+        <PARAMETER NAME="C_MM2S_BURST_SIZE" VALUE="16"/>
         <PARAMETER NAME="C_MM2S_BTT_USED" VALUE="23"/>
         <PARAMETER NAME="C_MM2S_ADDR_PIPE_DEPTH" VALUE="3"/>
         <PARAMETER NAME="C_INCLUDE_S2MM" VALUE="1"/>
@@ -2613,8 +2613,8 @@
         <PARAMETER NAME="C_INCLUDE_S2MM_STSFIFO" VALUE="1"/>
         <PARAMETER NAME="C_S2MM_STSCMD_FIFO_DEPTH" VALUE="4"/>
         <PARAMETER NAME="C_S2MM_STSCMD_IS_ASYNC" VALUE="0"/>
-        <PARAMETER NAME="C_INCLUDE_S2MM_DRE" VALUE="0"/>
-        <PARAMETER NAME="C_S2MM_BURST_SIZE" VALUE="64"/>
+        <PARAMETER NAME="C_INCLUDE_S2MM_DRE" VALUE="1"/>
+        <PARAMETER NAME="C_S2MM_BURST_SIZE" VALUE="16"/>
         <PARAMETER NAME="C_S2MM_BTT_USED" VALUE="23"/>
         <PARAMETER NAME="C_S2MM_SUPPORT_INDET_BTT" VALUE="0"/>
         <PARAMETER NAME="C_S2MM_ADDR_PIPE_DEPTH" VALUE="4"/>
@@ -2632,8 +2632,8 @@
         <PARAMETER NAME="c_mm2s_stscmd_is_async" VALUE="false"/>
         <PARAMETER NAME="c_m_axi_mm2s_data_width" VALUE="256"/>
         <PARAMETER NAME="c_m_axis_mm2s_tdata_width" VALUE="16"/>
-        <PARAMETER NAME="c_include_mm2s_dre" VALUE="false"/>
-        <PARAMETER NAME="c_mm2s_burst_size" VALUE="64"/>
+        <PARAMETER NAME="c_include_mm2s_dre" VALUE="true"/>
+        <PARAMETER NAME="c_mm2s_burst_size" VALUE="16"/>
         <PARAMETER NAME="c_include_mm2s_stsfifo" VALUE="true"/>
         <PARAMETER NAME="c_mm2s_stscmd_fifo_depth" VALUE="4"/>
         <PARAMETER NAME="c_mm2s_btt_used" VALUE="23"/>
@@ -2643,8 +2643,8 @@
         <PARAMETER NAME="c_s2mm_stscmd_is_async" VALUE="false"/>
         <PARAMETER NAME="c_m_axi_s2mm_data_width" VALUE="256"/>
         <PARAMETER NAME="c_s_axis_s2mm_tdata_width" VALUE="32"/>
-        <PARAMETER NAME="c_include_s2mm_dre" VALUE="false"/>
-        <PARAMETER NAME="c_s2mm_burst_size" VALUE="64"/>
+        <PARAMETER NAME="c_include_s2mm_dre" VALUE="true"/>
+        <PARAMETER NAME="c_s2mm_burst_size" VALUE="16"/>
         <PARAMETER NAME="c_include_s2mm_stsfifo" VALUE="true"/>
         <PARAMETER NAME="c_s2mm_stscmd_fifo_depth" VALUE="4"/>
         <PARAMETER NAME="c_s2mm_btt_used" VALUE="23"/>
