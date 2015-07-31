@@ -50,6 +50,9 @@ IRC_Status_t Storage_GC_Init()
    // Initialize GenICam register data
    gcRegsData = gcRegsDataFactory;
 
+   // Set default values
+   GC_SetDefaultRegsData();
+
    // Initialize Inter-FPGA GenICam master control interface
    status = GC_Manager_AddMaster(&gFpgaCtrlIntf,
          CIP_F1F2,

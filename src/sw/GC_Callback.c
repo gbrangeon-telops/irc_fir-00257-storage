@@ -273,7 +273,7 @@ void GC_MemoryBufferNumberOfSequencesCallback(gcCallbackPhase_t phase, gcCallbac
    {
       // After write
       // Limit number of images per sequence if necessary
-//      GC_UpdateMemoryBufferNumberOfSequenceLimits();
+      GC_UpdateMemoryBufferNumberOfSequenceLimits();
       // Update sequence parameters
       BufferManager_SetSequenceParams(&gBufManager, &gcRegsData);
    }
@@ -509,7 +509,7 @@ void GC_MemoryBufferSequenceSizeCallback(gcCallbackPhase_t phase, gcCallbackAcce
    {
       // After write
       // Limit the number of sequences if necessary
-//      GC_UpdateMemoryBufferSequenceSizeLimits();
+      GC_UpdateMemoryBufferSequenceSizeLimits();
       // Update sequence parameters
       BufferManager_SetSequenceParams(&gBufManager, &gcRegsData);
    }

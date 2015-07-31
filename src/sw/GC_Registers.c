@@ -99,6 +99,21 @@ void GC_Registers_Init()
 /* AUTO-CODE END */
 
 /**
+ * Set GenICam registers to default values.
+ */
+void GC_SetDefaultRegsData()
+{
+   // We don't know which detector is used so set default to the most restrictive in terms of memory size
+   gcRegsData.Width = 1280;
+   gcRegsData.Height = 1024;
+
+   // Update memory buffer registers by their callbacks
+   GC_MemoryBufferNumberOfImagesMaxCallback(GCCP_BEFORE, GCCA_READ);
+   GC_MemoryBufferNumberOfSequencesMaxCallback(GCCP_BEFORE, GCCA_READ);
+   GC_MemoryBufferSequenceSizeMaxCallback(GCCP_BEFORE, GCCA_READ);
+}
+
+/**
  * Update GenICam registers lock flag.
  * This function is called everytime a write is performed and updates the locked
  * flag for ALL registers.

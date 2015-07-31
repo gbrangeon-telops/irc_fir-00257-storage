@@ -76,6 +76,7 @@ void GC_Registers_Init();
 
 /* AUTO-CODE END */
 
+void GC_SetDefaultRegsData();
 void GC_UpdateLockedFlag();
 void GC_UpdateMemoryBufferSequenceSizeLimits();
 void GC_UpdateMemoryBufferNumberOfSequenceLimits();
