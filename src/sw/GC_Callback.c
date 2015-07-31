@@ -197,6 +197,9 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
       // After write
       // Remove 2 header lines (added for the NTx-Mini)
       gcRegsData.Height -= 2;
+
+      // Update Memory Buffer params
+      GC_MemoryBufferModeCallback(GCCP_AFTER, GCCA_WRITE);
    }
 }
 
@@ -593,6 +596,8 @@ void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
+      // Update Memory Buffer params
+      GC_MemoryBufferModeCallback(GCCP_AFTER, GCCA_WRITE);
    }
 }
 
