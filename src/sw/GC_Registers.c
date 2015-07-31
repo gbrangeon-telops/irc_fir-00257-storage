@@ -15,6 +15,7 @@
 
 #include "GC_Registers.h"
 #include "GenICam.h"
+#include "GC_Callback.h"
 
 
 /* AUTO-CODE BEGIN */
