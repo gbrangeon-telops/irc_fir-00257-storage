@@ -90,6 +90,7 @@ set_property IOSTANDARD SSTL15 [get_ports MOI]
 
 
 ################### B32 BUFFER SPARE  ###########################
+##WARNING: B32_BUFFER_SPARE_8 are connected on a bank at 1.8V on Output FPGA
 #set_property PACKAGE_PIN AF10 [get_ports B32_BUFFER_SPARE_8_P]
 #set_property PACKAGE_PIN AF9 [get_ports B32_BUFFER_SPARE_8_N]
 #set_property PACKAGE_PIN E13 [get_ports B32_BUFFER_SPARE_9_P]
