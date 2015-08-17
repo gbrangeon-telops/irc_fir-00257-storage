@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.8.1
+// Generated from XML camera definition file version 10.9.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -64,7 +64,7 @@ gcRegistersData_t gcRegsData;
 /**
  * TriggerMode data array
  */
-uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
+uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off, TM_Off};
 
 /**
  * GenICam registers data pointer initialization.

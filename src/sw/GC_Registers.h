@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.8.1
+// Generated from XML camera definition file version 10.9.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -69,7 +69,7 @@ extern gcRegistersData_t gcRegsDataFactory;
 
 extern gcRegistersData_t gcRegsData;
 
-#define TriggerModeAryLen 2
+#define TriggerModeAryLen 3
 extern uint32_t TriggerModeAry[TriggerModeAryLen];
 
 void GC_Registers_Init();
