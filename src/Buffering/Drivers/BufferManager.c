@@ -373,15 +373,6 @@ void BufferManager_SetBufferMode(t_bufferManager *pBufferCtrl, t_bufferMode Mode
    pBufferCtrl->nbImagePerSeq = pGCRegs->MemoryBufferSequenceSize;
    pBufferCtrl->nb_img_pre = pGCRegs->MemoryBufferSequencePreMOISize;
    pBufferCtrl->nb_img_post = pBufferCtrl->nbImagePerSeq - pBufferCtrl->nb_img_pre;
-
-   // Clear the memory if buffering is stopped
-   if (Mode == BM_OFF)
-   {
-      pBufferCtrl->clear_memory = 1;
-      AXI4L_write32(pBufferCtrl->clear_memory, pBufferCtrl->ADD + BM_CLEAR_MEMORY);
-   }
-
-   // Reset clear memory signal
    pBufferCtrl->clear_memory = 0;
 
    // Write values

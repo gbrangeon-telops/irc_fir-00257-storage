@@ -125,13 +125,15 @@ void GC_UpdateLockedFlag()
    // TODO: lock also when acq are started
    if (gcRegsData.MemoryBufferSequenceCount > 0)
    {
-      RegLock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
+      RegLock(&gcRegsDef[MemoryBufferModeIdx]);
+	  RegLock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
       RegLock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
       RegLock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
    }
    else
    {
-      RegUnlock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
+      RegUnlock(&gcRegsDef[MemoryBufferModeIdx]);
+	  RegUnlock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
       RegUnlock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
       RegUnlock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
    }
