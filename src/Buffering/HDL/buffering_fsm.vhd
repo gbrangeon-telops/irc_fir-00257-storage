@@ -60,6 +60,7 @@ entity BUFFERING_FSM is
         READ_SEQUENCE_ID    : in unsigned(7 downto 0);
         READ_START_ID       : in unsigned(31 downto 0);
         READ_STOP_ID        : in unsigned(31 downto 0);
+        RD_MIN_FRAME_TIME   : in unsigned(31 downto 0);
         WATER_LEVEL         : in std_logic;
         IMG_READ_EOF        : in std_logic;
 
@@ -127,15 +128,9 @@ architecture rtl of BUFFERING_FSM is
    signal wr_frame_offset : unsigned(HalfSeqSize_bytes_u'length-1 downto 0);
    signal wr_frame_offset_temp : unsigned(HalfSeqSize_bytes_u'length-1 downto 0); 
    
-   signal wr_time_between_images : unsigned(31 downto 0);
-   signal wr_time_between_images_reg : unsigned(31 downto 0);
-   signal wr_start_of_images_i : std_logic_vector(2 downto 0);
-   
    signal rd_sequence_offset : unsigned(HalfSeqSize_bytes_u'length-1 downto 0);
    signal rd_image_offset : unsigned(HalfSeqSize_bytes_u'length-1 downto 0);
    signal rd_image_offset_temp : unsigned(HalfSeqSize_bytes_u'length-1 downto 0);
-
-   signal rd_compteur_delay : unsigned(31 downto 0);
 
    --RD CONFIG
    signal nb_seq_in_mem_u : unsigned(NB_SEQUENCE_IN_MEM'length-1 downto 0) := to_unsigned(0,NB_SEQUENCE_IN_MEM'length);
@@ -144,6 +139,9 @@ architecture rtl of BUFFERING_FSM is
    signal read_stop_id_u : unsigned(READ_STOP_ID'length-1 downto 0);
    signal water_level_i : std_logic;
    signal img_read_eof_i : std_logic;
+
+   signal rd_delay_cnt : unsigned(31 downto 0);
+   signal rd_min_frame_time_hold : unsigned(31 downto 0);
    
    -- buffertable management
    signal seq_id : unsigned(NB_SEQUENCE_IN_MEM'length-1 downto 0) := to_unsigned(0,NB_SEQUENCE_IN_MEM'length);
@@ -315,17 +313,7 @@ end process Synchronous_calc;
 img_write : process(CLK_DATA)
 begin
     if rising_edge(CLK_DATA) then
-        
-        -- measuge time between image for playback at the same FPS
-        wr_start_of_images_i <= wr_start_of_images_i(1 downto 0) & NEW_IMAGE_DETECT;
-        if wr_start_of_images_i(2) = '0' and wr_start_of_images_i(1) = '1' then
-            wr_time_between_images <= (others => '0');
-            wr_time_between_images_reg <= wr_time_between_images;
-        else
-            wr_time_between_images <= wr_time_between_images + 1;
-            wr_time_between_images_reg <= wr_time_between_images_reg;
-        end if;  
-       
+               
         if sresetn = '0' or config_valid_s = '0' then
             write_state <= STANDBY_WR;
             next_write_state <= STANDBY_WR;
@@ -754,11 +742,17 @@ begin
             mm2s_err_o <= (others => '0');
             mm2s_sts_miso.tready <= '0';
             
-            rd_compteur_delay <= (others => '0');       
+            rd_delay_cnt <= (others => '0');       
+            rd_min_frame_time_hold <= RD_MIN_FRAME_TIME;
         else
+           rd_delay_cnt <= rd_delay_cnt + 1;
+           
             case read_state is
                 when STANDBY_RD =>
-                    if(buffer_mode_s = BUF_RD_IMG and water_level_i = '0') then --Mode Gige standard and image available
+                
+                     rd_min_frame_time_hold <= RD_MIN_FRAME_TIME;
+               
+                     if(buffer_mode_s = BUF_RD_IMG and water_level_i = '0') then --Mode Gige standard and image available
                         --change state
                         read_state <= WAIT_RD_HDR_ACK;
 
@@ -770,7 +764,6 @@ begin
                         mm2s_cmd_mosi.tvalid <= '1';
                         mm2s_sts_miso.tready <= '0';
                         
-
                         if(read_img_loc = read_stop_id_u) then -- only one image to read
                             next_read_state <= RD_SEQ_END;
                             read_img_loc <= read_start_id_u;
@@ -939,11 +932,9 @@ begin
                        s_mm2s_eof <=s_mm2s_eof; 
                        s_mm2s_btt <= s_mm2s_btt;
                        mm2s_cmd_mosi.tvalid <= '0';
-                       --mm2s_sts_miso.tready <= '1';
                        mm2s_sts_miso.tready <= '0';
                        
                        read_img_loc <= read_img_loc;
-                       rd_compteur_delay <= (others => '0');
                        
                    else
                        read_state <= read_state;
@@ -959,14 +950,14 @@ begin
                    
                 when WAIT_RD_IMG_STS_ACK =>
                    if(mm2s_sts_mosi.tvalid = '1') then --Mode Gige standard and image available
-                      if rd_compteur_delay > ((wr_time_between_images_reg + 7000) - frame_size_u) then    --same FPS  as write FPS  frame_size_u
+                      if rd_delay_cnt >= rd_min_frame_time_hold or next_read_state = RD_SEQ_END then
                          read_state <= next_read_state;
-                         rd_compteur_delay <= (others => '0');
-                         mm2s_sts_miso.tready <= '1';    -- *****ne pas oublier de décomenter la ligne plus bas*****
+                         rd_delay_cnt <= (others => '0');
+                         rd_min_frame_time_hold <= RD_MIN_FRAME_TIME;
+                         mm2s_sts_miso.tready <= '1';
                       else
                          read_state <= read_state;
-                         rd_compteur_delay <= rd_compteur_delay + 1;
-                         mm2s_sts_miso.tready <= '0';     -- *****ne pas oublier de décomenter la ligne plus bas*****
+                         mm2s_sts_miso.tready <= '0';
                       end if;
                        
                         -- Check for error
@@ -976,19 +967,22 @@ begin
                             mm2s_err_o <=  mm2s_err_o;
                         end if;
                         
+                        -- react on an stop acquisition command before the download was complete
+                        if ACQUISITION_STOP = '1' then
+                           read_state <= RD_SEQ_END;
+                           mm2s_sts_miso.tready <= '1';
+                        end if;
+                        
                        --signal/output to assigned during the process
                        s_mm2s_cmd_tag <= s_mm2s_cmd_tag;
                        s_mm2s_saddr <= s_mm2s_saddr;
                        s_mm2s_eof <=s_mm2s_eof; 
                        s_mm2s_btt <= s_mm2s_btt;
                        mm2s_cmd_mosi.tvalid <= '0';
-                       --mm2s_sts_miso.tready <= '1';
                        
                        read_img_loc <= read_img_loc;
                    else
                        read_state <= read_state;
-                       
-                       rd_compteur_delay <= rd_compteur_delay;
                        
                        --signal/output to assigned during the process
                        s_mm2s_cmd_tag <= s_mm2s_cmd_tag;

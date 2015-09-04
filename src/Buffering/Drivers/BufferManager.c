@@ -16,6 +16,7 @@
 
 #include "BufferManager.h"
 #include "xparameters.h"
+#include "GenICam.h"
 #include "xgpio.h"
 #include "tel2000_param.h"
 #include "irc_status.h"
@@ -154,7 +155,7 @@ void BufferManager_ReadSequence(t_bufferManager *pBufferCtrl, 	const gcRegisters
    AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
    AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
 
-   BufferManager_EnableBuffer(pBufferCtrl);
+   //BufferManager_EnableBuffer(pBufferCtrl); // workaround : on doit laisser un peu de temps à la config avant de la réactiver
 }
 
 
@@ -196,7 +197,7 @@ void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersDat
    AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
    AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
 
-   BufferManager_EnableBuffer(pBufferCtrl);
+   //BufferManager_EnableBuffer(pBufferCtrl); // workaround : on doit laisser un peu de temps à la config avant de la réactiver
 }
 
 
@@ -514,4 +515,172 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
 
    // Return the address to be used on the AXI4L
    return AXI4L_addrVal;
+}
+
+bool gBufferStartDownloadTrigger = false;
+bool gBufferStopDownloadTrigger = false;
+
+void BufferManagerOutput_SM()
+{
+   extern t_bufferManager gBufManager;
+   extern gcRegistersData_t gcRegsData;
+
+   static bmState_t cstate = BMS_IDLE;
+   static timerData_t timer;
+   static uint32_t frameID, lastFrameID, initialFrameID, numFrames;
+   static uint32_t frameSize; // frame size, including header [pixels]
+
+   const uint32_t bits_per_pixel = 16;
+   const float max_delay_us = 20e6; // 0.05 Hz min
+   float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
+   float timeout_delay_us; // configured delay between frames, [us]
+
+   // the external memory buffer overrides internal buffer
+   bool enabled = gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off;
+
+   if (gBufferStopDownloadTrigger == 1)
+   {
+      gBufferStopDownloadTrigger = 0;
+      if (cstate == BMS_READ)
+      {
+         BufferManager_AcquisitionStop(&gBufManager, 1);
+
+         cstate = BMS_DONE;
+      }
+   }
+
+   //
+   if (gcRegsData.MemoryBufferSequenceCount == 0)
+   {
+      gcRegsData.MemoryBufferSequenceDownloadMode = MBSDM_Off;
+      gcRegsData.MemoryBufferSequenceSelector = 0;
+   }
+
+   switch (cstate)
+   {
+   case BMS_IDLE:
+      if (enabled)
+      {
+         if (gBufferStartDownloadTrigger == 1)
+         {
+            gBufferStartDownloadTrigger = 0;
+            if (gcRegsData.MemoryBufferSequenceCount > 0
+                  && gcRegsData.MemoryBufferSequenceSelector >= 0
+                  && gcRegsData.MemoryBufferSequenceSelector < gcRegsData.MemoryBufferSequenceCount)
+               cstate = BMS_CFG;
+         }
+      }
+
+      break;
+
+   case BMS_CFG:
+
+      numFrames = BufferManager_GetSequenceLength(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
+      if (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
+      {
+         frameID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
+         lastFrameID = frameID + numFrames - 1;
+      }
+      else // single image mode
+      {
+         uint32_t firstID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
+         uint32_t lastID = firstID + numFrames - 1;
+
+         frameID = gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
+         lastFrameID = frameID;
+
+         if (frameID < firstID || frameID > lastID)
+         {
+            cstate = BMS_IDLE;
+            break;
+         }
+      }
+
+      maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
+      maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
+
+      frameSize = gcRegsData.Width * (gcRegsData.Height + 2);
+
+      timeout_delay_us = 1.0e6 * frameSize * bits_per_pixel / maxBandWidth;
+      timeout_delay_us = MIN(timeout_delay_us, max_delay_us);
+
+      initialFrameID = frameID;
+
+      StartTimer(&timer, 10); // workaround for buffer reactivation, the delay should probably be implemented in VHDL
+
+      BufferManager_ConfigureMinFrameTime(&gBufManager, timeout_delay_us);
+      if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
+      {
+         BufferManager_ReadSequence(&gBufManager, &gcRegsData);
+         cstate = BMS_READ;
+      }
+      else if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
+      {
+         BufferManager_ReadImage(&gBufManager, &gcRegsData);
+         cstate = BMS_DONE;
+      }
+
+      cstate = BMS_WAIT;
+
+      break;
+
+   case BMS_READ:
+
+      // live throttling of the average bit rate
+      maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
+      //maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
+
+      timeout_delay_us = 1.0e6 * frameSize * bits_per_pixel / maxBandWidth;
+      timeout_delay_us = MIN(timeout_delay_us, max_delay_us);
+
+      BufferManager_ConfigureMinFrameTime(&gBufManager, timeout_delay_us);
+      break;
+
+   case BMS_WAIT:
+      if (TimedOut(&timer))
+      {
+         BufferManager_EnableBuffer(&gBufManager);
+         cstate = BMS_READ;
+         break;
+      }
+      break;
+
+   case BMS_DONE:
+      // do some clean up
+
+      BufferManager_AcquisitionStop(&gBufManager, 0);
+
+      cstate = BMS_IDLE;
+
+      // restore the original value
+      gcRegsData.MemoryBufferSequenceDownloadImageFrameID = initialFrameID;
+
+      break;
+
+   default:
+      cstate = BMS_IDLE;
+      break;
+   };
+}
+
+/**
+ * Configure the frame duration in read mode.
+ *
+ * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
+ *
+ * @return void.
+ */
+void BufferManager_ConfigureMinFrameTime(t_bufferManager *pBufferCtrl, uint32_t time_us)
+{
+   const uint32_t clk_freq_MHz = 160;
+   uint32_t cnt;
+
+   cnt = time_us * clk_freq_MHz;
+
+   AXI4L_write32(cnt, pBufferCtrl->ADD + BM_MIN_FRAME_TIME);
+}
+
+void BufferManager_AcquisitionStop(t_bufferManager *pBufferCtrl, bool flag)
+{
+   AXI4L_write32(flag, pBufferCtrl->ADD + BM_ACQ_STOP);
 }

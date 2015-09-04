@@ -59,6 +59,7 @@ int main()  // Defining the standard main() function
    while(1)
    {
       GC_Manager_SM();
+      BufferManagerOutput_SM();
       BufferManager_UpdateErrorFlags(&gBufManager);
       TP_TP11_Heartbeat_SM();
    }

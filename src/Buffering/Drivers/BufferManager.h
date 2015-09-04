@@ -22,6 +22,7 @@
 #include "GC_Registers.h"
 #include "IRC_Status.h"
 #include <stdint.h>
+#include <stdbool.h>
 
 
 /************************** Constant Definitions ****************************/
@@ -72,7 +73,8 @@
 #define BM_NB_SEQ_IN_MEM		0x4C	//Return number of sequence int the buffer
 #define BM_WRITE_ERR 			0x50	//Return write error
 #define BM_READ_ERR 			   0x54	//Return read error
-#define BM_MEM_READY          0x58    //Return status of memory interface
+#define BM_MEM_READY          0x58  //Return status of memory interface
+#define BM_MIN_FRAME_TIME     0x5C  //Configure frame duration in read mode
 
 //BUFFER TABLE ADDRESS MAP
 #define BT_START_IMG_OFFSET		0
@@ -136,6 +138,15 @@ struct s_bufferTable {
 };
 typedef struct s_bufferTable t_bufferTable;
 
+typedef enum
+{
+   BMS_IDLE = 0,
+   BMS_CFG,
+   BMS_READ,
+   BMS_WAIT,
+   BMS_DONE
+} bmState_t;
+
 /**
  * BUFFER MANAGER ERROR TYPE
  */
@@ -164,5 +175,11 @@ uint32_t BufferManager_GetNumSequenceCount(t_bufferManager *pBufferCtrl);
 uint32_t BufferManager_GetSequenceFirstFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 uint32_t BufferManager_GetSequenceMOIFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
 uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t SequenceID);
+
+extern bool gBufferStartDownloadTrigger;
+extern bool gBufferStopDownloadTrigger;
+void BufferManagerOutput_SM();
+void BufferManager_ConfigureMinFrameTime(t_bufferManager *pBufferCtrl, uint32_t time_us);
+void BufferManager_AcquisitionStop(t_bufferManager *pBufferCtrl, bool flag);
 
 #endif // BUFFERMANAGER_H

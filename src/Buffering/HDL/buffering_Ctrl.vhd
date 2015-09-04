@@ -39,6 +39,7 @@ entity Buffering_Ctrl is
     FRAME_SIZE        : out unsigned(31 downto 0);
     HDR_BYTESSIZE     : out unsigned(31 downto 0);
     IMG_BYTESSIZE     : out unsigned(31 downto 0);
+    RD_MIN_FRAME_TIME : out unsigned(31 downto 0);
     BUFFER_MODE       : out BufferMode;
     CONFIG_VALID      : out std_logic;    
 
@@ -113,6 +114,7 @@ architecture RTL of Buffering_Ctrl is
    constant FSM_ERROR_WR_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(80,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    constant FSM_ERROR_RD_ADDR           : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(84,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    constant MEM_READY_ADDR              : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(88,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
+   constant RD_MIN_FRAME_TIME_ADDR      : std_logic_vector(ADDR_LSB + OPT_MEM_ADDR_BITS downto 0) := std_logic_vector(to_unsigned(92,ADDR_LSB + OPT_MEM_ADDR_BITS + 1));
    
 
    
@@ -204,7 +206,7 @@ architecture RTL of Buffering_Ctrl is
     signal acq_stop_o    : std_logic;
     
     signal axil_mem_addr_width_o  : std_logic_vector(5 downto 0);
-
+    signal rd_min_frame_time_o  : std_logic_vector(31 downto 0);
 
  
     -- AXI4LITE signals
@@ -243,7 +245,8 @@ begin
     RD_START_ID     <= unsigned(rd_start_id_b);
     RD_STOP_ID     <= unsigned(rd_stop_id_b);
     AXIL_MEM_ADDR_WIDTH <= to_integer(unsigned(axil_mem_addr_width_o));
-
+    RD_MIN_FRAME_TIME <= unsigned(rd_min_frame_time_o);
+    
     mem0baseaddr_o <= mem0baseaddr_msb_o & mem0baseaddr_lsb_o;
     mem1baseaddr_o <= mem1baseaddr_msb_o & mem1baseaddr_lsb_o;
 
@@ -369,6 +372,7 @@ begin
             config_valid_o <='0';
             acq_stop_o      <='0';
             axil_mem_addr_width_o <= (others => '0');
+            rd_min_frame_time_o <= (others => '0');
          else
             if (slv_reg_wren = '1') and axi_wstrb = "1111" then
                case axi_awaddr(OPT_MEM_ADDR_BITS+ADDR_LSB downto 0) is      
@@ -391,6 +395,7 @@ begin
                   when CONFIG_VALID_ADDR            =>  config_valid_o  <= AXI4_LITE_MOSI.WDATA(0);
                   when ACQ_STOP_ADDR            =>  acq_stop_o  <= AXI4_LITE_MOSI.WDATA(0);
                   when AXIL_MEM_ADDR_WIDTH_ADDR     =>  axil_mem_addr_width_o         <= AXI4_LITE_MOSI.WDATA(axil_mem_addr_width_o'length-1 downto 0);
+                  when RD_MIN_FRAME_TIME_ADDR       =>  rd_min_frame_time_o         <= AXI4_LITE_MOSI.WDATA(rd_min_frame_time_o'length-1 downto 0);
                   when others  =>                  
                end case;                                                                                          
             end if;                                        
