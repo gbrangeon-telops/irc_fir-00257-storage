@@ -527,7 +527,7 @@ void BufferManagerOutput_SM()
 
    static bmState_t cstate = BMS_IDLE;
    static timerData_t timer;
-   static uint32_t frameID, lastFrameID, initialFrameID, numFrames;
+   static uint32_t frameID, lastFrameID, numFrames;
    static uint32_t frameSize; // frame size, including header [pixels]
 
    const uint32_t bits_per_pixel = 16;
@@ -549,12 +549,14 @@ void BufferManagerOutput_SM()
       }
    }
 
-   //
+   // preserve consistency among the memory buffer registers
    if (gcRegsData.MemoryBufferSequenceCount == 0)
    {
       gcRegsData.MemoryBufferSequenceDownloadMode = MBSDM_Off;
       gcRegsData.MemoryBufferSequenceSelector = 0;
    }
+   else
+      gcRegsData.MemoryBufferSequenceSelector = MIN(gcRegsData.MemoryBufferSequenceSelector, gcRegsData.MemoryBufferSequenceCount - 1);
 
    switch (cstate)
    {
@@ -586,14 +588,11 @@ void BufferManagerOutput_SM()
          uint32_t firstID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
          uint32_t lastID = firstID + numFrames - 1;
 
+         // make sure the requested frame is within bounds
          frameID = gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
+         frameID = MAX(MIN(frameID, lastID), firstID);
          lastFrameID = frameID;
-
-         if (frameID < firstID || frameID > lastID)
-         {
-            cstate = BMS_IDLE;
-            break;
-         }
+         gcRegsData.MemoryBufferSequenceDownloadImageFrameID = frameID;
       }
 
       maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
@@ -603,8 +602,6 @@ void BufferManagerOutput_SM()
 
       timeout_delay_us = 1.0e6 * frameSize * bits_per_pixel / maxBandWidth;
       timeout_delay_us = MIN(timeout_delay_us, max_delay_us);
-
-      initialFrameID = frameID;
 
       StartTimer(&timer, 10); // workaround for buffer reactivation, the delay should probably be implemented in VHDL
 
@@ -651,9 +648,6 @@ void BufferManagerOutput_SM()
       BufferManager_AcquisitionStop(&gBufManager, 0);
 
       cstate = BMS_IDLE;
-
-      // restore the original value
-      gcRegsData.MemoryBufferSequenceDownloadImageFrameID = initialFrameID;
 
       break;
 
