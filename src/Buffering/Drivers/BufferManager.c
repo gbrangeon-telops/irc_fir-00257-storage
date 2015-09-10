@@ -609,12 +609,10 @@ void BufferManagerOutput_SM()
       if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
       {
          BufferManager_ReadSequence(&gBufManager, &gcRegsData);
-         cstate = BMS_READ;
       }
       else if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
       {
          BufferManager_ReadImage(&gBufManager, &gcRegsData);
-         cstate = BMS_DONE;
       }
 
       cstate = BMS_WAIT;
@@ -631,13 +629,20 @@ void BufferManagerOutput_SM()
       timeout_delay_us = MIN(timeout_delay_us, max_delay_us);
 
       BufferManager_ConfigureMinFrameTime(&gBufManager, timeout_delay_us);
+
+
       break;
 
    case BMS_WAIT:
       if (TimedOut(&timer))
       {
          BufferManager_EnableBuffer(&gBufManager);
-         cstate = BMS_READ;
+
+         if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
+            cstate = BMS_DONE;
+         else
+            cstate = BMS_READ;
+
          break;
       }
       break;
