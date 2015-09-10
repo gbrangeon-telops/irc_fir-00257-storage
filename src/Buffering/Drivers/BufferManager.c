@@ -596,7 +596,7 @@ void BufferManagerOutput_SM()
       }
 
       maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
-      maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
+      //maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
 
       frameSize = gcRegsData.Width * (gcRegsData.Height + 2);
 
