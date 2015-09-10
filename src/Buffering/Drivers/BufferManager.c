@@ -563,7 +563,7 @@ void BufferManagerOutput_SM()
    case BMS_IDLE:
       if (enabled)
       {
-         if (gBufferStartDownloadTrigger == 1)
+         if (gBufferStartDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
          {
             gBufferStartDownloadTrigger = 0;
             if (gcRegsData.MemoryBufferSequenceCount > 0
