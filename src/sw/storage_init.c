@@ -19,12 +19,51 @@
 #include "GC_Manager.h"
 #include "GC_Registers.h"
 #include "GC_Callback.h"
-
+#include "CtrlInterface.h"
+#include "NetworkInterface.h"
+#include "FirmwareUpdater.h"
 
 // Global variables
 XIntc gStorageIntc;
-ctrlIntf_t gFpgaCtrlIntf;
+netIntf_t gNetworkIntf;
+ctrlIntf_t gOutputCtrlIntf;
+qspiFlash_t gQSPIFlash;
 
+
+/**
+ * Initializes network interface
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_NI_Init()
+{
+   static networkCommand_t niCmdQueueBuffer[NI_CMD_QUEUE_SIZE];
+   static circCmdBuffer_t niCmdQueue = CCB_Ctor(niCmdQueueBuffer, NI_CMD_QUEUE_SIZE);
+
+   return NetIntf_Init(&gNetworkIntf, NIA_STORAGE_FPGA, &niCmdQueue);
+}
+
+/**
+ * Initializes firmware updater
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_FU_Init()
+{
+   static networkCommand_t fuCmdQueueBuffer[FU_CMD_QUEUE_SIZE];
+   static circCmdBuffer_t fuCmdQueue =
+         CCB_Ctor(fuCmdQueueBuffer, FU_CMD_QUEUE_SIZE);
+
+   // Initialize firmware updater
+   if (Firmware_Updater_Init(&gNetworkIntf, &fuCmdQueue, &gQSPIFlash) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   return IRC_SUCCESS;
+}
 
 /**
  * Initialize GenICam manager and GenICam registers.
@@ -34,12 +73,17 @@ ctrlIntf_t gFpgaCtrlIntf;
  */
 IRC_Status_t Storage_GC_Init()
 {
-   static uint8_t fpgaUartRxDataBuffer[FPGA_UART_RX_BUFFER_SIZE];
-   static uint8_t fpgaUartTxDataBuffer[FPGA_UART_TX_BUFFER_SIZE];
-   IRC_Status_t status;
+   static uint8_t outputRxDataBuffer[OUTPUT_CI_UART_RX_BUFFER_SIZE];
+   static uint8_t outputRxDataCircBuffer[OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE];
+   static uint8_t outputTxDataBuffer[OUTPUT_CI_UART_TX_BUFFER_SIZE];
+   static networkCommand_t outputCtrlIntfCmdQueueBuffer[OUTPUT_CI_CMD_QUEUE_SIZE];
+   static circCmdBuffer_t outputCtrlIntfCmdQueue =
+         CCB_Ctor(outputCtrlIntfCmdQueueBuffer, OUTPUT_CI_CMD_QUEUE_SIZE);
 
-   // Initialize GenICam Manager
-   GC_Manager_Init(GCRO_Storage_FPGA);
+   static networkCommand_t gcmCmdQueueBuffer[GCM_CMD_QUEUE_SIZE];
+   static circCmdBuffer_t gcmCmdQueue = CCB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE);
+
+   IRC_Status_t status;
 
    // Initialize GenICam registers data pointer
    GC_Registers_Init();
@@ -53,23 +97,34 @@ IRC_Status_t Storage_GC_Init()
    // Set default values
    GC_SetDefaultRegsData();
 
-   // Initialize Inter-FPGA GenICam master control interface
-   status = GC_Manager_AddMaster(&gFpgaCtrlIntf,
-         CIP_F1F2,
+   // Initialize Output FPGA GenICam control interface
+   status = CtrlIntf_InitUART(&gOutputCtrlIntf,
+         CIP_F1F2_NETWORK,
          XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
          &gStorageIntc,
          XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR,
-         fpgaUartRxDataBuffer,
-         FPGA_UART_RX_BUFFER_SIZE,
-         fpgaUartTxDataBuffer,
-         FPGA_UART_TX_BUFFER_SIZE);
+         outputRxDataBuffer,
+         OUTPUT_CI_UART_RX_BUFFER_SIZE,
+         outputRxDataCircBuffer,
+         OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE,
+         outputTxDataBuffer,
+         OUTPUT_CI_UART_TX_BUFFER_SIZE,
+         &gNetworkIntf,
+         &outputCtrlIntfCmdQueue,
+         NIP_UNDEFINED);
    if (status != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
 
-   status = UART_Config(&gFpgaCtrlIntf.link.uart, 115200, 8, 'N', 1);
+   status = UART_Config(&gOutputCtrlIntf.link.uart, 115200, 8, 'N', 1);
    if (status != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Initialize GenICam Manager
+   if (GC_Manager_Init(&gNetworkIntf, &gcmCmdQueue) != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
@@ -77,6 +132,28 @@ IRC_Status_t Storage_GC_Init()
    return IRC_SUCCESS;
 }
 
+/**
+ * Initializes QSPIFlash interface.
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_QSPIFlash_Init()
+{
+   IRC_Status_t status;
+
+   // QSPI flash initialization
+   status = QSPIFlash_Init(&gQSPIFlash,
+         XPAR_AXI_QUAD_SPI_0_DEVICE_ID,
+         &gStorageIntc,
+         XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_QUAD_SPI_0_IP2INTC_IRPT_INTR);
+   if (status != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   return IRC_SUCCESS;
+}
 
 /**
  * Initialize interrupt controller.
@@ -123,6 +200,11 @@ IRC_Status_t Storage_Intc_Start()
     * Enable the interrupt for the UartNs550 driver instances.
     */
    XIntc_Enable(&gStorageIntc, XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR);
+
+   /*
+    * Enable the interrupt for the SPI driver instance.
+    */
+   XIntc_Enable(&gStorageIntc, XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_QUAD_SPI_0_IP2INTC_IRPT_INTR);
 
    /*
     * Initialize the exception table.

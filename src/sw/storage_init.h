@@ -22,10 +22,19 @@
 #include "BufferManager.h"
 
 
-#define FPGA_UART_RX_BUFFER_SIZE    (F1F2_MIN_PACKET_SIZE + F1F2_REG_ADDR_SIZE + GC_REG_MAX_STORAGE_WRITE_LENGTH)
-#define FPGA_UART_TX_BUFFER_SIZE    (F1F2_MIN_PACKET_SIZE + F1F2_REG_ADDR_SIZE + GC_REG_MAX_STORAGE_READ_LENGTH)
+#define OUTPUT_CI_UART_RX_BUFFER_SIZE        32
+#define OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE   (2 * F1F2_MAX_NET_PACKET_SIZE)
+#define OUTPUT_CI_UART_TX_BUFFER_SIZE        F1F2_MAX_NET_PACKET_SIZE
 
+#define NI_CMD_QUEUE_SIZE           5
+#define GCM_CMD_QUEUE_SIZE          5
+#define OUTPUT_CI_CMD_QUEUE_SIZE    5
+#define FU_CMD_QUEUE_SIZE           1
+
+IRC_Status_t Storage_NI_Init();
+IRC_Status_t Storage_FU_Init();
 IRC_Status_t Storage_GC_Init();
+IRC_Status_t Storage_QSPIFlash_Init();
 IRC_Status_t Storage_Intc_Init();
 IRC_Status_t Storage_Intc_Start();
 IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl);
