@@ -16,6 +16,7 @@
 #ifndef GC_REGISTERS_H
 #define GC_REGISTERS_H
 
+#include "GC_Manager.h"
 #include <stdint.h>
 
 
@@ -71,6 +72,12 @@ extern gcRegistersData_t gcRegsData;
 
 #define TriggerModeAryLen 3
 extern uint32_t TriggerModeAry[TriggerModeAryLen];
+
+// Shared registers write macros
+////////////////////////////////////////////////////////////////////////////////
+
+#define GC_SetMemoryBufferMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferModeIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
 
 void GC_Registers_Init();
 
