@@ -552,7 +552,7 @@ void BufferManagerOutput_SM()
    // preserve consistency among the memory buffer registers
    if (gcRegsData.MemoryBufferSequenceCount == 0)
    {
-      GC_SetMemoryBufferSequenceDownloadMode(MBSDM_Off);
+      gcRegsData.MemoryBufferSequenceDownloadMode = MBSDM_Off;
       gcRegsData.MemoryBufferSequenceSelector = 0;
    }
    else

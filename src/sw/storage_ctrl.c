@@ -70,9 +70,6 @@ int main()  // Defining the standard main() function
    // Init test point controller
    TP_Init();
 
-   // Restart control interface
-   CtrlIntf_Restart(&gOutputCtrlIntf);
-
    // Main loop
    while(1)
    {
