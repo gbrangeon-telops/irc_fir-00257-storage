@@ -638,10 +638,10 @@ void BufferManagerOutput_SM()
       {
          BufferManager_EnableBuffer(&gBufManager);
 
-         if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
-            cstate = BMS_DONE;
-         else
+         if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
             cstate = BMS_READ;
+         else
+            cstate = BMS_DONE;
 
          break;
       }
