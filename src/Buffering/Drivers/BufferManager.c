@@ -541,12 +541,8 @@ void BufferManagerOutput_SM()
    if (gBufferStopDownloadTrigger == 1)
    {
       gBufferStopDownloadTrigger = 0;
-      if (cstate == BMS_READ)
-      {
-         BufferManager_AcquisitionStop(&gBufManager, 1);
-
-         cstate = BMS_DONE;
-      }
+      BufferManager_AcquisitionStop(&gBufManager, 1);
+      cstate = BMS_DONE;
    }
 
    // preserve consistency among the memory buffer registers

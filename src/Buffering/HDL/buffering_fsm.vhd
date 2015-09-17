@@ -630,6 +630,25 @@ begin
                         
                         
                         --s2mm_err_o <= s2mm_err_o;
+                    elsif(ACQUISITION_STOP = '1') then
+                        write_state <= STANDBY_WR;
+                        if (write_img_loc /= 0) then
+                           end_loc_s <= write_img_loc - 1;
+                        else
+                           end_loc_s <= total_img_per_seq_u-1;
+                        end if;
+                        
+                        write_buftable <= '1';
+                        seq_id <= nb_seq_in_mem_u;
+                        nb_seq_in_mem_u <= nb_seq_in_mem_u + 1;
+                        write_img_loc <= to_unsigned(0,write_img_loc'length);
+
+                        --signal/output to assigned during the process
+                        s_s2mm_cmd_tag <= s_s2mm_cmd_tag;
+                        s_s2mm_saddr <=s_s2mm_saddr;
+                        s_s2mm_eof <=s_s2mm_eof; 
+                        s_s2mm_btt <= s_s2mm_btt;
+                        s2mm_cmd_mosi.tvalid <= s2mm_cmd_mosi.tvalid;
                     else
                         write_state <= write_state;
                         --signal/output to assigned during the process
