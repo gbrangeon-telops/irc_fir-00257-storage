@@ -466,7 +466,7 @@ static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t 
       readAddrLoc = pBufferCtrl->Mem0_base_addr;
 
    // Since sequences are divided in the 2 memories, sequence offset and image offset are divided by 2
-   readAddrLoc += (SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) / 2 * FrameSizeInBytes + FrameIDHdrAddr;
+   readAddrLoc += (uint64_t)(SequenceID * pBufferCtrl->nbImagePerSeq + ImageLocation) / 2 * (uint64_t)FrameSizeInBytes + FrameIDHdrAddr;
 
    // Convert address location to GPIO + AXI4L_32
    AXI4L_addrVal = BufferManager_MemAddrGPIO_Handler(readAddrLoc);
