@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.9.0
+// Generated from XML camera definition file version 10.10.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -37,6 +37,7 @@ struct gcRegistersDataStruct {
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
+   uint32_t FValSize;
    uint32_t Height;
    uint32_t MemoryBufferMode;
    uint32_t MemoryBufferNumberOfImagesMax;
@@ -53,6 +54,8 @@ struct gcRegistersDataStruct {
    uint32_t MemoryBufferSequenceSelector;
    uint32_t MemoryBufferSequenceSize;
    uint32_t MemoryBufferSequenceSizeMax;
+   uint32_t SensorHeight;
+   uint32_t SensorWidth;
    uint32_t TriggerMode;
    uint32_t TriggerSelector;
    uint32_t Width;
@@ -77,6 +80,7 @@ extern uint32_t TriggerModeAry[TriggerModeAryLen];
 ////////////////////////////////////////////////////////////////////////////////
 
 #define GC_SetMemoryBufferMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferModeIdx], val)
+#define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
 #define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
 
 void GC_Registers_Init();

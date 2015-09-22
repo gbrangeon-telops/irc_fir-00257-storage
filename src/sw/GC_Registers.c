@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.9.0
+// Generated from XML camera definition file version 10.10.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -35,6 +35,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
+   /* FValSize = */ 0,
    /* Height = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
    /* MemoryBufferNumberOfImagesMax = */ 0,
@@ -51,6 +52,8 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferSequenceSelector = */ 0,
    /* MemoryBufferSequenceSize = */ 1,
    /* MemoryBufferSequenceSizeMax = */ 0,
+   /* SensorHeight = */ 0,
+   /* SensorWidth = */ 0,
    /* TriggerMode = */ 0,
    /* TriggerSelector = */ 0,
    /* Width = */ 0
@@ -76,6 +79,7 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
+   gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;
    gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfImagesMax;
@@ -92,6 +96,8 @@ void GC_Registers_Init()
    gcRegsDef[MemoryBufferSequenceSelectorIdx].p_data = &gcRegsData.MemoryBufferSequenceSelector;
    gcRegsDef[MemoryBufferSequenceSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceSize;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMax;
+   gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
+   gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
    gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
    gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;

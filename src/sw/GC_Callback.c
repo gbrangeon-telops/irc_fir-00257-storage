@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.9.0
+// Generated from XML camera definition file version 10.10.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -44,6 +44,7 @@ void GC_Callback_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].callback =                 &GC_AcquisitionFrameRateModeCallback;
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
+   gcRegsDef[FValSizeIdx].callback =                                 &GC_FValSizeCallback;
    gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
    gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
    gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].callback =            &GC_MemoryBufferNumberOfImagesMaxCallback;
@@ -60,6 +61,8 @@ void GC_Callback_Init()
    gcRegsDef[MemoryBufferSequenceSelectorIdx].callback =             &GC_MemoryBufferSequenceSelectorCallback;
    gcRegsDef[MemoryBufferSequenceSizeIdx].callback =                 &GC_MemoryBufferSequenceSizeCallback;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].callback =              &GC_MemoryBufferSequenceSizeMaxCallback;
+   gcRegsDef[SensorHeightIdx].callback =                             &GC_SensorHeightCallback;
+   gcRegsDef[SensorWidthIdx].callback =                              &GC_SensorWidthCallback;
    gcRegsDef[TriggerModeIdx].callback =                              &GC_TriggerModeCallback;
    gcRegsDef[TriggerSelectorIdx].callback =                          &GC_TriggerSelectorCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
@@ -179,6 +182,26 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
          // interrupt a buffer transfer, if any
          gBufferStopDownloadTrigger = 1;
       }
+   }
+}
+
+/**
+ * FValSize GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
    }
 }
 
@@ -535,6 +558,46 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
    {
       // Before read
       gcRegsData.MemoryBufferSequenceSizeMax = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences;
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * SensorHeight GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * SensorWidth GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
