@@ -33,6 +33,7 @@
  */
 struct gcRegistersDataStruct {
    float AcquisitionFrameRate;
+   float MemoryBufferSequenceDownloadBitRateMax;
    uint32_t AcquisitionArm;
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
