@@ -520,6 +520,7 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
 bool gBufferStartDownloadTrigger = false;
 bool gBufferStopDownloadTrigger = false;
 
+// attention tout changement à cette fonction doit être potentiellement répercuté dans le fichier BufferManager.c du projet Proc
 void BufferManagerOutput_SM()
 {
    extern t_bufferManager gBufManager;
@@ -532,13 +533,14 @@ void BufferManagerOutput_SM()
 
    const uint32_t bits_per_pixel = 16;
    const float max_delay_us = 20e6; // 0.05 Hz min
+   const float minBitRate = 0.1e6; // bps
    float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
    float timeout_delay_us; // configured delay between frames, [us]
 
    // the external memory buffer overrides internal buffer
    bool enabled = gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off;
 
-   if (gBufferStopDownloadTrigger == 1)
+   if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
    {
       gBufferStopDownloadTrigger = 0;
       BufferManager_AcquisitionStop(&gBufManager, 1);
@@ -559,7 +561,7 @@ void BufferManagerOutput_SM()
    case BMS_IDLE:
       if (enabled)
       {
-         if (gBufferStartDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
+         if (gBufferStartDownloadTrigger == 1)
          {
             gBufferStartDownloadTrigger = 0;
             if (gcRegsData.MemoryBufferSequenceCount > 0
@@ -591,8 +593,7 @@ void BufferManagerOutput_SM()
          gcRegsData.MemoryBufferSequenceDownloadImageFrameID = frameID;
       }
 
-      maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
-      //maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
+      maxBandWidth = MAX(minBitRate, gcRegsData.MemoryBufferSequenceDownloadBitRateMax * 1.0e6);
 
       frameSize = gcRegsData.Width * (gcRegsData.Height + 2);
 
@@ -618,14 +619,12 @@ void BufferManagerOutput_SM()
    case BMS_READ:
 
       // live throttling of the average bit rate
-      maxBandWidth = 20e6; // todo temporaire en attendant d'avoir le registre dédié
-      //maxBandWidth = MAX(1.0, gcRegsData.AcquisitionFrameRate * 10.0e6); // todo utiliser le bon champ pour ceci!
+      maxBandWidth = MAX(minBitRate, gcRegsData.MemoryBufferSequenceDownloadBitRateMax * 1.0e6);
 
       timeout_delay_us = 1.0e6 * frameSize * bits_per_pixel / maxBandWidth;
       timeout_delay_us = MIN(timeout_delay_us, max_delay_us);
 
       BufferManager_ConfigureMinFrameTime(&gBufManager, timeout_delay_us);
-
 
       break;
 
@@ -638,8 +637,6 @@ void BufferManagerOutput_SM()
             cstate = BMS_READ;
          else
             cstate = BMS_DONE;
-
-         break;
       }
       break;
 
@@ -665,9 +662,9 @@ void BufferManagerOutput_SM()
  *
  * @return void.
  */
-void BufferManager_ConfigureMinFrameTime(t_bufferManager *pBufferCtrl, uint32_t time_us)
+void BufferManager_ConfigureMinFrameTime(t_bufferManager *pBufferCtrl, float time_us)
 {
-   const uint32_t clk_freq_MHz = 160;
+   const float clk_freq_MHz = 160;
    uint32_t cnt;
 
    cnt = time_us * clk_freq_MHz;
