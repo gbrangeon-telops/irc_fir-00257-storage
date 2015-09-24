@@ -577,6 +577,9 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
    {
       // Before read
       gcRegsData.MemoryBufferSequenceSizeMax = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences;
+
+      // Since MemoryBufferSequenceSize must be even, make sure MemoryBufferSequenceSizeMax is even too
+      gcRegsData.MemoryBufferSequenceSizeMax -= (gcRegsData.MemoryBufferSequenceSizeMax % 2);
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
