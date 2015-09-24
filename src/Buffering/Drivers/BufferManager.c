@@ -536,6 +536,7 @@ void BufferManagerOutput_SM()
    const float minBitRate = 0.1e6; // bps
    float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
    float timeout_delay_us; // configured delay between frames, [us]
+   uint32_t sequenceCount;
 
    // the external memory buffer overrides internal buffer
    bool enabled = gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off;
@@ -543,14 +544,28 @@ void BufferManagerOutput_SM()
    if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
    {
       gBufferStopDownloadTrigger = 0;
-      BufferManager_AcquisitionStop(&gBufManager, 1);
-      cstate = BMS_DONE;
+      if (cstate == BMS_READ)
+      {
+         BufferManager_AcquisitionStop(&gBufManager, 1);
+
+         cstate = BMS_DONE;
+      }
+   }
+
+   // update sequence count
+   sequenceCount = BufferManager_GetNumSequenceCount(&gBufManager);
+   if (gcRegsData.MemoryBufferSequenceCount != sequenceCount)
+   {
+      GC_SetMemoryBufferSequenceCount(sequenceCount);
    }
 
    // preserve consistency among the memory buffer registers
    if (gcRegsData.MemoryBufferSequenceCount == 0)
    {
-      gcRegsData.MemoryBufferSequenceDownloadMode = MBSDM_Off;
+      if (gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off)
+      {
+         GC_SetMemoryBufferSequenceDownloadMode(MBSDM_Off);
+      }
       gcRegsData.MemoryBufferSequenceSelector = 0;
    }
    else

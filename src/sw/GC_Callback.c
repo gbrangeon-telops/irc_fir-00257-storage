@@ -364,8 +364,6 @@ void GC_MemoryBufferSequenceCountCallback(gcCallbackPhase_t phase, gcCallbackAcc
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-      // Get the number of sequence in memory This register should be poll or trigger by an GCevent
-      gcRegsData.MemoryBufferSequenceCount = BufferManager_GetNumSequenceCount(&gBufManager);
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
