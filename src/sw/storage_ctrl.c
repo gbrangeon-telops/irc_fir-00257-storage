@@ -77,7 +77,7 @@ int main()  // Defining the standard main() function
       Firmware_Updater_SM();
       NetIntf_SM(&gNetworkIntf);
       CtrlIntf_Process(&gOutputCtrlIntf);
-      BufferManagerOutput_SM();
+      BufferManager_SM();
       BufferManager_UpdateErrorFlags(&gBufManager);
       TP_TP11_Heartbeat_SM();
    }

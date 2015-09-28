@@ -521,7 +521,7 @@ bool gBufferStartDownloadTrigger = false;
 bool gBufferStopDownloadTrigger = false;
 
 // attention tout changement à cette fonction doit être potentiellement répercuté dans le fichier BufferManager.c du projet Proc
-void BufferManagerOutput_SM()
+void BufferManager_SM()
 {
    extern t_bufferManager gBufManager;
    extern gcRegistersData_t gcRegsData;

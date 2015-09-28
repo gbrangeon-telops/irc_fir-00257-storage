@@ -178,7 +178,7 @@ uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t 
 
 extern bool gBufferStartDownloadTrigger;
 extern bool gBufferStopDownloadTrigger;
-void BufferManagerOutput_SM();
+void BufferManager_SM();
 void BufferManager_ConfigureMinFrameTime(t_bufferManager *pBufferCtrl, float time_us);
 void BufferManager_AcquisitionStop(t_bufferManager *pBufferCtrl, bool flag);
 
