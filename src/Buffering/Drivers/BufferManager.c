@@ -526,31 +526,22 @@ void BufferManagerOutput_SM()
    extern t_bufferManager gBufManager;
    extern gcRegistersData_t gcRegsData;
 
-   static bmState_t cstate = BMS_IDLE;
-   static timerData_t timer;
-   static uint32_t frameID, lastFrameID, numFrames;
-   static uint32_t frameSize; // frame size, including header [pixels]
-
    const uint32_t bits_per_pixel = 16;
    const float max_delay_us = 20e6; // 0.05 Hz min
    const float minBitRate = 0.1e6; // bps
+
+   static bmState_t cstate = BMS_IDLE;
+   static timerData_t timer; // used to control some delay for buffer deactivation/activation
+   static uint32_t frameSize; // frame size, including header [pixels]
+   static bool acqStopToggle = false;
+
    float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
    float timeout_delay_us; // configured delay between frames, [us]
    uint32_t sequenceCount;
+   uint32_t frameID, numFrames;
 
    // the external memory buffer overrides internal buffer
    bool enabled = gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off;
-
-   if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
-   {
-      gBufferStopDownloadTrigger = 0;
-      if (cstate == BMS_READ)
-      {
-         BufferManager_AcquisitionStop(&gBufManager, 1);
-
-         cstate = BMS_DONE;
-      }
-   }
 
    // update sequence count
    sequenceCount = BufferManager_GetNumSequenceCount(&gBufManager);
@@ -594,17 +585,17 @@ void BufferManagerOutput_SM()
       if (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
       {
          frameID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
-         lastFrameID = frameID + numFrames - 1;
       }
       else // single image mode
       {
          uint32_t firstID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
+         uint32_t moiFrameID = BufferManager_GetSequenceMOIFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
          uint32_t lastID = firstID + numFrames - 1;
 
-         // make sure the requested frame is within bounds
+         // make sure the requested frame is within bounds. By default, send the MOI frame
          frameID = gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
-         frameID = MAX(MIN(frameID, lastID), firstID);
-         lastFrameID = frameID;
+         if (frameID < firstID || frameID > lastID)
+            frameID = moiFrameID;
          gcRegsData.MemoryBufferSequenceDownloadImageFrameID = frameID;
       }
 
@@ -668,6 +659,26 @@ void BufferManagerOutput_SM()
       cstate = BMS_IDLE;
       break;
    };
+
+   // always : handle acquisition stop and start. In download mode, a start trigger restarts the download
+   if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
+   {
+      gBufferStopDownloadTrigger = 0;
+      acqStopToggle = 1;
+
+      // go to the DONE state only when in download mode
+      if (enabled && cstate == BMS_READ)
+      {
+         PRINTF("Buffer download stopped.\n");
+
+         cstate = BMS_DONE;
+      }
+   }
+
+   // acquisition stop must be toggled
+   BufferManager_AcquisitionStop(&gBufManager, acqStopToggle);
+   if (acqStopToggle == 1)
+      acqStopToggle = 0;
 }
 
 /**
