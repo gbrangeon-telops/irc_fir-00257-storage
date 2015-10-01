@@ -32,10 +32,12 @@
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
+   /* DeviceFirmwareModuleRevision = */ 0,
    /* AcquisitionArm = */ 0,
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
+   /* DeviceFirmwareModuleSelector = */ 0,
    /* FValSize = */ 0,
    /* Height = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
@@ -66,6 +68,11 @@ gcRegistersData_t gcRegsDataFactory = {
 gcRegistersData_t gcRegsData;
 
 /**
+ * DeviceFirmwareModuleRevision data array
+ */
+int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SVN_REVISIONS_INIT;
+
+/**
  * TriggerMode data array
  */
 uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off, TM_Off};
@@ -77,10 +84,12 @@ void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;
+   gcRegsDef[DeviceFirmwareModuleRevisionIdx].p_data = &gcRegsData.DeviceFirmwareModuleRevision;
    gcRegsDef[AcquisitionArmIdx].p_data = &gcRegsData.AcquisitionArm;
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
+   gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;

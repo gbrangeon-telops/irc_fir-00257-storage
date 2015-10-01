@@ -44,6 +44,8 @@ void GC_Callback_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].callback =                 &GC_AcquisitionFrameRateModeCallback;
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
+   gcRegsDef[DeviceFirmwareModuleRevisionIdx].callback =             &GC_DeviceFirmwareModuleRevisionCallback;
+   gcRegsDef[DeviceFirmwareModuleSelectorIdx].callback =             &GC_DeviceFirmwareModuleSelectorCallback;
    gcRegsDef[FValSizeIdx].callback =                                 &GC_FValSizeCallback;
    gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
    gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
@@ -183,6 +185,42 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
          // interrupt a buffer transfer, if any
          gBufferStopDownloadTrigger = 1;
       }
+   }
+}
+
+/**
+ * DeviceFirmwareModuleRevision GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceFirmwareModuleRevisionCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+      gcRegsData.DeviceFirmwareModuleRevision = DeviceFirmwareModuleRevisionAry[gcRegsData.DeviceFirmwareModuleSelector];
+   }
+}
+
+/**
+ * DeviceFirmwareModuleSelector GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceFirmwareModuleSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
    }
 }
 

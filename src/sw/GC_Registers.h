@@ -18,7 +18,9 @@
 
 #include "GC_Manager.h"
 #include <stdint.h>
+#include "BuildInfo.h"
 
+#define SVN_REVISIONS_INIT {0, 0, 0, 0, 0, 0, 0, 0, SVN_HARDWARE_REV, SVN_SOFTWARE_REV, 0, SVN_COMMON_REV}
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
@@ -34,10 +36,12 @@
 struct gcRegistersDataStruct {
    float AcquisitionFrameRate;
    float MemoryBufferSequenceDownloadBitRateMax;
+   int32_t DeviceFirmwareModuleRevision;
    uint32_t AcquisitionArm;
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
+   uint32_t DeviceFirmwareModuleSelector;
    uint32_t FValSize;
    uint32_t Height;
    uint32_t MemoryBufferMode;
@@ -74,15 +78,18 @@ extern gcRegistersData_t gcRegsDataFactory;
 
 extern gcRegistersData_t gcRegsData;
 
+#define DeviceFirmwareModuleRevisionAryLen 12
+extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen];
+
 #define TriggerModeAryLen 3
 extern uint32_t TriggerModeAry[TriggerModeAryLen];
 
 // Shared registers write macros
 ////////////////////////////////////////////////////////////////////////////////
 
-#define GC_SetMemoryBufferMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferModeIdx], val)
-#define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
-#define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteU32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
+#define GC_SetMemoryBufferMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferModeIdx], val)
+#define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
 
 void GC_Registers_Init();
 
