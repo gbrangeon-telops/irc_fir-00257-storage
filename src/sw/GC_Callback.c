@@ -141,6 +141,7 @@ void GC_AcquisitionFrameRateModeCallback(gcCallbackPhase_t phase, gcCallbackAcce
 void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    extern bool gBufferStartDownloadTrigger;
+   extern bool gBufferAcqStartedTrigger;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
@@ -151,6 +152,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
    {
       // After write
       if (gcRegsData.AcquisitionStart)
+         gBufferAcqStartedTrigger = 1;
       {
          // Check if it is a buffer read
          if ((gcRegsData.MemoryBufferMode == MBM_On) && (gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off))

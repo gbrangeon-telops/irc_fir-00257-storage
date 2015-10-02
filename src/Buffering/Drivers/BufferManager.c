@@ -519,6 +519,7 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr)
 
 bool gBufferStartDownloadTrigger = false;
 bool gBufferStopDownloadTrigger = false;
+bool gBufferAcqStartedTrigger = false;
 
 // attention tout changement à cette fonction doit être potentiellement répercuté dans le fichier BufferManager.c du projet Proc
 void BufferManager_SM()
@@ -533,7 +534,7 @@ void BufferManager_SM()
    static bmState_t cstate = BMS_IDLE;
    static timerData_t timer; // used to control some delay for buffer deactivation/activation
    static uint32_t frameSize; // frame size, including header [pixels]
-   static bool acqStopToggle = false;
+   static bool acqStopToggle = true; // default acquisition is stop at startup
 
    float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
    float timeout_delay_us; // configured delay between frames, [us]
@@ -677,8 +678,18 @@ void BufferManager_SM()
 
    // acquisition stop must be toggled
    BufferManager_AcquisitionStop(&gBufManager, acqStopToggle);
-   if (acqStopToggle == 1)
+
+   if(gBufferAcqStartedTrigger == 1 || gBufferStartDownloadTrigger == 1)
+   {
+      gBufferAcqStartedTrigger = 0;
+      gBufferStartDownloadTrigger = 0;
       acqStopToggle = 0;
+   }
+
+
+
+//   if (acqStopToggle == 1)
+//      acqStopToggle = 0;
 }
 
 /**

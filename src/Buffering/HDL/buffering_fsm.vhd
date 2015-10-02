@@ -340,7 +340,9 @@ begin
             
         else
             --CHECK MOI
-            if(MOI = '1') then
+            if(ACQUISITION_STOP = '1') then
+                moi_i <= '0';
+            elsif(MOI = '1') then
                 moi_i <= '1';
             end if;
             
