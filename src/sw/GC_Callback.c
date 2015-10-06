@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.10.1
+// Generated from XML camera definition file version 10.11.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -46,6 +46,10 @@ void GC_Callback_Init()
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].callback =             &GC_DeviceFirmwareModuleRevisionCallback;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].callback =             &GC_DeviceFirmwareModuleSelectorCallback;
+   gcRegsDef[DeviceTemperatureIdx].callback =                        &GC_DeviceTemperatureCallback;
+   gcRegsDef[DeviceTemperatureSelectorIdx].callback =                &GC_DeviceTemperatureSelectorCallback;
+   gcRegsDef[DeviceVoltageIdx].callback =                            &GC_DeviceVoltageCallback;
+   gcRegsDef[DeviceVoltageSelectorIdx].callback =                    &GC_DeviceVoltageSelectorCallback;
    gcRegsDef[FValSizeIdx].callback =                                 &GC_FValSizeCallback;
    gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
    gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
@@ -214,6 +218,78 @@ void GC_DeviceFirmwareModuleRevisionCallback(gcCallbackPhase_t phase, gcCallback
  * @param access indicates whether the operation is read or write.
  */
 void GC_DeviceFirmwareModuleSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * DeviceTemperature GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceTemperatureCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+      gcRegsData.DeviceTemperature = DeviceTemperatureAry[gcRegsData.DeviceTemperatureSelector];
+   }
+}
+
+/**
+ * DeviceTemperatureSelector GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceTemperatureSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * DeviceVoltage GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceVoltageCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+      gcRegsData.DeviceVoltage = DeviceVoltageAry[gcRegsData.DeviceVoltageSelector];
+   }
+}
+
+/**
+ * DeviceVoltageSelector GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceVoltageSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {

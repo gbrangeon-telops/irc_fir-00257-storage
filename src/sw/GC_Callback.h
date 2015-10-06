@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.10.1
+// Generated from XML camera definition file version 10.11.0
 // using updateGenICamCallback.m Matlab script.
 
 void GC_Callback_Init();
@@ -32,6 +32,10 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_DeviceFirmwareModuleRevisionCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_DeviceFirmwareModuleSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_DeviceTemperatureCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_DeviceTemperatureSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_DeviceVoltageCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_DeviceVoltageSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);

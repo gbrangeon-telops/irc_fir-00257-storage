@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.10.1
+// Generated from XML camera definition file version 10.11.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -33,6 +33,8 @@
  */
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
+   /* DeviceTemperature = */ 0.0F,
+   /* DeviceVoltage = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
    /* DeviceFirmwareModuleRevision = */ 0,
    /* AcquisitionArm = */ 0,
@@ -40,6 +42,8 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
    /* DeviceFirmwareModuleSelector = */ 0,
+   /* DeviceTemperatureSelector = */ 0,
+   /* DeviceVoltageSelector = */ 0,
    /* FValSize = */ 0,
    /* Height = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
@@ -70,6 +74,16 @@ gcRegistersData_t gcRegsDataFactory = {
 gcRegistersData_t gcRegsData;
 
 /**
+ * DeviceTemperature data array
+ */
+float DeviceTemperatureAry[DeviceTemperatureAryLen] = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+
+/**
+ * DeviceVoltage data array
+ */
+float DeviceVoltageAry[DeviceVoltageAryLen] = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
+
+/**
  * DeviceFirmwareModuleRevision data array
  */
 int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SVN_REVISIONS_INIT;
@@ -85,6 +99,8 @@ uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off, TM_Off};
 void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
+   gcRegsDef[DeviceTemperatureIdx].p_data = &gcRegsData.DeviceTemperature;
+   gcRegsDef[DeviceVoltageIdx].p_data = &gcRegsData.DeviceVoltage;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].p_data = &gcRegsData.DeviceFirmwareModuleRevision;
    gcRegsDef[AcquisitionArmIdx].p_data = &gcRegsData.AcquisitionArm;
@@ -92,6 +108,8 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
+   gcRegsDef[DeviceTemperatureSelectorIdx].p_data = &gcRegsData.DeviceTemperatureSelector;
+   gcRegsDef[DeviceVoltageSelectorIdx].p_data = &gcRegsData.DeviceVoltageSelector;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;

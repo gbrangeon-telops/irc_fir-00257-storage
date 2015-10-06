@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.10.1
+// Generated from XML camera definition file version 10.11.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -32,6 +32,8 @@
  */
 struct gcRegistersDataStruct {
    float AcquisitionFrameRate;
+   float DeviceTemperature;
+   float DeviceVoltage;
    float MemoryBufferSequenceDownloadBitRateMax;
    int32_t DeviceFirmwareModuleRevision;
    uint32_t AcquisitionArm;
@@ -39,6 +41,8 @@ struct gcRegistersDataStruct {
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
    uint32_t DeviceFirmwareModuleSelector;
+   uint32_t DeviceTemperatureSelector;
+   uint32_t DeviceVoltageSelector;
    uint32_t FValSize;
    uint32_t Height;
    uint32_t MemoryBufferMode;
@@ -74,6 +78,12 @@ typedef struct gcRegistersDataStruct gcRegistersData_t;
 extern gcRegistersData_t gcRegsDataFactory;
 
 extern gcRegistersData_t gcRegsData;
+
+#define DeviceTemperatureAryLen 13
+extern float DeviceTemperatureAry[DeviceTemperatureAryLen];
+
+#define DeviceVoltageAryLen 31
+extern float DeviceVoltageAry[DeviceVoltageAryLen];
 
 #define DeviceFirmwareModuleRevisionAryLen 12
 extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen];
