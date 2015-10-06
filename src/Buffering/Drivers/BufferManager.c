@@ -683,10 +683,9 @@ void BufferManager_SM()
    // acquisition stop must be toggled
    BufferManager_AcquisitionStop(&gBufManager, acqStopToggle);
 
-   if(gBufferAcqStartedTrigger == 1 || gBufferStartDownloadTrigger == 1)
+   if(gBufferAcqStartedTrigger == 1 || gBufferStartDownloadTrigger == 1) //gBufferStartDownloadTrigger is not RAZ, restart a buffer read sequence at BMS_IDLE
    {
       gBufferAcqStartedTrigger = 0;
-      //gBufferStartDownloadTrigger = 0;
       acqStopToggle = 0;
    }
 }
