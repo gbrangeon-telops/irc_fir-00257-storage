@@ -209,6 +209,7 @@ void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersDat
  *
  * @return void.
  */
+bool gBufferClearedTrigger = false;
 void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs)
 {
    BufferManager_DisableBuffer(pBufferCtrl);
@@ -222,6 +223,8 @@ void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegister
    // Re-enable only in write mode (in read mode wait for read command triggered by acq start)
    if (pBufferCtrl->BufferMode == BM_WRITE)
       BufferManager_EnableBuffer(pBufferCtrl);
+
+   gBufferClearedTrigger = true;
 }
 
 
@@ -662,9 +665,10 @@ void BufferManager_SM()
    };
 
    // always : handle acquisition stop and start. In download mode, a start trigger restarts the download
-   if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1)
+   if (gBufferStopDownloadTrigger == 1 || gBufferStartDownloadTrigger == 1 || gBufferClearedTrigger == 1) // Acquisition Stop is high when buffer is cleared
    {
       gBufferStopDownloadTrigger = 0;
+      gBufferClearedTrigger = 0;
       acqStopToggle = 1;
 
       // go to the DONE state only when in download mode
@@ -682,14 +686,9 @@ void BufferManager_SM()
    if(gBufferAcqStartedTrigger == 1 || gBufferStartDownloadTrigger == 1)
    {
       gBufferAcqStartedTrigger = 0;
-      gBufferStartDownloadTrigger = 0;
+      //gBufferStartDownloadTrigger = 0;
       acqStopToggle = 0;
    }
-
-
-
-//   if (acqStopToggle == 1)
-//      acqStopToggle = 0;
 }
 
 /**

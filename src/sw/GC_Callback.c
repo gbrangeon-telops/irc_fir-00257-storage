@@ -152,8 +152,8 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
    {
       // After write
       if (gcRegsData.AcquisitionStart)
-         gBufferAcqStartedTrigger = 1;
       {
+         gBufferAcqStartedTrigger = 1;
          // Check if it is a buffer read
          if ((gcRegsData.MemoryBufferMode == MBM_On) && (gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off))
          {
