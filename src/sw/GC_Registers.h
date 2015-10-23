@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.11.0
+// Generated from XML camera definition file version 10.12.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
