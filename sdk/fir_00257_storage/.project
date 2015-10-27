@@ -75,6 +75,16 @@
 			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/USART/driver</locationURI>
 		</link>
 		<link>
+			<name>src/XADC_Channels.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/XADC_Channels.c</locationURI>
+		</link>
+		<link>
+			<name>src/XADC_Channels.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/XADC_Channels.h</locationURI>
+		</link>
+		<link>
 			<name>src/storage_ctrl.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/storage_ctrl.c</locationURI>

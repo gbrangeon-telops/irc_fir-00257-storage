@@ -25,6 +25,7 @@
 #include "CtrlInterface.h"
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
+#include "XADC.h"
 
 // Global variables
 t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
@@ -57,6 +58,9 @@ int main()  // Defining the standard main() function
    // Firmware updater initialization
    Storage_FU_Init();
 
+   // XADC initialization
+   Storage_XADC_Init();
+
    // Start interrupt controller
    Storage_Intc_Start();
 
@@ -80,5 +84,6 @@ int main()  // Defining the standard main() function
       BufferManager_SM();
       BufferManager_UpdateErrorFlags(&gBufManager);
       TP_TP11_Heartbeat_SM();
+      XADC_SM();
    }
 }

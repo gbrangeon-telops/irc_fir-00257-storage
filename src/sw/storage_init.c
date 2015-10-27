@@ -20,8 +20,10 @@
 #include "GC_Registers.h"
 #include "GC_Callback.h"
 #include "CtrlInterface.h"
+#include "UART_Utils.h"
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
+#include "XADC.h"
 
 // Global variables
 XIntc gStorageIntc;
@@ -268,4 +270,15 @@ IRC_Status_t Storage_BufferManager_Init(t_bufferManager *pBufferCtrl)
    BufferManager_WaitMemReady(pBufferCtrl);
 
    return status;
+}
+
+/**
+ * Initializes XADC.
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_XADC_Init()
+{
+   return XADC_Init(XPAR_SYSMON_0_DEVICE_ID);
 }

@@ -39,5 +39,6 @@ IRC_Status_t Storage_Intc_Init();
 IRC_Status_t Storage_Intc_Start();
 IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl);
 IRC_Status_t Storage_BufferManager_Init(t_bufferManager *pBufferCtrl);
+IRC_Status_t Storage_XADC_Init();
 
 #endif // STORAGE_INIT_H
