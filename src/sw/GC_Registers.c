@@ -156,24 +156,16 @@ void GC_SetDefaultRegsData()
  * This function is called everytime a write is performed and updates the locked
  * flag for ALL registers.
  */
+// TODO: Find a way to know when acquisition is started (share TDCStatus?).
+#define GC_AcquisitionStarted    (0)
+#define GC_MemoryBufferNotEmpty  (gcRegsData.MemoryBufferSequenceCount > 0)
 void GC_UpdateLockedFlag()
 {
-   // Lock buffering config registers when buffering is in progress
-   // TODO: lock also when acq are started
-   if (gcRegsData.MemoryBufferSequenceCount > 0)
-   {
-      RegLock(&gcRegsDef[MemoryBufferModeIdx]);
-	  RegLock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
-      RegLock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
-      RegLock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
-   }
-   else
-   {
-      RegUnlock(&gcRegsDef[MemoryBufferModeIdx]);
-	  RegUnlock(&gcRegsDef[MemoryBufferNumberOfSequencesIdx]);
-      RegUnlock(&gcRegsDef[MemoryBufferSequenceSizeIdx]);
-      RegUnlock(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx]);
-   }
+   // Lock buffering configuration registers when buffering is in progress
+   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
 }
 
 void GC_UpdateMemoryBufferSequenceSizeLimits()
