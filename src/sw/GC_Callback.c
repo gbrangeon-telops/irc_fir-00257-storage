@@ -31,7 +31,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 10.12.0
+// Generated from XML camera definition file version 10.12.1
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -68,10 +68,13 @@ void GC_Callback_Init()
    gcRegsDef[MemoryBufferSequenceSelectorIdx].callback =             &GC_MemoryBufferSequenceSelectorCallback;
    gcRegsDef[MemoryBufferSequenceSizeIdx].callback =                 &GC_MemoryBufferSequenceSizeCallback;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].callback =              &GC_MemoryBufferSequenceSizeMaxCallback;
+   gcRegsDef[ReverseXIdx].callback =                                 &GC_ReverseXCallback;
+   gcRegsDef[ReverseYIdx].callback =                                 &GC_ReverseYCallback;
    gcRegsDef[SensorHeightIdx].callback =                             &GC_SensorHeightCallback;
    gcRegsDef[SensorWidthIdx].callback =                              &GC_SensorWidthCallback;
    gcRegsDef[TriggerModeIdx].callback =                              &GC_TriggerModeCallback;
    gcRegsDef[TriggerSelectorIdx].callback =                          &GC_TriggerSelectorCallback;
+   gcRegsDef[VideoAGCIdx].callback =                                 &GC_VideoAGCCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
 }
 
@@ -705,6 +708,46 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
 }
 
 /**
+ * ReverseX GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * ReverseY GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
  * SensorHeight GenICam register callback function.
  * 
  * @param phase indicates whether the function is called before or
@@ -772,6 +815,26 @@ void GC_TriggerModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  * @param access indicates whether the operation is read or write.
  */
 void GC_TriggerSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * VideoAGC GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {

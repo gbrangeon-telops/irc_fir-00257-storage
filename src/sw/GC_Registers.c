@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.12.0
+// Generated from XML camera definition file version 10.12.1
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -61,10 +61,13 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferSequenceSelector = */ 0,
    /* MemoryBufferSequenceSize = */ 2,
    /* MemoryBufferSequenceSizeMax = */ 0,
+   /* ReverseX = */ 0,
+   /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
    /* SensorWidth = */ 0,
    /* TriggerMode = */ 0,
    /* TriggerSelector = */ 0,
+   /* VideoAGC = */ 0,
    /* Width = */ 0
 };
 
@@ -127,10 +130,13 @@ void GC_Registers_Init()
    gcRegsDef[MemoryBufferSequenceSelectorIdx].p_data = &gcRegsData.MemoryBufferSequenceSelector;
    gcRegsDef[MemoryBufferSequenceSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceSize;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMax;
+   gcRegsDef[ReverseXIdx].p_data = &gcRegsData.ReverseX;
+   gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
    gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
    gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
    gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
+   gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
 
