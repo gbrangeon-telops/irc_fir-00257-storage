@@ -41,7 +41,8 @@ qspiFlash_t gQSPIFlash;
 IRC_Status_t Storage_NI_Init()
 {
    static networkCommand_t niCmdQueueBuffer[NI_CMD_QUEUE_SIZE];
-   static circCmdBuffer_t niCmdQueue = CCB_Ctor(niCmdQueueBuffer, NI_CMD_QUEUE_SIZE);
+   static circBuffer_t niCmdQueue =
+         CB_Ctor(niCmdQueueBuffer, NI_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
    return NetIntf_Init(&gNetworkIntf, NIA_STORAGE_FPGA, &niCmdQueue);
 }
@@ -55,8 +56,8 @@ IRC_Status_t Storage_NI_Init()
 IRC_Status_t Storage_FU_Init()
 {
    static networkCommand_t fuCmdQueueBuffer[FU_CMD_QUEUE_SIZE];
-   static circCmdBuffer_t fuCmdQueue =
-         CCB_Ctor(fuCmdQueueBuffer, FU_CMD_QUEUE_SIZE);
+   static circBuffer_t fuCmdQueue =
+         CB_Ctor(fuCmdQueueBuffer, FU_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
    // Initialize firmware updater
    if (Firmware_Updater_Init(&gNetworkIntf, &fuCmdQueue, &gQSPIFlash) != IRC_SUCCESS)
@@ -79,11 +80,12 @@ IRC_Status_t Storage_GC_Init()
    static uint8_t outputRxDataCircBuffer[OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE];
    static uint8_t outputTxDataBuffer[OUTPUT_CI_UART_TX_BUFFER_SIZE];
    static networkCommand_t outputCtrlIntfCmdQueueBuffer[OUTPUT_CI_CMD_QUEUE_SIZE];
-   static circCmdBuffer_t outputCtrlIntfCmdQueue =
-         CCB_Ctor(outputCtrlIntfCmdQueueBuffer, OUTPUT_CI_CMD_QUEUE_SIZE);
+   static circBuffer_t outputCtrlIntfCmdQueue =
+         CB_Ctor(outputCtrlIntfCmdQueueBuffer, OUTPUT_CI_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
    static networkCommand_t gcmCmdQueueBuffer[GCM_CMD_QUEUE_SIZE];
-   static circCmdBuffer_t gcmCmdQueue = CCB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE);
+   static circBuffer_t gcmCmdQueue =
+         CB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
    IRC_Status_t status;
 
