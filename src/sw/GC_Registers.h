@@ -43,6 +43,14 @@ struct gcRegistersDataStruct {
    uint32_t DeviceFirmwareModuleSelector;
    uint32_t DeviceTemperatureSelector;
    uint32_t DeviceVoltageSelector;
+   uint32_t EventError;
+   uint32_t EventErrorCode;
+   uint32_t EventErrorTimestamp;
+   uint32_t EventNotification;
+   uint32_t EventSelector;
+   uint32_t EventTelops;
+   uint32_t EventTelopsCode;
+   uint32_t EventTelopsTimestamp;
    uint32_t FValSize;
    uint32_t Height;
    uint32_t MemoryBufferMode;
@@ -88,6 +96,9 @@ extern float DeviceTemperatureAry[DeviceTemperatureAryLen];
 #define DeviceVoltageAryLen 31
 extern float DeviceVoltageAry[DeviceVoltageAryLen];
 
+#define EventNotificationAryLen 33
+extern uint32_t EventNotificationAry[EventNotificationAryLen];
+
 #define DeviceFirmwareModuleRevisionAryLen 12
 extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen];
 
@@ -110,5 +121,6 @@ void GC_UpdateLockedFlag();
 void GC_UpdateMemoryBufferSequenceSizeLimits();
 void GC_UpdateMemoryBufferNumberOfSequenceLimits();
 void GC_UpdateMemoryBufferSequencePreMOISizeLimits();
+uint32_t GC_GetTimestamp();
 
 #endif // GC_REGISTERS_H

@@ -31,6 +31,8 @@
 #define OUTPUT_CI_CMD_QUEUE_SIZE    5
 #define FU_CMD_QUEUE_SIZE           1
 
+#define GC_EVENT_ERROR_QUEUE_SIZE   5
+
 IRC_Status_t Storage_NI_Init();
 IRC_Status_t Storage_FU_Init();
 IRC_Status_t Storage_GC_Init();

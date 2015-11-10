@@ -18,6 +18,7 @@
 #include "xil_exception.h"
 #include "GC_Manager.h"
 #include "GC_Registers.h"
+#include "GC_Events.h"
 #include "GC_Callback.h"
 #include "CtrlInterface.h"
 #include "UART_Utils.h"
@@ -87,6 +88,10 @@ IRC_Status_t Storage_GC_Init()
    static circBuffer_t gcmCmdQueue =
          CB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
+   static gcEvent_t gcEventErrorQueueBuffer[GC_EVENT_ERROR_QUEUE_SIZE];
+   static circBuffer_t gcEventErrorQueue =
+         CB_Ctor(gcEventErrorQueueBuffer, GC_EVENT_ERROR_QUEUE_SIZE, sizeof(gcEvent_t));
+
    IRC_Status_t status;
 
    // Initialize GenICam registers data pointer
@@ -129,6 +134,12 @@ IRC_Status_t Storage_GC_Init()
 
    // Initialize GenICam Manager
    if (GC_Manager_Init(&gNetworkIntf, &gcmCmdQueue) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Initialize GenICam Events
+   if (GC_Events_Init(&gcEventErrorQueue, NULL) != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }

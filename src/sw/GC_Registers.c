@@ -44,6 +44,14 @@ gcRegistersData_t gcRegsDataFactory = {
    /* DeviceFirmwareModuleSelector = */ 0,
    /* DeviceTemperatureSelector = */ 0,
    /* DeviceVoltageSelector = */ 0,
+   /* EventError = */ 0,
+   /* EventErrorCode = */ 0,
+   /* EventErrorTimestamp = */ 0,
+   /* EventNotification = */ 0,
+   /* EventSelector = */ 0,
+   /* EventTelops = */ 0,
+   /* EventTelopsCode = */ 0,
+   /* EventTelopsTimestamp = */ 0,
    /* FValSize = */ 0,
    /* Height = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
@@ -87,6 +95,11 @@ float DeviceTemperatureAry[DeviceTemperatureAryLen] = {0.0F, 0.0F, 0.0F, 0.0F, 0
 float DeviceVoltageAry[DeviceVoltageAryLen] = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
 
 /**
+ * EventNotification data array
+ */
+uint32_t EventNotificationAry[EventNotificationAryLen] = {0, 0, EN_On, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, EN_On};
+
+/**
  * DeviceFirmwareModuleRevision data array
  */
 int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SVN_REVISIONS_INIT;
@@ -113,6 +126,14 @@ void GC_Registers_Init()
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
    gcRegsDef[DeviceTemperatureSelectorIdx].p_data = &gcRegsData.DeviceTemperatureSelector;
    gcRegsDef[DeviceVoltageSelectorIdx].p_data = &gcRegsData.DeviceVoltageSelector;
+   gcRegsDef[EventErrorIdx].p_data = &gcRegsData.EventError;
+   gcRegsDef[EventErrorCodeIdx].p_data = &gcRegsData.EventErrorCode;
+   gcRegsDef[EventErrorTimestampIdx].p_data = &gcRegsData.EventErrorTimestamp;
+   gcRegsDef[EventNotificationIdx].p_data = &gcRegsData.EventNotification;
+   gcRegsDef[EventSelectorIdx].p_data = &gcRegsData.EventSelector;
+   gcRegsDef[EventTelopsIdx].p_data = &gcRegsData.EventTelops;
+   gcRegsDef[EventTelopsCodeIdx].p_data = &gcRegsData.EventTelopsCode;
+   gcRegsDef[EventTelopsTimestampIdx].p_data = &gcRegsData.EventTelopsTimestamp;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;
@@ -213,4 +234,15 @@ void GC_UpdateMemoryBufferSequencePreMOISizeLimits()
    {
       gcRegsData.MemoryBufferSequencePreMOISize =  (gcRegsData.MemoryBufferSequenceSize -1);
    }
+}
+
+/**
+ * Return a timestamp corresponding to actual POSIX time.
+ *
+ * @return a timestamp corresponding to actual POSIX time.
+ */
+uint32_t GC_GetTimestamp()
+{
+   // Output FPGA does not support POSIX time.
+   return 0;
 }

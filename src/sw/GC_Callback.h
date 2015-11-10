@@ -36,6 +36,14 @@ void GC_DeviceTemperatureCallback(gcCallbackPhase_t phase, gcCallbackAccess_t ac
 void GC_DeviceTemperatureSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_DeviceVoltageCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_DeviceVoltageSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventErrorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventErrorCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventErrorTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventNotificationCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventTelopsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventTelopsCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_EventTelopsTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);

@@ -24,6 +24,7 @@
 
 #include "GC_Callback.h"
 #include "GC_Registers.h"
+#include "GC_Events.h"
 #include "utils.h"
 #include "BufferManager.h"
 
@@ -50,6 +51,14 @@ void GC_Callback_Init()
    gcRegsDef[DeviceTemperatureSelectorIdx].callback =                &GC_DeviceTemperatureSelectorCallback;
    gcRegsDef[DeviceVoltageIdx].callback =                            &GC_DeviceVoltageCallback;
    gcRegsDef[DeviceVoltageSelectorIdx].callback =                    &GC_DeviceVoltageSelectorCallback;
+   gcRegsDef[EventErrorIdx].callback =                               &GC_EventErrorCallback;
+   gcRegsDef[EventErrorCodeIdx].callback =                           &GC_EventErrorCodeCallback;
+   gcRegsDef[EventErrorTimestampIdx].callback =                      &GC_EventErrorTimestampCallback;
+   gcRegsDef[EventNotificationIdx].callback =                        &GC_EventNotificationCallback;
+   gcRegsDef[EventSelectorIdx].callback =                            &GC_EventSelectorCallback;
+   gcRegsDef[EventTelopsIdx].callback =                              &GC_EventTelopsCallback;
+   gcRegsDef[EventTelopsCodeIdx].callback =                          &GC_EventTelopsCodeCallback;
+   gcRegsDef[EventTelopsTimestampIdx].callback =                     &GC_EventTelopsTimestampCallback;
    gcRegsDef[FValSizeIdx].callback =                                 &GC_FValSizeCallback;
    gcRegsDef[HeightIdx].callback =                                   &GC_HeightCallback;
    gcRegsDef[MemoryBufferModeIdx].callback =                         &GC_MemoryBufferModeCallback;
@@ -302,6 +311,143 @@ void GC_DeviceVoltageSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
+   }
+}
+
+/**
+ * EventError GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventErrorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventError = 0;
+      GC_NextEventError();
+   }}
+
+/**
+ * EventErrorCode GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventErrorCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventErrorCode = EECD_NoError;
+      GC_NextEventError();
+   }}
+
+/**
+ * EventErrorTimestamp GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventErrorTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventErrorTimestamp = 0;
+      GC_NextEventError();
+   }}
+
+/**
+ * EventNotification GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventNotificationCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+      gcRegsData.EventNotification = EventNotificationAry[gcRegsData.EventSelector];
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+      EventNotificationAry[gcRegsData.EventSelector] = gcRegsData.EventNotification;
+   }
+}
+
+/**
+ * EventSelector GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+      gcRegsData.EventSelector = MIN(gcRegsData.EventSelector, EventNotificationAryLen - 1);
+   }
+}
+
+/**
+ * EventTelops GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventTelopsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventTelops = 0;
+      GC_NextEventTelops();
+   }
+}
+
+/**
+ * EventTelopsCode GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventTelopsCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventTelopsCode = ETCD_NoEvent;
+      GC_NextEventTelops();
+   }
+}
+
+/**
+ * EventTelopsTimestamp GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_EventTelopsTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_READ))
+   {
+      // After read
+      gcRegsData.EventTelopsTimestamp = 0;
+      GC_NextEventTelops();
    }
 }
 
