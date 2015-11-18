@@ -77,7 +77,6 @@ IRC_Status_t Storage_FU_Init()
  */
 IRC_Status_t Storage_GC_Init()
 {
-   static uint8_t outputRxDataBuffer[OUTPUT_CI_UART_RX_BUFFER_SIZE];
    static uint8_t outputRxDataCircBuffer[OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE];
    static uint8_t outputTxDataBuffer[OUTPUT_CI_UART_TX_BUFFER_SIZE];
    static networkCommand_t outputCtrlIntfCmdQueueBuffer[OUTPUT_CI_CMD_QUEUE_SIZE];
@@ -107,13 +106,11 @@ IRC_Status_t Storage_GC_Init()
    GC_SetDefaultRegsData();
 
    // Initialize Output FPGA GenICam control interface
-   status = CtrlIntf_InitUART(&gOutputCtrlIntf,
+   status = CtrlIntf_InitCircularUART(&gOutputCtrlIntf,
          CIP_F1F2_NETWORK,
          XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
          &gStorageIntc,
          XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR,
-         outputRxDataBuffer,
-         OUTPUT_CI_UART_RX_BUFFER_SIZE,
          outputRxDataCircBuffer,
          OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE,
          outputTxDataBuffer,
@@ -126,7 +123,7 @@ IRC_Status_t Storage_GC_Init()
       return IRC_FAILURE;
    }
 
-   status = UART_Config(&gOutputCtrlIntf.link.uart, 115200, 8, 'N', 1);
+   status = UART_Config(&gOutputCtrlIntf.link.cuart.uart, 115200, 8, 'N', 1);
    if (status != IRC_SUCCESS)
    {
       return IRC_FAILURE;
