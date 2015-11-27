@@ -21,7 +21,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.12.2
+// Generated from XML camera definition file version 11.0.0
 // using generateGenICamCLib.m Matlab script.
 
 // Registers data structure and data type
@@ -40,6 +40,9 @@ struct gcRegistersDataStruct {
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
+   uint32_t DeviceBuiltInTestsResults5;
+   uint32_t DeviceBuiltInTestsResults7;
+   uint32_t DeviceBuiltInTestsResults8;
    uint32_t DeviceFirmwareModuleSelector;
    uint32_t DeviceTemperatureSelector;
    uint32_t DeviceVoltageSelector;
@@ -102,7 +105,7 @@ extern uint32_t EventNotificationAry[EventNotificationAryLen];
 #define DeviceFirmwareModuleRevisionAryLen 12
 extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen];
 
-#define TriggerModeAryLen 3
+#define TriggerModeAryLen 2
 extern uint32_t TriggerModeAry[TriggerModeAryLen];
 
 // Shared registers write macros
@@ -111,6 +114,7 @@ extern uint32_t TriggerModeAry[TriggerModeAryLen];
 #define GC_SetMemoryBufferMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferModeIdx], val)
 #define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
 #define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
+#define GC_SetDeviceBuiltInTestsResults7(val) GC_RegisterWriteUI32(&gcRegsDef[DeviceBuiltInTestsResults7Idx], val)
 
 void GC_Registers_Init();
 

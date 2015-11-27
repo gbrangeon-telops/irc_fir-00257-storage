@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 10.12.2
+// Generated from XML camera definition file version 11.0.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -41,6 +41,9 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
+   /* DeviceBuiltInTestsResults5 = */ 0,
+   /* DeviceBuiltInTestsResults7 = */ 0,
+   /* DeviceBuiltInTestsResults8 = */ 0,
    /* DeviceFirmwareModuleSelector = */ 0,
    /* DeviceTemperatureSelector = */ 0,
    /* DeviceVoltageSelector = */ 0,
@@ -107,7 +110,7 @@ int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SV
 /**
  * TriggerMode data array
  */
-uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_On, TM_Off};
+uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
 
 /**
  * GenICam registers data pointer initialization.
@@ -123,6 +126,9 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
+   gcRegsDef[DeviceBuiltInTestsResults5Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults5;
+   gcRegsDef[DeviceBuiltInTestsResults7Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults7;
+   gcRegsDef[DeviceBuiltInTestsResults8Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults8;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
    gcRegsDef[DeviceTemperatureSelectorIdx].p_data = &gcRegsData.DeviceTemperatureSelector;
    gcRegsDef[DeviceVoltageSelectorIdx].p_data = &gcRegsData.DeviceVoltageSelector;
