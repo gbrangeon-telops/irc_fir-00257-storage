@@ -24,13 +24,33 @@
 #include "UART_Utils.h"
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
+#include "mgt_ctrl.h"
+#include "BufferManager.h"
 #include "XADC.h"
+#include "tel2000_param.h"
+#include "Timer.h"
+#include "mgt_ctrl.h"
+
 
 // Global variables
 XIntc gStorageIntc;
 netIntf_t gNetworkIntf;
 ctrlIntf_t gOutputCtrlIntf;
 qspiFlash_t gQSPIFlash;
+t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
+t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
+
+
+/**
+ * Initializes general purpose 64-bit timer.
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_Timer_Init()
+{
+   return Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
+}
 
 
 /**
@@ -242,22 +262,20 @@ IRC_Status_t Storage_Intc_Start()
 /**
  * Initialize MGT interface.
  *
- * @param pMgtCtrl Pointer to the MGT controller instance.
- *
  * @return IRC_SUCCESS if successfully initialized.
  * @return IRC_FAILURE if failed to initialize.
  */
-IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl)
+IRC_Status_t Storage_MGT_Init()
 {
-   MGT_Init(pMgtCtrl);
+   MGT_Init(&gMGT);
 
    // Disable Data and Video MGT (not used on this board)
-   MGT_DisableMGT(pMgtCtrl, DATA_MGT);
-   MGT_DisableMGT(pMgtCtrl, VIDEO_MGT);
+   MGT_DisableMGT(&gMGT, DATA_MGT);
+   MGT_DisableMGT(&gMGT, VIDEO_MGT);
 
    // Read statuses
-   MGT_ReadCoreStatus(pMgtCtrl);
-   MGT_ReadPLLStatus(pMgtCtrl);
+   MGT_ReadCoreStatus(&gMGT);
+   MGT_ReadPLLStatus(&gMGT);
 
    return IRC_SUCCESS;
 }
@@ -266,18 +284,16 @@ IRC_Status_t Storage_MGT_Init(t_mgt *pMgtCtrl)
 /**
  * Initialize the Buffer Manager interface.
  *
- * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
- *
  * @return IRC_SUCCESS if successfully initialized.
  * @return IRC_FAILURE if failed to initialize.
  */
-IRC_Status_t Storage_BufferManager_Init(t_bufferManager *pBufferCtrl)
+IRC_Status_t Storage_BufferManager_Init()
 {
    IRC_Status_t status;
 
    // Init module and wait for memory to be ready
-   status = BufferManager_Init(pBufferCtrl, &gcRegsData);
-   BufferManager_WaitMemReady(pBufferCtrl);
+   status = BufferManager_Init(&gBufManager, &gcRegsData);
+   BufferManager_WaitMemReady(&gBufManager);
 
    return status;
 }

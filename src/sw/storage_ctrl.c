@@ -13,23 +13,15 @@
  * (c) Copyright 2014 Telops Inc.
  */
 
-#include <stdint.h>
-#include "tel2000_param.h"
-#include "Timer.h"
 #include "utils.h"
-#include "storage_init.h"
+#include "BuiltInTests.h"
 #include "GC_Manager.h"
 #include "test_point.h"
-#include "mgt_ctrl.h"
 #include "BufferManager.h"
 #include "CtrlInterface.h"
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
 #include "XADC.h"
-
-// Global variables
-t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
-t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
 
 /*--------------------------------------------------------------------------------------*/
 /* main                                                                                 */
@@ -38,41 +30,23 @@ int main()  // Defining the standard main() function
 {
    extern netIntf_t gNetworkIntf;
    extern ctrlIntf_t gOutputCtrlIntf;
+   extern t_bufferManager gBufManager;
 
-   // Init timer
-   Timer_Init(XPAR_TMRCTR_0_BASEADDR, XPAR_TMRCTR_0_CLOCK_FREQ_HZ);
+   BuiltInTest_Execute(BITID_BuiltInTestsVerification);
+
+   BuiltInTest_Execute(BITID_TimerInitialization);
    WAIT_US(30);
 
-   // Init interrupt controller
-   Storage_Intc_Init();
-
-   // Network interface initialization
-   Storage_NI_Init();
-
-   // GenICam initialization
-   Storage_GC_Init();
-
-   // QSPI flash interface initialization
-   Storage_QSPIFlash_Init();
-
-   // Firmware updater initialization
-   Storage_FU_Init();
-
-   // XADC initialization
-   Storage_XADC_Init();
-
-   // Start interrupt controller
-   Storage_Intc_Start();
-
-   // Init MGT module
-   Storage_MGT_Init(&gMGT);
-
-   // Init Buffer Manager module
-   // @attention This function contains a wait loop.
-   Storage_BufferManager_Init(&gBufManager);
-
-   // Init test point controller
-   TP_Init();
+   BuiltInTest_Execute(BITID_InterruptControllerInitialization);
+   BuiltInTest_Execute(BITID_NetworkInterfaceInitialization);
+   BuiltInTest_Execute(BITID_GenICamManagerInitialization);
+   BuiltInTest_Execute(BITID_QSPIFlashInerfaceInitialization);
+   BuiltInTest_Execute(BITID_FirmwareUpdaterInitialization);
+   BuiltInTest_Execute(BITID_ADCControllerInitialization);
+   BuiltInTest_Execute(BITID_InterruptControllerStartup);
+   BuiltInTest_Execute(BITID_MGTInterfaceInitialization);
+   BuiltInTest_Execute(BITID_MemoryBufferControllerInitialization);
+   BuiltInTest_Execute(BITID_TestPointInitialization);
 
    // Main loop
    while(1)

@@ -27,6 +27,7 @@
 #include "GC_Events.h"
 #include "utils.h"
 #include "BufferManager.h"
+#include "BuiltInTests.h"
 
 extern t_bufferManager gBufManager;
 
@@ -241,13 +242,8 @@ void GC_DeviceBuiltInTestsResults7Callback(gcCallbackPhase_t phase, gcCallbackAc
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-      // TODO Implement built-in tests results.
-      gcRegsData.DeviceBuiltInTestsResults7 = 2;
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
+      BuiltInTest_Execute(BITID_BuiltInTestsGlobalResult);
+      gcRegsData.DeviceBuiltInTestsResults7 = BuiltInTest_FillResultRegister(0);
    }
 }
 
@@ -263,11 +259,7 @@ void GC_DeviceBuiltInTestsResults8Callback(gcCallbackPhase_t phase, gcCallbackAc
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
+      gcRegsData.DeviceBuiltInTestsResults8 = BuiltInTest_FillResultRegister(1);
    }
 }
 
