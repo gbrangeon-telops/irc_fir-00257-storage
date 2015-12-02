@@ -182,6 +182,7 @@ void GC_SetDefaultRegsData()
    GC_MemoryBufferNumberOfImagesMaxCallback(GCCP_BEFORE, GCCA_READ);
    GC_MemoryBufferNumberOfSequencesMaxCallback(GCCP_BEFORE, GCCA_READ);
    GC_MemoryBufferSequenceSizeMaxCallback(GCCP_BEFORE, GCCA_READ);
+   gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfSequencesMax;
 }
 
 /**
@@ -209,10 +210,7 @@ void GC_UpdateMemoryBufferSequenceSizeLimits()
    }
 
    // Limit the number of sequences
-   if( (gcRegsData.MemoryBufferNumberOfSequences * gcRegsData.MemoryBufferSequenceSize) > gcRegsData.MemoryBufferNumberOfImagesMax  )
-   {
-      gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize;
-   }
+   gcRegsData.MemoryBufferNumberOfSequences = MIN(gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize, gcRegsData.MemoryBufferNumberOfSequencesMax);
 
    GC_UpdateMemoryBufferSequencePreMOISizeLimits();
 }
@@ -227,7 +225,7 @@ void GC_UpdateMemoryBufferNumberOfSequenceLimits()
    // Limit the number of images per sequence
    if( (gcRegsData.MemoryBufferNumberOfSequences * gcRegsData.MemoryBufferSequenceSize) > gcRegsData.MemoryBufferNumberOfImagesMax  )
    {
-      gcRegsData.MemoryBufferSequenceSize = gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences;
+      gcRegsData.MemoryBufferSequenceSize = roundDown(gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences, 2);
    }
 
    GC_UpdateMemoryBufferSequencePreMOISizeLimits();
