@@ -723,9 +723,19 @@ void GC_MemoryBufferSequenceDownloadBitRateMaxCallback(gcCallbackPhase_t phase, 
  */
 void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
+   uint32_t firstFrameID, lastFrameID;
+
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
       // Before read
+      firstFrameID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
+      lastFrameID = firstFrameID + BufferManager_GetSequenceLength(&gBufManager, gcRegsData.MemoryBufferSequenceSelector) - 1;
+
+      if (gcRegsData.MemoryBufferSequenceDownloadImageFrameID < firstFrameID)
+         gcRegsData.MemoryBufferSequenceDownloadImageFrameID = firstFrameID;
+
+      if (gcRegsData.MemoryBufferSequenceDownloadImageFrameID > lastFrameID)
+         gcRegsData.MemoryBufferSequenceDownloadImageFrameID = lastFrameID;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
