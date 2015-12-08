@@ -33,7 +33,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 11.0.1
+// Generated from XML camera definition file version 11.0.2
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -43,6 +43,7 @@ void GC_Callback_Init()
 {
    gcRegsDef[AcquisitionArmIdx].callback =                           &GC_AcquisitionArmCallback;
    gcRegsDef[AcquisitionFrameRateIdx].callback =                     &GC_AcquisitionFrameRateCallback;
+   gcRegsDef[AcquisitionFrameRateMaxFGIdx].callback =                &GC_AcquisitionFrameRateMaxFGCallback;
    gcRegsDef[AcquisitionFrameRateModeIdx].callback =                 &GC_AcquisitionFrameRateModeCallback;
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
@@ -119,6 +120,26 @@ void GC_AcquisitionArmCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acces
  * @param access indicates whether the operation is read or write.
  */
 void GC_AcquisitionFrameRateCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      // Before read
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      // After write
+   }
+}
+
+/**
+ * AcquisitionFrameRateMaxFG GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_AcquisitionFrameRateMaxFGCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {

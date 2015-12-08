@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 11.0.1
+// Generated from XML camera definition file version 11.0.2
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -33,6 +33,7 @@
  */
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
+   /* AcquisitionFrameRateMaxFG = */ 0.0F,
    /* DeviceTemperature = */ 0.0F,
    /* DeviceVoltage = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
@@ -118,6 +119,7 @@ uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
 void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
+   gcRegsDef[AcquisitionFrameRateMaxFGIdx].p_data = &gcRegsData.AcquisitionFrameRateMaxFG;
    gcRegsDef[DeviceTemperatureIdx].p_data = &gcRegsData.DeviceTemperature;
    gcRegsDef[DeviceVoltageIdx].p_data = &gcRegsData.DeviceVoltage;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;

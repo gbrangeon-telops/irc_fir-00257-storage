@@ -80,11 +80,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/src/TestPoint</locationURI>
 		</link>
 		<link>
-			<name>src/USART</name>
-			<type>2</type>
-			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/USART/driver</locationURI>
-		</link>
-		<link>
 			<name>src/XADC_Channels.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/XADC_Channels.c</locationURI>
@@ -113,6 +108,11 @@
 			<name>src/tel2000_param.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/tel2000_param.h</locationURI>
+		</link>
+		<link>
+			<name>src/usart</name>
+			<type>2</type>
+			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/USART/Drivers</locationURI>
 		</link>
 		<link>
 			<name>src/verbose.h</name>
