@@ -24,6 +24,10 @@
 // Generated from XML camera definition file version 11.0.3
 // using generateGenICamCLib.m Matlab script.
 
+#if ((GC_XMLMAJORVERSION != 11) || (GC_XMLMINORVERSION != 0) || (GC_XMLSUBMINORVERSION != 3))
+#error "XML version mismatch."
+#endif
+
 // Registers data structure and data type
 ////////////////////////////////////////////////////////////////////////////////
 
