@@ -33,7 +33,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 11.0.3
+// Generated from XML camera definition file version 11.0.4
 // using updateGenICamCallback.m Matlab script.
 
 /**

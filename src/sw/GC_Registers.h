@@ -21,10 +21,10 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 11.0.3
+// Generated from XML camera definition file version 11.0.4
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 11) || (GC_XMLMINORVERSION != 0) || (GC_XMLSUBMINORVERSION != 3))
+#if ((GC_XMLMAJORVERSION != 11) || (GC_XMLMINORVERSION != 0) || (GC_XMLSUBMINORVERSION != 4))
 #error "XML version mismatch."
 #endif
 
