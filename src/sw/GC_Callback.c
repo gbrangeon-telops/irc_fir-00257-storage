@@ -183,6 +183,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 {
    extern bool gBufferStartDownloadTrigger;
    extern bool gBufferAcqStartedTrigger;
+   extern uint8_t gAcquisitionStarted;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
@@ -194,6 +195,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
       // After write
       if (gcRegsData.AcquisitionStart)
       {
+         gAcquisitionStarted = 1;
          gBufferAcqStartedTrigger = 1;
          // Check if it is a buffer read
          if ((gcRegsData.MemoryBufferMode == MBM_On) && (gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off))
@@ -214,6 +216,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    extern bool gBufferStopDownloadTrigger;
+   extern uint8_t gAcquisitionStarted;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
@@ -225,6 +228,8 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
       // After write
       if (gcRegsData.AcquisitionStop)
       {
+         gAcquisitionStarted = 0;
+
          // interrupt a buffer transfer, if any
          gBufferStopDownloadTrigger = 1;
       }

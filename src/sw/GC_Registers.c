@@ -171,6 +171,24 @@ void GC_Registers_Init()
 
 /* AUTO-CODE END */
 
+uint8_t gAcquisitionStarted = 0;
+
+/**
+ * Update GenICam registers lock flag.
+ * This function is called everytime a write is performed and updates the locked
+ * flag for ALL registers.
+ */
+#define GC_MemoryBufferNotEmpty  (gcRegsData.MemoryBufferSequenceCount > 0)
+void GC_UpdateLockedFlag()
+{
+   // Lock buffering configuration registers when buffering is in progress
+   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+}
+
+
 /**
  * Set GenICam registers to default values.
  */
@@ -185,23 +203,6 @@ void GC_SetDefaultRegsData()
    GC_MemoryBufferNumberOfSequencesMaxCallback(GCCP_BEFORE, GCCA_READ);
    GC_MemoryBufferSequenceSizeMaxCallback(GCCP_BEFORE, GCCA_READ);
    gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfSequencesMax;
-}
-
-/**
- * Update GenICam registers lock flag.
- * This function is called everytime a write is performed and updates the locked
- * flag for ALL registers.
- */
-// TODO: Find a way to know when acquisition is started (share TDCStatus?).
-#define GC_AcquisitionStarted    (0)
-#define GC_MemoryBufferNotEmpty  (gcRegsData.MemoryBufferSequenceCount > 0)
-void GC_UpdateLockedFlag()
-{
-   // Lock buffering configuration registers when buffering is in progress
-   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
 }
 
 void GC_UpdateMemoryBufferSequenceSizeLimits()

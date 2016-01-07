@@ -19,6 +19,8 @@
 #include "GC_Manager.h"
 #include <stdint.h>
 
+#define GC_AcquisitionStarted    (gAcquisitionStarted == 1)
+
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
 // Generated from XML camera definition file version 11.0.4
@@ -125,8 +127,8 @@ void GC_Registers_Init();
 
 /* AUTO-CODE END */
 
-void GC_SetDefaultRegsData();
 void GC_UpdateLockedFlag();
+void GC_SetDefaultRegsData();
 void GC_UpdateMemoryBufferSequenceSizeLimits();
 void GC_UpdateMemoryBufferNumberOfSequenceLimits();
 void GC_UpdateMemoryBufferSequencePreMOISizeLimits();
