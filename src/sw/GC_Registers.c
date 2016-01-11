@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 11.0.4
+// Generated from XML camera definition file version 11.0.5
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -175,17 +175,22 @@ uint8_t gAcquisitionStarted = 0;
 
 /**
  * Update GenICam registers lock flag.
- * This function is called everytime a write is performed and updates the locked
+ * This function is called every time a write is performed and updates the locked
  * flag for ALL registers.
  */
-#define GC_MemoryBufferNotEmpty  (gcRegsData.MemoryBufferSequenceCount > 0)
 void GC_UpdateLockedFlag()
 {
-   // Lock buffering configuration registers when buffering is in progress
-   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], GC_AcquisitionStarted || GC_MemoryBufferNotEmpty);
+/* AUTO-CODE REGLOCKED BEGIN */
+   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSelectorIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx], (GC_AcquisitionStarted && (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceClearAllIdx], GC_AcquisitionStarted);
+/* AUTO-CODE REGLOCKED END */
 }
 
 
