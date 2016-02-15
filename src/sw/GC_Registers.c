@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 11.1.0
+// Generated from XML camera definition file version 11.2.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -42,7 +42,6 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
-   /* DeviceBuiltInTestsResults5 = */ 0,
    /* DeviceBuiltInTestsResults7 = */ 0,
    /* DeviceBuiltInTestsResults8 = */ 0,
    /* DeviceFirmwareModuleSelector = */ 0,
@@ -111,7 +110,7 @@ int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SV
 /**
  * TriggerMode data array
  */
-uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off};
+uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off, TM_Off};
 
 /**
  * GenICam registers data pointer initialization.
@@ -128,7 +127,6 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
-   gcRegsDef[DeviceBuiltInTestsResults5Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults5;
    gcRegsDef[DeviceBuiltInTestsResults7Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults7;
    gcRegsDef[DeviceBuiltInTestsResults8Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults8;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
@@ -181,10 +179,10 @@ uint8_t gAcquisitionStarted = 0;
 void GC_UpdateLockedFlag()
 {
 /* AUTO-CODE REGLOCKED BEGIN */
-   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], (((gcRegsData.MemoryBufferSequenceCount > 0) || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForCalibrationActualization) || GC_AcquisitionStarted));
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceSelectorIdx], GC_AcquisitionStarted);
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], GC_AcquisitionStarted);
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], GC_AcquisitionStarted);
