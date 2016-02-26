@@ -285,6 +285,9 @@ begin
             -- Memory 0 contains even images and memory 1 contains odd images, so sequence offset and image offset are divided by 2 in each memory
             HalfSeqSize_bytes_u <= resize(frame_size_u * total_img_per_seq_u, HalfSeqSize_bytes_u'length);  --frame_size in pix (x2) but we want HalfSize (/2) so it simplifies	
             
+            -- Cette opération (mult 64bits) pour calculer wr_sequence_offset ne passe pas les timings.
+            -- Utiliser l'IP Multiplier, choisir "Use Mults" (DSP48) et mettre les "Pipeline Stages" à la valeur optimale.
+            -- Ré-utiliser l'IP pour le calcul de rd_sequence_offset
             wr_sequence_offset <= resize(nb_seq_in_mem_u * HalfSeqSize_bytes_u, wr_sequence_offset'length);	         --seq offset div. 2
             wr_frame_offset_temp <= resize( (shift_right(write_img_loc,1) * shift_left(frame_size_u,1)), wr_frame_offset_temp'length);   --frame_offset div. 2
             wr_frame_offset <= wr_frame_offset_temp;

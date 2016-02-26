@@ -88,3 +88,10 @@ set_property generate_synth_checkpoint true [get_files  d:/Telops/fir-00257-Stor
 update_compile_order -fileset sources_1
 
 set_property STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY none [get_runs synth_1]
+
+# #Limit max fanout (see UG949 p143 for Fanout Guidelines table)
+# set_property STEPS.SYNTH_DESIGN.ARGS.FANOUT_LIMIT 200 [get_runs synth_1]
+
+# #Enable post-place optimization (see UG904 p66-74 for more details)
+# set_property STEPS.PHYS_OPT_DESIGN.IS_ENABLED true [get_runs impl_1]
+# set_property STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE Default [get_runs impl_1]
