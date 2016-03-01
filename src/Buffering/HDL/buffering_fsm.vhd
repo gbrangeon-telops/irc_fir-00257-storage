@@ -17,6 +17,9 @@ use work.tel2000.all;
 use work.BufferingDefine.all;
 
 entity BUFFERING_FSM is
+    generic(
+       ADDR_WIDTH_PER_MEM : natural := 35
+    );
     port(
         --clk and reset
         --CLK_CTRL         : in std_logic; -- at 100 MHZ
