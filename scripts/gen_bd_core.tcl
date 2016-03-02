@@ -749,9 +749,9 @@ proc create_hier_cell_MemoryBuffer { parentCell nameHier } {
   connect_bd_intf_net -intf_net buffer_interconnect_0_M01_AXI [get_bd_intf_pins buffer_interconnect_0/M01_AXI] [get_bd_intf_pins dimm1_ctrl/S_AXI]
 
   # Create port connections
-  connect_bd_net -net ACLK_1 [get_bd_pins clk100] [get_bd_pins buffer_interconnect_0/ACLK] [get_bd_pins buffer_interconnect_0/S02_ACLK]
+  connect_bd_net -net ACLK_1 [get_bd_pins clk100] [get_bd_pins buffer_interconnect_0/S02_ACLK]
   connect_bd_net -net ARESETN_1 [get_bd_pins ARESETN] [get_bd_pins buffer_interconnect_0/ARESETN]
-  connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_pins aclk160] [get_bd_pins axi_dm_buffer/m_axi_mm2s_aclk] [get_bd_pins axi_dm_buffer/m_axi_s2mm_aclk] [get_bd_pins axi_dm_buffer/m_axis_mm2s_cmdsts_aclk] [get_bd_pins axi_dm_buffer/m_axis_s2mm_cmdsts_awclk] [get_bd_pins buffer_interconnect_0/S00_ACLK] [get_bd_pins buffer_interconnect_0/S01_ACLK]
+  connect_bd_net -net clk_wiz_1_clk_out2 [get_bd_pins aclk160] [get_bd_pins axi_dm_buffer/m_axi_mm2s_aclk] [get_bd_pins axi_dm_buffer/m_axi_s2mm_aclk] [get_bd_pins axi_dm_buffer/m_axis_mm2s_cmdsts_aclk] [get_bd_pins axi_dm_buffer/m_axis_s2mm_cmdsts_awclk] [get_bd_pins buffer_interconnect_0/ACLK] [get_bd_pins buffer_interconnect_0/S00_ACLK] [get_bd_pins buffer_interconnect_0/S01_ACLK]
   connect_bd_net -net device_temp_i_1 [get_bd_pins device_temp_i] [get_bd_pins dimm0_ctrl/device_temp_i] [get_bd_pins dimm1_ctrl/device_temp_i]
   connect_bd_net -net dimm0_ctrl_init_calib_complete [get_bd_pins init_calib_complete] [get_bd_pins dimm0_ctrl/init_calib_complete]
   connect_bd_net -net dimm0_ctrl_ui_clk [get_bd_pins buffer_interconnect_0/M00_ACLK] [get_bd_pins dimm0_ctrl/ui_clk]
@@ -945,17 +945,17 @@ proc create_root_design { parentCell } {
   set AXIL_BUF_TABLE [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_BUF_TABLE ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_BUF_TABLE
   set AXIL_MEM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MEM_IN ]
-  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {32} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {0} CONFIG.MAX_BURST_LENGTH {1} CONFIG.NUM_READ_OUTSTANDING {1} CONFIG.NUM_WRITE_OUTSTANDING {1} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4LITE} CONFIG.READ_WRITE_MODE {READ_WRITE} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXIL_MEM_IN
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.DATA_WIDTH {32} CONFIG.ID_WIDTH {0} CONFIG.MAX_BURST_LENGTH {1} CONFIG.NUM_READ_OUTSTANDING {1} CONFIG.NUM_WRITE_OUTSTANDING {1} CONFIG.PROTOCOL {AXI4LITE} CONFIG.READ_WRITE_MODE {READ_WRITE} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXIL_MEM_IN
   set AXIL_MEM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MEM_OUT ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_MEM_OUT
   set AXIL_MGT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXIL_MGT ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {32} CONFIG.DATA_WIDTH {32} CONFIG.PROTOCOL {AXI4LITE}  ] $AXIL_MGT
   set AXI_MM2S_DM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_MM2S_DM_IN ]
-  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {256} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {READ_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_MM2S_DM_IN
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.DATA_WIDTH {256} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {READ_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_MM2S_DM_IN
   set AXI_MM2S_DM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_MM2S_DM_OUT ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.DATA_WIDTH {256} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {READ_ONLY}  ] $AXI_MM2S_DM_OUT
   set AXI_S2MM_DM_IN [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_S2MM_DM_IN ]
-  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.CLK_DOMAIN {} CONFIG.DATA_WIDTH {256} CONFIG.FREQ_HZ {100000000} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PHASE {0.000} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {WRITE_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_S2MM_DM_IN
+  set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.ARUSER_WIDTH {0} CONFIG.AWUSER_WIDTH {0} CONFIG.BUSER_WIDTH {0} CONFIG.DATA_WIDTH {256} CONFIG.ID_WIDTH {4} CONFIG.MAX_BURST_LENGTH {64} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {WRITE_ONLY} CONFIG.RUSER_WIDTH {0} CONFIG.SUPPORTS_NARROW_BURST {0} CONFIG.WUSER_WIDTH {0}  ] $AXI_S2MM_DM_IN
   set AXI_S2MM_DM_OUT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI_S2MM_DM_OUT ]
   set_property -dict [ list CONFIG.ADDR_WIDTH {64} CONFIG.DATA_WIDTH {256} CONFIG.NUM_READ_OUTSTANDING {2} CONFIG.NUM_WRITE_OUTSTANDING {2} CONFIG.PROTOCOL {AXI4} CONFIG.READ_WRITE_MODE {WRITE_ONLY}  ] $AXI_S2MM_DM_OUT
   set DIMM0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddrx_rtl:1.0 DIMM0 ]
@@ -969,11 +969,11 @@ proc create_root_design { parentCell } {
   set SYS_CLK_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_0 ]
   set SYS_CLK_1 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 SYS_CLK_1 ]
   set S_AXIS_MM2S_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_MM2S_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
+  set_property -dict [ list CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_MM2S_CMD
   set S_AXIS_S2MM [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {4} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM
+  set_property -dict [ list CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.TDATA_NUM_BYTES {4} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM
   set S_AXIS_S2MM_CMD [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 S_AXIS_S2MM_CMD ]
-  set_property -dict [ list CONFIG.CLK_DOMAIN {} CONFIG.FREQ_HZ {100000000} CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.PHASE {0.000} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
+  set_property -dict [ list CONFIG.HAS_TKEEP {0} CONFIG.HAS_TLAST {0} CONFIG.HAS_TREADY {1} CONFIG.HAS_TSTRB {0} CONFIG.LAYERED_METADATA {undef} CONFIG.TDATA_NUM_BYTES {13} CONFIG.TDEST_WIDTH {0} CONFIG.TID_WIDTH {0} CONFIG.TUSER_WIDTH {0}  ] $S_AXIS_S2MM_CMD
   set TEST_POINT [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:gpio_rtl:1.0 TEST_POINT ]
   set UART [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 UART ]
 
