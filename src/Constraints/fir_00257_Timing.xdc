@@ -19,14 +19,14 @@ set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks MGT_
 ## Timing Exceptions Section
 
 # False Paths
-# set_false_path -from [get_clocks clk_out1_core_clk_wiz_1*] -to [get_clocks clk_out2_core_clk_wiz_1*]
-# set_false_path -from [get_clocks clk_out1_core_clk_wiz_1*] -to [get_clocks clk_out3_core_clk_wiz_1*]
-# set_false_path -from [get_clocks clk_out2_core_clk_wiz_1*] -to [get_clocks clk_out1_core_clk_wiz_1*]
-# set_false_path -from [get_clocks clk_out2_core_clk_wiz_1*] -to [get_clocks clk_out3_core_clk_wiz_1*]
-# set_false_path -from [get_clocks clk_out3_core_clk_wiz_1*] -to [get_clocks clk_out1_core_clk_wiz_1*]
-# set_false_path -from [get_clocks clk_out3_core_clk_wiz_1*] -to [get_clocks clk_out2_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out1_core_clk_wiz_1*] -to [get_clocks clk_out2_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out1_core_clk_wiz_1*] -to [get_clocks clk_out3_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out2_core_clk_wiz_1*] -to [get_clocks clk_out1_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out2_core_clk_wiz_1*] -to [get_clocks clk_out3_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out3_core_clk_wiz_1*] -to [get_clocks clk_out1_core_clk_wiz_1*]
+set_false_path -from [get_clocks clk_out3_core_clk_wiz_1*] -to [get_clocks clk_out2_core_clk_wiz_1*]
 
-# set_false_path -from [get_cells *reset*_reg* -hierarchical -filter {NAME =~ *rst_clk_wiz*}]
+set_false_path -from [get_cells *reset*_reg* -hierarchical -filter {NAME =~ *rst_clk_wiz*}]
 
 # Max Delay / Min Delay
 
