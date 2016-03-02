@@ -1,7 +1,7 @@
 Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:24:04 MST 2014
-| Date         : Fri Feb 12 16:40:06 2016
+| Date         : Wed Mar 02 11:32:49 2016
 | Host         : TELOPS212 running 64-bit Service Pack 1  (build 7601)
 | Command      : report_utilization -file d:/Telops/fir-00257-Storage/reports/fir_00257_Storage_utilization_placed_hier.rpt -hierarchical -hierarchical_depth 5
 | Design       : fir_257_top
@@ -21,9 +21,9 @@ Table of Contents
 +--------------------------------------------------+-------------------------------------------------------------------------+------------+------------+---------+------+-------+--------+--------+--------------+
 |                     Instance                     |                                  Module                                 | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP48 Blocks |
 +--------------------------------------------------+-------------------------------------------------------------------------+------------+------------+---------+------+-------+--------+--------+--------------+
-| fir_257_top                                      |                                                                   (top) |      43646 |      37202 |    4832 | 1612 | 45296 |     66 |     38 |           20 |
+| fir_257_top                                      |                                                                   (top) |      43095 |      37163 |    4320 | 1612 | 44009 |     66 |     38 |           20 |
 |   (fir_257_top)                                  |                                                                   (top) |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|   BUFFER_INST                                    |                                                               Buffering |       1885 |       1885 |       0 |    0 |  2705 |      4 |      0 |           20 |
+|   BUFFER_INST                                    |                                                               Buffering |       1884 |       1884 |       0 |    0 |  2782 |      4 |      0 |           20 |
 |     (BUFFER_INST)                                |                                                               Buffering |          3 |          3 |       0 |    0 |     0 |      0 |      0 |            0 |
 |     AXIL_MEM                                     |                                                   memory_access_handler |         99 |         99 |       0 |    0 |     0 |      0 |      0 |            0 |
 |     BUF_CTRL                                     |                                                          Buffering_Ctrl |         48 |         48 |       0 |    0 |  1266 |      0 |      0 |            0 |
@@ -48,8 +48,8 @@ Table of Contents
 |       U3A                                        |                                          double_sync__parameterized0__1 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |       U3B                                        |                                          double_sync__parameterized0__2 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |       U3D                                        |                                          double_sync__parameterized0__3 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
-|     FSM                                          |                                                           BUFFERING_FSM |       1380 |       1380 |       0 |    0 |   982 |      0 |      0 |           20 |
-|       (FSM)                                      |                                                           BUFFERING_FSM |       1379 |       1379 |       0 |    0 |   978 |      0 |      0 |           20 |
+|     FSM                                          |                                           BUFFERING_FSM__parameterized0 |       1380 |       1380 |       0 |    0 |  1059 |      0 |      0 |           20 |
+|       (FSM)                                      |                                           BUFFERING_FSM__parameterized0 |       1379 |       1379 |       0 |    0 |  1055 |      0 |      0 |           20 |
 |       WL_sync                                    |                                          double_sync__parameterized0__4 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |       inst_sync_reset                            |                                                          sync_resetn__2 |          1 |          1 |       0 |    0 |     2 |      0 |      0 |            0 |
 |     U1                                           |                                          axis32_tid_gen__parameterized0 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |            0 |
@@ -87,24 +87,24 @@ Table of Contents
 |     U9                                           |                                                          axis32_img_sof |          3 |          3 |       0 |    0 |     4 |      0 |      0 |            0 |
 |       (U9)                                       |                                                          axis32_img_sof |          2 |          2 |       0 |    0 |     2 |      0 |      0 |            0 |
 |       U1                                         |                                                             sync_resetn |          1 |          1 |       0 |    0 |     2 |      0 |      0 |            0 |
-|   CORE_BD                                        |                                                              bd_wrapper |      40194 |      33954 |    4696 | 1544 | 39386 |     59 |     38 |            0 |
+|   CORE_BD                                        |                                                              bd_wrapper |      39645 |      33917 |    4184 | 1544 | 38022 |     59 |     38 |            0 |
 |     (CORE_BD)                                    |                                                              bd_wrapper |          1 |          1 |       0 |    0 |     0 |      0 |      0 |            0 |
-|     core_wrapper_i                               |                                                            core_wrapper |      40193 |      33953 |    4696 | 1544 | 39386 |     59 |     38 |            0 |
+|     core_wrapper_i                               |                                                            core_wrapper |      39644 |      33916 |    4184 | 1544 | 38022 |     59 |     38 |            0 |
 |       (core_wrapper_i)                           |                                                            core_wrapper |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|       core_i                                     |                                                                    core |      40193 |      33953 |    4696 | 1544 | 39386 |     59 |     38 |            0 |
+|       core_i                                     |                                                                    core |      39644 |      33916 |    4184 | 1544 | 38022 |     59 |     38 |            0 |
 |         (core_i)                                 |                                                                    core |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|         INTC                                     |                                                    core_INTC_imp_PABUAD |        205 |        173 |      32 |    0 |   190 |      0 |      0 |            0 |
-|           microblaze_0_axi_intc                  |                                       core_core_microblaze_0_axi_intc_0 |        205 |        173 |      32 |    0 |   190 |      0 |      0 |            0 |
+|         INTC                                     |                                                    core_INTC_imp_PABUAD |        204 |        172 |      32 |    0 |   190 |      0 |      0 |            0 |
+|           microblaze_0_axi_intc                  |                                       core_core_microblaze_0_axi_intc_0 |        204 |        172 |      32 |    0 |   190 |      0 |      0 |            0 |
 |           microblaze_0_xlconcat                  |                                       core_core_microblaze_0_xlconcat_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|         MCU                                      |                                                     core_MCU_imp_N4RJ0G |       1719 |       1526 |      64 |  129 |  1452 |     32 |      0 |            0 |
-|           mdm_1                                  |                                                       core_core_mdm_1_0 |        378 |        306 |       0 |   72 |   357 |      0 |      0 |            0 |
-|           microblaze_0                           |                                                core_core_microblaze_0_0 |       1279 |       1158 |      64 |   57 |  1036 |      0 |      0 |            0 |
+|         MCU                                      |                                                     core_MCU_imp_N4RJ0G |       1721 |       1528 |      64 |  129 |  1452 |     32 |      0 |            0 |
+|           mdm_1                                  |                                                       core_core_mdm_1_0 |        379 |        307 |       0 |   72 |   357 |      0 |      0 |            0 |
+|           microblaze_0                           |                                                core_core_microblaze_0_0 |       1280 |       1159 |      64 |   57 |  1036 |      0 |      0 |            0 |
 |           microblaze_0_local_memory              |                               core_microblaze_0_local_memory_imp_LRV7VF |         62 |         62 |       0 |    0 |    59 |     32 |      0 |            0 |
-|         MemoryBuffer                             |                                            core_MemoryBuffer_imp_SPXWA4 |      36523 |      30539 |    4584 | 1400 | 35925 |     27 |     38 |            0 |
-|           axi_dm_buffer                          |                                               core_core_axi_dm_buffer_0 |       2360 |       2056 |       0 |  304 |  2536 |      8 |      1 |            0 |
-|           buffer_interconnect_0                  |                                       core_core_buffer_interconnect_0_0 |       9287 |       8077 |    1196 |   14 | 14667 |     19 |     35 |            0 |
+|         MemoryBuffer                             |                                            core_MemoryBuffer_imp_SPXWA4 |      35971 |      30499 |    4072 | 1400 | 34561 |     27 |     38 |            0 |
+|           axi_dm_buffer                          |                                               core_core_axi_dm_buffer_0 |       2357 |       2053 |       0 |  304 |  2534 |      8 |      1 |            0 |
+|           buffer_interconnect_0                  |                                       core_core_buffer_interconnect_0_0 |       8751 |       8053 |     684 |   14 | 13305 |     19 |     35 |            0 |
 |           dimm0_ctrl                             |                                                  core_core_dimm0_ctrl_0 |      12431 |      10198 |    1692 |  541 |  9361 |      0 |      1 |            0 |
-|           dimm1_ctrl                             |                                                  core_core_dimm1_ctrl_0 |      12446 |      10209 |    1696 |  541 |  9361 |      0 |      1 |            0 |
+|           dimm1_ctrl                             |                                                  core_core_dimm1_ctrl_0 |      12432 |      10195 |    1696 |  541 |  9361 |      0 |      1 |            0 |
 |         axi_gpio_mem_addr                        |                                           core_core_axi_gpio_mem_addr_0 |         33 |         33 |       0 |    0 |    44 |      0 |      0 |            0 |
 |           U0                                     |                                           core_axi_gpio__parameterized0 |         33 |         33 |       0 |    0 |    44 |      0 |      0 |            0 |
 |         axi_gpio_tp                              |                                                 core_core_axi_gpio_tp_0 |         31 |         31 |       0 |    0 |    29 |      0 |      0 |            0 |
@@ -115,17 +115,17 @@ Table of Contents
 |         axi_quad_spi_0                           |                                              core_core_axi_quad_spi_0_0 |        382 |        364 |      16 |    2 |   548 |      0 |      0 |            0 |
 |           (axi_quad_spi_0)                       |                                              core_core_axi_quad_spi_0_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |           U0                                     |                                       core_axi_quad_spi__parameterized0 |        382 |        364 |      16 |    2 |   548 |      0 |      0 |            0 |
-|         axi_timer_0                              |                                                 core_core_axi_timer_0_0 |        279 |        279 |       0 |    0 |   214 |      0 |      0 |            0 |
-|           U0                                     |                                          core_axi_timer__parameterized0 |        279 |        279 |       0 |    0 |   214 |      0 |      0 |            0 |
-|         axi_uart_fpga_output                     |                                        core_core_axi_uart_fpga_output_0 |        343 |        331 |       0 |   12 |   301 |      0 |      0 |            0 |
-|           U0                                     |                                      core_axi_uart16550__parameterized0 |        343 |        331 |       0 |   12 |   301 |      0 |      0 |            0 |
+|         axi_timer_0                              |                                                 core_core_axi_timer_0_0 |        278 |        278 |       0 |    0 |   214 |      0 |      0 |            0 |
+|           U0                                     |                                          core_axi_timer__parameterized0 |        278 |        278 |       0 |    0 |   214 |      0 |      0 |            0 |
+|         axi_uart_fpga_output                     |                                        core_core_axi_uart_fpga_output_0 |        341 |        329 |       0 |   12 |   301 |      0 |      0 |            0 |
+|           U0                                     |                                      core_axi_uart16550__parameterized0 |        341 |        329 |       0 |   12 |   301 |      0 |      0 |            0 |
 |         clk_wiz_1                                |                                                   core_core_clk_wiz_1_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |           U0                                     |                                           core_core_clk_wiz_1_0_clk_wiz |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |         rst_clk_wiz_1_100M                       |                                          core_core_rst_clk_wiz_1_100M_0 |         16 |         15 |       0 |    1 |    33 |      0 |      0 |            0 |
 |           U0                                     |                                     core_proc_sys_reset__parameterized0 |         16 |         15 |       0 |    1 |    33 |      0 |      0 |            0 |
-|         xadc_wiz_0                               |                                                  core_core_xadc_wiz_0_0 |        284 |        284 |       0 |    0 |   364 |      0 |      0 |            0 |
-|           U0                                     |                         core_core_xadc_wiz_0_0_axi_xadc__parameterized0 |        284 |        284 |       0 |    0 |   364 |      0 |      0 |            0 |
-|   MGT                                            |                                                     storage_mgt_wrapper |       1568 |       1364 |     136 |   68 |  3205 |      3 |      0 |            0 |
+|         xadc_wiz_0                               |                                                  core_core_xadc_wiz_0_0 |        286 |        286 |       0 |    0 |   364 |      0 |      0 |            0 |
+|           U0                                     |                         core_core_xadc_wiz_0_0_axi_xadc__parameterized0 |        286 |        286 |       0 |    0 |   364 |      0 |      0 |            0 |
+|   MGT                                            |                                                     storage_mgt_wrapper |       1567 |       1363 |     136 |   68 |  3205 |      3 |      0 |            0 |
 |     (MGT)                                        |                                                     storage_mgt_wrapper |          2 |          0 |       0 |    2 |     0 |      0 |      0 |            0 |
 |     EXP_64_TO_32                                 |                                              AXI_Stream64_to_32_wrapper |        274 |        138 |     136 |    0 |   798 |      0 |      0 |            0 |
 |       (EXP_64_TO_32)                             |                                              AXI_Stream64_to_32_wrapper |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
@@ -136,7 +136,7 @@ Table of Contents
 |       axi4_stream32_to_64_inst                   |                                                     AXI4_Stream32_to_64 |        269 |        269 |       0 |    0 |   600 |      3 |      0 |            0 |
 |         inst                                     |  AXI4_Stream32_to_64_axis_interconnect_v1_1_axis_interconnect_16x16_top |        269 |        269 |       0 |    0 |   600 |      3 |      0 |            0 |
 |           axis_interconnect_0                    |            AXI4_Stream32_to_64_axis_interconnect_v1_1_axis_interconnect |        269 |        269 |       0 |    0 |   600 |      3 |      0 |            0 |
-|     U1                                           |                                                               mgt_block |       1023 |        957 |       0 |   66 |  1807 |      0 |      0 |            0 |
+|     U1                                           |                                                               mgt_block |       1022 |        956 |       0 |   66 |  1807 |      0 |      0 |            0 |
 |       (U1)                                       |                                                               mgt_block |          5 |          5 |       0 |    0 |     0 |      0 |      0 |            0 |
 |       CTRL                                       |                                                                MGT_CTRL |         57 |         57 |       0 |    0 |   141 |      0 |      0 |            0 |
 |         (CTRL)                                   |                                                                MGT_CTRL |         57 |         57 |       0 |    0 |   109 |      0 |      0 |            0 |
@@ -144,13 +144,13 @@ Table of Contents
 |         exp_loopback_sync                        |                                     double_sync_vector__parameterized14 |          0 |          0 |       0 |    0 |     6 |      0 |      0 |            0 |
 |         exp_pwrdown_sync                         |                                          double_sync__parameterized0__7 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |         pll_sync                                 |                                      double_sync_vector__parameterized8 |          0 |          0 |       0 |    0 |     4 |      0 |      0 |            0 |
-|       EXP                                        |                                                                 exp_mgt |        948 |        884 |       0 |   64 |  1599 |      0 |      0 |            0 |
+|       EXP                                        |                                                                 exp_mgt |        947 |        883 |       0 |   64 |  1599 |      0 |      0 |            0 |
 |         (EXP)                                    |                                                                 exp_mgt |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|         U0                                       |                                                    exp_mgt_exp_mgt_core |        948 |        884 |       0 |   64 |  1599 |      0 |      0 |            0 |
+|         U0                                       |                                                    exp_mgt_exp_mgt_core |        947 |        883 |       0 |   64 |  1599 |      0 |      0 |            0 |
 |           (U0)                                   |                                                    exp_mgt_exp_mgt_core |          2 |          2 |       0 |    0 |     6 |      0 |      0 |            0 |
 |           axi_to_ll_pdu_i                        |                               exp_mgt_exp_mgt_AXI_TO_LL__parameterized0 |          2 |          2 |       0 |    0 |     1 |      0 |      0 |            0 |
 |           core_reset_logic_i                     |                                             exp_mgt_exp_mgt_RESET_LOGIC |          3 |          3 |       0 |    0 |    17 |      0 |      0 |            0 |
-|           exp_mgt_aurora_lane_4byte_0_i          |                       exp_mgt_exp_mgt_AURORA_LANE_4BYTE__parameterized0 |        187 |        183 |       0 |    4 |   313 |      0 |      0 |            0 |
+|           exp_mgt_aurora_lane_4byte_0_i          |                       exp_mgt_exp_mgt_AURORA_LANE_4BYTE__parameterized0 |        186 |        182 |       0 |    4 |   313 |      0 |      0 |            0 |
 |           exp_mgt_aurora_lane_4byte_1_i          |                     exp_mgt_exp_mgt_AURORA_LANE_4BYTE__parameterized0_0 |        185 |        181 |       0 |    4 |   313 |      0 |      0 |            0 |
 |           exp_mgt_global_logic_i                 |                                            exp_mgt_exp_mgt_GLOBAL_LOGIC |         56 |         50 |       0 |    6 |   102 |      0 |      0 |            0 |
 |           exp_mgt_rx_ll_i                        |                                                   exp_mgt_exp_mgt_RX_LL |        216 |        184 |       0 |   32 |   322 |      0 |      0 |            0 |

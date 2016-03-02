@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Feb 12 12:33:06 2016" VIVADOVERSION="2014.4">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Mar 02 10:52:48 2016" VIVADOVERSION="2014.4">
 
   <SYSTEMINFO ARCH="kintex7" DEVICE="7k160t" NAME="core_imp" PACKAGE="fbg676" SPEEDGRADE="-1"/>
 
@@ -2252,7 +2252,7 @@
         <PARAMETER NAME="C_DISABLE_WARN_BHV_RANGE" VALUE="0"/>
         <PARAMETER NAME="C_COUNT_36K_BRAM" VALUE="32"/>
         <PARAMETER NAME="C_COUNT_18K_BRAM" VALUE="0"/>
-        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     20.388 mW"/>
+        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     20.388000000000002 mW"/>
         <PARAMETER NAME="Component_Name" VALUE="core_lmb_bram_0"/>
         <PARAMETER NAME="Interface_Type" VALUE="Native"/>
         <PARAMETER NAME="AXI_Type" VALUE="AXI4_Full"/>
@@ -3170,9 +3170,9 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" NAME="ACLK" SIGIS="clk" SIGNAME="clk_wiz_1_clk_out1">
+        <PORT DIR="I" NAME="ACLK" SIGIS="clk" SIGNAME="clk_wiz_1_clk_out2">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="clk_wiz_1" PORT="clk_out1"/>
+            <CONNECTION INSTANCE="clk_wiz_1" PORT="clk_out2"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="0" NAME="ARESETN" RIGHT="0" SIGIS="rst" SIGNAME="rst_clk_wiz_1_100M_interconnect_aresetn">
@@ -10007,7 +10007,6 @@
             <CONNECTION INSTANCE="MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr" PORT="LMB_Clk"/>
             <CONNECTION INSTANCE="MCU_microblaze_0_local_memory_ilmb_v10" PORT="LMB_Clk"/>
             <CONNECTION INSTANCE="MCU_microblaze_0_local_memory_lmb_v10" PORT="LMB_Clk"/>
-            <CONNECTION INSTANCE="MemoryBuffer_buffer_interconnect_0" PORT="ACLK"/>
             <CONNECTION INSTANCE="MemoryBuffer_buffer_interconnect_0" PORT="S02_ACLK"/>
             <CONNECTION INSTANCE="axi_gpio_mem_addr" PORT="s_axi_aclk"/>
             <CONNECTION INSTANCE="axi_gpio_tp" PORT="s_axi_aclk"/>
@@ -10037,6 +10036,7 @@
             <CONNECTION INSTANCE="MemoryBuffer_axi_dm_buffer" PORT="m_axi_s2mm_aclk"/>
             <CONNECTION INSTANCE="MemoryBuffer_axi_dm_buffer" PORT="m_axis_mm2s_cmdsts_aclk"/>
             <CONNECTION INSTANCE="MemoryBuffer_axi_dm_buffer" PORT="m_axis_s2mm_cmdsts_awclk"/>
+            <CONNECTION INSTANCE="MemoryBuffer_buffer_interconnect_0" PORT="ACLK"/>
             <CONNECTION INSTANCE="MemoryBuffer_buffer_interconnect_0" PORT="S00_ACLK"/>
             <CONNECTION INSTANCE="MemoryBuffer_buffer_interconnect_0" PORT="S01_ACLK"/>
           </CONNECTIONS>
