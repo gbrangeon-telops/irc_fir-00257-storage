@@ -1089,14 +1089,14 @@ proc create_root_design { parentCell } {
   connect_bd_net -net xadc_wiz_0_temp_out [get_bd_pins MemoryBuffer/device_temp_i] [get_bd_pins xadc_wiz_0/temp_out]
 
   # Create address segments
-  create_bd_addr_seg -range 0x20000 -offset 0x0 [get_bd_addr_spaces MCU/mdm_1/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB1/Mem] SEG_dlmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x40000 -offset 0x0 [get_bd_addr_spaces MCU/mdm_1/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB1/Mem] SEG_dlmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x10000 -offset 0x40000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_gpio_mem_addr/S_AXI/Reg] SEG_axi_gpio_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x40010000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_gpio_tp/S_AXI/Reg] SEG_axi_gpio_tp_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x44A40000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x41C00000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_timer_0/S_AXI/Reg] SEG_axi_timer_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x40400000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_uart_fpga_output/S_AXI/Reg] SEG_axi_uart_fpga_output_Reg
-  create_bd_addr_seg -range 0x20000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
-  create_bd_addr_seg -range 0x20000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Instruction] [get_bd_addr_segs MCU/microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x40000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x40000 -offset 0x0 [get_bd_addr_spaces MCU/microblaze_0/Instruction] [get_bd_addr_segs MCU/microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x10000 -offset 0x41200000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs INTC/microblaze_0_axi_intc/s_axi/Reg] SEG_microblaze_0_axi_intc_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x44A00000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs xadc_wiz_0/s_axi_lite/Reg] SEG_xadc_wiz_0_Reg
   create_bd_addr_seg -range 0x10000 -offset 0x44A10000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_BUF/Reg] TEL_AXIL_BUF
