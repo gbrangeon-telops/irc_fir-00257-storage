@@ -814,7 +814,7 @@ proc create_hier_cell_MCU { parentCell nameHier } {
 
   # Create instance: microblaze_0, and set properties
   set microblaze_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:9.4 microblaze_0 ]
-  set_property -dict [ list CONFIG.C_DEBUG_ENABLED {1} CONFIG.C_D_AXI {1}  ] $microblaze_0
+  set_property -dict [ list CONFIG.C_DEBUG_ENABLED {1} CONFIG.C_D_AXI {1} CONFIG.C_USE_STACK_PROTECTION {1} CONFIG.G_USE_EXCEPTIONS {1}  ] $microblaze_0
 
   # Create instance: microblaze_0_local_memory
   create_hier_cell_microblaze_0_local_memory $hier_obj microblaze_0_local_memory
