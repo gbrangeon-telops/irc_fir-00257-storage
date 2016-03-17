@@ -32,6 +32,12 @@ int main()  // Defining the standard main() function
    extern ctrlIntf_t gOutputCtrlIntf;
    extern t_bufferManager gBufManager;
 
+   // Configure stack violation exception
+   extern unsigned int *_stack_end;
+   extern unsigned int *_stack;
+   mtshr(&_stack);
+   mtslr(&_stack_end);
+
    BuiltInTest_Execute(BITID_BuiltInTestsVerification);
 
    BuiltInTest_Execute(BITID_TimerInitialization);
