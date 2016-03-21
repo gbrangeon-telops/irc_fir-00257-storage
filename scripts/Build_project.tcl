@@ -18,5 +18,6 @@ report_utilization -file $base_dir/reports/${proj_name}_utilization_placed_hier.
 #open_bd_design $base_dir/xilinx/$proj_name.srcs/sources_1/bd/core/core.bd
 #Export hardware for sdk
 source $base_dir/scripts/export_hw_to_sdk.tcl
+exec $base_dir/scripts/updateHwSvnRev.bat
 # End of this build
 close_project
