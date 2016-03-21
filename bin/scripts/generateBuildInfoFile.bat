@@ -1,3 +1,4 @@
+@echo off
 call D:\Telops\FIR-00257-Storage\bin\scripts\setEnvironment.bat
 
 rem Clean up

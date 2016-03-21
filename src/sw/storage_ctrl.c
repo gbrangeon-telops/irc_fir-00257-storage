@@ -22,6 +22,7 @@
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
 #include "XADC.h"
+#include "StackUtils.h"
 
 /*--------------------------------------------------------------------------------------*/
 /* main                                                                                 */
@@ -32,11 +33,8 @@ int main()  // Defining the standard main() function
    extern ctrlIntf_t gOutputCtrlIntf;
    extern t_bufferManager gBufManager;
 
-   // Configure stack violation exception
-   extern unsigned int *_stack_end;
-   extern unsigned int *_stack;
-   mtshr(&_stack);
-   mtslr(&_stack_end);
+   Stack_ConfigStackViolationException();
+   Stack_FillRemaining();
 
    BuiltInTest_Execute(BITID_BuiltInTestsVerification);
 
