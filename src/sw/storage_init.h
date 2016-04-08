@@ -19,6 +19,8 @@
 #include "Protocol_F1F2.h"
 #include "IRC_Status.h"
 
+#define DT_UART_TX_CIRC_BUFFER_SIZE          1024
+
 #define OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE   (2 * F1F2_MAX_NET_PACKET_SIZE)
 #define OUTPUT_CI_UART_TX_BUFFER_SIZE        F1F2_MAX_NET_PACKET_SIZE
 
@@ -26,12 +28,15 @@
 #define GCM_CMD_QUEUE_SIZE          1
 #define OUTPUT_CI_CMD_QUEUE_SIZE    5
 #define FU_CMD_QUEUE_SIZE           1
+#define DT_CMD_QUEUE_SIZE           1
 
 #define GC_EVENT_ERROR_QUEUE_SIZE   5
 
 IRC_Status_t Storage_Timer_Init();
 IRC_Status_t Storage_FU_Init();
 IRC_Status_t Storage_NI_Init();
+IRC_Status_t Storage_DebugTerminal_InitPhase1();
+IRC_Status_t Storage_DebugTerminal_InitPhase2();
 IRC_Status_t Storage_GC_Init();
 IRC_Status_t Storage_QSPIFlash_Init();
 IRC_Status_t Storage_Intc_Init();

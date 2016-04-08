@@ -50,6 +50,11 @@
 			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/Software</locationURI>
 		</link>
 		<link>
+			<name>src/DT_CommandsDef.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/DT_CommandsDef.c</locationURI>
+		</link>
+		<link>
 			<name>src/GC_Callback.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/GC_Callback.c</locationURI>

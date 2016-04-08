@@ -35,6 +35,7 @@ enum builtInTestIDEnum {
    BITID_InterruptControllerStartup,
    BITID_TestPointInitialization,
    BITID_NetworkHostsSynchronization,
+   BITID_DebugTerminalInitialization,
 
    // Built-in test count
    BITID_Count
