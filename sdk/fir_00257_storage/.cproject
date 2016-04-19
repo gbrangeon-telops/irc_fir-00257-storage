@@ -45,7 +45,7 @@
 								<option id="xilinx.gnu.compiler.symbols.defined.1669916499" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="FPGA_STORAGE"/>
 									<listOptionValue builtIn="false" value="ENABLE_PRINTF"/>
-									<listOptionValue builtIn="false" value="DEBUG"/>
+									<listOptionValue builtIn="false" value="TELOPS_DEBUG"/>
 								</option>
 								<option id="xilinx.gnu.compiler.symbols.undefined.54029551" name="Undefined symbols (-U)" superClass="xilinx.gnu.compiler.symbols.undefined"/>
 								<inputType id="xilinx.gnu.compiler.input.213317003" name="C source files" superClass="xilinx.gnu.compiler.input"/>
