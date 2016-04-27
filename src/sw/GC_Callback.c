@@ -100,15 +100,6 @@ void GC_Callback_Init()
  */
 void GC_AcquisitionArmCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -120,15 +111,6 @@ void GC_AcquisitionArmCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acces
  */
 void GC_AcquisitionFrameRateCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -140,15 +122,6 @@ void GC_AcquisitionFrameRateCallback(gcCallbackPhase_t phase, gcCallbackAccess_t
  */
 void GC_AcquisitionFrameRateMaxFGCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -160,15 +133,6 @@ void GC_AcquisitionFrameRateMaxFGCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_AcquisitionFrameRateModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -183,11 +147,6 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
    extern bool gBufferStartDownloadTrigger;
    extern bool gBufferAcqStartedTrigger;
    extern uint8_t gAcquisitionStarted;
-
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
@@ -219,11 +178,6 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
 {
    extern bool gBufferStopDownloadTrigger;
    extern uint8_t gAcquisitionStarted;
-
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
@@ -296,15 +250,6 @@ void GC_DeviceFirmwareModuleRevisionCallback(gcCallbackPhase_t phase, gcCallback
  */
 void GC_DeviceFirmwareModuleSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -332,15 +277,6 @@ void GC_DeviceTemperatureCallback(gcCallbackPhase_t phase, gcCallbackAccess_t ac
  */
 void GC_DeviceTemperatureSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -368,15 +304,6 @@ void GC_DeviceVoltageCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access
  */
 void GC_DeviceVoltageSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -393,7 +320,8 @@ void GC_EventErrorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
       // After read
       gcRegsData.EventError = 0;
       GC_NextEventError();
-   }}
+   }
+}
 
 /**
  * EventErrorCode GenICam register callback function.
@@ -409,7 +337,8 @@ void GC_EventErrorCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acces
       // After read
       gcRegsData.EventErrorCode = EECD_NoError;
       GC_NextEventError();
-   }}
+   }
+}
 
 /**
  * EventErrorTimestamp GenICam register callback function.
@@ -425,7 +354,8 @@ void GC_EventErrorTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t 
       // After read
       gcRegsData.EventErrorTimestamp = 0;
       GC_NextEventError();
-   }}
+   }
+}
 
 /**
  * EventNotification GenICam register callback function.
@@ -525,15 +455,6 @@ void GC_EventTelopsTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t
  */
 void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -545,11 +466,6 @@ void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -570,11 +486,6 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -590,7 +501,6 @@ void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
       {
          BufferManager_SetBufferMode(&gBufManager, BM_READ,  &gcRegsData);
       }
-
    }
 }
 
@@ -607,11 +517,6 @@ void GC_MemoryBufferNumberOfImagesMaxCallback(gcCallbackPhase_t phase, gcCallbac
    {
       // Before read
       gcRegsData.MemoryBufferNumberOfImagesMax = BufferManager_GetNbImageMax(&gcRegsData);
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
    }
 }
 
@@ -654,11 +559,6 @@ void GC_MemoryBufferNumberOfSequencesMaxCallback(gcCallbackPhase_t phase, gcCall
       // Before read
       gcRegsData.MemoryBufferNumberOfSequencesMax = BufferManager_GetNumberOfSequenceMax();
    }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -670,11 +570,6 @@ void GC_MemoryBufferNumberOfSequencesMaxCallback(gcCallbackPhase_t phase, gcCall
  */
 void GC_MemoryBufferSequenceClearAllCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -691,15 +586,6 @@ void GC_MemoryBufferSequenceClearAllCallback(gcCallbackPhase_t phase, gcCallback
  */
 void GC_MemoryBufferSequenceCountCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -711,15 +597,6 @@ void GC_MemoryBufferSequenceCountCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_MemoryBufferSequenceDownloadBitRateMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -762,11 +639,6 @@ void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase
  */
 void GC_MemoryBufferSequenceDownloadModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -788,11 +660,6 @@ void GC_MemoryBufferSequenceFirstFrameIDCallback(gcCallbackPhase_t phase, gcCall
       // Before read
       gcRegsData.MemoryBufferSequenceFirstFrameID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
    }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -809,11 +676,6 @@ void GC_MemoryBufferSequenceMOIFrameIDCallback(gcCallbackPhase_t phase, gcCallba
       // Before read
       gcRegsData.MemoryBufferSequenceMOIFrameID = BufferManager_GetSequenceMOIFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
    }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -825,11 +687,6 @@ void GC_MemoryBufferSequenceMOIFrameIDCallback(gcCallbackPhase_t phase, gcCallba
  */
 void GC_MemoryBufferSequencePreMOISizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -852,11 +709,6 @@ void GC_MemoryBufferSequenceRecordedSizeCallback(gcCallbackPhase_t phase, gcCall
       // Before read
       gcRegsData.MemoryBufferSequenceRecordedSize = BufferManager_GetSequenceLength(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
    }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -868,16 +720,6 @@ void GC_MemoryBufferSequenceRecordedSizeCallback(gcCallbackPhase_t phase, gcCall
  */
 void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-      // This parameter has to be set for other actions, so nothing to do for now
-   }
 }
 
 /**
@@ -889,11 +731,6 @@ void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallback
  */
 void GC_MemoryBufferSequenceSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -919,11 +756,6 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
       // Since MemoryBufferSequenceSize must be even, make sure MemoryBufferSequenceSizeMax is even too
       gcRegsData.MemoryBufferSequenceSizeMax = roundDown(BufferManager_GetNbImageMax(&gcRegsData), 2);
    }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -935,15 +767,6 @@ void GC_MemoryBufferSequenceSizeMaxCallback(gcCallbackPhase_t phase, gcCallbackA
  */
 void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -955,15 +778,6 @@ void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -975,15 +789,6 @@ void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -995,15 +800,6 @@ void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -1015,15 +811,6 @@ void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_TriggerModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -1035,15 +822,6 @@ void GC_TriggerModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_TriggerSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -1055,15 +833,6 @@ void GC_TriggerSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
  */
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      // After write
-   }
 }
 
 /**
@@ -1075,11 +844,6 @@ void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      // Before read
-   }
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
