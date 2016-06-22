@@ -23,10 +23,10 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 11.5.0
+// Generated from XML camera definition file version 12.0.0
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 11) || (GC_XMLMINORVERSION != 5) || (GC_XMLSUBMINORVERSION != 0))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 0) || (GC_XMLSUBMINORVERSION != 0))
 #error "XML version mismatch."
 #endif
 
@@ -124,7 +124,7 @@ extern uint32_t TriggerModeAry[TriggerModeAryLen];
 // Locked registers utility macros
 ////////////////////////////////////////////////////////////////////////////////
 #define GC_MemoryBufferNotEmpty (gcRegsData.MemoryBufferSequenceCount > 0)
-#define GC_WaitingForCalibrationActualization (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
+#define GC_WaitingForImageCorrection (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
 
 void GC_Registers_Init();
 
