@@ -674,7 +674,7 @@ void BufferManager_SM()
       // go to the DONE state only when in download mode
       if (enabled && cstate == BMS_READ)
       {
-         PRINTF("Buffer download stopped.\n");
+         FPGA_PRINTF("Buffer download stopped.\n");
 
          cstate = BMS_DONE;
       }
