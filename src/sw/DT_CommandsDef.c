@@ -48,7 +48,7 @@ IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
       return IRC_FAILURE;
    }
 
-   DT_PRINTF("Output FPGA debug terminal commands: (%d)", gDebugTerminal.txCircDataBuffer.maxLength);
+   DT_PRINTF("Storage FPGA debug terminal commands: (%d)", gDebugTerminal.txCircDataBuffer.maxLength);
    DT_PRINTF("  Read memory:        RDM address [c|u8|u16|u32|s8|s16|s32 length]");
    DT_PRINTF("  Write memory:       WRM address value");
    DT_PRINTF("  Network status:     NET [0|1 [port]]");

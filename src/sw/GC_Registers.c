@@ -253,6 +253,6 @@ void GC_UpdateMemoryBufferSequencePreMOISizeLimits()
  */
 uint32_t GC_GetTimestamp()
 {
-   // Output FPGA does not support POSIX time.
+   // Storage FPGA does not support POSIX time.
    return 0;
 }
