@@ -45,6 +45,7 @@ entity BUFFERING_FSM is
         ACQUISITION_STOP    : in std_logic;
         MOI                 : in std_logic;
         FULL                : out std_logic;
+        PAUSE               : out std_logic;
 
         --WRITE MODE
         CONFIG_VALID        : in STD_LOGIC;        
@@ -259,7 +260,8 @@ mm2s_sts_mosi <= AXIS_MM2S_STS_MOSI;
 s2mm_cmd_miso <= AXIS_S2MM_CMD_MISO;
 s2mm_sts_mosi <= AXIS_S2MM_STS_MOSI;
 
-FULL <= '1' when (nb_seq_in_mem_u = nb_sequence_u) else '0';
+FULL <= '1' when (nb_seq_in_mem_u = nb_sequence_u) else '0';   
+PAUSE <= '1' when (ACQUISITION_STOP = '1' and write_state = STANDBY_WR) else '0'; 
 
 WRITE_ERR <= s2mm_err_o;
 READ_ERR  <= mm2s_err_o;
