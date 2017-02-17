@@ -11,6 +11,7 @@ wait_on_run impl_1
 open_run impl_1
 #Save reports
 report_timing_summary -file $base_dir/reports/${proj_name}_timing_summary_routed.rpt
+report_power -file $base_dir/reports/${proj_name}_power.rpt
 report_clock_utilization -file $base_dir/reports/${proj_name}_clock_utilization_placed.rpt
 report_utilization -file $base_dir/reports/${proj_name}_utilization_placed.rpt
 report_utilization -file $base_dir/reports/${proj_name}_utilization_placed_hier.rpt -hierarchical -hierarchical_depth 5
