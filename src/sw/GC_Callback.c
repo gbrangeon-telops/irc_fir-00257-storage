@@ -30,7 +30,7 @@
 #include "BuiltInTests.h"
 
 extern t_bufferManager gBufManager;
-
+extern bool gBufferStartDownloadTrigger;
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
 // Generated from XML camera definition file version 12.0.1
@@ -625,8 +625,7 @@ void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
-      // This parameter has to be set for other actions, so nothing to do for now
+      gBufferStartDownloadTrigger = 1;
    }
 }
 
