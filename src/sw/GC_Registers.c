@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.0.1
+// Generated from XML camera definition file version 12.1.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -57,21 +57,42 @@ gcRegistersData_t gcRegsDataFactory = {
    /* EventTelopsTimestamp = */ 0,
    /* FValSize = */ 0,
    /* Height = */ 0,
+   /* MemoryBufferAvailableFreeSpaceHigh = */ 0,
+   /* MemoryBufferAvailableFreeSpaceLow = */ 0,
+   /* MemoryBufferFragmentedFreeSpaceHigh = */ 0,
+   /* MemoryBufferFragmentedFreeSpaceLow = */ 0,
+   /* MemoryBufferLegacyMode = */ MBLM_On,
+   /* MemoryBufferMOISource = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
    /* MemoryBufferNumberOfImagesMax = */ 0,
    /* MemoryBufferNumberOfSequences = */ 1,
    /* MemoryBufferNumberOfSequencesMax = */ 0,
+   /* MemoryBufferSequenceClear = */ 0,
    /* MemoryBufferSequenceClearAll = */ 0,
    /* MemoryBufferSequenceCount = */ 0,
+   /* MemoryBufferSequenceDefrag = */ 0,
+   /* MemoryBufferSequenceDownloadFrameCount = */ 0,
+   /* MemoryBufferSequenceDownloadFrameID = */ 0,
    /* MemoryBufferSequenceDownloadImageFrameID = */ 0,
    /* MemoryBufferSequenceDownloadMode = */ MBSDM_Off,
    /* MemoryBufferSequenceFirstFrameID = */ 0,
+   /* MemoryBufferSequenceHeight = */ 0,
    /* MemoryBufferSequenceMOIFrameID = */ 0,
+   /* MemoryBufferSequenceOffsetX = */ 0,
+   /* MemoryBufferSequenceOffsetY = */ 0,
    /* MemoryBufferSequencePreMOISize = */ 0,
    /* MemoryBufferSequenceRecordedSize = */ 0,
    /* MemoryBufferSequenceSelector = */ 0,
    /* MemoryBufferSequenceSize = */ 2,
+   /* MemoryBufferSequenceSizeInc = */ 0,
    /* MemoryBufferSequenceSizeMax = */ 0,
+   /* MemoryBufferSequenceSizeMin = */ 0,
+   /* MemoryBufferSequenceWidth = */ 0,
+   /* MemoryBufferStatus = */ MEMORY_BUFFER_STATUS_INIT,
+   /* MemoryBufferTotalSpaceHigh = */ 0,
+   /* MemoryBufferTotalSpaceLow = */ 0,
+   /* OffsetX = */ 0,
+   /* OffsetY = */ 0,
    /* ReverseX = */ 0,
    /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
@@ -142,21 +163,42 @@ void GC_Registers_Init()
    gcRegsDef[EventTelopsTimestampIdx].p_data = &gcRegsData.EventTelopsTimestamp;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
+   gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceHigh;
+   gcRegsDef[MemoryBufferAvailableFreeSpaceLowIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceLow;
+   gcRegsDef[MemoryBufferFragmentedFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferFragmentedFreeSpaceHigh;
+   gcRegsDef[MemoryBufferFragmentedFreeSpaceLowIdx].p_data = &gcRegsData.MemoryBufferFragmentedFreeSpaceLow;
+   gcRegsDef[MemoryBufferLegacyModeIdx].p_data = &gcRegsData.MemoryBufferLegacyMode;
+   gcRegsDef[MemoryBufferMOISourceIdx].p_data = &gcRegsData.MemoryBufferMOISource;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;
    gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfImagesMax;
    gcRegsDef[MemoryBufferNumberOfSequencesIdx].p_data = &gcRegsData.MemoryBufferNumberOfSequences;
    gcRegsDef[MemoryBufferNumberOfSequencesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfSequencesMax;
+   gcRegsDef[MemoryBufferSequenceClearIdx].p_data = &gcRegsData.MemoryBufferSequenceClear;
    gcRegsDef[MemoryBufferSequenceClearAllIdx].p_data = &gcRegsData.MemoryBufferSequenceClearAll;
    gcRegsDef[MemoryBufferSequenceCountIdx].p_data = &gcRegsData.MemoryBufferSequenceCount;
+   gcRegsDef[MemoryBufferSequenceDefragIdx].p_data = &gcRegsData.MemoryBufferSequenceDefrag;
+   gcRegsDef[MemoryBufferSequenceDownloadFrameCountIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadFrameCount;
+   gcRegsDef[MemoryBufferSequenceDownloadFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadFrameID;
    gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
    gcRegsDef[MemoryBufferSequenceDownloadModeIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadMode;
    gcRegsDef[MemoryBufferSequenceFirstFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceFirstFrameID;
+   gcRegsDef[MemoryBufferSequenceHeightIdx].p_data = &gcRegsData.MemoryBufferSequenceHeight;
    gcRegsDef[MemoryBufferSequenceMOIFrameIDIdx].p_data = &gcRegsData.MemoryBufferSequenceMOIFrameID;
+   gcRegsDef[MemoryBufferSequenceOffsetXIdx].p_data = &gcRegsData.MemoryBufferSequenceOffsetX;
+   gcRegsDef[MemoryBufferSequenceOffsetYIdx].p_data = &gcRegsData.MemoryBufferSequenceOffsetY;
    gcRegsDef[MemoryBufferSequencePreMOISizeIdx].p_data = &gcRegsData.MemoryBufferSequencePreMOISize;
    gcRegsDef[MemoryBufferSequenceRecordedSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceRecordedSize;
    gcRegsDef[MemoryBufferSequenceSelectorIdx].p_data = &gcRegsData.MemoryBufferSequenceSelector;
    gcRegsDef[MemoryBufferSequenceSizeIdx].p_data = &gcRegsData.MemoryBufferSequenceSize;
+   gcRegsDef[MemoryBufferSequenceSizeIncIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeInc;
    gcRegsDef[MemoryBufferSequenceSizeMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMax;
+   gcRegsDef[MemoryBufferSequenceSizeMinIdx].p_data = &gcRegsData.MemoryBufferSequenceSizeMin;
+   gcRegsDef[MemoryBufferSequenceWidthIdx].p_data = &gcRegsData.MemoryBufferSequenceWidth;
+   gcRegsDef[MemoryBufferStatusIdx].p_data = &gcRegsData.MemoryBufferStatus;
+   gcRegsDef[MemoryBufferTotalSpaceHighIdx].p_data = &gcRegsData.MemoryBufferTotalSpaceHigh;
+   gcRegsDef[MemoryBufferTotalSpaceLowIdx].p_data = &gcRegsData.MemoryBufferTotalSpaceLow;
+   gcRegsDef[OffsetXIdx].p_data = &gcRegsData.OffsetX;
+   gcRegsDef[OffsetYIdx].p_data = &gcRegsData.OffsetY;
    gcRegsDef[ReverseXIdx].p_data = &gcRegsData.ReverseX;
    gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
@@ -185,6 +227,8 @@ void GC_UpdateLockedFlag()
    SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceSelectorIdx], GC_AcquisitionStarted);
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameIDIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameCountIdx], GC_AcquisitionStarted);
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], GC_AcquisitionStarted);
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx], (GC_AcquisitionStarted && (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off)));
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceClearAllIdx], GC_AcquisitionStarted);

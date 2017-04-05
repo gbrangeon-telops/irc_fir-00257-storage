@@ -128,16 +128,6 @@ enum BufferMode_enum {
 };
 typedef enum BufferMode_enum t_bufferMode;
 
-/**
- * BUFFER TABLE STRUCT
- */
-struct s_bufferTable {
-   uint32_t start_img;
-   uint32_t moi_img;
-   uint32_t stop_img;
-};
-typedef struct s_bufferTable t_bufferTable;
-
 typedef enum
 {
    BMS_IDLE = 0,
@@ -161,13 +151,13 @@ typedef uint32_t t_bufferManagerError;
 IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs);
 void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl);
 void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl);
-void BufferManager_ReadSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
-void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
+IRC_Status_t BufferManager_ConfigureDownload(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs);
 void BufferManager_ClearSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs);
 void BufferManager_EnableBuffer(t_bufferManager *pBufferCtrl);
 void BufferManager_DisableBuffer(t_bufferManager *pBufferCtrl);
 void BufferManager_SetBufferMode(t_bufferManager *pBufferCtrl, t_bufferMode Mode, const gcRegistersData_t *pGCRegs );
 void BufferManager_SetSequenceParams(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs );
+void BufferManager_SetSequenceDownloadDefaultParams(t_bufferManager *pBufferCtrl, gcRegistersData_t *pGCRegs);
 
 uint32_t BufferManager_GetNbImageMax(const gcRegistersData_t *pGCRegs);
 uint32_t BufferManager_GetNumberOfSequenceMax();

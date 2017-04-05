@@ -23,10 +23,10 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.0.1
+// Generated from XML camera definition file version 12.1.0
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 0) || (GC_XMLSUBMINORVERSION != 1))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 1) || (GC_XMLSUBMINORVERSION != 0))
 #error "XML version mismatch."
 #endif
 
@@ -62,21 +62,42 @@ struct gcRegistersDataStruct {
    uint32_t EventTelopsTimestamp;
    uint32_t FValSize;
    uint32_t Height;
+   uint32_t MemoryBufferAvailableFreeSpaceHigh;
+   uint32_t MemoryBufferAvailableFreeSpaceLow;
+   uint32_t MemoryBufferFragmentedFreeSpaceHigh;
+   uint32_t MemoryBufferFragmentedFreeSpaceLow;
+   uint32_t MemoryBufferLegacyMode;
+   uint32_t MemoryBufferMOISource;
    uint32_t MemoryBufferMode;
    uint32_t MemoryBufferNumberOfImagesMax;
    uint32_t MemoryBufferNumberOfSequences;
    uint32_t MemoryBufferNumberOfSequencesMax;
+   uint32_t MemoryBufferSequenceClear;
    uint32_t MemoryBufferSequenceClearAll;
    uint32_t MemoryBufferSequenceCount;
+   uint32_t MemoryBufferSequenceDefrag;
+   uint32_t MemoryBufferSequenceDownloadFrameCount;
+   uint32_t MemoryBufferSequenceDownloadFrameID;
    uint32_t MemoryBufferSequenceDownloadImageFrameID;
    uint32_t MemoryBufferSequenceDownloadMode;
    uint32_t MemoryBufferSequenceFirstFrameID;
+   uint32_t MemoryBufferSequenceHeight;
    uint32_t MemoryBufferSequenceMOIFrameID;
+   uint32_t MemoryBufferSequenceOffsetX;
+   uint32_t MemoryBufferSequenceOffsetY;
    uint32_t MemoryBufferSequencePreMOISize;
    uint32_t MemoryBufferSequenceRecordedSize;
    uint32_t MemoryBufferSequenceSelector;
    uint32_t MemoryBufferSequenceSize;
+   uint32_t MemoryBufferSequenceSizeInc;
    uint32_t MemoryBufferSequenceSizeMax;
+   uint32_t MemoryBufferSequenceSizeMin;
+   uint32_t MemoryBufferSequenceWidth;
+   uint32_t MemoryBufferStatus;
+   uint32_t MemoryBufferTotalSpaceHigh;
+   uint32_t MemoryBufferTotalSpaceLow;
+   uint32_t OffsetX;
+   uint32_t OffsetY;
    uint32_t ReverseX;
    uint32_t ReverseY;
    uint32_t SensorHeight;
@@ -118,6 +139,8 @@ extern uint32_t TriggerModeAry[TriggerModeAryLen];
 ////////////////////////////////////////////////////////////////////////////////
 
 #define GC_SetMemoryBufferMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferModeIdx], val)
+#define GC_SetMemoryBufferLegacyMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferLegacyModeIdx], val)
+#define GC_SetMemoryBufferStatus(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferStatusIdx], val)
 #define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
 #define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
 

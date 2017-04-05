@@ -32,7 +32,6 @@ static t_bufferManagerError gBufManagerError;
 
 
 // Private function prototypes
-static t_bufferTable BufferManager_ReadBufferTable(uint32_t SequenceID);
 static uint32_t BufferManager_GetFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID, uint32_t ImageLocation);
 static IRC_Status_t BufferManager_MemAddrGPIO_Init();
 static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr);
@@ -130,74 +129,63 @@ void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl)
 
 
 /**
- * Set the Buffer Manager module to read a sequence.
+ * Configure the Buffer Manager module to download a sequence.
  *
  * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
  * @param pGCRegs Pointer to the Genicam registers.
  *
- * @return void.
+ * @return IRC_SUCCESS if successfully configured the buffer manager module.
+ * @return IRC_FAILURE otherwise.
  */
-void BufferManager_ReadSequence(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs)
+IRC_Status_t BufferManager_ConfigureDownload(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs)
 {
-   t_bufferTable SequenceTable;
+   uint32_t rd_frameId;
+   uint32_t rd_frameOffset;
+   uint32_t rd_frameCount;
 
-   // Get sequence info values
-   SequenceTable = BufferManager_ReadBufferTable(pGCRegs->MemoryBufferSequenceSelector);
+   switch (gcRegsData.MemoryBufferSequenceDownloadMode)
+   {
+      case MBSDM_Sequence:
+         rd_frameId = pGCRegs->MemoryBufferSequenceDownloadFrameID;
+         rd_frameCount = pGCRegs->MemoryBufferSequenceDownloadFrameCount;
+         break;
+
+      case MBSDM_Image:
+         rd_frameId = pGCRegs->MemoryBufferSequenceDownloadImageFrameID;
+         rd_frameCount = 1;
+         break;
+
+      default:
+         // Invalid download mode
+         return IRC_FAILURE;
+         break;
+   }
 
    BufferManager_DisableBuffer(pBufferCtrl);
 
-   // Set read mode control values
+   // Get sequence info
    pBufferCtrl->rd_sequence_id = pGCRegs->MemoryBufferSequenceSelector;
-   pBufferCtrl->rd_start_img = SequenceTable.start_img;
-   pBufferCtrl->rd_stop_img = SequenceTable.stop_img;
+   uint32_t sequenceFirstFrameOffset =  AXI4L_read32(TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + pBufferCtrl->rd_sequence_id*4 + BT_START_IMG_OFFSET);
+   uint32_t sequenceFirstFrameId = BufferManager_GetFrameId(pBufferCtrl, pBufferCtrl->rd_sequence_id, sequenceFirstFrameOffset);
+   uint32_t sequenceFrameCount = BufferManager_GetSequenceLength(pBufferCtrl, pBufferCtrl->rd_sequence_id);
+   uint32_t sequenceLastFrameId = sequenceFirstFrameId + sequenceFrameCount - 1;
 
-   AXI4L_write32(pBufferCtrl->rd_sequence_id, 	pBufferCtrl->ADD + BM_READ_SEQUENCE_ID);
-   AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
-   AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
+   // Limit frame ID and frame count
+   rd_frameId = MIN(MAX(rd_frameId, sequenceFirstFrameId), sequenceLastFrameId);
+   rd_frameOffset = rd_frameId - sequenceFirstFrameId;
+   rd_frameCount = MIN(rd_frameCount, sequenceFrameCount - rd_frameOffset);
+
+   // Compute download start and stop images offset
+   pBufferCtrl->rd_start_img = (sequenceFirstFrameOffset + rd_frameOffset) % pBufferCtrl->nbImagePerSeq;
+   pBufferCtrl->rd_stop_img = (pBufferCtrl->rd_start_img + (rd_frameCount - 1)) % pBufferCtrl->nbImagePerSeq;
+
+   AXI4L_write32(pBufferCtrl->rd_sequence_id,   pBufferCtrl->ADD + BM_READ_SEQUENCE_ID);
+   AXI4L_write32(pBufferCtrl->rd_start_img,  pBufferCtrl->ADD + BM_READ_START_ID);
+   AXI4L_write32(pBufferCtrl->rd_stop_img,   pBufferCtrl->ADD + BM_READ_STOP_ID);
 
    //BufferManager_EnableBuffer(pBufferCtrl); // workaround : on doit laisser un peu de temps à la config avant de la réactiver
-}
 
-
-/**
- * Set the Buffer Manager module to read an image.
- *
- * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
- * @param pGCRegs Pointer to the Genicam registers.
- *
- * @return void.
- */
-void BufferManager_ReadImage(t_bufferManager *pBufferCtrl, 	const gcRegistersData_t *pGCRegs)
-{
-   t_bufferTable SequenceTable;
-   uint32_t firstFrameId;
-   uint32_t img_offset;
-   uint32_t download_img_loc;
-
-   // Get sequence info values
-   SequenceTable = BufferManager_ReadBufferTable(pGCRegs->MemoryBufferSequenceSelector);
-
-   // Get the firstFrameId
-   firstFrameId = BufferManager_GetFrameId(pBufferCtrl, pGCRegs->MemoryBufferSequenceSelector, SequenceTable.start_img);
-
-   // Get the image location of the RequieredimageFrameID
-   img_offset = pGCRegs->MemoryBufferSequenceDownloadImageFrameID - firstFrameId;
-
-   // Find the location of the frame id (modulo to rollover the circular buffer)
-   download_img_loc = (img_offset + SequenceTable.start_img) % pBufferCtrl->nbImagePerSeq;
-
-   BufferManager_DisableBuffer(pBufferCtrl);
-
-   // Set read mode control values
-   pBufferCtrl->rd_sequence_id = pGCRegs->MemoryBufferSequenceSelector;
-   pBufferCtrl->rd_start_img = download_img_loc;
-   pBufferCtrl->rd_stop_img = download_img_loc;
-
-   AXI4L_write32(pBufferCtrl->rd_sequence_id, 	pBufferCtrl->ADD + BM_READ_SEQUENCE_ID);
-   AXI4L_write32(pBufferCtrl->rd_start_img, 	pBufferCtrl->ADD + BM_READ_START_ID);
-   AXI4L_write32(pBufferCtrl->rd_stop_img, 	pBufferCtrl->ADD + BM_READ_STOP_ID);
-
-   //BufferManager_EnableBuffer(pBufferCtrl); // workaround : on doit laisser un peu de temps à la config avant de la réactiver
+   return IRC_SUCCESS;
 }
 
 
@@ -298,13 +286,10 @@ uint32_t BufferManager_GetNumSequenceCount(t_bufferManager *pBufferCtrl)
  */
 uint32_t BufferManager_GetSequenceFirstFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID)
 {
-   t_bufferTable SequenceTable;
-
-   // Get sequence info values
-   SequenceTable = BufferManager_ReadBufferTable(SequenceID);
+   uint32_t start_img = AXI4L_read32(TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + SequenceID*4 + BT_START_IMG_OFFSET);
 
    // Get FrameID of sequence start image
-   return BufferManager_GetFrameId(pBufferCtrl, SequenceID, SequenceTable.start_img);
+   return BufferManager_GetFrameId(pBufferCtrl, SequenceID, start_img);
 }
 
 
@@ -318,13 +303,10 @@ uint32_t BufferManager_GetSequenceFirstFrameId(t_bufferManager *pBufferCtrl, uin
  */
 uint32_t BufferManager_GetSequenceMOIFrameId(t_bufferManager *pBufferCtrl, uint32_t SequenceID)
 {
-   t_bufferTable SequenceTable;
-
-   // Get sequence info values
-   SequenceTable = BufferManager_ReadBufferTable(SequenceID);
+   uint32_t moi_img = AXI4L_read32(TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + SequenceID*4 + BT_MOI_IMG_OFFSET);
 
    // Get FrameID of sequence start image
-   return BufferManager_GetFrameId(pBufferCtrl, SequenceID, SequenceTable.moi_img);
+   return BufferManager_GetFrameId(pBufferCtrl, SequenceID, moi_img);
 }
 
 
@@ -338,18 +320,17 @@ uint32_t BufferManager_GetSequenceMOIFrameId(t_bufferManager *pBufferCtrl, uint3
  */
 uint32_t BufferManager_GetSequenceLength(t_bufferManager *pBufferCtrl, uint32_t SequenceID)
 {
-   t_bufferTable SequenceTable;
    uint32_t SequenceLength;
 
-   // Get sequence info values
-   SequenceTable = BufferManager_ReadBufferTable(SequenceID);
+   uint32_t start_img =  AXI4L_read32(TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + SequenceID*4 + BT_START_IMG_OFFSET);
+   uint32_t stop_img  =  AXI4L_read32(TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + SequenceID*4 + BT_END_IMG_OFFSET);
 
    // Calculate sequence length
    // Check for rollover
-   if(SequenceTable.start_img > SequenceTable.stop_img )
-      SequenceLength = pBufferCtrl->nbImagePerSeq - SequenceTable.start_img + SequenceTable.stop_img + 1;
+   if(start_img > stop_img )
+      SequenceLength = pBufferCtrl->nbImagePerSeq - start_img + stop_img + 1;
    else
-      SequenceLength = SequenceTable.stop_img - SequenceTable.start_img + 1;
+      SequenceLength = stop_img - start_img + 1;
 
    return SequenceLength;
 }
@@ -425,23 +406,16 @@ void BufferManager_SetSequenceParams(t_bufferManager *pBufferCtrl, const gcRegis
 
 
 /**
- * Read Buffer Table to get sequence info values.
+ * Set memory buffer sequence download default parameters.
  *
- * @param SequenceID Number of the sequence to get.
- *
- * @return Sequence info values.
+ * @param pBufferCtrl Pointer to the Buffer Manager controller instance.
+ * @param pGCRegs Pointer to the Genicam registers.
  */
-static t_bufferTable BufferManager_ReadBufferTable(uint32_t SequenceID)
+void BufferManager_SetSequenceDownloadDefaultParams(t_bufferManager *pBufferCtrl, gcRegistersData_t *pGCRegs)
 {
-   t_bufferTable SequenceTable;
-   const uint32_t seqAddr = TEL_PAR_TEL_AXIL_BUF_TABLE_BASEADDR + SequenceID*4;
-
-   // Read sequence info values
-   SequenceTable.start_img =  AXI4L_read32(seqAddr + BT_START_IMG_OFFSET);
-   SequenceTable.moi_img   =  AXI4L_read32(seqAddr + BT_MOI_IMG_OFFSET);
-   SequenceTable.stop_img  =  AXI4L_read32(seqAddr + BT_END_IMG_OFFSET);
-
-   return SequenceTable;
+   pGCRegs->MemoryBufferSequenceDownloadImageFrameID = BufferManager_GetSequenceMOIFrameId(pBufferCtrl, pGCRegs->MemoryBufferSequenceSelector);
+   pGCRegs->MemoryBufferSequenceDownloadFrameID = BufferManager_GetSequenceFirstFrameId(pBufferCtrl, pGCRegs->MemoryBufferSequenceSelector);
+   pGCRegs->MemoryBufferSequenceDownloadFrameCount = BufferManager_GetSequenceLength(pBufferCtrl, pGCRegs->MemoryBufferSequenceSelector);
 }
 
 
@@ -542,7 +516,6 @@ void BufferManager_SM()
    float maxBandWidth = 10e6; // maximum average bit rate as requested by the client [bps]
    float timeout_delay_us; // configured delay between frames, [us]
    uint32_t sequenceCount;
-   uint32_t frameID, numFrames;
 
    // the external memory buffer overrides internal buffer
    bool enabled = gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off;
@@ -551,6 +524,11 @@ void BufferManager_SM()
    sequenceCount = BufferManager_GetNumSequenceCount(&gBufManager);
    if (gcRegsData.MemoryBufferSequenceCount != sequenceCount)
    {
+      if (gcRegsData.MemoryBufferSequenceCount == 0)
+      {
+         // Memory buffer was empty, load sequence download default parameter for first
+         BufferManager_SetSequenceDownloadDefaultParams(&gBufManager, &gcRegsData);
+      }
       GC_SetMemoryBufferSequenceCount(sequenceCount);
    }
 
@@ -563,8 +541,8 @@ void BufferManager_SM()
       }
       gcRegsData.MemoryBufferSequenceSelector = 0;
    }
-   else
-      gcRegsData.MemoryBufferSequenceSelector = MIN(gcRegsData.MemoryBufferSequenceSelector, gcRegsData.MemoryBufferSequenceCount - 1);
+   else if (gcRegsData.MemoryBufferSequenceSelector >= gcRegsData.MemoryBufferSequenceCount)
+      GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSelectorIdx], gcRegsData.MemoryBufferSequenceCount - 1);
 
    switch (cstate)
    {
@@ -585,24 +563,6 @@ void BufferManager_SM()
 
    case BMS_CFG:
 
-      numFrames = BufferManager_GetSequenceLength(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
-      if (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
-      {
-         frameID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
-      }
-      else // single image mode
-      {
-         uint32_t firstID = BufferManager_GetSequenceFirstFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
-         uint32_t moiFrameID = BufferManager_GetSequenceMOIFrameId(&gBufManager, gcRegsData.MemoryBufferSequenceSelector);
-         uint32_t lastID = firstID + numFrames - 1;
-
-         // make sure the requested frame is within bounds. By default, send the MOI frame
-         frameID = gcRegsData.MemoryBufferSequenceDownloadImageFrameID;
-         if (frameID < firstID || frameID > lastID)
-            frameID = moiFrameID;
-         gcRegsData.MemoryBufferSequenceDownloadImageFrameID = frameID;
-      }
-
       maxBandWidth = MAX(minBitRate, gcRegsData.MemoryBufferSequenceDownloadBitRateMax * 1.0e6);
 
       frameSize = gcRegsData.Width * (gcRegsData.Height + 2);
@@ -613,14 +573,7 @@ void BufferManager_SM()
       StartTimer(&timer, 10); // workaround for buffer reactivation, the delay should probably be implemented in VHDL
 
       BufferManager_ConfigureMinFrameTime(&gBufManager, timeout_delay_us);
-      if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
-      {
-         BufferManager_ReadSequence(&gBufManager, &gcRegsData);
-      }
-      else if(gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
-      {
-         BufferManager_ReadImage(&gBufManager, &gcRegsData);
-      }
+      BufferManager_ConfigureDownload(&gBufManager, &gcRegsData);
 
       cstate = BMS_WAIT;
 

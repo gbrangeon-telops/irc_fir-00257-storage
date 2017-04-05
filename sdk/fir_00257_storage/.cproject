@@ -134,7 +134,7 @@
 					<folderInfo id="xilinx.gnu.mb.exe.release.1257917207." name="/" resourcePath="">
 						<toolChain id="xilinx.gnu.mb.exe.release.toolchain.1181501518" name="Xilinx MicroBlaze GNU Toolchain" superClass="xilinx.gnu.mb.exe.release.toolchain">
 							<targetPlatform binaryParser="com.xilinx.sdk.managedbuilder.XELF.mb" id="xilinx.mb.target.gnu.base.release.1417579233" isAbstract="false" name="Debug Platform" superClass="xilinx.mb.target.gnu.base.release"/>
-							<builder buildPath="${workspace_loc:/fir_00257_storage}/Release" enableAutoBuild="true" id="xilinx.gnu.mb.toolchain.builder.release.1037912980" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU make" superClass="xilinx.gnu.mb.toolchain.builder.release"/>
+							<builder buildPath="${workspace_loc:/fir_00257_storage}/Release" enableAutoBuild="false" id="xilinx.gnu.mb.toolchain.builder.release.1037912980" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU make" superClass="xilinx.gnu.mb.toolchain.builder.release"/>
 							<tool id="xilinx.gnu.mb.c.toolchain.assembler.release.1347251729" name="MicroBlaze gcc assembler" superClass="xilinx.gnu.mb.c.toolchain.assembler.release">
 								<option id="xilinx.gnu.mb.assembler.usele.954416083" name="Produce little endian code (-mlittle-endian)" superClass="xilinx.gnu.mb.assembler.usele" value="true" valueType="boolean"/>
 								<inputType id="xilinx.gnu.assembler.input.804029688" superClass="xilinx.gnu.assembler.input"/>
