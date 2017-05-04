@@ -42,13 +42,14 @@ IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
    extern debugTerminal_t gDebugTerminal;
 
    // There is supposed to be no remaining bytes in the buffer
-   if (!CBB_Empty(cbuf))
+   if (!DebugTerminal_CommandIsEmpty(cbuf))
    {
       DT_ERR("Unsupported command arguments");
       return IRC_FAILURE;
    }
 
-   DT_PRINTF("Storage FPGA debug terminal commands: (%d)", gDebugTerminal.txCircDataBuffer.maxLength);
+   DT_PRINTF("Storage FPGA debug terminal commands: (%d/%d)",
+         gDebugTerminal.txCircBuffer->maxLength, gDebugTerminal.txCircBuffer->size);
    DT_PRINTF("  Read memory:        RDM address [c|u8|u16|u32|s8|s16|s32 length]");
    DT_PRINTF("  Write memory:       WRM address value");
    DT_PRINTF("  Network status:     NET [0|1 [port]]");

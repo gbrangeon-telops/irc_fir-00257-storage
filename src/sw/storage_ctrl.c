@@ -35,14 +35,16 @@
 int main()  // Defining the standard main() function
 {
    extern netIntf_t gNetworkIntf;
-   extern ctrlIntf_t gOutputCtrlIntf;
+   extern ctrlIntf_t gCtrlIntf_OutputFPGA;
+   extern debugTerminal_t gDebugTerminal;
+   extern IRC_Status_t gDebugTerminalStatus;
    extern t_bufferManager gBufManager;
    uint64_t tic;
 
    Stack_ConfigStackViolationException();
    Stack_FillRemaining();
 
-   Storage_DebugTerminal_InitPhase1();
+   gDebugTerminalStatus = Storage_DebugTerminal_InitPhase1();
 
    FPGA_PRINT("Storage FGPA starting...\n");
 
@@ -77,11 +79,11 @@ int main()  // Defining the standard main() function
       GC_Manager_SM();
       Firmware_Updater_SM();
       NetIntf_SM(&gNetworkIntf);
-      CtrlIntf_Process(&gOutputCtrlIntf);
+      CtrlIntf_Process(&gCtrlIntf_OutputFPGA);
       BufferManager_SM();
       BufferManager_UpdateErrorFlags(&gBufManager);
       TP_TP11_Heartbeat_SM();
       XADC_SM();
-      DebugTerminal_Process();
+      DebugTerminal_Process(&gDebugTerminal);
    }
 }

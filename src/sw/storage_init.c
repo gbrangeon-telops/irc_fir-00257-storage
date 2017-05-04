@@ -36,7 +36,10 @@
 // Global variables
 XIntc gStorageIntc;
 netIntf_t gNetworkIntf;
-ctrlIntf_t gOutputCtrlIntf;
+circularUART_t gCircularUART_OutputFPGA;
+debugTerminal_t gDebugTerminal;
+IRC_Status_t gDebugTerminalStatus;
+ctrlIntf_t gCtrlIntf_OutputFPGA;
 qspiFlash_t gQSPIFlash;
 t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
 t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
@@ -77,21 +80,22 @@ IRC_Status_t Storage_NI_Init()
  */
 IRC_Status_t Storage_DebugTerminal_InitPhase1()
 {
-   static uint8_t dtTxDataCircBuffer[DT_UART_TX_CIRC_BUFFER_SIZE];
+   static uint8_t dtTxCircBufferBytes[DT_UART_TX_CIRC_BUFFER_SIZE];
+   static circByteBuffer_t dtTxCircBuffer;
 
-   IRC_Status_t status;
-
-   // Initialize debug terminal
-   status =  DebugTerminal_Init(NULL, 0,
-         dtTxDataCircBuffer,
-         DT_UART_TX_CIRC_BUFFER_SIZE);
-   if (status != IRC_SUCCESS)
+   // Initialize debug terminal TX circular buffer
+   if (CBB_Init(&dtTxCircBuffer, dtTxCircBufferBytes, DT_UART_TX_CIRC_BUFFER_SIZE) != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
 
-   return IRC_SUCCESS;
-}
+   // Initialize debug terminal data structure
+   if (DebugTerminal_Init(&gDebugTerminal, NULL, &dtTxCircBuffer) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   return IRC_SUCCESS;}
 
 /**
  * Initializes debug terminal (phase 2).
@@ -105,12 +109,14 @@ IRC_Status_t Storage_DebugTerminal_InitPhase2()
    static circBuffer_t dtCmdQueue =
          CB_Ctor(dtCmdQueueBuffer, DT_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
-   IRC_Status_t status;
-
    // Connect debug terminal to network interface
-   status =  DebugTerminal_Connect(&gNetworkIntf,
-         &dtCmdQueue);
-   if (status != IRC_SUCCESS)
+   if (DebugTerminal_Connect(&gDebugTerminal, &gNetworkIntf, &dtCmdQueue) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Look for global debug terminal initialization tests result
+   if (gDebugTerminalStatus != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
@@ -147,20 +153,6 @@ IRC_Status_t Storage_FU_Init()
  */
 IRC_Status_t Storage_GC_Init()
 {
-   static uint8_t outputRxDataCircBuffer[OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE];
-   static uint8_t outputTxDataBuffer[OUTPUT_CI_UART_TX_BUFFER_SIZE];
-   static networkCommand_t outputCtrlIntfCmdQueueBuffer[OUTPUT_CI_CMD_QUEUE_SIZE];
-   static circBuffer_t outputCtrlIntfCmdQueue =
-         CB_Ctor(outputCtrlIntfCmdQueueBuffer, OUTPUT_CI_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
-
-   static networkCommand_t gcmCmdQueueBuffer[GCM_CMD_QUEUE_SIZE];
-   static circBuffer_t gcmCmdQueue =
-         CB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
-
-   static gcEvent_t gcEventErrorQueueBuffer[GC_EVENT_ERROR_QUEUE_SIZE];
-   static circBuffer_t gcEventErrorQueue =
-         CB_Ctor(gcEventErrorQueueBuffer, GC_EVENT_ERROR_QUEUE_SIZE, sizeof(gcEvent_t));
-
    IRC_Status_t status;
 
    // Initialize GenICam registers data pointer
@@ -175,16 +167,37 @@ IRC_Status_t Storage_GC_Init()
    // Set default values
    GC_SetDefaultRegsData();
 
-   // Initialize Output FPGA GenICam control interface
-   status = CtrlIntf_InitCircularUART(&gOutputCtrlIntf,
+   /************************************************************************************
+    * Output FPGA Control interface
+    ************************************************************************************/
+
+   static uint8_t outputRxCircBufferBytes[OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE];
+   static circByteBuffer_t outputRxCircBuffer;
+
+   static uint8_t outputTxCircBufferBytes[OUTPUT_CI_UART_TX_CIRC_BUFFER_SIZE];
+   static circByteBuffer_t outputTxCircBuffer;
+
+   static networkCommand_t outputCtrlIntfCmdQueueBuffer[OUTPUT_CI_CMD_QUEUE_SIZE];
+   static circBuffer_t outputCtrlIntfCmdQueue =
+         CB_Ctor(outputCtrlIntfCmdQueueBuffer, OUTPUT_CI_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
+
+   // Initialize Output FPGA control interface RX circular buffer
+   if (CBB_Init(&outputRxCircBuffer, outputRxCircBufferBytes, OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Initialize Output FPGA control interface TX circular buffer
+   if (CBB_Init(&outputTxCircBuffer, outputTxCircBufferBytes, OUTPUT_CI_UART_TX_CIRC_BUFFER_SIZE) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Initialize Output FPGA control interface
+   status = CtrlIntf_Init(&gCtrlIntf_OutputFPGA,
          CIP_F1F2_NETWORK,
-         XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
-         &gStorageIntc,
-         XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR,
-         outputRxDataCircBuffer,
-         OUTPUT_CI_UART_RX_CIRC_BUFFER_SIZE,
-         outputTxDataBuffer,
-         OUTPUT_CI_UART_TX_BUFFER_SIZE,
+         &outputRxCircBuffer,
+         &outputTxCircBuffer,
          &gNetworkIntf,
          &outputCtrlIntfCmdQueue,
          NIP_UNDEFINED);
@@ -193,17 +206,49 @@ IRC_Status_t Storage_GC_Init()
       return IRC_FAILURE;
    }
 
-   status = UART_Config(&gOutputCtrlIntf.link.cuart.uart, 115200, 8, 'N', 1);
+   // Initialize Output FPGA UART serial port
+   status = CircularUART_Init(&gCircularUART_OutputFPGA,
+         XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
+         &gStorageIntc,
+         XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR);
    if (status != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
+
+   // Configure Output FPGA UART serial port
+   if (UART_Config(&gCircularUART_OutputFPGA.uart, 115200, 8, 'N', 1) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   // Connect Output FPGA UART serial port to Output FPGA control interface
+   if (CtrlIntf_SetLink(&gCtrlIntf_OutputFPGA, CILT_CUART, &gCircularUART_OutputFPGA) != IRC_SUCCESS)
+   {
+      return IRC_FAILURE;
+   }
+
+   /************************************************************************************
+    * GenICam manager
+    ************************************************************************************/
+
+   static networkCommand_t gcmCmdQueueBuffer[GCM_CMD_QUEUE_SIZE];
+   static circBuffer_t gcmCmdQueue =
+         CB_Ctor(gcmCmdQueueBuffer, GCM_CMD_QUEUE_SIZE, sizeof(networkCommand_t));
 
    // Initialize GenICam Manager
    if (GC_Manager_Init(&gNetworkIntf, &gcmCmdQueue) != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
+
+   /************************************************************************************
+    * GenICam events
+    ************************************************************************************/
+
+   static gcEvent_t gcEventErrorQueueBuffer[GC_EVENT_ERROR_QUEUE_SIZE];
+   static circBuffer_t gcEventErrorQueue =
+         CB_Ctor(gcEventErrorQueueBuffer, GC_EVENT_ERROR_QUEUE_SIZE, sizeof(gcEvent_t));
 
    // Initialize GenICam Events
    if (GC_Events_Init(&gcEventErrorQueue, NULL) != IRC_SUCCESS)
@@ -281,7 +326,7 @@ IRC_Status_t Storage_Intc_Start()
    /*
     * Enable the interrupt for the UartNs550 driver instances.
     */
-   XIntc_Enable(&gStorageIntc, XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR);
+   CircularUART_Enable(&gCircularUART_OutputFPGA);
 
    /*
     * Enable the interrupt for the SPI driver instance.
