@@ -46,7 +46,7 @@ int main()  // Defining the standard main() function
 
    gDebugTerminalStatus = Storage_DebugTerminal_InitPhase1();
 
-   FPGA_PRINT("Storage FGPA starting...\n");
+   FPGA_PRINT("Storage FPGA starting...\n");
 
    BuiltInTest_Execute(BITID_BuiltInTestsVerification);
 
