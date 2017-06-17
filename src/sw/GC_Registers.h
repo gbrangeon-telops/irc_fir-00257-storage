@@ -67,6 +67,7 @@ struct gcRegistersDataStruct {
    uint32_t MemoryBufferFragmentedFreeSpaceHigh;
    uint32_t MemoryBufferFragmentedFreeSpaceLow;
    uint32_t MemoryBufferLegacyMode;
+   uint32_t MemoryBufferMOIActivation;
    uint32_t MemoryBufferMOISource;
    uint32_t MemoryBufferMode;
    uint32_t MemoryBufferNumberOfImagesMax;

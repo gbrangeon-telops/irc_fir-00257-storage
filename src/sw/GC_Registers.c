@@ -62,6 +62,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferFragmentedFreeSpaceHigh = */ 0,
    /* MemoryBufferFragmentedFreeSpaceLow = */ 0,
    /* MemoryBufferLegacyMode = */ MBLM_On,
+   /* MemoryBufferMOIActivation = */ 0,
    /* MemoryBufferMOISource = */ 0,
    /* MemoryBufferMode = */ MBM_Off,
    /* MemoryBufferNumberOfImagesMax = */ 0,
@@ -168,6 +169,7 @@ void GC_Registers_Init()
    gcRegsDef[MemoryBufferFragmentedFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferFragmentedFreeSpaceHigh;
    gcRegsDef[MemoryBufferFragmentedFreeSpaceLowIdx].p_data = &gcRegsData.MemoryBufferFragmentedFreeSpaceLow;
    gcRegsDef[MemoryBufferLegacyModeIdx].p_data = &gcRegsData.MemoryBufferLegacyMode;
+   gcRegsDef[MemoryBufferMOIActivationIdx].p_data = &gcRegsData.MemoryBufferMOIActivation;
    gcRegsDef[MemoryBufferMOISourceIdx].p_data = &gcRegsData.MemoryBufferMOISource;
    gcRegsDef[MemoryBufferModeIdx].p_data = &gcRegsData.MemoryBufferMode;
    gcRegsDef[MemoryBufferNumberOfImagesMaxIdx].p_data = &gcRegsData.MemoryBufferNumberOfImagesMax;
