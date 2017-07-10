@@ -26,10 +26,20 @@ debugTerminalCommand_t gDebugTerminalCommands[] =
    {"WRM", DebugTerminalParseWRM},
    {"NET", DebugTerminalParseNET},
    {"STACK", DebugTerminalParseSTACK},
+   {"CI", DebugTerminalParseCI},
    {"HLP", DebugTerminalParseHLP}
 };
 
 uint32_t gDebugTerminalCommandsCount = NUM_OF(gDebugTerminalCommands);
+
+extern ctrlIntf_t gCtrlIntf_OutputFPGA;
+
+debugTerminalCtrlIntf_t gDebugTerminalCtrlIntfs[] =
+{
+   {"OUTPUT", &gCtrlIntf_OutputFPGA}
+};
+
+uint32_t gDebugTerminalCtrlIntfsCount = NUM_OF(gDebugTerminalCtrlIntfs);
 
 /**
  * Debug terminal Help command parser parser.
@@ -39,8 +49,6 @@ uint32_t gDebugTerminalCommandsCount = NUM_OF(gDebugTerminalCommands);
  */
 IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
 {
-   extern debugTerminal_t gDebugTerminal;
-
    // There is supposed to be no remaining bytes in the buffer
    if (!DebugTerminal_CommandIsEmpty(cbuf))
    {
@@ -48,12 +56,12 @@ IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
       return IRC_FAILURE;
    }
 
-   DT_PRINTF("Storage FPGA debug terminal commands: (%d/%d)",
-         gDebugTerminal.txCircBuffer->maxLength, gDebugTerminal.txCircBuffer->size);
+   DT_PRINTF("Storage FPGA debug terminal commands:");
    DT_PRINTF("  Read memory:        RDM address [c|u8|u16|u32|s8|s16|s32 length]");
    DT_PRINTF("  Write memory:       WRM address value");
    DT_PRINTF("  Network status:     NET [0|1 [port]]");
    DT_PRINTF("  Get Stack Level:    STACK");
+   DT_PRINTF("  Ctrl Intf status:   CI [SB|LB OUTPUT 0|1]");
    DT_PRINTF("  Print help:         HLP");
 
    return IRC_SUCCESS;
