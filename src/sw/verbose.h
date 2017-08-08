@@ -20,7 +20,7 @@
 
 #define FPGA_PRINT_PREFIX        "S> "
 
-#ifdef TELOPS_DEBUG
+
 // #define CI_VERBOSE
 // #define DT_VERBOSE
 // #define F1F2_VERBOSE
@@ -32,6 +32,6 @@
 // #define QSPI_VERBOSE
 // #define SREC_VERBOSE
 // #define XADC_VERBOSE
-#endif // TELOPS_DEBUG
+
 
 #endif // VERBOSE_H
