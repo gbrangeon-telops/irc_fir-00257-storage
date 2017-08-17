@@ -13,3 +13,4 @@ rem Integrate software elf file to bit file
 
 rem Generate PROM file
 %x_promgen% -w -p mcs -spi -c FF -o "%binDir%\prom\%baseName%.mcs" -s 16384 -u 0 %binDir%\download.bit > %binDir%\_promgen.log
+pause
