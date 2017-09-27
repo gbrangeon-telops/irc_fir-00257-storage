@@ -47,6 +47,7 @@ struct gcRegistersDataStruct {
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
+   uint32_t CalibrationMode;
    uint32_t DeviceBuiltInTestsResults7;
    uint32_t DeviceBuiltInTestsResults8;
    uint32_t DeviceFirmwareModuleSelector;
@@ -106,6 +107,7 @@ struct gcRegistersDataStruct {
    uint32_t TriggerMode;
    uint32_t TriggerSelector;
    uint32_t VideoAGC;
+   uint32_t VideoFreeze;
    uint32_t Width;
 };
 

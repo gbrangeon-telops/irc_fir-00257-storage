@@ -47,6 +47,7 @@ void GC_Callback_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].callback =                 &GC_AcquisitionFrameRateModeCallback;
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
+   gcRegsDef[CalibrationModeIdx].callback =                          &GC_CalibrationModeCallback;
    gcRegsDef[DeviceBuiltInTestsResults7Idx].callback =               &GC_DeviceBuiltInTestsResults7Callback;
    gcRegsDef[DeviceBuiltInTestsResults8Idx].callback =               &GC_DeviceBuiltInTestsResults8Callback;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].callback =             &GC_DeviceFirmwareModuleRevisionCallback;
@@ -110,6 +111,7 @@ void GC_Callback_Init()
    gcRegsDef[TriggerModeIdx].callback =                              &GC_TriggerModeCallback;
    gcRegsDef[TriggerSelectorIdx].callback =                          &GC_TriggerSelectorCallback;
    gcRegsDef[VideoAGCIdx].callback =                                 &GC_VideoAGCCallback;
+   gcRegsDef[VideoFreezeIdx].callback =                              &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
 }
 
@@ -212,6 +214,17 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
          gBufferStopDownloadTrigger = 1;
       }
    }
+}
+
+/**
+ * CalibrationMode GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_CalibrationModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
 }
 
 /**
@@ -1221,6 +1234,17 @@ void GC_TriggerSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
  * @param access indicates whether the operation is read or write.
  */
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
+ * VideoFreeze GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_VideoFreezeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
 }
 

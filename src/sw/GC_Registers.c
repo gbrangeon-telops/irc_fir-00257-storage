@@ -42,6 +42,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRateMode = */ 0,
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
+   /* CalibrationMode = */ 0,
    /* DeviceBuiltInTestsResults7 = */ 0,
    /* DeviceBuiltInTestsResults8 = */ 0,
    /* DeviceFirmwareModuleSelector = */ 0,
@@ -101,6 +102,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* TriggerMode = */ 0,
    /* TriggerSelector = */ 0,
    /* VideoAGC = */ 0,
+   /* VideoFreeze = */ 0,
    /* Width = */ 0
 };
 
@@ -149,6 +151,7 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
+   gcRegsDef[CalibrationModeIdx].p_data = &gcRegsData.CalibrationMode;
    gcRegsDef[DeviceBuiltInTestsResults7Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults7;
    gcRegsDef[DeviceBuiltInTestsResults8Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults8;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
@@ -208,6 +211,7 @@ void GC_Registers_Init()
    gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
    gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
+   gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
 
