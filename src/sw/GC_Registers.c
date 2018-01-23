@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.1.0
+// Generated from XML camera definition file version 12.2.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -37,6 +37,9 @@ gcRegistersData_t gcRegsDataFactory = {
    /* DeviceTemperature = */ 0.0F,
    /* DeviceVoltage = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
+   /* VideoAGCFractionMax = */ 0.0F,
+   /* VideoAGCFractionMin = */ 0.0F,
+   /* VideoAGCResponseTime = */ 0.0F,
    /* DeviceFirmwareModuleRevision = */ 0,
    /* AcquisitionArm = */ 0,
    /* AcquisitionFrameRateMode = */ 0,
@@ -58,6 +61,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* EventTelopsTimestamp = */ 0,
    /* FValSize = */ 0,
    /* Height = */ 0,
+   /* IsActiveFlags = */ 0,
    /* MemoryBufferAvailableFreeSpaceHigh = */ 0,
    /* MemoryBufferAvailableFreeSpaceLow = */ 0,
    /* MemoryBufferFragmentedFreeSpaceHigh = */ 0,
@@ -73,7 +77,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferSequenceClearAll = */ 0,
    /* MemoryBufferSequenceCount = */ 0,
    /* MemoryBufferSequenceDefrag = */ 0,
-   /* MemoryBufferSequenceDownloadFrameCount = */ 0,
+   /* MemoryBufferSequenceDownloadFrameCount = */ 1,
    /* MemoryBufferSequenceDownloadFrameID = */ 0,
    /* MemoryBufferSequenceDownloadImageFrameID = */ 0,
    /* MemoryBufferSequenceDownloadMode = */ MBSDM_Off,
@@ -102,6 +106,9 @@ gcRegistersData_t gcRegsDataFactory = {
    /* TriggerMode = */ 0,
    /* TriggerSelector = */ 0,
    /* VideoAGC = */ 0,
+   /* VideoColorMap = */ 0,
+   /* VideoColorMapMax = */ 0,
+   /* VideoColorMapMin = */ 0,
    /* VideoFreeze = */ 0,
    /* Width = */ 0
 };
@@ -146,6 +153,9 @@ void GC_Registers_Init()
    gcRegsDef[DeviceTemperatureIdx].p_data = &gcRegsData.DeviceTemperature;
    gcRegsDef[DeviceVoltageIdx].p_data = &gcRegsData.DeviceVoltage;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;
+   gcRegsDef[VideoAGCFractionMaxIdx].p_data = &gcRegsData.VideoAGCFractionMax;
+   gcRegsDef[VideoAGCFractionMinIdx].p_data = &gcRegsData.VideoAGCFractionMin;
+   gcRegsDef[VideoAGCResponseTimeIdx].p_data = &gcRegsData.VideoAGCResponseTime;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].p_data = &gcRegsData.DeviceFirmwareModuleRevision;
    gcRegsDef[AcquisitionArmIdx].p_data = &gcRegsData.AcquisitionArm;
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
@@ -167,6 +177,7 @@ void GC_Registers_Init()
    gcRegsDef[EventTelopsTimestampIdx].p_data = &gcRegsData.EventTelopsTimestamp;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
+   gcRegsDef[IsActiveFlagsIdx].p_data = &gcRegsData.IsActiveFlags;
    gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceHigh;
    gcRegsDef[MemoryBufferAvailableFreeSpaceLowIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceLow;
    gcRegsDef[MemoryBufferFragmentedFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferFragmentedFreeSpaceHigh;
@@ -211,6 +222,9 @@ void GC_Registers_Init()
    gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
    gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
+   gcRegsDef[VideoColorMapIdx].p_data = &gcRegsData.VideoColorMap;
+   gcRegsDef[VideoColorMapMaxIdx].p_data = &gcRegsData.VideoColorMapMax;
+   gcRegsDef[VideoColorMapMinIdx].p_data = &gcRegsData.VideoColorMapMin;
    gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
