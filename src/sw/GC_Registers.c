@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.2.0
+// Generated from XML camera definition file version 12.2.1
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
