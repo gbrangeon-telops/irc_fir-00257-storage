@@ -37,6 +37,10 @@ enum builtInTestIDEnum {
    BITID_NetworkHostsSynchronization,
    BITID_DebugTerminalInitialization,
 
+   // When a built-in test is added to this list, the following tools must be updated:
+   //    - tsirinfo
+   //    - IRCAM_TEL2000\Test\DeviceBuiltInTests\ParseDeviceBuiltInTestsResults.m (called in TSIRDiag)
+
    // Built-in test count
    BITID_Count
 };
