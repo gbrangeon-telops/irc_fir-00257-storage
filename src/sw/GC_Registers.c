@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.2.1
+// Generated from XML camera definition file version 12.3.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -34,6 +34,7 @@
 gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionFrameRate = */ 0.0F,
    /* AcquisitionFrameRateMaxFG = */ 0.0F,
+   /* DeviceClockFrequency = */ 0.0F,
    /* DeviceTemperature = */ 0.0F,
    /* DeviceVoltage = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
@@ -46,8 +47,10 @@ gcRegistersData_t gcRegsDataFactory = {
    /* AcquisitionStart = */ 0,
    /* AcquisitionStop = */ 0,
    /* CalibrationMode = */ 0,
+   /* ClConfiguration = */ 0,
    /* DeviceBuiltInTestsResults7 = */ 0,
    /* DeviceBuiltInTestsResults8 = */ 0,
+   /* DeviceClockSelector = */ 0,
    /* DeviceFirmwareModuleSelector = */ 0,
    /* DeviceTemperatureSelector = */ 0,
    /* DeviceVoltageSelector = */ 0,
@@ -119,6 +122,11 @@ gcRegistersData_t gcRegsDataFactory = {
 gcRegistersData_t gcRegsData;
 
 /**
+ * DeviceClockFrequency data array
+ */
+float DeviceClockFrequencyAry[DeviceClockFrequencyAryLen] = {0.0F, 0.0F, 0.0F};
+
+/**
  * DeviceTemperature data array
  */
 float DeviceTemperatureAry[DeviceTemperatureAryLen] = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
@@ -150,6 +158,7 @@ void GC_Registers_Init()
 {
    gcRegsDef[AcquisitionFrameRateIdx].p_data = &gcRegsData.AcquisitionFrameRate;
    gcRegsDef[AcquisitionFrameRateMaxFGIdx].p_data = &gcRegsData.AcquisitionFrameRateMaxFG;
+   gcRegsDef[DeviceClockFrequencyIdx].p_data = &gcRegsData.DeviceClockFrequency;
    gcRegsDef[DeviceTemperatureIdx].p_data = &gcRegsData.DeviceTemperature;
    gcRegsDef[DeviceVoltageIdx].p_data = &gcRegsData.DeviceVoltage;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;
@@ -162,8 +171,10 @@ void GC_Registers_Init()
    gcRegsDef[AcquisitionStartIdx].p_data = &gcRegsData.AcquisitionStart;
    gcRegsDef[AcquisitionStopIdx].p_data = &gcRegsData.AcquisitionStop;
    gcRegsDef[CalibrationModeIdx].p_data = &gcRegsData.CalibrationMode;
+   gcRegsDef[ClConfigurationIdx].p_data = &gcRegsData.ClConfiguration;
    gcRegsDef[DeviceBuiltInTestsResults7Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults7;
    gcRegsDef[DeviceBuiltInTestsResults8Idx].p_data = &gcRegsData.DeviceBuiltInTestsResults8;
+   gcRegsDef[DeviceClockSelectorIdx].p_data = &gcRegsData.DeviceClockSelector;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
    gcRegsDef[DeviceTemperatureSelectorIdx].p_data = &gcRegsData.DeviceTemperatureSelector;
    gcRegsDef[DeviceVoltageSelectorIdx].p_data = &gcRegsData.DeviceVoltageSelector;

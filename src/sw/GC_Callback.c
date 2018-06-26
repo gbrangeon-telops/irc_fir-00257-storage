@@ -33,7 +33,7 @@ extern t_bufferManager gBufManager;
 extern bool gBufferStartDownloadTrigger;
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 12.2.1
+// Generated from XML camera definition file version 12.3.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -48,8 +48,11 @@ void GC_Callback_Init()
    gcRegsDef[AcquisitionStartIdx].callback =                         &GC_AcquisitionStartCallback;
    gcRegsDef[AcquisitionStopIdx].callback =                          &GC_AcquisitionStopCallback;
    gcRegsDef[CalibrationModeIdx].callback =                          &GC_CalibrationModeCallback;
+   gcRegsDef[ClConfigurationIdx].callback =                          &GC_ClConfigurationCallback;
    gcRegsDef[DeviceBuiltInTestsResults7Idx].callback =               &GC_DeviceBuiltInTestsResults7Callback;
    gcRegsDef[DeviceBuiltInTestsResults8Idx].callback =               &GC_DeviceBuiltInTestsResults8Callback;
+   gcRegsDef[DeviceClockFrequencyIdx].callback =                     &GC_DeviceClockFrequencyCallback;
+   gcRegsDef[DeviceClockSelectorIdx].callback =                      &GC_DeviceClockSelectorCallback;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].callback =             &GC_DeviceFirmwareModuleRevisionCallback;
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].callback =             &GC_DeviceFirmwareModuleSelectorCallback;
    gcRegsDef[DeviceTemperatureIdx].callback =                        &GC_DeviceTemperatureCallback;
@@ -235,6 +238,17 @@ void GC_CalibrationModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
 }
 
 /**
+ * ClConfiguration GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_ClConfigurationCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
  * DeviceBuiltInTestsResults7 GenICam register callback function.
  * 
  * @param phase indicates whether the function is called before or
@@ -265,6 +279,28 @@ void GC_DeviceBuiltInTestsResults8Callback(gcCallbackPhase_t phase, gcCallbackAc
       // Before read
       gcRegsData.DeviceBuiltInTestsResults8 = BuiltInTest_FillResultRegister(1);
    }
+}
+
+/**
+ * DeviceClockFrequency GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceClockFrequencyCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
+ * DeviceClockSelector GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_DeviceClockSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
 }
 
 /**
