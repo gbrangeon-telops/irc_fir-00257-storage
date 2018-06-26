@@ -106,8 +106,6 @@ gcRegistersData_t gcRegsDataFactory = {
    /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
    /* SensorWidth = */ 0,
-   /* TriggerMode = */ 0,
-   /* TriggerSelector = */ 0,
    /* VideoAGC = */ 0,
    /* VideoColorMap = */ 0,
    /* VideoColorMapMax = */ 0,
@@ -145,11 +143,6 @@ uint32_t EventNotificationAry[EventNotificationAryLen] = {0, 0, EN_On, 0, 0, 0, 
  * DeviceFirmwareModuleRevision data array
  */
 int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLen] = SVN_REVISIONS_INIT;
-
-/**
- * TriggerMode data array
- */
-uint32_t TriggerModeAry[TriggerModeAryLen] = {TM_Off, TM_Off, TM_Off};
 
 /**
  * GenICam registers data pointer initialization.
@@ -230,8 +223,6 @@ void GC_Registers_Init()
    gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
    gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
-   gcRegsDef[TriggerModeIdx].p_data = &gcRegsData.TriggerMode;
-   gcRegsDef[TriggerSelectorIdx].p_data = &gcRegsData.TriggerSelector;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
    gcRegsDef[VideoColorMapIdx].p_data = &gcRegsData.VideoColorMap;
    gcRegsDef[VideoColorMapMaxIdx].p_data = &gcRegsData.VideoColorMapMax;
