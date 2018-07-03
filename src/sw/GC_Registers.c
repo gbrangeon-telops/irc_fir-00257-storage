@@ -120,6 +120,17 @@ gcRegistersData_t gcRegsDataFactory = {
 gcRegistersData_t gcRegsData;
 
 /**
+ * Selected registers list
+ */
+gcSelectedReg_t gcSelectedRegList[gcSelectedRegListLen] = {
+   {DeviceClockFrequencyIdx, DeviceClockSelectorIdx, 3},
+   {DeviceTemperatureIdx, DeviceTemperatureSelectorIdx, 13},
+   {DeviceVoltageIdx, DeviceVoltageSelectorIdx, 31},
+   {EventNotificationIdx, EventSelectorIdx, 33},
+   {DeviceFirmwareModuleRevisionIdx, DeviceFirmwareModuleSelectorIdx, 12}
+};
+
+/**
  * DeviceClockFrequency data array
  */
 float DeviceClockFrequencyAry[DeviceClockFrequencyAryLen] = {0.0F, 0.0F, 0.0F};
