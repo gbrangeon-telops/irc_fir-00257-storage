@@ -1,5 +1,7 @@
 @echo off
 
+set MEMCONF=%1
+
 set storageDir=D:\Telops\FIR-00257-Storage
 set commonDir=D:\Telops\FIR-00251-Common
 set commonHdlDir=D:\Telops\Common_HDL
@@ -9,7 +11,7 @@ set srcExtensionList=".bde" ".vhd" ".xdc"
 set tortoiseSVNDir="C:\Program Files\TortoiseSVN"
 set svn_subwcrev=%tortoiseSVNDir%\bin\SubWCRev.exe
 
-set hwRevFile=%storageDir%\sdk\hw\hw_svn_rev.txt
+set hwRevFile=%storageDir%\sdk\hw_%MEMCONF%\hw_svn_rev_%MEMCONF%.txt
 
 REM Delete old revision file
 del %hwRevFile%

@@ -1,6 +1,9 @@
 @echo off
 call D:\Telops\FIR-00257-Storage\bin\scripts\setEnvironment.bat
 
+rem Configuration variable
+set conf=%1
+
 rem Clean up
 del %buildInfoFile%
 
@@ -29,8 +32,8 @@ echo #warning Uncommitted changes detected.>> %buildInfoFile%
 echo #endif>> %buildInfoFile%
 
 rem Check for hardware definition file mismatch
-set hwFile1=%sdkDir%\hw_platform_0\system.hdf
-set hwFile2=%sdkDir%\hw\fir_257_top.hdf
+set hwFile1=%sdkDir%\hw_platform_%conf%\system.hdf
+set hwFile2=%sdkDir%\hw_%conf%\fir_257_top.hdf
 %x_xilperl% %scriptsDir%\compareFiles.pl -f1 %hwFile1% -f2 %hwFile2%
 set hardwareMismatch=%errorlevel%
 

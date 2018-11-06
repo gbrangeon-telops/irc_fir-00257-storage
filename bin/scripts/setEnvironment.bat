@@ -1,4 +1,5 @@
-set baseName=fir_00257_storage
+set memconf=%1
+set baseName=fir_00257_storage_%memconf%
 
 set commonDir=D:\Telops\FIR-00251-Common
 set projectDir=D:\Telops\FIR-00257-Storage
@@ -8,12 +9,12 @@ set binDir=%projectDir%\bin
 set scriptsDir=%binDir%\scripts
 
 set elfFile=%binDir%\%baseName%.elf
-set bitFile=%binDir%\fir_257_top.bit
-set bmmFile=%binDir%\fir_257_top_bd.bmm
+set bitFile=%binDir%\fir_257_top_%memconf%.bit
+set bmmFile=%binDir%\fir_257_top_bd_%memconf%.bmm
 set buildInfoFile=%srcDir%\BuildInfo\BuildInfo.h
-set releaseFile=%binDir%\%baseName%_release.bin
-set releaseLogFile=%binDir%\%baseName%_release.txt
-set revFile=%binDir%\svnrevs.pl
+set releaseFile=%binDir%\%baseName%_release_%memconf%.bin
+set releaseLogFile=%binDir%\%baseName%_release_%memconf%.txt
+set revFile=%binDir%\svnrevs_%memconf%.pl
 
 set tortoiseSVNDir="C:\Program Files\TortoiseSVN"
 set svn_subwcrev=%tortoiseSVNDir%\bin\SubWCRev.exe

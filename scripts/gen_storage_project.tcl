@@ -1,5 +1,5 @@
 set root_dir "d:/Telops/fir-00257-Storage"
-set proj_name "fir_00257_Storage"
+set proj_name "fir_00257_Storage_$memconf"
 set proj_dir $root_dir/xilinx/
 set script_dir $root_dir/scripts
 set aldec_dir $root_dir/aldec/compile
@@ -17,7 +17,6 @@ set obj [get_projects $proj_name]
 set_property "part" "xc7k160tfbg676-1" $obj
 set_property "simulator_language" "Mixed" $obj
 set_property "target_language" "VHDL" $obj
-
 
 
 # Add Project IP sources
@@ -46,7 +45,7 @@ set filelist  [concat $filelist [glob -nocomplain $src_dir/Buffering/HDL/*.vhd]]
 #MGT
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/MGT/hdl/*.vhd]]
 
-# Add specific contraint
+# Add specific constraint
 add_files -fileset constrs_1 $constr_dir
 set_property target_constrs_file $src_dir/Constraints/fir_00257_Target.xdc [current_fileset -constrset]
 reorder_files -fileset constrs_1 -before $src_dir/Constraints/fir_00257_Timing.xdc $src_dir/Constraints/fir_00257_Physical.xdc
@@ -71,7 +70,7 @@ add_files $common_hdl_dir/RS232/uarts.vhd
 add_files $common_hdl_dir/Utilities/dcm_reset.vhd
 
 #Generate the bloc design
-source $script_dir/gen_bd_core.tcl
+source $script_dir/gen_bd_core_$memconf.tcl
 
 #create the bd wrapper
 make_wrapper -files [get_files $proj_dir/$proj_name.srcs/sources_1/bd/core/core.bd] -top
