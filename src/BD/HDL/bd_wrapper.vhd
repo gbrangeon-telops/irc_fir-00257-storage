@@ -118,7 +118,10 @@ entity bd_wrapper is
     
     QSPI    :   inout STD_LOGIC_VECTOR ( 3 downto 0 );
     QSPI_SS    :   inout STD_LOGIC;
-    
+
+    IIC_SCL : inout STD_LOGIC;
+    IIC_SDA : inout STD_LOGIC;
+
     --debug
     TEST_POINT :   OUT STD_LOGIC_VECTOR ( 1 downto 0 );
     INIT_CALIB_COMPLETE :   OUT STD_LOGIC
@@ -384,6 +387,8 @@ component core_wrapper
       clk_50 : out STD_LOGIC;
       dimm0_init_calib_complete : out STD_LOGIC;
       dimm1_init_calib_complete : out STD_LOGIC;
+      iic_scl_io : inout STD_LOGIC;
+      iic_sda_io : inout STD_LOGIC;
       mem_addr_msb_tri_o : out STD_LOGIC_VECTOR ( 4 downto 0 );
       qspi_io0_io : inout STD_LOGIC;
       qspi_io1_io : inout STD_LOGIC;
@@ -670,7 +675,7 @@ port map (
     AXI_MM2S_DM_IN_rready => AXI_MM2S_DM_IN_MOSI.rready,
     AXI_MM2S_DM_IN_rresp => AXI_MM2S_DM_IN_MISO.rresp,
     AXI_MM2S_DM_IN_rvalid => AXI_MM2S_DM_IN_MISO.rvalid,
-                                
+    
     qspi_io0_io => QSPI(0),
     qspi_io1_io => QSPI(1),
     qspi_io2_io => QSPI(2),
@@ -680,8 +685,10 @@ port map (
     DIMM0_INIT_CALIB_COMPLETE =>  init_calib(0),
     DIMM1_INIT_CALIB_COMPLETE =>  init_calib(1),
     
+    IIC_SCL_IO => IIC_SCL,
+    IIC_SDA_IO => IIC_SDA,
+    
     test_point_tri_o => TEST_POINT
-
 );											
 
 end bd_wrapper;

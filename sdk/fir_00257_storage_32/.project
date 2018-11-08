@@ -76,6 +76,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/GC_Registers.h</locationURI>
 		</link>
 		<link>
+			<name>src/IIC_Utils.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC_Utils.c</locationURI>
+		</link>
+		<link>
+			<name>src/IIC_Utils.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC_Utils.h</locationURI>
+		</link>
+		<link>
 			<name>src/MGT</name>
 			<type>2</type>
 			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/MGT/Driver</locationURI>
