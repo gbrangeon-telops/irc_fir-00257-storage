@@ -60,7 +60,7 @@ IRC_Status_t IIC_SPD_Validate(void)
    #if MEMCONF == 16
      if (sodimm0_spd_data[4] == 0x04 && sodimm1_spd_data[4] == 0x04)
         return IRC_SUCCESS;
-    else
+     else
         return IRC_FAILURE;
    #endif
    #if MEMCONF == 32

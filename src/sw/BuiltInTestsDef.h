@@ -36,6 +36,8 @@ enum builtInTestIDEnum {
    BITID_TestPointInitialization,
    BITID_NetworkHostsSynchronization,
    BITID_DebugTerminalInitialization,
+   BITID_I2CInterfaceInitialization,
+   BITID_MemConfCheck,
 
    // When a built-in test is added to this list, the following tools must be updated:
    //    - tsirinfo

@@ -31,6 +31,7 @@
 #include "Timer.h"
 #include "mgt_ctrl.h"
 #include "DebugTerminal.h"
+#include "IIC_Utils.h"
 
 
 // Global variables
@@ -402,4 +403,26 @@ IRC_Status_t Storage_BufferManager_Init()
 IRC_Status_t Storage_XADC_Init()
 {
    return XADC_Init(XPAR_SYSMON_0_DEVICE_ID);
+}
+
+/**
+ * Initializes I2C interface.
+ *
+ * @return IRC_SUCCESS if successfully initialized.
+ * @return IRC_FAILURE if failed to initialize.
+ */
+IRC_Status_t Storage_I2C_Init()
+{
+   return IIC_Init();
+}
+
+/**
+ * Verification of installed memory modules
+ *
+ * @return IRC_SUCCESS if memory configuration is valid.
+ * @return IRC_FAILURE if verification failed.
+ */
+IRC_Status_t Storage_MemConf_Check()
+{
+   return IIC_SPD_Validate();
 }

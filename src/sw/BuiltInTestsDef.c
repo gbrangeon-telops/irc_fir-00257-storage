@@ -34,5 +34,7 @@ builtInTest_t builtInTests[BITID_Count] =
    {BITID_InterruptControllerStartup, "Starting interrupt controller", Storage_Intc_Start, BITR_Pending},
    {BITID_TestPointInitialization, "Initializing test point", TP_Init, BITR_Pending},
    {BITID_NetworkHostsSynchronization, "", NULL, BITR_Pending},
-   {BITID_DebugTerminalInitialization, "Initializing debug terminal", Storage_DebugTerminal_InitPhase2, BITR_Pending}
+   {BITID_DebugTerminalInitialization, "Initializing debug terminal", Storage_DebugTerminal_InitPhase2, BITR_Pending},
+   {BITID_I2CInterfaceInitialization, "Initializing I2C interface", Storage_I2C_Init, BITR_Pending},
+   {BITID_MemConfCheck, "Verifying memory configuration", Storage_MemConf_Check, BITR_Pending}
 };

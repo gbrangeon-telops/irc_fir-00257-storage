@@ -44,5 +44,7 @@ IRC_Status_t Storage_Intc_Start();
 IRC_Status_t Storage_MGT_Init();
 IRC_Status_t Storage_BufferManager_Init();
 IRC_Status_t Storage_XADC_Init();
+IRC_Status_t Storage_I2C_Init();
+IRC_Status_t Storage_MemConf_Check();
 
 #endif // STORAGE_INIT_H

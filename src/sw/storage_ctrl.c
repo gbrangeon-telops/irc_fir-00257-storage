@@ -64,6 +64,8 @@ int main()  // Defining the standard main() function
    BuiltInTest_Execute(BITID_MGTInterfaceInitialization);
    BuiltInTest_Execute(BITID_MemoryBufferControllerInitialization);
    BuiltInTest_Execute(BITID_TestPointInitialization);
+   BuiltInTest_Execute(BITID_I2CInterfaceInitialization);
+   BuiltInTest_Execute(BITID_MemConfCheck);
 
    GETTIME(&tic);
 
