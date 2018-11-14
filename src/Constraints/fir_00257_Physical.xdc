@@ -7,8 +7,8 @@ set_operating_conditions -grade industrial
 set_property CONFIG_MODE SPIx4 [current_design]
 set_property BITSTREAM.CONFIG.CONFIGRATE 12 [current_design]
 set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
-#set_property CFGBVS VCCO [current_design]
-#set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS GND [current_design]
+set_property CONFIG_VOLTAGE 1.5 [current_design]
 
 ############### DCI ###############################
 set_property DCI_CASCADE {32 34} [get_iobanks 33]

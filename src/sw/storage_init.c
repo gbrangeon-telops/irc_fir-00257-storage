@@ -31,7 +31,7 @@
 #include "Timer.h"
 #include "mgt_ctrl.h"
 #include "DebugTerminal.h"
-#include "IIC_Utils.h"
+#include "IIC.h"
 
 
 // Global variables

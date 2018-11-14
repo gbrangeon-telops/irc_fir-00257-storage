@@ -39,3 +39,4 @@ echo our $rel_storage_boot_rev = 0;>> %revFile%
 echo our $rel_storage_common_rev = $WCREV$;>> %revFile%
 %svn_subwcrev% %commonDir% %revFile% %revFile%
 
+echo 1;>> %revFile%

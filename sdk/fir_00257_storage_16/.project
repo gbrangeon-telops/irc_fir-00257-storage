@@ -76,14 +76,24 @@
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/GC_Registers.h</locationURI>
 		</link>
 		<link>
-			<name>src/IIC_Utils.c</name>
+			<name>src/HwIcap.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC_Utils.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/HwIcap.c</locationURI>
 		</link>
 		<link>
-			<name>src/IIC_Utils.h</name>
+			<name>src/HwIcap.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC_Utils.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/HwIcap.h</locationURI>
+		</link>
+		<link>
+			<name>src/IIC.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC.c</locationURI>
+		</link>
+		<link>
+			<name>src/IIC.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/IIC.h</locationURI>
 		</link>
 		<link>
 			<name>src/MGT</name>

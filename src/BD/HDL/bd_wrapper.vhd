@@ -351,7 +351,6 @@ component core_wrapper
       M_AXIS_S2MM_STS_tvalid : out STD_LOGIC;
       STARTUP_IO_cfgclk : out STD_LOGIC;
       STARTUP_IO_cfgmclk : out STD_LOGIC;
-      STARTUP_IO_eos : out STD_LOGIC;
       STARTUP_IO_preq : out STD_LOGIC;
       SYS_CLK_0_clk_n : in STD_LOGIC;
       SYS_CLK_0_clk_p : in STD_LOGIC;

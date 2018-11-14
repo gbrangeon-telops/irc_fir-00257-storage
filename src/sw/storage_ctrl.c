@@ -25,7 +25,9 @@
 #include "DebugTerminal.h"
 #include "storage_init.h"
 #include "StackUtils.h"
+#include "HwIcap.h"
 #include "verbose.h"
+
 
 #define DEVICE_RUNNING_TIME_REFRESH_PERIOD_US   TIME_ONE_MINUTE_US
 
@@ -40,6 +42,16 @@ int main()  // Defining the standard main() function
    extern IRC_Status_t gDebugTerminalStatus;
    extern t_bufferManager gBufManager;
    uint64_t tic;
+
+   #if MEMCONF == 16
+   if (HwIcap_Init() != XST_FAILURE) {
+      if (IIC_Init() != IRC_FAILURE) {
+         if (IIC_SPD_Validate() == IRC_FAILURE) {
+            HwIcap_Reconfig(HWICAP_BOOT_ADDRESS);
+         }
+      }
+   }
+   #endif
 
    Stack_ConfigStackViolationException();
    Stack_FillRemaining();
@@ -65,7 +77,7 @@ int main()  // Defining the standard main() function
    BuiltInTest_Execute(BITID_MemoryBufferControllerInitialization);
    BuiltInTest_Execute(BITID_TestPointInitialization);
    BuiltInTest_Execute(BITID_I2CInterfaceInitialization);
-   BuiltInTest_Execute(BITID_MemConfCheck);
+   BuiltInTest_Execute(BITID_MemoryConfigurationCheck);
 
    GETTIME(&tic);
 
