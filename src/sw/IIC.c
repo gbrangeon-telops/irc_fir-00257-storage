@@ -4,11 +4,11 @@
  *
  * This file implements the interface used to manage the I2C bus.
   *
- * $Rev: 22466 $
- * $Author: elarouche $
- * $Date: 2018-11-12 09:15:33 -0500 (lun., 12 nov. 2018) $
- * $Id: IIC_Utils.c 22466 2018-11-12 14:15:33Z elarouche $
- * $URL: http://einstein/svn/firmware/FIR-00257-Storage/trunk/src/sw/IIC_Utils.c $
+ * $Rev$
+ * $Author$
+ * $Date$
+ * $Id$
+ * $URL$
  *
  * (c) Copyright 2018 Telops Inc.
  */
