@@ -25,6 +25,7 @@
 #include "DebugTerminal.h"
 #include "storage_init.h"
 #include "StackUtils.h"
+#include "IIC.h"
 #include "HwIcap.h"
 #include "verbose.h"
 
