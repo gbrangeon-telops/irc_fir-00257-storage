@@ -36,6 +36,7 @@ enum builtInTestIDEnum {
    BITID_TestPointInitialization,
    BITID_NetworkHostsSynchronization,
    BITID_DebugTerminalInitialization,
+   BITID_GPIOControllerInitialization,
    BITID_I2CInterfaceInitialization,
    BITID_MemoryConfigurationCheck,
 
