@@ -36,5 +36,5 @@ rem Generate PROM file
 rem %x_promgen% -w -p mcs -spi -c FF -o "%binDir%\prom\%baseName%.mcs" -s 16384 -u 0 %binDir%\download_32.bit > %binDir%\_promgen_32.log
 
 rem Generate Multiboot PROM file
-%x_promgen% -w -p mcs -spi -c FF -o "%binDir%\prom\FIR-00257_storage_multiboot.mcs" -s 16384 -u 0 %binDir%\download_16.bit -u 670000 %binDir%\download_32.bit > %binDir%\_promgen_multiboot.log
+%x_promgen% -w -p mcs -spi -c FF -o "%binDir%\prom\FIR-00257_storage.mcs" -s 16384 -u 0 %binDir%\download_16.bit -u 670000 %binDir%\download_32.bit > %binDir%\_promgen_multiboot.log
 pause
