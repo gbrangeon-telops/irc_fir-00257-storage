@@ -136,6 +136,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/src/sw/tel2000_param.h</locationURI>
 		</link>
 		<link>
+			<name>src/tel2000_param_16.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/tel2000_param_16.h</locationURI>
+		</link>
+		<link>
+			<name>src/tel2000_param_32.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/src/sw/tel2000_param_32.h</locationURI>
+		</link>
+		<link>
 			<name>src/usart</name>
 			<type>2</type>
 			<locationURI>PARENT-3-PROJECT_LOC/FIR-00251-Common/VHDL/USART/Drivers</locationURI>

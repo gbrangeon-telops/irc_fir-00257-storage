@@ -42,7 +42,13 @@
  */
 #define MEM1_BUFFER_BASEADDR    ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_BASEADDR)
 #define MEM1_BUFFER_HIGHADDR    ((uint64_t)TEL_PAR_TEL_dimm1_ctrl_memaddr_HIGHADDR)
-#define MEM1_BUFFER_SIZE        ((uint64_t)(MEM0_BUFFER_HIGHADDR - MEM0_BUFFER_BASEADDR + 1))
+#define MEM1_BUFFER_SIZE        ((uint64_t)(MEM1_BUFFER_HIGHADDR - MEM1_BUFFER_BASEADDR + 1))
+
+
+/**
+ * Storage space in bytes
+ */
+#define BM_TOTAL_SPACE_BYTES    (MEM0_BUFFER_SIZE+MEM1_BUFFER_SIZE)
 
 /**
  * AXI4 Lite memory access address space.
@@ -148,7 +154,7 @@ typedef uint32_t t_bufferManagerError;
 
 
 /************************** Function Prototypes *****************************/
-IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs);
+IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, gcRegistersData_t *pGCRegs);
 void BufferManager_WaitMemReady(t_bufferManager *pBufferCtrl);
 void BufferManager_UpdateErrorFlags(t_bufferManager *pBufferCtrl);
 IRC_Status_t BufferManager_ConfigureDownload(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs);

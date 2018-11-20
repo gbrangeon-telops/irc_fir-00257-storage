@@ -46,8 +46,10 @@ static uint32_t BufferManager_MemAddrGPIO_Handler(uint64_t memAddr);
  * @return IRC_SUCCESS if successfully initialized.
  * @return IRC_FAILURE if failed to initialize.
  */
-IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersData_t *pGCRegs)
+IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, gcRegistersData_t *pGCRegs)
 {
+   uint64_t totalSpace = BM_TOTAL_SPACE_BYTES;
+
    // Reset error flags
    gBufManagerError = (t_bufferManagerError)0;
 
@@ -72,6 +74,10 @@ IRC_Status_t BufferManager_Init(t_bufferManager *pBufferCtrl, const gcRegistersD
 
    // Write values
    WriteStruct(pBufferCtrl);
+
+   // Initialize memory registers
+   pGCRegs->MemoryBufferTotalSpaceHigh = totalSpace >> 32;
+   pGCRegs->MemoryBufferTotalSpaceLow = totalSpace & 0x00000000FFFFFFFF;
 
    // Init memory address GPIO
    return BufferManager_MemAddrGPIO_Init();
