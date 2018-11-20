@@ -2,11 +2,11 @@
 # Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 SOFTWARE_VERSION P.20131013
-DATE            11/20/2018 - 10:19
+DATE            11/20/2018 - 13:31
 SOURCE          D:\Telops\FIR-00257-Storage\bin\prom\FIR-00257_storage.mcs
 DEVICE          16384K
 DATA_WIDTH      4
 FILL_DATA       0xFF
-SIGNATURE       0x411C8485
+SIGNATURE       0x411C7F4B
 START_ADDRESS   0x00000000 END_ADDRESS 0x00661EDB DIRECTION_UP   "D:/Telops/FIR-00257-Storage/bin/download_16.bit" 7k160tfbg676
 START_ADDRESS   0x00670000 END_ADDRESS 0x00CD1EDB DIRECTION_UP   "D:/Telops/FIR-00257-Storage/bin/download_32.bit" 7k160tfbg676
