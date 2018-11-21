@@ -59,7 +59,11 @@ int main()  // Defining the standard main() function
 
    gDebugTerminalStatus = Storage_DebugTerminal_InitPhase1();
 
-   FPGA_PRINT("Storage FPGA starting...\n");
+   #if MEMCONF == 16
+     FPGA_PRINT("16 GB Storage FPGA starting...\n");
+   #elif MEMCONF == 32
+     FPGA_PRINT("32 GB Storage FPGA starting...\n");
+   #endif
 
    BuiltInTest_Execute(BITID_BuiltInTestsVerification);
 
