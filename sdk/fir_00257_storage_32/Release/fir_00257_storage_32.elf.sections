@@ -6,60 +6,56 @@ EXEC_P, HAS_SYMS
 start address 0x00000000
 
 Program Header:
-    LOAD off    0x00000094 vaddr 0x00000000 paddr 0x00000000 align 2**2
+    LOAD off    0x00000074 vaddr 0x00000000 paddr 0x00000000 align 2**2
          filesz 0x00000028 memsz 0x00000028 flags r-x
-    LOAD off    0x000000bc vaddr 0x00000050 paddr 0x00000050 align 2**2
-         filesz 0x0002544c memsz 0x00025450 flags rwx
-    LOAD off    0x00025508 vaddr 0x000254a0 paddr 0x000254a0 align 2**2
-         filesz 0x00001f28 memsz 0x00005000 flags rw-
+    LOAD off    0x0000009c vaddr 0x00000050 paddr 0x00000050 align 2**2
+         filesz 0x00027378 memsz 0x0002a450 flags rwx
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .vectors.reset 00000008  00000000  00000000  00000094  2**2
+  0 .vectors.reset 00000008  00000000  00000000  00000074  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .vectors.sw_exception 00000008  00000008  00000008  0000009c  2**2
+  1 .vectors.sw_exception 00000008  00000008  00000008  0000007c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .vectors.interrupt 00000008  00000010  00000010  000000a4  2**2
+  2 .vectors.interrupt 00000008  00000010  00000010  00000084  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .vectors.hw_exception 00000008  00000020  00000020  000000b4  2**2
+  3 .vectors.hw_exception 00000008  00000020  00000020  00000094  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  4 .text         00021d38  00000050  00000050  000000bc  2**2
+  4 .text         00021d38  00000050  00000050  0000009c  2**2
                   CONTENTS, ALLOC, LOAD, CODE
-  5 .init         0000003c  00021d88  00021d88  00021df4  2**2
+  5 .init         0000003c  00021d88  00021d88  00021dd4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  6 .fini         00000020  00021dc4  00021dc4  00021e30  2**2
+  6 .fini         00000020  00021dc4  00021dc4  00021e10  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  7 .ctors        00000008  00021de4  00021de4  00021e50  2**2
+  7 .ctors        00000008  00021de4  00021de4  00021e30  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .dtors        00000008  00021dec  00021dec  00021e58  2**2
+  8 .dtors        00000008  00021dec  00021dec  00021e38  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .rodata       000036a8  00021df4  00021df4  00021e60  2**2
+  9 .rodata       000036ac  00021df4  00021df4  00021e40  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
- 10 .sdata2       00000004  0002549c  0002549c  00025508  2**0
-                  ALLOC
- 11 .data         00001f28  000254a0  000254a0  00025508  2**2
+ 10 .data         00001f28  000254a0  000254a0  000254ec  2**2
                   CONTENTS, ALLOC, LOAD, DATA
- 12 .bss          000020d4  000273c8  000273c8  00027430  2**2
+ 11 .bss          000020d4  000273c8  000273c8  00027414  2**2
                   ALLOC
- 13 .heap         00000804  0002949c  0002949c  00027430  2**0
+ 12 .heap         00000804  0002949c  0002949c  00027414  2**0
                   ALLOC
- 14 .stack        00000800  00029ca0  00029ca0  00027430  2**0
+ 13 .stack        00000800  00029ca0  00029ca0  00027414  2**0
                   ALLOC
- 15 .debug_frame  000018c8  00000000  00000000  00027430  2**2
+ 14 .debug_frame  000018c8  00000000  00000000  00027414  2**2
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_info   0000eccc  00000000  00000000  00028cf8  2**0
+ 15 .debug_info   0000eccc  00000000  00000000  00028cdc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_abbrev 0000574f  00000000  00000000  000379c4  2**0
+ 16 .debug_abbrev 0000574f  00000000  00000000  000379a8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_loc    0000a4ad  00000000  00000000  0003d113  2**0
+ 17 .debug_loc    0000a4ad  00000000  00000000  0003d0f7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_aranges 00000c88  00000000  00000000  000475c0  2**3
+ 18 .debug_aranges 00000c88  00000000  00000000  000475a8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 20 .debug_ranges 00000b30  00000000  00000000  00048248  2**0
+ 19 .debug_ranges 00000b30  00000000  00000000  00048230  2**0
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_line   0000c29f  00000000  00000000  00048d78  2**0
+ 20 .debug_line   0000c29f  00000000  00000000  00048d60  2**0
                   CONTENTS, READONLY, DEBUGGING
- 22 .debug_str    000022ce  00000000  00000000  00055017  2**0
+ 21 .debug_str    000022ce  00000000  00000000  00054fff  2**0
                   CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00000000 l    d  .vectors.reset	00000000 .vectors.reset
@@ -72,7 +68,6 @@ SYMBOL TABLE:
 00021de4 l    d  .ctors	00000000 .ctors
 00021dec l    d  .dtors	00000000 .dtors
 00021df4 l    d  .rodata	00000000 .rodata
-0002549c l    d  .sdata2	00000000 .sdata2
 000254a0 l    d  .data	00000000 .data
 000273c8 l    d  .bss	00000000 .bss
 0002949c l    d  .heap	00000000 .heap
@@ -122,10 +117,10 @@ SYMBOL TABLE:
 000273f0 l     O .bss	00000014 tpCtrl
 000273e8 l     O .bss	00000008 tic.3111
 00000000 l    df *ABS*	00000000 ./src/Common/CRC.o
-00024220 l     O .rodata	00000200 crcTable.2922
+00024224 l     O .rodata	00000200 crcTable.2922
 00000000 l    df *ABS*	00000000 ./src/Common/CircularUART.o
 000077b8 l     F .text	0000004c CircularUART_InterruptHandler
-00024420 l     O .rodata	00000034 HandlerTable
+00024424 l     O .rodata	00000034 HandlerTable
 00007804 l     F .text	00000088 NoInterruptHandler
 0000788c l     F .text	0000004c ModemHandler
 000078d8 l     F .text	00000188 CircularUART_ReceiveCircBuffer
@@ -200,11 +195,11 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 xspi.o
 0001ef60 l     F .text	00000034 StubStatusHandler
 00000000 l    df *ABS*	00000000 xspi_options.o
-0002542c l     O .rodata	00000028 OptionsTable
+00025430 l     O .rodata	00000028 OptionsTable
 00000000 l    df *ABS*	00000000 xil_assert.o
 00028ea8 l     O .bss	00000004 Xil_AssertCallbackRoutine
 00000000 l    df *ABS*	00000000 xuartns550_options.o
-00025454 l     O .rodata	00000048 OptionsTable
+00025458 l     O .rodata	00000048 OptionsTable
 00000000 l    df *ABS*	00000000 xuartns550_selftest.o
 00027338 l     O .data	00000021 TestString
 00028eac l     O .bss	00000021 ReturnString
@@ -216,12 +211,12 @@ SYMBOL TABLE:
 00000000 l    df *ABS*	00000000 lib_a-impure.o
 000254e4 l     O .data	000000f0 impure_data
 00000000 l    df *ABS*	00000000 lib_a-ctype_.o
-00023e38 l     O .rodata	00000180 _ctype_b
+00023e3c l     O .rodata	00000180 _ctype_b
 00000000 l    df *ABS*	00000000 
 000273c8 l       .data	00000000 __sdata_start
-000254a0 l       .sdata2	00000000 __sbss2_end
+000254a0 l       .data	00000000 __sbss2_end
 00000800 l       *ABS*	00000000 _HEAP_SIZE
-000254a0 l       .sdata2	00000000 __sdata2_start
+000254a0 l       .data	00000000 __sdata2_start
 0002a4a0 l       .stack	00000000 _end
 00011cf0 g     F .text	00000050 BufferManager_GetNbImageMax
 0000fd80 g     F .text	00000158 Pleora_ConvertFromF1F2
@@ -311,7 +306,7 @@ SYMBOL TABLE:
 00021df0 g     O .dtors	00000000 .hidden __DTOR_END__
 0001f15c g     F .text	0000019c XSpi_CfgInitialize
 00007160 g     F .text	0000008c CBB_Peek
-0002549c g       .rodata	00000000 __rodata_end
+000254a0 g       .rodata	00000000 __rodata_end
 000255dc g     O .data	00001776 gcRegsDef
 0001ee40 g     F .text	00000120 XIntc_DeviceInterruptHandler
 0000ccf0 g     F .text	00000050 GC_RegisterWriteUI32
@@ -355,7 +350,7 @@ SYMBOL TABLE:
 00029ca0 g       .heap	00000000 _heap_end
 00021978 g     F .text	00000158 XUartNs550_Recv
 00012a9c g     F .text	00000008 GC_MemoryBufferAvailableFreeSpaceLowCallback
-00023e34 g     O .rodata	00000004 _global_impure_ptr
+00023e38 g     O .rodata	00000004 _global_impure_ptr
 0002949c g       .bss	00000000 __bss_end
 00010aac g     F .text	00000068 Stack_GetMaximumLevel
 000008a4 g     F .text	00000f98 .hidden __udivdi3
@@ -442,7 +437,7 @@ SYMBOL TABLE:
 00020b54 g     F .text	00000110 XSysMon_SetSeqAcqTime
 0001ef94 g     F .text	000000ec XSpi_Start
 00003dc0 g     F .text	00000084 .hidden __clzsi2
-000254a0 g       .sdata2	00000000 __sbss2_start
+000254a0 g       .data	00000000 __sbss2_start
 00012da0 g     F .text	0000007c GC_AcquisitionStartCallback
 00026e74 g     O .data	00000004 gDebugTerminalCtrlIntfsCount
 000278a0 g     O .bss	0000007c DeviceVoltageAry
@@ -498,7 +493,7 @@ SYMBOL TABLE:
 0001179c g     F .text	00000038 roundDown
 00002dc4 g     F .text	00000630 .hidden __muldf3
 00013458 g     F .text	00000048 GC_MemoryBufferSequenceFirstFrameIDCallback
-00023d0c g     O .rodata	00000010 .hidden __thenan_sf
+00023d10 g     O .rodata	00000010 .hidden __thenan_sf
 00020674 g     F .text	000000dc XSysMon_GetSequencerMode
 00008d30 g     F .text	00000068 outbyte
 0000f5c4 g     F .text	000001ec F1F2_CircFrameBuilder
@@ -548,7 +543,7 @@ SYMBOL TABLE:
 00020920 g     F .text	00000124 XSysMon_SetSeqAvgEnables
 000007e0 g     F .text	000000c4 .hidden __fixunssfdi
 0000b688 g     F .text	000007a0 GC_RegisterReadRequest
-00023d1c g     O .rodata	00000014 .hidden __thenan_df
+00023d20 g     O .rodata	00000014 .hidden __thenan_df
 000273c8 g       .data	00000000 __sdata_end
 00021dec g       .ctors	00000000 __CTOR_END__
 00001d20 g     F .text	00000370 .hidden __mulsf3
@@ -568,7 +563,7 @@ SYMBOL TABLE:
 00012bc0 g     F .text	00000008 GC_VideoColorMapMaxCallback
 0001e0e0 g     F .text	00000020 Storage_MemConf_Check
 00008454 g     F .text	00000074 CtrlIntf_Disable
-00023d30 g     O .rodata	00000100 .hidden __clz_tab
+00023d34 g     O .rodata	00000100 .hidden __clz_tab
 00012aac g     F .text	00000008 GC_MemoryBufferFragmentedFreeSpaceLowCallback
 00012bd0 g     F .text	00000008 GC_VideoFreezeCallback
 00021c78 g     F .text	00000110 XUartNs550_CfgInitialize
@@ -591,7 +586,7 @@ SYMBOL TABLE:
 00012ba8 g     F .text	00000008 GC_VideoAGCFractionMinCallback
 00028ee8 g     O .bss	0000000c gcmPort
 00011de4 g     F .text	00000090 BufferManager_GetSequenceLength
-000254a0 g       .sdata2	00000000 __sdata2_end
+000254a0 g       .data	00000000 __sdata2_end
 00012a94 g     F .text	00000008 GC_MemoryBufferAvailableFreeSpaceHighCallback
 00012b58 g     F .text	00000008 GC_MemoryBufferTotalSpaceHighCallback
 0001fe88 g       .text	00000000 _interrupt_handler
@@ -642,7 +637,7 @@ SYMBOL TABLE:
 00000000  w      *UND*	00000000 __sf_fake_stdout
 0001d5a8 g     F .text	000000fc IIC_SPD_Validate
 0001e744 g     F .text	0000008c XIic_Initialize
-00023fb8 g     O .rodata	00000101 _ctype_
+00023fbc g     O .rodata	00000101 _ctype_
 00027882 g     O .bss	00000001 gBufferStartDownloadTrigger
 000254a4 g       .data	00000000 MB_ExceptionVectorTable
 00012b38 g     F .text	00000008 GC_MemoryBufferSequenceSizeIncCallback
