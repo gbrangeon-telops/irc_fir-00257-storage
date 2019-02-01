@@ -33,7 +33,7 @@ extern t_bufferManager gBufManager;
 extern bool gBufferStartDownloadTrigger;
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 12.3.0
+// Generated from XML camera definition file version 12.4.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -113,12 +113,6 @@ void GC_Callback_Init()
    gcRegsDef[SensorHeightIdx].callback =                             &GC_SensorHeightCallback;
    gcRegsDef[SensorWidthIdx].callback =                              &GC_SensorWidthCallback;
    gcRegsDef[VideoAGCIdx].callback =                                 &GC_VideoAGCCallback;
-   gcRegsDef[VideoAGCFractionMaxIdx].callback =                      &GC_VideoAGCFractionMaxCallback;
-   gcRegsDef[VideoAGCFractionMinIdx].callback =                      &GC_VideoAGCFractionMinCallback;
-   gcRegsDef[VideoAGCResponseTimeIdx].callback =                     &GC_VideoAGCResponseTimeCallback;
-   gcRegsDef[VideoColorMapIdx].callback =                            &GC_VideoColorMapCallback;
-   gcRegsDef[VideoColorMapMaxIdx].callback =                         &GC_VideoColorMapMaxCallback;
-   gcRegsDef[VideoColorMapMinIdx].callback =                         &GC_VideoColorMapMinCallback;
    gcRegsDef[VideoFreezeIdx].callback =                              &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
 }
@@ -1302,72 +1296,6 @@ void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  * @param access indicates whether the operation is read or write.
  */
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoAGCFractionMax GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoAGCFractionMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoAGCFractionMin GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoAGCFractionMinCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoAGCResponseTime GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoAGCResponseTimeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoColorMap GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoColorMapCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoColorMapMax GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoColorMapMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
- * VideoColorMapMin GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_VideoColorMapMinCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
 }
 

@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.3.0
+// Generated from XML camera definition file version 12.4.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -38,9 +38,6 @@ gcRegistersData_t gcRegsDataFactory = {
    /* DeviceTemperature = */ 0.0F,
    /* DeviceVoltage = */ 0.0F,
    /* MemoryBufferSequenceDownloadBitRateMax = */ 20.0F,
-   /* VideoAGCFractionMax = */ 0.0F,
-   /* VideoAGCFractionMin = */ 0.0F,
-   /* VideoAGCResponseTime = */ 0.0F,
    /* DeviceFirmwareModuleRevision = */ 0,
    /* AcquisitionArm = */ 0,
    /* AcquisitionFrameRateMode = */ 0,
@@ -107,9 +104,6 @@ gcRegistersData_t gcRegsDataFactory = {
    /* SensorHeight = */ 0,
    /* SensorWidth = */ 0,
    /* VideoAGC = */ 0,
-   /* VideoColorMap = */ 0,
-   /* VideoColorMapMax = */ 0,
-   /* VideoColorMapMin = */ 0,
    /* VideoFreeze = */ 0,
    /* Width = */ 0
 };
@@ -166,9 +160,6 @@ void GC_Registers_Init()
    gcRegsDef[DeviceTemperatureIdx].p_data = &gcRegsData.DeviceTemperature;
    gcRegsDef[DeviceVoltageIdx].p_data = &gcRegsData.DeviceVoltage;
    gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx].p_data = &gcRegsData.MemoryBufferSequenceDownloadBitRateMax;
-   gcRegsDef[VideoAGCFractionMaxIdx].p_data = &gcRegsData.VideoAGCFractionMax;
-   gcRegsDef[VideoAGCFractionMinIdx].p_data = &gcRegsData.VideoAGCFractionMin;
-   gcRegsDef[VideoAGCResponseTimeIdx].p_data = &gcRegsData.VideoAGCResponseTime;
    gcRegsDef[DeviceFirmwareModuleRevisionIdx].p_data = &gcRegsData.DeviceFirmwareModuleRevision;
    gcRegsDef[AcquisitionArmIdx].p_data = &gcRegsData.AcquisitionArm;
    gcRegsDef[AcquisitionFrameRateModeIdx].p_data = &gcRegsData.AcquisitionFrameRateMode;
@@ -235,9 +226,6 @@ void GC_Registers_Init()
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
    gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
-   gcRegsDef[VideoColorMapIdx].p_data = &gcRegsData.VideoColorMap;
-   gcRegsDef[VideoColorMapMaxIdx].p_data = &gcRegsData.VideoColorMapMax;
-   gcRegsDef[VideoColorMapMinIdx].p_data = &gcRegsData.VideoColorMapMin;
    gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
 }
