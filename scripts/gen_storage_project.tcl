@@ -19,6 +19,7 @@ set_property "simulator_language" "Mixed" $obj
 set_property "target_language" "VHDL" $obj
 
 
+
 # Add Project IP sources
 foreach subdir [glob -nocomplain -type d $ip_dir/*] {
    if {[glob -nocomplain $subdir/*.xci] != {}} {read_ip [glob $subdir/*.xci]}
@@ -45,7 +46,7 @@ set filelist  [concat $filelist [glob -nocomplain $src_dir/Buffering/HDL/*.vhd]]
 #MGT
 set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/MGT/hdl/*.vhd]]
 
-# Add specific constraint
+# Add specific contraint
 add_files -fileset constrs_1 $constr_dir
 set_property target_constrs_file $src_dir/Constraints/fir_00257_Target.xdc [current_fileset -constrset]
 reorder_files -fileset constrs_1 -before $src_dir/Constraints/fir_00257_Timing.xdc $src_dir/Constraints/fir_00257_Physical.xdc
@@ -57,6 +58,8 @@ add_files $filelist
 #ADD STAND ALONE COMMON HDL SOURCE
 add_files $common_hdl_dir/Utilities/double_sync_vector.vhd
 add_files $common_hdl_dir/Utilities/double_sync.vhd
+add_files $common_hdl_dir/Utilities/Pulse_gen.vhd
+add_files $common_hdl_dir/Utilities/sync_pulse.vhd
 add_files $common_hdl_dir/Utilities/sync_reset.vhd
 add_files $common_hdl_dir/Utilities/sync_resetn.vhd
 add_files $common_hdl_dir/gh_vhdl_lib/custom_MSI/gh_PWM.vhd
@@ -69,7 +72,7 @@ add_files $common_hdl_dir/Utilities/Clk_Divider_Pulse.vhd
 add_files $common_hdl_dir/RS232/uarts.vhd
 add_files $common_hdl_dir/Utilities/dcm_reset.vhd
 
-#Generate the bloc design
+#Generate the block design
 source $script_dir/gen_bd_core_$memconf.tcl
 
 #create the bd wrapper

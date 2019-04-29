@@ -4,7 +4,7 @@
 /*                                                                 */
 /* Version:                                 */
 /*                                                                 */
-/* Copyright (c) 2010 Xilinx, Inc.  All rights reserved.           */
+/* Copyright (c) 2010-2016 Xilinx, Inc.  All rights reserved.      */
 /*                                                                 */
 /* Description : MicroBlaze Linker Script                          */
 /*                                                                 */
@@ -17,7 +17,7 @@ _HEAP_SIZE = DEFINED(_HEAP_SIZE) ? _HEAP_SIZE : 0x800;
 
 MEMORY
 {
-   MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr : ORIGIN = 0x00000050, LENGTH = 0x0003FFB0
+   MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem : ORIGIN = 0x50, LENGTH = 0x3FFB0
 }
 
 /* Specify the default entry point to the program */
@@ -28,19 +28,19 @@ ENTRY(_start)
 
 SECTIONS
 {
-.vectors.reset 0x00000000 : {
+.vectors.reset 0x0 : {
    KEEP (*(.vectors.reset))
 } 
 
-.vectors.sw_exception 0x00000008 : {
+.vectors.sw_exception 0x8 : {
    KEEP (*(.vectors.sw_exception))
 } 
 
-.vectors.interrupt 0x00000010 : {
+.vectors.interrupt 0x10 : {
    KEEP (*(.vectors.interrupt))
 } 
 
-.vectors.hw_exception 0x00000020 : {
+.vectors.hw_exception 0x20 : {
    KEEP (*(.vectors.hw_exception))
 } 
 
@@ -48,15 +48,15 @@ SECTIONS
    *(.text)
    *(.text.*)
    *(.gnu.linkonce.t.*)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .init : {
    KEEP (*(.init))
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .fini : {
    KEEP (*(.fini))
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .ctors : {
    __CTOR_LIST__ = .;
@@ -67,7 +67,7 @@ SECTIONS
    KEEP (*(.ctors))
    __CTOR_END__ = .;
    ___CTORS_END___ = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .dtors : {
    __DTOR_LIST__ = .;
@@ -78,7 +78,7 @@ SECTIONS
    KEEP (*(.dtors))
    PROVIDE(__DTOR_END__ = .);
    PROVIDE(___DTORS_END___ = .);
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .rodata : {
    __rodata_start = .;
@@ -86,7 +86,7 @@ SECTIONS
    *(.rodata.*)
    *(.gnu.linkonce.r.*)
    __rodata_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .sdata2 : {
    . = ALIGN(8);
@@ -96,7 +96,7 @@ SECTIONS
    *(.gnu.linkonce.s2.*)
    . = ALIGN(8);
    __sdata2_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .sbss2 : {
    __sbss2_start = .;
@@ -104,7 +104,7 @@ SECTIONS
    *(.sbss2.*)
    *(.gnu.linkonce.sb2.*)
    __sbss2_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .data : {
    . = ALIGN(4);
@@ -113,31 +113,31 @@ SECTIONS
    *(.data.*)
    *(.gnu.linkonce.d.*)
    __data_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .got : {
    *(.got)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .got1 : {
    *(.got1)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .got2 : {
    *(.got2)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .eh_frame : {
    *(.eh_frame)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .jcr : {
    *(.jcr)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .gcc_except_table : {
    *(.gcc_except_table)
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .sdata : {
    . = ALIGN(8);
@@ -146,7 +146,7 @@ SECTIONS
    *(.sdata.*)
    *(.gnu.linkonce.s.*)
    __sdata_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .sbss (NOLOAD) : {
    . = ALIGN(4);
@@ -156,7 +156,7 @@ SECTIONS
    *(.gnu.linkonce.sb.*)
    . = ALIGN(8);
    __sbss_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .tdata : {
    __tdata_start = .;
@@ -164,7 +164,7 @@ SECTIONS
    *(.tdata.*)
    *(.gnu.linkonce.td.*)
    __tdata_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .tbss : {
    __tbss_start = .;
@@ -172,7 +172,7 @@ SECTIONS
    *(.tbss.*)
    *(.gnu.linkonce.tb.*)
    __tbss_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .bss (NOLOAD) : {
    . = ALIGN(4);
@@ -183,7 +183,7 @@ SECTIONS
    *(COMMON)
    . = ALIGN(4);
    __bss_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 _SDA_BASE_ = __sdata_start + ((__sbss_end - __sdata_start) / 2 );
 
@@ -197,7 +197,7 @@ _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2 );
    _heap_start = .;
    . += _HEAP_SIZE;
    _heap_end = .;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 .stack (NOLOAD) : {
    _stack_end = .;
@@ -205,7 +205,7 @@ _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2 );
    . = ALIGN(8);
    _stack = .;
    __stack = _stack;
-} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr
+} > MCU_microblaze_0_local_memory_ilmb_bram_if_cntlr_Mem_MCU_microblaze_0_local_memory_dlmb_bram_if_cntlr_Mem
 
 _end = .;
 }

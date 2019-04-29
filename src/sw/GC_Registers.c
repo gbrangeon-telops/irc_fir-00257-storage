@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.4.0
+// Generated from XML camera definition file version 12.5.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -51,6 +51,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* DeviceFirmwareModuleSelector = */ 0,
    /* DeviceTemperatureSelector = */ 0,
    /* DeviceVoltageSelector = */ 0,
+   /* EHDRINumberOfExposures = */ 0,
    /* EventError = */ 0,
    /* EventErrorCode = */ 0,
    /* EventErrorTimestamp = */ 0,
@@ -60,6 +61,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* EventTelopsCode = */ 0,
    /* EventTelopsTimestamp = */ 0,
    /* FValSize = */ 0,
+   /* FWMode = */ 0,
    /* Height = */ 0,
    /* IsActiveFlags = */ 0,
    /* MemoryBufferAvailableFreeSpaceHigh = */ 0,
@@ -173,6 +175,7 @@ void GC_Registers_Init()
    gcRegsDef[DeviceFirmwareModuleSelectorIdx].p_data = &gcRegsData.DeviceFirmwareModuleSelector;
    gcRegsDef[DeviceTemperatureSelectorIdx].p_data = &gcRegsData.DeviceTemperatureSelector;
    gcRegsDef[DeviceVoltageSelectorIdx].p_data = &gcRegsData.DeviceVoltageSelector;
+   gcRegsDef[EHDRINumberOfExposuresIdx].p_data = &gcRegsData.EHDRINumberOfExposures;
    gcRegsDef[EventErrorIdx].p_data = &gcRegsData.EventError;
    gcRegsDef[EventErrorCodeIdx].p_data = &gcRegsData.EventErrorCode;
    gcRegsDef[EventErrorTimestampIdx].p_data = &gcRegsData.EventErrorTimestamp;
@@ -182,6 +185,7 @@ void GC_Registers_Init()
    gcRegsDef[EventTelopsCodeIdx].p_data = &gcRegsData.EventTelopsCode;
    gcRegsDef[EventTelopsTimestampIdx].p_data = &gcRegsData.EventTelopsTimestamp;
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
+   gcRegsDef[FWModeIdx].p_data = &gcRegsData.FWMode;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
    gcRegsDef[IsActiveFlagsIdx].p_data = &gcRegsData.IsActiveFlags;
    gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceHigh;
@@ -243,16 +247,18 @@ void GC_UpdateLockedFlag()
 {
 /* AUTO-CODE REGLOCKED BEGIN */
    SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSelectorIdx], GC_AcquisitionStarted);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], GC_AcquisitionStarted);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameIDIdx], GC_AcquisitionStarted);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameCountIdx], GC_AcquisitionStarted);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], GC_AcquisitionStarted);
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx], (GC_AcquisitionStarted && (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off)));
-   SetRegLocked(&gcRegsDef[MemoryBufferSequenceClearAllIdx], GC_AcquisitionStarted);
+   SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], (GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferNumberOfSequencesMax == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], (GC_MemoryBufferNotEmptyLegacy || GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferSequenceSizeMax == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], (GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferSequenceSizeMax == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceSelectorIdx], GC_MemoryBufferBusy);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], ((gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Image) || (gcRegsData.MemoryBufferSequenceRecordedSize == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameIDIdx], ((gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Sequence) || (gcRegsData.MemoryBufferSequenceRecordedSize == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadFrameCountIdx], ((gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Sequence) || (gcRegsData.MemoryBufferSequenceRecordedSize == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], (GC_MemoryBufferBusy || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx], (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceClearIdx], (GC_MemoryBufferBusy || (gcRegsData.MemoryBufferSequenceRecordedSize == 0)));
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceClearAllIdx], GC_MemoryBufferBusy);
+   SetRegLocked(&gcRegsDef[MemoryBufferSequenceDefragIdx], GC_MemoryBufferBusy);
 /* AUTO-CODE REGLOCKED END */
 }
 
@@ -265,50 +271,6 @@ void GC_SetDefaultRegsData()
    // We don't know which detector is used so set default to the most restrictive in terms of memory size
    gcRegsData.Width = 1280;
    gcRegsData.Height = 1024;
-
-   // Update memory buffer registers by their callbacks
-   GC_MemoryBufferNumberOfImagesMaxCallback(GCCP_BEFORE, GCCA_READ);
-   GC_MemoryBufferNumberOfSequencesMaxCallback(GCCP_BEFORE, GCCA_READ);
-   GC_MemoryBufferSequenceSizeMaxCallback(GCCP_BEFORE, GCCA_READ);
-   gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfSequencesMax;
-}
-
-void GC_UpdateMemoryBufferSequenceSizeLimits()
-{
-   if( gcRegsData.MemoryBufferSequenceSize > gcRegsData.MemoryBufferSequenceSizeMax  )
-   {
-      gcRegsData.MemoryBufferSequenceSize = gcRegsData.MemoryBufferSequenceSizeMax;
-   }
-
-   // Limit the number of sequences
-   gcRegsData.MemoryBufferNumberOfSequences = MIN(gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferSequenceSize, gcRegsData.MemoryBufferNumberOfSequencesMax);
-
-   GC_UpdateMemoryBufferSequencePreMOISizeLimits();
-}
-
-void GC_UpdateMemoryBufferNumberOfSequenceLimits()
-{
-   if( gcRegsData.MemoryBufferNumberOfSequences > gcRegsData.MemoryBufferNumberOfSequencesMax  )
-   {
-      gcRegsData.MemoryBufferNumberOfSequences = gcRegsData.MemoryBufferNumberOfSequencesMax;
-   }
-
-   // Limit the number of images per sequence
-   if( (gcRegsData.MemoryBufferNumberOfSequences * gcRegsData.MemoryBufferSequenceSize) > gcRegsData.MemoryBufferNumberOfImagesMax  )
-   {
-      gcRegsData.MemoryBufferSequenceSize = roundDown(gcRegsData.MemoryBufferNumberOfImagesMax / gcRegsData.MemoryBufferNumberOfSequences, 2);
-   }
-
-   GC_UpdateMemoryBufferSequencePreMOISizeLimits();
-}
-
-void GC_UpdateMemoryBufferSequencePreMOISizeLimits()
-{
-   //Limit the Pre MOI size
-   if(gcRegsData.MemoryBufferSequencePreMOISize > (gcRegsData.MemoryBufferSequenceSize -1) )
-   {
-      gcRegsData.MemoryBufferSequencePreMOISize =  (gcRegsData.MemoryBufferSequenceSize -1);
-   }
 }
 
 /**

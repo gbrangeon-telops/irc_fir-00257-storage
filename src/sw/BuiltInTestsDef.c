@@ -16,7 +16,7 @@
 #include "BuiltInTestsdef.h"
 #include "BuiltInTests.h"
 #include "storage_init.h"
-#include "test_point.h"
+#include "gpio.h"
 
 builtInTest_t builtInTests[BITID_Count] =
 {
@@ -32,10 +32,10 @@ builtInTest_t builtInTests[BITID_Count] =
    {BITID_ADCControllerInitialization, "Initializing ADC controller", Storage_XADC_Init, BITR_Pending},
    {BITID_MemoryBufferControllerInitialization, "Initializing memory buffer manager", Storage_BufferManager_Init, BITR_Pending},
    {BITID_InterruptControllerStartup, "Starting interrupt controller", Storage_Intc_Start, BITR_Pending},
-   {BITID_TestPointInitialization, "Initializing test point", TP_Init, BITR_Pending},
+   {BITID_TestPointInitialization, "Initializing test point (obsolete)", NULL, BITR_Passed},      // Obsolete
    {BITID_NetworkHostsSynchronization, "", NULL, BITR_Pending},
    {BITID_DebugTerminalInitialization, "Initializing debug terminal", Storage_DebugTerminal_InitPhase2, BITR_Pending},
-   {BITID_GPIOControllerInitialization, "", NULL, BITR_NotApplicable},
+   {BITID_GPIOControllerInitialization, "Initializing GPIO controller", GPIO_Init, BITR_Pending},
    {BITID_I2CInterfaceInitialization, "Initializing I2C interface", Storage_I2C_Init, BITR_Pending},
    {BITID_MemoryConfigurationCheck, "Verifying memory configuration", Storage_MemConf_Check, BITR_Pending}
 };

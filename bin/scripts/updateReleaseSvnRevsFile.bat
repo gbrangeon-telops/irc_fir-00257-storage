@@ -19,7 +19,6 @@ echo our $rel_storage_common_rev1 = $WCREV$;>> %revFile%
 
 echo 1;>> %revFile%
 
-
 rem ###########
 rem Config 32GB
 rem ###########

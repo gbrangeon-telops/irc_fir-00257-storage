@@ -14,7 +14,6 @@
  */
 
 #include "storage_init.h"
-#include "xparameters.h"
 #include "xil_exception.h"
 #include "GC_Manager.h"
 #include "GC_Registers.h"
@@ -27,7 +26,6 @@
 #include "mgt_ctrl.h"
 #include "BufferManager.h"
 #include "XADC.h"
-#include "tel2000_param.h"
 #include "Timer.h"
 #include "mgt_ctrl.h"
 #include "DebugTerminal.h"
@@ -42,8 +40,8 @@ debugTerminal_t gDebugTerminal;
 IRC_Status_t gDebugTerminalStatus;
 ctrlIntf_t gCtrlIntf_OutputFPGA;
 qspiFlash_t gQSPIFlash;
-t_mgt gMGT = MGT_Ctor(TEL_PAR_TEL_AXIL_MGT_BASEADDR);
-t_bufferManager gBufManager = Buffering_Intf_Ctor(TEL_PAR_TEL_AXIL_BUF_BASEADDR);
+t_mgt gMGT = MGT_Ctor(XPAR_MGT_CTRL_BASEADDR);
+t_bufferManager gBufManager = Buffering_Intf_Ctor(XPAR_M_BUFFERING_CTRL_BASEADDR);
 
 
 /**
@@ -211,14 +209,15 @@ IRC_Status_t Storage_GC_Init()
    status = CircularUART_Init(&gCircularUART_OutputFPGA,
          XPAR_AXI_UART_FPGA_OUTPUT_DEVICE_ID,
          &gStorageIntc,
-         XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR);
+         XPAR_INTC_MICROBLAZE_0_AXI_INTC_AXI_UART_FPGA_OUTPUT_IP2INTC_IRPT_INTR,
+         NULL, NULL, Ns550);
    if (status != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
 
    // Configure Output FPGA UART serial port
-   if (UART_Config(&gCircularUART_OutputFPGA.uart, 115200, 8, 'N', 1) != IRC_SUCCESS)
+   if (CircularUART_Config(&gCircularUART_OutputFPGA, 115200, 8, 'N', 1) != IRC_SUCCESS)
    {
       return IRC_FAILURE;
    }
@@ -385,13 +384,7 @@ IRC_Status_t Storage_MGT_Init()
  */
 IRC_Status_t Storage_BufferManager_Init()
 {
-   IRC_Status_t status;
-
-   // Init module and wait for memory to be ready
-   status = BufferManager_Init(&gBufManager, &gcRegsData);
-   BufferManager_WaitMemReady(&gBufManager);
-
-   return status;
+   return BufferManager_Init(&gBufManager, &gcRegsData);
 }
 
 /**

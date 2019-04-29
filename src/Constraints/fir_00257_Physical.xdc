@@ -10,6 +10,7 @@ set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
 set_property CFGBVS GND [current_design]
 set_property CONFIG_VOLTAGE 1.5 [current_design]
 
+
 ############### DCI ###############################
 set_property DCI_CASCADE {32 34} [get_iobanks 33]
 
@@ -19,14 +20,14 @@ set_property INTERNAL_VREF 0.75 [get_iobanks 33]
 
 ####################### Sys clocks #######################
 set_property PACKAGE_PIN C12 [get_ports SYSCLK_0_P]
-#set_property PACKAGE_PIN C11 [get_ports SYSCLK_0_N]
+set_property PACKAGE_PIN C11 [get_ports SYSCLK_0_N]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_0_P]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_0_N]
 set_property DIFF_TERM FALSE [get_ports SYSCLK_0_P]
 set_property DIFF_TERM FALSE [get_ports SYSCLK_0_N]
 
 set_property PACKAGE_PIN AB11 [get_ports SYSCLK_1_P]
-#set_property PACKAGE_PIN AC11 [get_ports SYSCLK_1_N]
+set_property PACKAGE_PIN AC11 [get_ports SYSCLK_1_N]
 set_property IOSTANDARD DIFF_SSTL15 [get_ports SYSCLK_1_P]
 set_property DIFF_TERM FALSE [get_ports SYSCLK_1_P]
 
@@ -143,3 +144,4 @@ set_property IOSTANDARD LVCMOS33 [get_ports TP12]
 
 set_property PACKAGE_PIN AA25 [get_ports TP11]
 set_property IOSTANDARD LVCMOS33 [get_ports TP11]
+

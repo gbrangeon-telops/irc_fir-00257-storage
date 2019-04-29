@@ -1,13 +1,22 @@
 #Liste de commandes utiles
 
 #Générer le projet
-write_project_tcl -force -all_properties -absolute_path -verbose "D:/telops/FIR-00257-Storage/script/gen_project.tcl"
+write_project_tcl -force -all_properties -absolute_path -verbose "D:/telops/FIR-00251-Output/script/gen_project.tcl"
 
 #liste des fichiers utiles d'un ip
 get_files -all -of_objects [get_files  CH2_CLINK.xci]
 
 #Générer le bloc diagram
-write_bd_tcl -force -verbose "D:/Telops/FIR-00257-Storage/scripts/gen_bd_core.tcl"
+write_bd_tcl -force -verbose "D:/Telops/FIR-00251-Proc/scripts/gen_bd_core.tcl"
+
+#Générer le fichier de debug (avec Synthesized Design ouvert)
+write_debug_probes "[get_property DIRECTORY [current_project]]/[current_project]_debug_nets.ltx" -force
+
+#sauvegarder les resultat d'une simulation ILA
+write_hw_ila_data "d:/Output_debug_ila.zip" -force [upload_hw_ila_data hw_ila_1]
+
+#restorer les resultats d'une simulation ILA
+display_hw_ila_data [read_hw_ila_data "d:/Output_debug_ila.zip"]
 
 #execution du script de génération
 source -verbose gen_project.tcl

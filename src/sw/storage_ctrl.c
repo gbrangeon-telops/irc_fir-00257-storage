@@ -16,8 +16,9 @@
 #include "utils.h"
 #include "BuiltInTests.h"
 #include "GC_Manager.h"
-#include "test_point.h"
+#include "gpio.h"
 #include "BufferManager.h"
+#include "CDMA_DefragMem.h"
 #include "CtrlInterface.h"
 #include "NetworkInterface.h"
 #include "FirmwareUpdater.h"
@@ -28,7 +29,6 @@
 #include "IIC.h"
 #include "HwIcap.h"
 #include "verbose.h"
-
 
 #define DEVICE_RUNNING_TIME_REFRESH_PERIOD_US   TIME_ONE_MINUTE_US
 
@@ -41,7 +41,6 @@ int main()  // Defining the standard main() function
    extern ctrlIntf_t gCtrlIntf_OutputFPGA;
    extern debugTerminal_t gDebugTerminal;
    extern IRC_Status_t gDebugTerminalStatus;
-   extern t_bufferManager gBufManager;
    uint64_t tic;
 
    #if MEMCONF == 16
@@ -80,7 +79,7 @@ int main()  // Defining the standard main() function
    BuiltInTest_Execute(BITID_InterruptControllerStartup);
    BuiltInTest_Execute(BITID_MGTInterfaceInitialization);
    BuiltInTest_Execute(BITID_MemoryBufferControllerInitialization);
-   BuiltInTest_Execute(BITID_TestPointInitialization);
+   BuiltInTest_Execute(BITID_GPIOControllerInitialization);
    BuiltInTest_Execute(BITID_I2CInterfaceInitialization);
    BuiltInTest_Execute(BITID_MemoryConfigurationCheck);
 
@@ -100,8 +99,7 @@ int main()  // Defining the standard main() function
       NetIntf_SM(&gNetworkIntf);
       CtrlIntf_Process(&gCtrlIntf_OutputFPGA);
       BufferManager_SM();
-      BufferManager_UpdateErrorFlags(&gBufManager);
-      TP_TP11_Heartbeat_SM();
+      GPIO_TP11_Heartbeat_SM();
       XADC_SM();
       DebugTerminal_Process(&gDebugTerminal);
    }

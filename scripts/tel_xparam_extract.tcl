@@ -16,7 +16,11 @@ if  {$comparison != 0} {
    puts "Core is open"
 }
 
-#First Extract the port information
+#Extract the clock information
+set clkName [get_property NAME [get_bd_ports -filter {TYPE == clk && DIR == O}]]
+set clkFreq [get_property CONFIG.FREQ_HZ [get_bd_ports -filter {TYPE == clk && DIR == O}]]
+
+#Extract the port information
 set DataName [get_property NAME [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
 set DataAddr [get_property offset [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
 set Datarange [get_property range [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
@@ -44,10 +48,22 @@ puts $fd1 "/**
  
 #ifndef TEL2000_PARAM_H
 #define TEL2000_PARAM_H
- 
- /**
- * AXI PORT declaration
- */"
+
+/**
+* Clock declaration
+*/"
+
+#enter a loop that write all the information
+set i 0
+foreach j $clkName {
+   puts $fd1 "#define [string toupper [lindex $clkName $i]]_FREQ_HZ [lindex $clkFreq $i]"
+   incr i
+}
+
+puts $fd1 "
+/**
+* AXI PORT declaration
+*/"
 
 #enter a loop that write all the information
 set i 0
@@ -63,6 +79,13 @@ foreach j $DataName {
    incr i
 }
 
+puts $fd1 "/* Definitions for peripherals connected to TEL_AXIL_PERIPHERAL */"
+puts $fd1 "#define AXIL_DEMUX_SLAVE_ADDR_WIDTH       14"
+puts $fd1 "#define XPAR_M_BUFFERING_CTRL_BASEADDR    (XPAR_AXIL_PERIPHERAL_BASEADDR + (0 << AXIL_DEMUX_SLAVE_ADDR_WIDTH))"
+puts $fd1 "#define XPAR_M_BUF_TABLE_BASEADDR         (XPAR_AXIL_PERIPHERAL_BASEADDR + (1 << AXIL_DEMUX_SLAVE_ADDR_WIDTH))"
+puts $fd1 "#define TEL_PAR_TEL_UNUSED_BASEADDR       (XPAR_AXIL_PERIPHERAL_BASEADDR + (2 << AXIL_DEMUX_SLAVE_ADDR_WIDTH))"
+puts $fd1 "#define XPAR_MGT_CTRL_BASEADDR            (XPAR_AXIL_PERIPHERAL_BASEADDR + (3 << AXIL_DEMUX_SLAVE_ADDR_WIDTH))"
+puts $fd1 ""
 puts $fd1 "#endif // TEL2000_PARAM_H"
 
 #close file 

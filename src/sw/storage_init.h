@@ -18,6 +18,7 @@
 
 #include "Protocol_F1F2.h"
 #include "IRC_Status.h"
+#include "tel2000_param.h"
 
 #define DT_UART_TX_CIRC_BUFFER_SIZE          1024
 
@@ -46,5 +47,6 @@ IRC_Status_t Storage_BufferManager_Init();
 IRC_Status_t Storage_XADC_Init();
 IRC_Status_t Storage_I2C_Init();
 IRC_Status_t Storage_MemConf_Check();
+
 
 #endif // STORAGE_INIT_H

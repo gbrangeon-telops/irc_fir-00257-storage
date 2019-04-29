@@ -19,14 +19,21 @@
 #include "GC_Manager.h"
 #include <stdint.h>
 
-#define GC_AcquisitionStarted    (gAcquisitionStarted == 1)
+#define GC_AcquisitionStarted                (gAcquisitionStarted == 1)
+#define GC_ExternalMemoryBufferIsImplemented (1) // We are in the storage firmware !!!
+#define GC_MemoryBufferHalted                (gcRegsData.MemoryBufferMOISource == MBMOIS_None)
+#define GC_MemoryBufferOff                   (gcRegsData.MemoryBufferMode == MBM_Off || (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off && GC_MemoryBufferHalted))
+#define GC_MemoryBufferWrite                 (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off && !GC_MemoryBufferHalted)
+#define GC_MemoryBufferRead                  (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off)
+#define GC_MemoryBufferSequence              (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
+#define GC_MemoryBufferImage                 (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.4.0
+// Generated from XML camera definition file version 12.5.0
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 4) || (GC_XMLSUBMINORVERSION != 0))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 5) || (GC_XMLSUBMINORVERSION != 0))
 #error "XML version mismatch."
 #endif
 
@@ -56,6 +63,7 @@ struct gcRegistersDataStruct {
    uint32_t DeviceFirmwareModuleSelector;
    uint32_t DeviceTemperatureSelector;
    uint32_t DeviceVoltageSelector;
+   uint32_t EHDRINumberOfExposures;
    uint32_t EventError;
    uint32_t EventErrorCode;
    uint32_t EventErrorTimestamp;
@@ -65,6 +73,7 @@ struct gcRegistersDataStruct {
    uint32_t EventTelopsCode;
    uint32_t EventTelopsTimestamp;
    uint32_t FValSize;
+   uint32_t FWMode;
    uint32_t Height;
    uint32_t IsActiveFlags;
    uint32_t MemoryBufferAvailableFreeSpaceHigh;
@@ -145,16 +154,53 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 
 // Shared registers write macros
 ////////////////////////////////////////////////////////////////////////////////
-
 #define GC_SetMemoryBufferMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferModeIdx], val)
 #define GC_SetMemoryBufferLegacyMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferLegacyModeIdx], val)
 #define GC_SetMemoryBufferStatus(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferStatusIdx], val)
+#define GC_SetMemoryBufferAvailableFreeSpaceHigh(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx], val)
+#define GC_SetMemoryBufferAvailableFreeSpaceLow(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferAvailableFreeSpaceLowIdx], val)
+#define GC_SetMemoryBufferFragmentedFreeSpaceHigh(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferFragmentedFreeSpaceHighIdx], val)
+#define GC_SetMemoryBufferFragmentedFreeSpaceLow(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferFragmentedFreeSpaceLowIdx], val)
+#define GC_SetMemoryBufferTotalSpaceHigh(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferTotalSpaceHighIdx], val)
+#define GC_SetMemoryBufferTotalSpaceLow(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferTotalSpaceLowIdx], val)
+#define GC_SetMemoryBufferNumberOfImagesMax(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferNumberOfImagesMaxIdx], val)
+#define GC_SetMemoryBufferNumberOfSequencesMax(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferNumberOfSequencesMaxIdx], val)
+#define GC_SetMemoryBufferNumberOfSequences(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], val)
+#define GC_SetMemoryBufferSequenceSize(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSizeIdx], val)
+#define GC_SetMemoryBufferSequenceSizeMin(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSizeMinIdx], val)
+#define GC_SetMemoryBufferSequenceSizeMax(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSizeMaxIdx], val)
+#define GC_SetMemoryBufferSequenceSizeInc(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSizeIncIdx], val)
+#define GC_SetMemoryBufferSequencePreMOISize(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], val)
 #define GC_SetMemoryBufferSequenceCount(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceCountIdx], val)
+#define GC_SetMemoryBufferSequenceSelector(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceSelectorIdx], val)
+#define GC_SetMemoryBufferSequenceOffsetX(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceOffsetXIdx], val)
+#define GC_SetMemoryBufferSequenceOffsetY(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceOffsetYIdx], val)
+#define GC_SetMemoryBufferSequenceWidth(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceWidthIdx], val)
+#define GC_SetMemoryBufferSequenceHeight(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceHeightIdx], val)
+#define GC_SetMemoryBufferSequenceFirstFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceFirstFrameIDIdx], val)
+#define GC_SetMemoryBufferSequenceMOIFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceMOIFrameIDIdx], val)
+#define GC_SetMemoryBufferSequenceRecordedSize(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceRecordedSizeIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadImageFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadImageFrameIDIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadFrameIDIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadFrameCount(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadFrameCountIdx], val)
 #define GC_SetMemoryBufferSequenceDownloadMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDownloadModeIdx], val)
+#define GC_SetMemoryBufferSequenceDownloadBitRateMax(val) GC_RegisterWriteFloat(&gcRegsDef[MemoryBufferSequenceDownloadBitRateMaxIdx], val)
+#define GC_SetMemoryBufferSequenceClear(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceClearIdx], val)
+#define GC_SetMemoryBufferSequenceClearAll(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceClearAllIdx], val)
+#define GC_SetMemoryBufferSequenceDefrag(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceDefragIdx], val)
+#define GC_SetDeviceBuiltInTestsResults7(val) GC_RegisterWriteUI32(&gcRegsDef[DeviceBuiltInTestsResults7Idx], val)
+#define GC_SetDeviceBuiltInTestsResults8(val) GC_RegisterWriteUI32(&gcRegsDef[DeviceBuiltInTestsResults8Idx], val)
 
 // Locked registers utility macros
 ////////////////////////////////////////////////////////////////////////////////
-#define GC_MemoryBufferNotEmpty (gcRegsData.MemoryBufferSequenceCount > 0)
+#define GC_MemoryBufferBusy (GC_MemoryBufferRecording || GC_MemoryBufferTransmitting || GC_MemoryBufferDefraging || GC_MemoryBufferUpdating)
+#define GC_MemoryBufferDefraging MemoryBufferStatusTst(MemoryBufferDefragingMask)
+#define GC_MemoryBufferNotEmpty (GC_MemoryBufferBusy || (gcRegsData.MemoryBufferSequenceCount > 0))
+#define GC_MemoryBufferNotEmptyLegacy ((gcRegsData.MemoryBufferLegacyMode == MBLM_On) && GC_MemoryBufferNotEmpty)
+#define GC_MemoryBufferRecording MemoryBufferStatusTst(MemoryBufferRecordingMask)
+#define GC_MemoryBufferTransmitting MemoryBufferStatusTst(MemoryBufferTransmittingMask)
+#define GC_MemoryBufferUpdating MemoryBufferStatusTst(MemoryBufferUpdatingMask)
+#define GC_MemoryBufferWritingProcess (GC_MemoryBufferRecording || GC_MemoryBufferUpdating)
 #define GC_WaitingForImageCorrection (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
 
 void GC_Registers_Init();
@@ -163,9 +209,6 @@ void GC_Registers_Init();
 
 void GC_UpdateLockedFlag();
 void GC_SetDefaultRegsData();
-void GC_UpdateMemoryBufferSequenceSizeLimits();
-void GC_UpdateMemoryBufferNumberOfSequenceLimits();
-void GC_UpdateMemoryBufferSequencePreMOISizeLimits();
 uint32_t GC_GetTimestamp();
 
 #endif // GC_REGISTERS_H

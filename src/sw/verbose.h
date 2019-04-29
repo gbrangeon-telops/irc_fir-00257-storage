@@ -21,12 +21,14 @@
 #define FPGA_PRINT_PREFIX        "S> "
 
 
+// #define BUFFERING_VERBOSE
 // #define CI_VERBOSE
 // #define DT_VERBOSE
 // #define F1F2_VERBOSE
 // #define FU_VERBOSE
 // #define GCM_VERBOSE
 // #define IHEX_VERBOSE
+// #define MGT_VERBOSE
 // #define NI_VERBOSE
 // #define PLEORA_VERBOSE
 // #define QSPI_VERBOSE
