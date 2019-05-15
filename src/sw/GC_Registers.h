@@ -21,12 +21,6 @@
 
 #define GC_AcquisitionStarted                (gAcquisitionStarted == 1)
 #define GC_ExternalMemoryBufferIsImplemented (1) // We are in the storage firmware !!!
-#define GC_MemoryBufferHalted                (gcRegsData.MemoryBufferMOISource == MBMOIS_None)
-#define GC_MemoryBufferOff                   (gcRegsData.MemoryBufferMode == MBM_Off || (gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off && GC_MemoryBufferHalted))
-#define GC_MemoryBufferWrite                 (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off && !GC_MemoryBufferHalted)
-#define GC_MemoryBufferRead                  (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode != MBSDM_Off)
-#define GC_MemoryBufferSequence              (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Sequence)
-#define GC_MemoryBufferImage                 (gcRegsData.MemoryBufferMode == MBM_On && gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Image)
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.

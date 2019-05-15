@@ -179,7 +179,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
       // After write
       if (gcRegsData.AcquisitionStart)
       {
-         if(!GC_MemoryBufferRead)
+         if(!BM_MemoryBufferRead)
             gAcquisitionStarted = 1;
          BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
       }
@@ -690,12 +690,12 @@ void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-      if(GC_MemoryBufferWrite && GC_AcquisitionStarted)
+      if ((gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off) && GC_AcquisitionStarted)
       {
-         if((prevSource == MBMOIS_None) && (gcRegsData.MemoryBufferMOISource != MBMOIS_None))
-            BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
-         else if((prevSource != MBMOIS_None) && (gcRegsData.MemoryBufferMOISource == MBMOIS_None))
+         if ((prevSource != MBMOIS_None) && (gcRegsData.MemoryBufferMOISource == MBMOIS_None))
             BufferManager_OnAcquisitionStop(&gBufManager, &gcRegsData);
+         else if ((prevSource == MBMOIS_None) && (gcRegsData.MemoryBufferMOISource != MBMOIS_None))
+            BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
       }
 
       if (gcRegsData.MemoryBufferMOISource == MBMOIS_None)
@@ -888,7 +888,7 @@ void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase
       // After write
       if(BufferManager_SequenceDownloadLimits(&gcRegsData))
       {
-         if(GC_MemoryBufferImage)
+         if(BM_MemoryBufferImage)
             BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
       }
    }
