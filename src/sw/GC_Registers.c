@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.5.0
+// Generated from XML camera definition file version 12.5.1
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -105,6 +105,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
    /* SensorWidth = */ 0,
+   /* TDCStatus = */ 0,
    /* VideoAGC = */ 0,
    /* VideoFreeze = */ 0,
    /* Width = */ 0
@@ -229,6 +230,7 @@ void GC_Registers_Init()
    gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
    gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
+   gcRegsDef[TDCStatusIdx].p_data = &gcRegsData.TDCStatus;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
    gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;

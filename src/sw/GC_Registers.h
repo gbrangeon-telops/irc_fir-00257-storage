@@ -24,10 +24,10 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.5.0
+// Generated from XML camera definition file version 12.5.1
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 5) || (GC_XMLSUBMINORVERSION != 0))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 5) || (GC_XMLSUBMINORVERSION != 1))
 #error "XML version mismatch."
 #endif
 
@@ -111,6 +111,7 @@ struct gcRegistersDataStruct {
    uint32_t ReverseY;
    uint32_t SensorHeight;
    uint32_t SensorWidth;
+   uint32_t TDCStatus;
    uint32_t VideoAGC;
    uint32_t VideoFreeze;
    uint32_t Width;
@@ -195,7 +196,7 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 #define GC_MemoryBufferTransmitting MemoryBufferStatusTst(MemoryBufferTransmittingMask)
 #define GC_MemoryBufferUpdating MemoryBufferStatusTst(MemoryBufferUpdatingMask)
 #define GC_MemoryBufferWritingProcess (GC_MemoryBufferRecording || GC_MemoryBufferUpdating)
-#define GC_WaitingForImageCorrection (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
+#define GC_WaitingForImageCorrection TDCStatusTst(WaitingForImageCorrectionMask)
 
 void GC_Registers_Init();
 

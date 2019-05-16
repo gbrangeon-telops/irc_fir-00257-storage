@@ -33,7 +33,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 12.5.0
+// Generated from XML camera definition file version 12.5.1
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -114,6 +114,7 @@ void GC_Callback_Init()
    gcRegsDef[ReverseYIdx].callback =                                 &GC_ReverseYCallback;
    gcRegsDef[SensorHeightIdx].callback =                             &GC_SensorHeightCallback;
    gcRegsDef[SensorWidthIdx].callback =                              &GC_SensorWidthCallback;
+   gcRegsDef[TDCStatusIdx].callback =                                &GC_TDCStatusCallback;
    gcRegsDef[VideoAGCIdx].callback =                                 &GC_VideoAGCCallback;
    gcRegsDef[VideoFreezeIdx].callback =                              &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
@@ -1168,6 +1169,17 @@ void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  * @param access indicates whether the operation is read or write.
  */
 void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
+ * TDCStatus GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_TDCStatusCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
 }
 

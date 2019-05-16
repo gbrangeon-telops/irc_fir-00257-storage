@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 12.5.0
+// Generated from XML camera definition file version 12.5.1
 // using updateGenICamCallback.m Matlab script.
 
 void GC_Callback_Init();
@@ -98,6 +98,7 @@ void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_TDCStatusCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoFreezeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
