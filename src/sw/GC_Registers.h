@@ -19,6 +19,7 @@
 #include "GC_Manager.h"
 #include <stdint.h>
 
+extern uint8_t gAcquisitionStarted;
 #define GC_AcquisitionStarted                (gAcquisitionStarted == 1)
 #define GC_ExternalMemoryBufferIsImplemented (1) // We are in the storage firmware !!!
 

@@ -172,8 +172,6 @@ void GC_AcquisitionFrameRateModeCallback(gcCallbackPhase_t phase, gcCallbackAcce
  */
 void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   extern uint8_t gAcquisitionStarted;
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -195,8 +193,6 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
  */
 void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   extern uint8_t gAcquisitionStarted;
-
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
