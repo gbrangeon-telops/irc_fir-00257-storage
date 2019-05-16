@@ -111,7 +111,6 @@ struct gcRegistersDataStruct {
    uint32_t ReverseY;
    uint32_t SensorHeight;
    uint32_t SensorWidth;
-   uint32_t TDCStatus;
    uint32_t VideoAGC;
    uint32_t VideoFreeze;
    uint32_t Width;
@@ -196,7 +195,7 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 #define GC_MemoryBufferTransmitting MemoryBufferStatusTst(MemoryBufferTransmittingMask)
 #define GC_MemoryBufferUpdating MemoryBufferStatusTst(MemoryBufferUpdatingMask)
 #define GC_MemoryBufferWritingProcess (GC_MemoryBufferRecording || GC_MemoryBufferUpdating)
-#define GC_WaitingForImageCorrection TDCStatusTst(WaitingForImageCorrectionMask)
+#define GC_WaitingForImageCorrection (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
 
 void GC_Registers_Init();
 

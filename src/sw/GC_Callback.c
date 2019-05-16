@@ -114,7 +114,6 @@ void GC_Callback_Init()
    gcRegsDef[ReverseYIdx].callback =                                 &GC_ReverseYCallback;
    gcRegsDef[SensorHeightIdx].callback =                             &GC_SensorHeightCallback;
    gcRegsDef[SensorWidthIdx].callback =                              &GC_SensorWidthCallback;
-   gcRegsDef[TDCStatusIdx].callback =                                &GC_TDCStatusCallback;
    gcRegsDef[VideoAGCIdx].callback =                                 &GC_VideoAGCCallback;
    gcRegsDef[VideoFreezeIdx].callback =                              &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                    &GC_WidthCallback;
@@ -680,7 +679,6 @@ void GC_MemoryBufferMOIActivationCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   extern uint8_t gAcquisitionStarted;
    static uint32_t prevSource;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
@@ -688,6 +686,7 @@ void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_
       // Before write
       prevSource = gcRegsData.MemoryBufferMOISource;
    }
+
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
@@ -795,7 +794,7 @@ void GC_MemoryBufferSequenceClearAllCallback(gcCallbackPhase_t phase, gcCallback
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-      if(gcRegsData.MemoryBufferSequenceClearAll)
+      if (gcRegsData.MemoryBufferSequenceClearAll)
       {
          BufferManager_OnSequenceClearAll(&gBufManager, &gcRegsData);
       }
@@ -825,7 +824,7 @@ void GC_MemoryBufferSequenceDefragCallback(gcCallbackPhase_t phase, gcCallbackAc
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-      if(gcRegsData.MemoryBufferSequenceDefrag)
+      if (gcRegsData.MemoryBufferSequenceDefrag)
       {
          BufferManager_OnDefrag(&gBufManager, &gcRegsData);
       }
@@ -887,9 +886,9 @@ void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
-      if(BufferManager_SequenceDownloadLimits(&gcRegsData))
+      if (BufferManager_SequenceDownloadLimits(&gcRegsData))
       {
-         if(BM_MemoryBufferImage)
+         if (BM_MemoryBufferImage)
             BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
       }
    }
@@ -1004,11 +1003,12 @@ void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallback
       // Before Write
       prevSelector = gcRegsData.MemoryBufferSequenceSelector;
    }
+
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
       // Call update function only when selector has changed because it resets download default frame IDs
-      if(gcRegsData.MemoryBufferSequenceSelector != prevSelector)
+      if (gcRegsData.MemoryBufferSequenceSelector != prevSelector)
          BufferManager_UpdateSelectedSequenceParameters(&gcRegsData);
    }
 }
@@ -1173,17 +1173,6 @@ void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 }
 
 /**
- * TDCStatus GenICam register callback function.
- * 
- * @param phase indicates whether the function is called before or
- *    after the read or write operation.
- * @param access indicates whether the operation is read or write.
- */
-void GC_TDCStatusCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
-{
-}
-
-/**
  * VideoAGC GenICam register callback function.
  * 
  * @param phase indicates whether the function is called before or
@@ -1220,7 +1209,7 @@ void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
    {
       // After write
       BufferManager_UpdateSequenceMaxParameters(&gcRegsData);
-      if(firstRegConfig)
+      if (firstRegConfig)
       {
          BufferManager_OnWindowSizeInit(&gcRegsData);
          firstRegConfig = false;
