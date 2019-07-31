@@ -31,6 +31,8 @@
 
 extern t_bufferManager gBufManager;
 
+#define CMD_MEMORY_BUFFER_UPDATE_STATUS 0xff
+
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
 // Generated from XML camera definition file version 12.5.1
@@ -1078,6 +1080,18 @@ void GC_MemoryBufferSequenceWidthCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_MemoryBufferStatusCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
+   static uint32_t val;
+
+   if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
+   {
+      val = gcRegsData.MemoryBufferStatus;
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      if (gcRegsData.MemoryBufferStatus == CMD_MEMORY_BUFFER_UPDATE_STATUS)
+         gcRegsData.MemoryBufferStatus = val;
+   }
 }
 
 /**
