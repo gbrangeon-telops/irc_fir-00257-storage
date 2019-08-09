@@ -31,11 +31,10 @@
 
 extern t_bufferManager gBufManager;
 
-#define CMD_MEMORY_BUFFER_UPDATE_STATUS 0xff
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 12.5.1
+// Generated from XML camera definition file version 12.6.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -677,12 +676,12 @@ void GC_MemoryBufferMOIActivationCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   static uint32_t prevSource;
+   static uint32_t prevMemoryBufferMOISource;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
    {
       // Before write
-      prevSource = gcRegsData.MemoryBufferMOISource;
+      prevMemoryBufferMOISource = gcRegsData.MemoryBufferMOISource;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
@@ -690,16 +689,16 @@ void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_
       // After write
       if ((gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off) && GC_AcquisitionStarted)
       {
-         if ((prevSource != MBMOIS_None) && (gcRegsData.MemoryBufferMOISource == MBMOIS_None))
+         if ((prevMemoryBufferMOISource != MBMOIS_None) && (gcRegsData.MemoryBufferMOISource == MBMOIS_None))
+         {
             BufferManager_OnAcquisitionStop(&gBufManager, &gcRegsData);
-         else if ((prevSource == MBMOIS_None) && (gcRegsData.MemoryBufferMOISource != MBMOIS_None))
+            GC_SetMemoryBufferStatus(MBS_Holding);
+         }
+         else if ((prevMemoryBufferMOISource == MBMOIS_None) && (gcRegsData.MemoryBufferMOISource != MBMOIS_None))
+         {
             BufferManager_OnAcquisitionStart(&gBufManager, &gcRegsData);
+         }
       }
-
-      if (gcRegsData.MemoryBufferMOISource == MBMOIS_None)
-         MemoryBufferStatusSet(MemoryBufferHoldingMask);
-      else
-         MemoryBufferStatusClr(MemoryBufferHoldingMask);
    }
 }
 
@@ -716,9 +715,9 @@ void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
    {
       // After write
       if (gcRegsData.MemoryBufferMode == MBM_Off)
-         MemoryBufferStatusSet(MemoryBufferDeactivatedMask);
+         GC_SetMemoryBufferStatus(MBS_Deactivated);
       else
-         MemoryBufferStatusClr(MemoryBufferDeactivatedMask);
+         GC_SetMemoryBufferStatus(MBS_Idle);
    }
 }
 
@@ -994,19 +993,19 @@ void GC_MemoryBufferSequenceRecordedSizeCallback(gcCallbackPhase_t phase, gcCall
  */
 void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   static uint32_t prevSelector;
+   static uint32_t prevMemoryBufferSequenceSelector;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
    {
       // Before Write
-      prevSelector = gcRegsData.MemoryBufferSequenceSelector;
+      prevMemoryBufferSequenceSelector = gcRegsData.MemoryBufferSequenceSelector;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       // After write
       // Call update function only when selector has changed because it resets download default frame IDs
-      if (gcRegsData.MemoryBufferSequenceSelector != prevSelector)
+      if (gcRegsData.MemoryBufferSequenceSelector != prevMemoryBufferSequenceSelector)
          BufferManager_UpdateSelectedSequenceParameters(&gcRegsData);
    }
 }
@@ -1080,17 +1079,17 @@ void GC_MemoryBufferSequenceWidthCallback(gcCallbackPhase_t phase, gcCallbackAcc
  */
 void GC_MemoryBufferStatusCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   static uint32_t val;
+   static uint32_t prevMemoryBufferStatus;
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
    {
-      val = gcRegsData.MemoryBufferStatus;
+      prevMemoryBufferStatus = gcRegsData.MemoryBufferStatus;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      if (gcRegsData.MemoryBufferStatus == CMD_MEMORY_BUFFER_UPDATE_STATUS)
-         gcRegsData.MemoryBufferStatus = val;
+      if (gcRegsData.MemoryBufferStatus == MBS_Refresh)
+         gcRegsData.MemoryBufferStatus = prevMemoryBufferStatus;
    }
 }
 

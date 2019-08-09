@@ -22,7 +22,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.5.1
+// Generated from XML camera definition file version 12.6.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -96,7 +96,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferSequenceSizeMax = */ 0,
    /* MemoryBufferSequenceSizeMin = */ 0,
    /* MemoryBufferSequenceWidth = */ 0,
-   /* MemoryBufferStatus = */ MEMORY_BUFFER_STATUS_INIT,
+   /* MemoryBufferStatus = */ MBS_Deactivated,
    /* MemoryBufferTotalSpaceHigh = */ 0,
    /* MemoryBufferTotalSpaceLow = */ 0,
    /* OffsetX = */ 0,

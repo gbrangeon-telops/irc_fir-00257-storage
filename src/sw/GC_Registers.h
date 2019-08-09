@@ -25,10 +25,10 @@ extern uint8_t gAcquisitionStarted;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.5.1
+// Generated from XML camera definition file version 12.6.0
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 5) || (GC_XMLSUBMINORVERSION != 1))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 6) || (GC_XMLSUBMINORVERSION != 0))
 #error "XML version mismatch."
 #endif
 
@@ -188,14 +188,10 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 
 // Locked registers utility macros
 ////////////////////////////////////////////////////////////////////////////////
-#define GC_MemoryBufferBusy (GC_MemoryBufferRecording || GC_MemoryBufferTransmitting || GC_MemoryBufferDefraging || GC_MemoryBufferUpdating)
-#define GC_MemoryBufferDefraging MemoryBufferStatusTst(MemoryBufferDefragingMask)
+#define GC_MemoryBufferBusy ((gcRegsData.MemoryBufferStatus == MBS_Recording) || (gcRegsData.MemoryBufferStatus == MBS_Updating) || (gcRegsData.MemoryBufferStatus == MBS_Transmitting) || (gcRegsData.MemoryBufferStatus == MBS_Defraging))
 #define GC_MemoryBufferNotEmpty (GC_MemoryBufferBusy || (gcRegsData.MemoryBufferSequenceCount > 0))
 #define GC_MemoryBufferNotEmptyLegacy ((gcRegsData.MemoryBufferLegacyMode == MBLM_On) && GC_MemoryBufferNotEmpty)
-#define GC_MemoryBufferRecording MemoryBufferStatusTst(MemoryBufferRecordingMask)
-#define GC_MemoryBufferTransmitting MemoryBufferStatusTst(MemoryBufferTransmittingMask)
-#define GC_MemoryBufferUpdating MemoryBufferStatusTst(MemoryBufferUpdatingMask)
-#define GC_MemoryBufferWritingProcess (GC_MemoryBufferRecording || GC_MemoryBufferUpdating)
+#define GC_MemoryBufferWritingProcess ((gcRegsData.MemoryBufferStatus == MBS_Recording) || (gcRegsData.MemoryBufferStatus == MBS_Updating))
 #define GC_WaitingForImageCorrection (((/* TDCStatusReg not found */ 0) & 0x00002000) == 0x00002000)
 
 void GC_Registers_Init();
