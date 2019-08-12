@@ -967,37 +967,6 @@ CONFIG.C_USE_STACK_PROTECTION.VALUE_SRC {DEFAULT} \
   connect_bd_net -net rst_clk_wiz_1_100M_bus_struct_reset [get_bd_pins LMB_Rst] [get_bd_pins microblaze_0_local_memory/LMB_Rst]
   connect_bd_net -net rst_clk_wiz_1_100M_peripheral_aresetn [get_bd_pins s_axi_aresetn] [get_bd_pins mdm_1/M_AXI_ARESETN] [get_bd_pins mdm_1/S_AXI_ARESETN]
 
-  # Perform GUI Layout
-  regenerate_bd_layout -hierarchy [get_bd_cells /MCU] -layout_string {
-   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
-#  -string -flagsOSRD
-preplace port Debug_SYS_Rst -pg 1 -y 250 -defaultsOSRD
-preplace port M_AXI_DP -pg 1 -y 60 -defaultsOSRD
-preplace port processor_rst -pg 1 -y 90 -defaultsOSRD
-preplace port Clk -pg 1 -y 110 -defaultsOSRD
-preplace port INTERRUPT -pg 1 -y 40 -defaultsOSRD
-preplace port S_MDM_AXI -pg 1 -y 150 -defaultsOSRD
-preplace portBus LMB_Rst -pg 1 -y 270 -defaultsOSRD
-preplace portBus s_axi_aresetn -pg 1 -y 200 -defaultsOSRD
-preplace inst mdm_1 -pg 1 -lvl 1 -y 180 -defaultsOSRD
-preplace inst microblaze_0 -pg 1 -lvl 2 -y 70 -defaultsOSRD
-preplace inst microblaze_0_local_memory -pg 1 -lvl 3 -y 160 -defaultsOSRD
-preplace netloc S_MDM_AXI_1 1 0 1 0
-preplace netloc mdm_1_MBDEBUG_0 1 1 1 270
-preplace netloc microblaze_0_ILMB 1 2 1 740
-preplace netloc processor_rst_1 1 0 2 NJ 90 280J
-preplace netloc microblaze_0_Clk 1 0 3 10 80 290 180 NJ
-preplace netloc microblaze_0_lmb 1 1 2 N 160 NJ
-preplace netloc microblaze_0_M_AXI_DP 1 2 2 750J 60 NJ
-preplace netloc INTERRUPT_1 1 0 2 NJ 40 NJ
-preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 0 3 NJ 270 NJ 270 750J
-preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 0 1 0J
-preplace netloc mdm_1_debug_sys_rst 1 1 3 280J 250 NJ 250 NJ
-preplace netloc microblaze_0_DLMB 1 2 1 760
-levelinfo -pg 1 -20 140 520 850 960 -top 0 -bot 290
-",
-}
-
   # Restore current instance
   current_bd_instance $oldCurInst
 }
@@ -1422,7 +1391,7 @@ CONFIG.INTERFACE_SELECTION.VALUE_SRC {DEFAULT} \
   connect_bd_net -net xadc_wiz_0_temp_out [get_bd_pins MemoryBuffer/device_temp_i] [get_bd_pins xadc_wiz_0/temp_out]
 
   # Create address segments
-  create_bd_addr_seg -range 0x00080000 -offset 0x00000000 [get_bd_addr_spaces MCU/mdm_1/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB1/Mem] SEG_dlmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x00040000 -offset 0x00000000 [get_bd_addr_spaces MCU/mdm_1/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB1/Mem] SEG_dlmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x80000000 -offset 0x80000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_MEM_OUT/Reg] SEG_AXIL_MEM_OUT_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40060000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs AXIL_PERIPHERAL/Reg] SEG_AXIL_PERIPHERAL_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40070000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MemoryBuffer/axi_cdma_0/S_AXI_LITE/Reg] SEG_axi_cdma_0_Reg
@@ -1433,8 +1402,8 @@ CONFIG.INTERFACE_SELECTION.VALUE_SRC {DEFAULT} \
   create_bd_addr_seg -range 0x00010000 -offset 0x40010000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_quad_spi_0/AXI_LITE/Reg] SEG_axi_quad_spi_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40020000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_timer_0/S_AXI/Reg] SEG_axi_timer_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40030000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs axi_uart_fpga_output/S_AXI/Reg] SEG_axi_uart_fpga_output_Reg
-  create_bd_addr_seg -range 0x00080000 -offset 0x00000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
-  create_bd_addr_seg -range 0x00080000 -offset 0x00000000 [get_bd_addr_spaces MCU/microblaze_0/Instruction] [get_bd_addr_segs MCU/microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x00040000 -offset 0x00000000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
+  create_bd_addr_seg -range 0x00040000 -offset 0x00000000 [get_bd_addr_spaces MCU/microblaze_0/Instruction] [get_bd_addr_segs MCU/microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x00001000 -offset 0x400B0000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs MCU/mdm_1/S_AXI/Reg] SEG_mdm_1_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40050000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs INTC/microblaze_0_axi_intc/S_AXI/Reg] SEG_microblaze_0_axi_intc_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x40040000 [get_bd_addr_spaces MCU/microblaze_0/Data] [get_bd_addr_segs xadc_wiz_0/s_axi_lite/Reg] SEG_xadc_wiz_0_Reg
@@ -1496,8 +1465,8 @@ preplace netloc axi_interconnect_0_M09_AXI 1 3 2 N 370 1270
 preplace netloc xadc_wiz_0_temp_out 1 4 2 1350 440 1780
 preplace netloc axi_uart_fpga_output_ip2intc_irpt 1 0 6 30 1020 NJ 1020 NJ 1020 NJ 1020 N 1020 1790
 preplace netloc AXIL_MEM_IN_1 1 0 5 NJ 1290 NJ 1290 NJ 1290 NJ 1290 NJ
-preplace netloc axi_interconnect_0_M12_AXI 1 1 3 330 690 NJ 690 980
 preplace netloc MemoryBuffer_M_AXIS_MM2S_STS 1 5 1 NJ
+preplace netloc axi_interconnect_0_M12_AXI 1 1 3 330 690 NJ 690 980
 preplace netloc MemoryBuffer_M_AXIS_MM2S 1 5 1 NJ
 preplace netloc microblaze_0_Clk 1 0 6 -30 1490 300 1490 610 1490 1010 1490 1290J 1190 NJ
 preplace netloc MemoryBuffer_init_calib_complete 1 5 1 NJ
