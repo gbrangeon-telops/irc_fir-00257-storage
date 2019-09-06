@@ -23,6 +23,7 @@
 
 static IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf);
 static IRC_Status_t DebugTerminalParseBUF(circByteBuffer_t *cbuf);
+static IRC_Status_t DebugTerminalParsePBT(circByteBuffer_t *cbuf);
 
 debugTerminalCommand_t gDebugTerminalCommands[] =
 {
@@ -32,6 +33,7 @@ debugTerminalCommand_t gDebugTerminalCommands[] =
    {"NET", DebugTerminalParseNET},
    {"STACK", DebugTerminalParseSTACK},
    {"CI", DebugTerminalParseCI},
+   {"PBT", DebugTerminalParsePBT},
    {"HLP", DebugTerminalParseHLP}
 };
 
@@ -69,6 +71,7 @@ static IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
    DT_PRINTF("  Network status:     NET [0|1 [port]]");
    DT_PRINTF("  Get Stack Level:    STACK");
    DT_PRINTF("  Ctrl Intf status:   CI [SB|LB OUTPUT 0|1]");
+   DT_PRINTF("  Print buffer table: PBT");
    DT_PRINTF("  Print help:         HLP");
 
    return IRC_SUCCESS;
@@ -100,6 +103,25 @@ static IRC_Status_t DebugTerminalParseBUF(circByteBuffer_t *cbuf)
    DT_PRINTF("buf.mem_ready     = %d", status.mem_ready);
    DT_PRINTF("buf.ext_buf_prsnt = %d", status.ext_buf_prsnt);
    DT_PRINTF("buf.status        = 0x%08X", gcRegsData.MemoryBufferStatus);
+
+   return IRC_SUCCESS;
+}
+
+static IRC_Status_t DebugTerminalParsePBT(circByteBuffer_t *cbuf)
+{
+   extern t_memoryTable gMemoryTable;
+   uint32_t i;
+
+   DT_PRINTF("Buffer Table:");
+   for (i = 0; i < gMemoryTable.NbValidSequences; i++)
+   {
+      uint64_t addr = (uint64_t)gMemoryTable.data[i].startAddress << BM_ADDRBITS_ALIGN;
+      DT_PRINTF("Seq %u: startAddr=0x%08x%08x, bufLen=%u, width=%u, height=%u, offX=%u, offY=%u",
+                i, (uint32_t) (addr >> 32),  (uint32_t) (addr & 0x00000000ffffffffull),
+                gMemoryTable.data[i].bufferLength,
+                gMemoryTable.data[i].imageWidth,  gMemoryTable.data[i].imageHeight,
+                gMemoryTable.data[i].OffsetX,  gMemoryTable.data[i].OffsetY);
+   }
 
    return IRC_SUCCESS;
 }
