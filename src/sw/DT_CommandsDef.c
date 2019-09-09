@@ -116,11 +116,14 @@ static IRC_Status_t DebugTerminalParsePBT(circByteBuffer_t *cbuf)
    for (i = 0; i < gMemoryTable.NbValidSequences; i++)
    {
       uint64_t addr = (uint64_t)gMemoryTable.data[i].startAddress << BM_ADDRBITS_ALIGN;
-      DT_PRINTF("Seq %u: startAddr=0x%08x%08x, bufLen=%u, width=%u, height=%u, offX=%u, offY=%u",
+      DT_PRINTF("Seq %u: startAddr=0x%08x%08x, bufLen=%u, width=%u, height=%u, offX=%u, offY=%u, "
+                "start=%u, stop=%u, moi=%u",
                 i, (uint32_t) (addr >> 32),  (uint32_t) (addr & 0x00000000ffffffffull),
                 gMemoryTable.data[i].bufferLength,
                 gMemoryTable.data[i].imageWidth,  gMemoryTable.data[i].imageHeight,
-                gMemoryTable.data[i].OffsetX,  gMemoryTable.data[i].OffsetY);
+                gMemoryTable.data[i].OffsetX,  gMemoryTable.data[i].OffsetY,
+                gMemoryTable.data[i].bufImgIdx.start_img, gMemoryTable.data[i].bufImgIdx.stop_img,
+                gMemoryTable.data[i].bufImgIdx.moi_img);
    }
 
    return IRC_SUCCESS;
