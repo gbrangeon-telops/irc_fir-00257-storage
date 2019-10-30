@@ -161,7 +161,7 @@ IRC_Status_t Storage_GC_Init()
    GC_Callback_Init();
 
    // Initialize GenICam register data
-   gcRegsData = gcRegsDataFactory;
+   GC_RestoreDataFactory();
 
    // Set default values
    GC_SetDefaultRegsData();

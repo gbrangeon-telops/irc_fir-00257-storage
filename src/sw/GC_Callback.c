@@ -177,7 +177,6 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.AcquisitionStart)
       {
          if(!BM_MemoryBufferRead)
@@ -198,7 +197,6 @@ void GC_AcquisitionStopCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.AcquisitionStop)
       {
          gAcquisitionStarted = 0;
@@ -240,7 +238,6 @@ void GC_DeviceBuiltInTestsResults7Callback(gcCallbackPhase_t phase, gcCallbackAc
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       BuiltInTest_Execute(BITID_BuiltInTestsGlobalResult);
       gcRegsData.DeviceBuiltInTestsResults7 = BuiltInTest_FillResultRegister(0);
    }
@@ -257,7 +254,6 @@ void GC_DeviceBuiltInTestsResults8Callback(gcCallbackPhase_t phase, gcCallbackAc
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.DeviceBuiltInTestsResults8 = BuiltInTest_FillResultRegister(1);
    }
 }
@@ -273,13 +269,11 @@ void GC_DeviceClockFrequencyCallback(gcCallbackPhase_t phase, gcCallbackAccess_t
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.DeviceClockFrequency = DeviceClockFrequencyAry[gcRegsData.DeviceClockSelector];
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       DeviceClockFrequencyAry[gcRegsData.DeviceClockSelector] = gcRegsData.DeviceClockFrequency;
    }
 }
@@ -306,13 +300,11 @@ void GC_DeviceFirmwareModuleRevisionCallback(gcCallbackPhase_t phase, gcCallback
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.DeviceFirmwareModuleRevision = DeviceFirmwareModuleRevisionAry[gcRegsData.DeviceFirmwareModuleSelector];
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       DeviceFirmwareModuleRevisionAry[gcRegsData.DeviceFirmwareModuleSelector] = gcRegsData.DeviceFirmwareModuleRevision;
    }
 }
@@ -339,13 +331,11 @@ void GC_DeviceTemperatureCallback(gcCallbackPhase_t phase, gcCallbackAccess_t ac
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.DeviceTemperature = DeviceTemperatureAry[gcRegsData.DeviceTemperatureSelector];
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       DeviceTemperatureAry[gcRegsData.DeviceTemperatureSelector] = gcRegsData.DeviceTemperature;
    }
 }
@@ -372,13 +362,11 @@ void GC_DeviceVoltageCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.DeviceVoltage = DeviceVoltageAry[gcRegsData.DeviceVoltageSelector];
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       DeviceVoltageAry[gcRegsData.DeviceVoltageSelector] = gcRegsData.DeviceVoltage;
    }
 }
@@ -416,7 +404,6 @@ void GC_EventErrorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventError = 0;
       GC_NextEventError();
    }
@@ -433,7 +420,6 @@ void GC_EventErrorCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acces
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventErrorCode = EECD_NoError;
       GC_NextEventError();
    }
@@ -450,7 +436,6 @@ void GC_EventErrorTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t 
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventErrorTimestamp = 0;
       GC_NextEventError();
    }
@@ -467,13 +452,11 @@ void GC_EventNotificationCallback(gcCallbackPhase_t phase, gcCallbackAccess_t ac
 {
    if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
    {
-      // Before read
       gcRegsData.EventNotification = EventNotificationAry[gcRegsData.EventSelector];
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       EventNotificationAry[gcRegsData.EventSelector] = gcRegsData.EventNotification;
    }
 }
@@ -489,7 +472,6 @@ void GC_EventSelectorCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       gcRegsData.EventSelector = MIN(gcRegsData.EventSelector, EventNotificationAryLen - 1);
    }
 }
@@ -505,7 +487,6 @@ void GC_EventTelopsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventTelops = 0;
       GC_NextEventTelops();
    }
@@ -522,7 +503,6 @@ void GC_EventTelopsCodeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acce
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventTelopsCode = ETCD_NoEvent;
       GC_NextEventTelops();
    }
@@ -539,7 +519,6 @@ void GC_EventTelopsTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_READ))
    {
-      // After read
       gcRegsData.EventTelopsTimestamp = 0;
       GC_NextEventTelops();
    }
@@ -580,7 +559,6 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       gcRegsData.Height -= 2; // Remove 2 header lines (added for the NTx-Mini)
 
       BufferManager_UpdateSequenceMaxParameters(&gcRegsData);
@@ -682,13 +660,11 @@ void GC_MemoryBufferMOISourceCallback(gcCallbackPhase_t phase, gcCallbackAccess_
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
    {
-      // Before write
       prevMemoryBufferMOISource = gcRegsData.MemoryBufferMOISource;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if ((gcRegsData.MemoryBufferSequenceDownloadMode == MBSDM_Off) && GC_AcquisitionStarted)
       {
          if ((prevMemoryBufferMOISource != MBMOIS_None) && (gcRegsData.MemoryBufferMOISource == MBMOIS_None))
@@ -715,7 +691,6 @@ void GC_MemoryBufferModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.MemoryBufferMode == MBM_Off)
          GC_SetMemoryBufferStatus(MBS_Deactivated);
       else
@@ -746,7 +721,6 @@ void GC_MemoryBufferNumberOfSequencesCallback(gcCallbackPhase_t phase, gcCallbac
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_NumberOfSequencesLimits(&gcRegsData);
    }
 }
@@ -773,7 +747,6 @@ void GC_MemoryBufferSequenceClearCallback(gcCallbackPhase_t phase, gcCallbackAcc
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.MemoryBufferSequenceClear)
       {
          BufferManager_OnSequenceClearSelected(&gcRegsData);
@@ -792,7 +765,6 @@ void GC_MemoryBufferSequenceClearAllCallback(gcCallbackPhase_t phase, gcCallback
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.MemoryBufferSequenceClearAll)
       {
          BufferManager_OnSequenceClearAll(&gBufManager, &gcRegsData);
@@ -822,7 +794,6 @@ void GC_MemoryBufferSequenceDefragCallback(gcCallbackPhase_t phase, gcCallbackAc
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (gcRegsData.MemoryBufferSequenceDefrag)
       {
          BufferManager_OnDefrag(&gBufManager, &gcRegsData);
@@ -852,7 +823,6 @@ void GC_MemoryBufferSequenceDownloadFrameCountCallback(gcCallbackPhase_t phase, 
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_SequenceDownloadLimits(&gcRegsData);
    }
 }
@@ -868,7 +838,6 @@ void GC_MemoryBufferSequenceDownloadFrameIDCallback(gcCallbackPhase_t phase, gcC
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_SequenceDownloadLimits(&gcRegsData);
    }
 }
@@ -895,7 +864,6 @@ void GC_MemoryBufferSequenceDownloadImageFrameIDCallback(gcCallbackPhase_t phase
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       if (BufferManager_SequenceDownloadLimits(&gcRegsData))
       {
          if (BM_MemoryBufferImage)
@@ -992,7 +960,6 @@ void GC_MemoryBufferSequencePreMOISizeCallback(gcCallbackPhase_t phase, gcCallba
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_SequencePreMOISizeLimits(&gcRegsData);
    }
 }
@@ -1021,13 +988,11 @@ void GC_MemoryBufferSequenceSelectorCallback(gcCallbackPhase_t phase, gcCallback
 
    if ((phase == GCCP_BEFORE) && (access == GCCA_WRITE))
    {
-      // Before Write
       prevMemoryBufferSequenceSelector = gcRegsData.MemoryBufferSequenceSelector;
    }
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       // Call update function only when selector has changed because it resets download default frame IDs
       if (gcRegsData.MemoryBufferSequenceSelector != prevMemoryBufferSequenceSelector)
          BufferManager_UpdateSelectedSequenceParameters(&gcRegsData);
@@ -1045,7 +1010,6 @@ void GC_MemoryBufferSequenceSizeCallback(gcCallbackPhase_t phase, gcCallbackAcce
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_SequenceSizeLimits(&gcRegsData);
    }
 }
@@ -1240,7 +1204,6 @@ void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      // After write
       BufferManager_UpdateSequenceMaxParameters(&gcRegsData);
       if (firstRegConfig)
       {
