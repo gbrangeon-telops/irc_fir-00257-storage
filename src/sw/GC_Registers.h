@@ -25,10 +25,10 @@ extern uint8_t gAcquisitionStarted;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 12.6.255
+// Generated from XML camera definition file version 12.7.0
 // using generateGenICamCLib.m Matlab script.
 
-#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 6) || (GC_XMLSUBMINORVERSION != 255))
+#if ((GC_XMLMAJORVERSION != 12) || (GC_XMLMINORVERSION != 7) || (GC_XMLSUBMINORVERSION != 0))
 #error "XML version mismatch."
 #endif
 
