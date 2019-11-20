@@ -23,7 +23,6 @@ set xDir=C:\Xilinx
 if exist D:\Xilinx\SDK\2016.3\*.* set xDir=D:\Xilinx
 @echo Xilinx directory: %xDir%
 
-set x_data2mem=%xDir%\SDK\2016.3\bin\unwrapped\win64.o\data2mem.exe
 set x_updatemem=%xDir%\SDK\2016.3\bin\updatemem.bat
 set x_xilperl=%xDir%\Vivado\2016.3\ids_lite\ISE\bin\nt64\xilperl.exe
 
