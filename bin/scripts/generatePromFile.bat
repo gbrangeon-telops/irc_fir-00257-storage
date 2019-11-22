@@ -48,4 +48,5 @@ rem Generate Multiboot PROM file
 if errorlevel 1 (
 	echo PROM file generation failed!
 	pause
+   exit
 )
