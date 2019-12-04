@@ -9,11 +9,9 @@ set binDir=%projectDir%\bin
 set scriptsDir=%binDir%\scripts
 
 set elfFile=%binDir%\%baseName%.elf
-set bitFile=%binDir%\fir_257_top_%memconf%.bit
-set mmiFile=%binDir%\fir_257_top_%memconf%.mmi
+set hwFile=%sdkDir%\hw_%memconf%\fir_257_top.hdf
+
 set buildInfoFile=%srcDir%\BuildInfo\BuildInfo.h
-set releaseFile=%binDir%\%baseName%_release_%memconf%.bin
-set releaseLogFile=%binDir%\%baseName%_release_%memconf%.txt
 set revFile=%binDir%\svnrevs_%memconf%.pl
 
 set tortoiseSVNDir="C:\Program Files\TortoiseSVN"
