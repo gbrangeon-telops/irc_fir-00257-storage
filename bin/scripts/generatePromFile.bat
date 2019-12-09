@@ -47,7 +47,7 @@ rem Generate PROM file
 rem %x_promgen% -w -p mcs -spi -c FF -o "%binDir%\prom\%baseName%.mcs" -s 16384 -u 0 %binDir%\download_%memconf%.bit > %binDir%\_promgen_%memconf%.log
 
 rem Clean up
-del %scriptsDir%\updatemem*
+del %cd%\updatemem*
 del %binDir%\_promgen_multiboot.log
 
 rem Generate Multiboot PROM file
