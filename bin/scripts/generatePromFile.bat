@@ -1,5 +1,5 @@
 rem Fetch hw and sw files (all memconf)
-call %scriptsDir%\fetchHwSwFiles.bat
+call D:\Telops\FIR-00257-Storage\bin\scripts\fetchHwSwFiles.bat
 
 call D:\Telops\FIR-00257-Storage\bin\scripts\setEnvironment.bat 16
 
