@@ -3,10 +3,10 @@
 
 #if MEMCONF == 16
 
-#define SVN_HARDWARE_REV      24031
-#define SVN_SOFTWARE_REV      24452
+#define SVN_HARDWARE_REV      24029
+#define SVN_SOFTWARE_REV      24515
 #define SVN_BOOTLOADER_REV    0 
-#define SVN_COMMON_REV        24523
+#define SVN_COMMON_REV        24561
 
 #define SVN_UNCOMMITTED_CHANGES  ((SVN_HARDWARE_REV < 0) || (SVN_SOFTWARE_REV < 0) || (SVN_BOOTLOADER_REV < 0) || (SVN_COMMON_REV < 0))
 
@@ -17,15 +17,15 @@
 #define HARDWARE_MISMATCH (0)
 
 #if HARDWARE_MISMATCH
-#error D:\Telops\FIR-00257-Storage\sdk\hw_platform_16\system.hdf does not match D:\Telops\FIR-00257-Storage\sdk\hw_16\fir_257_top.hdf.
+#error D:\Telops\FIR-00257-Storage\sdk\hw_platform_16\system.hdf does not match D:\Telops\FIR-00257-Storage\sdk\hw_16\fir_257_top.hdf
 #endif
 
 #elif MEMCONF == 32
 
-#define SVN_HARDWARE_REV      24031
-#define SVN_SOFTWARE_REV      24452
+#define SVN_HARDWARE_REV      24029
+#define SVN_SOFTWARE_REV      24515
 #define SVN_BOOTLOADER_REV    0 
-#define SVN_COMMON_REV        24523
+#define SVN_COMMON_REV        24561
 
 #define SVN_UNCOMMITTED_CHANGES  ((SVN_HARDWARE_REV < 0) || (SVN_SOFTWARE_REV < 0) || (SVN_BOOTLOADER_REV < 0) || (SVN_COMMON_REV < 0))
 
@@ -36,9 +36,9 @@
 #define HARDWARE_MISMATCH (0)
 
 #if HARDWARE_MISMATCH
-#error D:\Telops\FIR-00257-Storage\sdk\hw_platform_32\system.hdf does not match D:\Telops\FIR-00257-Storage\sdk\hw_32\fir_257_top.hdf.
+#error D:\Telops\FIR-00257-Storage\sdk\hw_platform_32\system.hdf does not match D:\Telops\FIR-00257-Storage\sdk\hw_32\fir_257_top.hdf
 #endif
 
-#endif 
+#endif  // MEMCONF Check
 
 #endif // BUILDINFO_H
