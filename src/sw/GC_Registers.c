@@ -109,6 +109,8 @@ gcRegistersData_t gcRegsDataFactory = {
    /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
    /* SensorWidth = */ 0,
+   /* TDCFlags = */ 0,
+   /* TDCFlags2 = */ 0,
    /* VideoAGC = */ 0,
    /* VideoFreeze = */ 0,
    /* Width = */ 0
@@ -241,6 +243,8 @@ void GC_Registers_Init()
    gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
    gcRegsDef[SensorWidthIdx].p_data = &gcRegsData.SensorWidth;
+   gcRegsDef[TDCFlagsIdx].p_data = &gcRegsData.TDCFlags;
+   gcRegsDef[TDCFlags2Idx].p_data = &gcRegsData.TDCFlags2;
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
    gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
@@ -271,7 +275,7 @@ uint8_t gAcquisitionStarted = 0;
 void GC_UpdateLockedFlag()
 {
 /* AUTO-CODE REGLOCKED BEGIN */
-   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection) || GC_AcquisitionStarted));
+   SetRegLocked(&gcRegsDef[MemoryBufferModeIdx], ((GC_MemoryBufferNotEmpty || GC_WaitingForImageCorrection || (GC_MemoryBufferIsImplemented == 0)) || GC_AcquisitionStarted));
    SetRegLocked(&gcRegsDef[MemoryBufferNumberOfSequencesIdx], (GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferNumberOfSequencesMax == 0)));
    SetRegLocked(&gcRegsDef[MemoryBufferSequenceSizeIdx], (GC_MemoryBufferNotEmptyLegacy || GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferSequenceSizeMax == 0)));
    SetRegLocked(&gcRegsDef[MemoryBufferSequencePreMOISizeIdx], (GC_MemoryBufferWritingProcess || (gcRegsData.MemoryBufferSequenceSizeMax == 0)));

@@ -115,6 +115,8 @@ struct gcRegistersDataStruct {
    uint32_t ReverseY;
    uint32_t SensorHeight;
    uint32_t SensorWidth;
+   uint32_t TDCFlags;
+   uint32_t TDCFlags2;
    uint32_t VideoAGC;
    uint32_t VideoFreeze;
    uint32_t Width;
@@ -194,6 +196,7 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 // Locked registers utility macros
 ////////////////////////////////////////////////////////////////////////////////
 #define GC_MemoryBufferBusy ((gcRegsData.MemoryBufferStatus == MBS_Recording) || (gcRegsData.MemoryBufferStatus == MBS_Updating) || (gcRegsData.MemoryBufferStatus == MBS_Transmitting) || (gcRegsData.MemoryBufferStatus == MBS_Defraging))
+#define GC_MemoryBufferIsImplemented TDCFlagsTst(MemoryBufferIsImplementedMask)
 #define GC_MemoryBufferNotEmpty (GC_MemoryBufferBusy || (gcRegsData.MemoryBufferSequenceCount > 0))
 #define GC_MemoryBufferNotEmptyLegacy ((gcRegsData.MemoryBufferLegacyMode == MBLM_On) && GC_MemoryBufferNotEmpty)
 #define GC_MemoryBufferWritingProcess ((gcRegsData.MemoryBufferStatus == MBS_Recording) || (gcRegsData.MemoryBufferStatus == MBS_Updating))

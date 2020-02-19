@@ -101,6 +101,8 @@ void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_TDCFlagsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_TDCFlags2Callback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoFreezeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);

@@ -118,6 +118,8 @@ void GC_Callback_Init()
    gcRegsDef[ReverseYIdx].callback =                                             &GC_ReverseYCallback;
    gcRegsDef[SensorHeightIdx].callback =                                         &GC_SensorHeightCallback;
    gcRegsDef[SensorWidthIdx].callback =                                          &GC_SensorWidthCallback;
+   gcRegsDef[TDCFlagsIdx].callback =                                             &GC_TDCFlagsCallback;
+   gcRegsDef[TDCFlags2Idx].callback =                                            &GC_TDCFlags2Callback;
    gcRegsDef[VideoAGCIdx].callback =                                             &GC_VideoAGCCallback;
    gcRegsDef[VideoFreezeIdx].callback =                                          &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                                &GC_WidthCallback;
@@ -1189,6 +1191,37 @@ void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  * @param access indicates whether the operation is read or write.
  */
 void GC_SensorWidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
+ * TDCFlags GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_TDCFlagsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      if (!GC_MemoryBufferIsImplemented)
+      {
+         GC_SetMemoryBufferSequenceClearAll(1);
+         GC_SetMemoryBufferSequenceDownloadMode(MBSDM_Off);
+         GC_SetMemoryBufferMode(MBM_Off);    // disable Memory Buffer
+      }
+   }
+}
+
+/**
+ * TDCFlags2 GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_TDCFlags2Callback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
 }
 
