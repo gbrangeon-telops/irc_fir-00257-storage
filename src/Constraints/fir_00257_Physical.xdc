@@ -85,9 +85,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports DIMM1_TEMP_EVENTN]
 
 ################### BUFFERING  ###########################
 set_property PACKAGE_PIN A23 [get_ports WATER_LEVEL]
-set_property PACKAGE_PIN A24 [get_ports MOI]
+set_property PACKAGE_PIN A24 [get_ports SEQ_WRITE_DONE]
 set_property IOSTANDARD SSTL15 [get_ports WATER_LEVEL]
-set_property IOSTANDARD SSTL15 [get_ports MOI]
+set_property IOSTANDARD SSTL15 [get_ports SEQ_WRITE_DONE]
 
 
 ################### B32 BUFFER SPARE  ###########################
