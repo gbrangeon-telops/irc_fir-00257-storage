@@ -17,7 +17,7 @@ wait_on_run impl_1
 open_run impl_1
 
 #Open Block diagram
-#open_bd_design $base_dir/xilinx/$proj_name.srcs/sources_1/bd/core/core.bd
+open_bd_design $base_dir/xilinx/$proj_name.srcs/sources_1/bd/core/core.bd
 
 #Export hardware for sdk
 source $base_dir/scripts/export_hw_to_sdk.tcl
