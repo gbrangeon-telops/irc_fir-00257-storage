@@ -46,7 +46,7 @@ set filelist  [concat $filelist [glob  $src_dir/BD/hdl/*.vhd]]
 set filelist  [concat $filelist [glob -nocomplain $src_dir/Buffering/HDL/*.vhd]]
 
 #MGT
-set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/MGT/hdl/*.vhd]]
+set filelist  [concat $filelist [glob -nocomplain $fir_common_dir/MGT/hdl/*.{vhd,v}]]
 
 # Add specific contraint
 add_files -fileset constrs_1 $constr_dir
