@@ -21,6 +21,9 @@
 
 #define SVN_REVISIONS_INIT {0, 0, 0, 0, 0, 0, 0, 0, SVN_HARDWARE_REV, SVN_SOFTWARE_REV, SVN_BOOTLOADER_REV, SVN_COMMON_REV}
 
+#define DEFAULT_WIDTH 1280
+#define DEFAULT_HEIGHT 1024
+
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
 // Generated from XML camera definition file version 12.9.0
@@ -298,8 +301,8 @@ void GC_UpdateLockedFlag()
 void GC_SetDefaultRegsData()
 {
    // We don't know which detector is used so set default to the most restrictive in terms of memory size
-   gcRegsData.Width = 1280;
-   gcRegsData.Height = 1024;
+   gcRegsData.Width = DEFAULT_WIDTH;
+   gcRegsData.Height = DEFAULT_HEIGHT;
 }
 
 /**
