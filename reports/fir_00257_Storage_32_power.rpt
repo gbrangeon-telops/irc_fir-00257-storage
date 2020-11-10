@@ -1,8 +1,8 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date             : Fri Sep 18 14:09:40 2020
-| Host             : TELOPS258-7 running 64-bit Service Pack 1  (build 7601)
+| Date             : Tue Nov 10 10:47:34 2020
+| Host             : TELOPS250 running 64-bit Service Pack 1  (build 7601)
 | Command          : report_power -file d:/Telops/fir-00257-Storage/reports/fir_00257_Storage_32_power.rpt
 | Design           : fir_257_top
 | Device           : xc7k160tfbg676-1
@@ -52,11 +52,11 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.239 |      107 |       --- |             --- |
 | Slice Logic              |     0.067 |   140519 |       --- |             --- |
-|   LUT as Logic           |     0.055 |    47243 |    101400 |           46.59 |
-|   LUT as Distributed RAM |     0.006 |     8580 |     35000 |           24.51 |
-|   Register               |     0.004 |    63378 |    202800 |           31.25 |
+|   LUT as Logic           |     0.055 |    41211 |    101400 |           40.64 |
+|   LUT as Distributed RAM |     0.006 |     8548 |     35000 |           24.42 |
+|   Register               |     0.004 |    63374 |    202800 |           31.25 |
 |   CARRY4                 |     0.002 |      983 |     25350 |            3.88 |
-|   LUT as Shift Register  |    <0.001 |     3086 |     35000 |            8.82 |
+|   LUT as Shift Register  |    <0.001 |     2215 |     35000 |            6.33 |
 |   F7/F8 Muxes            |    <0.001 |      662 |    101400 |            0.65 |
 |   Others                 |    <0.001 |     3027 |       --- |             --- |
 | Signals                  |     0.139 |   108760 |       --- |             --- |
