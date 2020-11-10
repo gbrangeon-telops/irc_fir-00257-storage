@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 promgen -w -p mcs -spi -c FF -o D:\Telops\FIR-00257-Storage\bin\prom\fir_00257_storage.mcs -s 16384 -u 0 D:\Telops\FIR-00257-Storage\bin\download_16.bit -u 670000 D:\Telops\FIR-00257-Storage\bin\download_32.bit 
 
-PROM D:\Telops\FIR-00257-Storage\bin\prom\fir_00257_storage.prm map: Thu Apr 30 09:39:09 2020
+PROM D:\Telops\FIR-00257-Storage\bin\prom\fir_00257_storage.prm map: Tue Nov 10 10:52:20 2020
 
 Calculating PROM checksum with fill value ff
 
@@ -11,8 +11,8 @@ Format        Mcs86 (32-bit)
 Size          16384K
 PROM start    0000:0000
 PROM end      00ff:ffff
-PROM checksum 43884a69
+PROM checksum 43cd734b
 
         Addr1        Addr2                     Date File(s)
-    0000:0000    0066:1edb     Apr 30 09:38:45 2020 D:/Telops/FIR-00257-Storage/bin/download_16.bit
-    0067:0000    00cd:1edb     Apr 30 09:39:04 2020 D:/Telops/FIR-00257-Storage/bin/download_32.bit
+    0000:0000    0066:1edb     Nov 10 10:51:51 2020 D:/Telops/FIR-00257-Storage/bin/download_16.bit
+    0067:0000    00cd:1edb     Nov 10 10:52:11 2020 D:/Telops/FIR-00257-Storage/bin/download_32.bit
