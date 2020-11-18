@@ -4,22 +4,22 @@
 create_clock -period 5.000 [get_ports SYSCLK_0_P]
 create_clock -period 5.000 [get_ports SYSCLK_1_P]
 create_clock -period 8.000 -name MGT_CLK [get_ports RCLKC_P]
-create_clock -period 10.000 [get_pins MGT/MGT/EXP/U0/gt_wrapper_i/exp_mgt_multi_gt_i/gt0_exp_mgt_i/gtxe2_i/TXOUTCLK]
-create_clock -period 10.000 -name DIMM0_UI_CLK [get_pins CORE_BD/core_wrapper_i/core_i/MemoryBuffer/dimm0_ctrl/u_core_mig_7series_0_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT]
-create_clock -period 10.000 -name DIMM1_UI_CLK [get_pins CORE_BD/core_wrapper_i/core_i/MemoryBuffer/dimm1_ctrl/u_core_mig_7series_0_1_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT]
-create_clock -period 10.000 -name CLK_MB [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/clk_out1]
-create_clock -period 11.764 -name CLK_DATA [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/clk_out2]
-create_clock -period 20.000 -name CLK_MGT_INIT [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/clk_out3]
 
 # Virtual clocks
 
 # Generated clocks
+create_generated_clock -name DIMM0_UI_CLK [get_pins CORE_BD/core_wrapper_i/core_i/MemoryBuffer/dimm0_ctrl/u_core_dimm0_ctrl_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT]
+create_generated_clock -name DIMM1_UI_CLK [get_pins CORE_BD/core_wrapper_i/core_i/MemoryBuffer/dimm1_ctrl/u_core_dimm1_ctrl_0_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i/CLKFBOUT]
+create_generated_clock -name CLK_MB [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/mmcm_adv_inst/CLKOUT0]
+create_generated_clock -name CLK_DATA [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/mmcm_adv_inst/CLKOUT1]
+create_generated_clock -name CLK_MGT_INIT [get_pins CORE_BD/core_wrapper_i/core_i/clk_wiz_1/inst/mmcm_adv_inst/CLKOUT2]
 
 # Clock Groups
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks *SYSCLK_0*]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks *SYSCLK_1*]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks MGT_CLK]
-set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks *MGT*TXOUTCLK*]
+set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks MGT*TXOUTCLK]
+set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks MGT*RXOUTCLK]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks DIMM0_UI_CLK]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks DIMM1_UI_CLK]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks CLK_MB]
