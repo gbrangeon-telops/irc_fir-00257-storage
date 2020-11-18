@@ -66,6 +66,10 @@ MGT=1
 Buffering=1
 
 
+
+
+
+
 [Files]
 /..\..\src\fir_257_top.bde=-1
 /..\..\src\fir_00257_build.do=-1
@@ -108,11 +112,6 @@ Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\buffering_fsm.vhd=-1
 .\compile\buffering.vhd=VHDL Source Code
 .\compile\buffering_wrapper.vhd=VHDL Source Code
 .\compile\fir_257_top.vhd=VHDL Source Code
-
-
-
-
-
 
 [file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
 MGT/..\..\compile\mgt_block.vhd=-1
