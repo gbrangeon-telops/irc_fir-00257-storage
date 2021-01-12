@@ -107,6 +107,16 @@ static IRC_Status_t DebugTerminalParseBUF(circByteBuffer_t *cbuf)
    return IRC_SUCCESS;
 }
 
+/**
+ * Print Buffer Table command parser
+ * This parser is used to parse and validate Print Buffer Table
+ * command arguments and to execute the command.
+ *
+ * @param cbuf is the pointer to the circular buffer containing the data to be parsed.
+ *
+ * @return IRC_SUCCESS when Print Buffer Table command was successfully executed.
+ * @return IRC_FAILURE otherwise.
+ */
 static IRC_Status_t DebugTerminalParsePBT(circByteBuffer_t *cbuf)
 {
    extern t_memoryTable gMemoryTable;
