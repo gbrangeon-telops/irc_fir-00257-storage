@@ -71,7 +71,7 @@ static IRC_Status_t DebugTerminalParseHLP(circByteBuffer_t *cbuf)
    DT_PRINTF("  Network status:     NET [0|1 [port]]");
    DT_PRINTF("  Get Stack Level:    STACK");
    DT_PRINTF("  Ctrl Intf status:   CI [SB|LB OUTPUT 0|1]");
-   DT_PRINTF("  Print buffer table: PBT");
+   DT_PRINTF("  Print Buffer Table: PBT");
    DT_PRINTF("  Print help:         HLP");
 
    return IRC_SUCCESS;
