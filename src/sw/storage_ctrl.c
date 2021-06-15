@@ -73,10 +73,10 @@ int main()  // Defining the standard main() function
    BuiltInTest_Execute(BITID_NetworkInterfaceInitialization);
    BuiltInTest_Execute(BITID_DebugTerminalInitialization);
    BuiltInTest_Execute(BITID_GenICamManagerInitialization);
-   BuiltInTest_Execute(BITID_QSPIFlashInerfaceInitialization);
-   BuiltInTest_Execute(BITID_FirmwareUpdaterInitialization);
    BuiltInTest_Execute(BITID_ADCControllerInitialization);
    BuiltInTest_Execute(BITID_InterruptControllerStartup);
+   BuiltInTest_Execute(BITID_QSPIFlashInerfaceInitialization);
+   BuiltInTest_Execute(BITID_FirmwareUpdaterInitialization);
    BuiltInTest_Execute(BITID_MGTInterfaceInitialization);
    BuiltInTest_Execute(BITID_MemoryBufferControllerInitialization);
    BuiltInTest_Execute(BITID_GPIOControllerInitialization);
