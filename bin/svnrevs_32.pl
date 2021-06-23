@@ -1,5 +1,5 @@
 our $rel_storage_hw_rev2 = 25987;
-our $rel_storage_sw_rev2 = 26020;
+our $rel_storage_sw_rev2 = 26584;
 our $rel_storage_boot_rev2 = 0;
-our $rel_storage_common_rev2 = 26004;
+our $rel_storage_common_rev2 = 26551;
 1;

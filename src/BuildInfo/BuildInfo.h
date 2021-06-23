@@ -4,7 +4,7 @@
 #if MEMCONF == 16
 
 #define SVN_HARDWARE_REV      25987
-#define SVN_SOFTWARE_REV      26021
+#define SVN_SOFTWARE_REV      26584
 #define SVN_BOOTLOADER_REV    0 
 #define SVN_COMMON_REV        26551
 
@@ -23,7 +23,7 @@
 #elif MEMCONF == 32
 
 #define SVN_HARDWARE_REV      25987
-#define SVN_SOFTWARE_REV      26021
+#define SVN_SOFTWARE_REV      26584
 #define SVN_BOOTLOADER_REV    0 
 #define SVN_COMMON_REV        26551
 
