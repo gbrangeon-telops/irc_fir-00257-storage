@@ -756,6 +756,7 @@ CONFIG.c_m_axis_mm2s_tdata_width {16} \
 CONFIG.c_mm2s_btt_used {23} \
 CONFIG.c_mm2s_burst_size {16} \
 CONFIG.c_s2mm_btt_used {23} \
+CONFIG.c_s2mm_burst_size {256} \
  ] $axi_datamover_0
 
   # Create instance: axi_interconnect_0, and set properties
