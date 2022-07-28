@@ -26,7 +26,7 @@ my $error = 0;
 
 # Parse storage build info file
 my $storageBuildInfoFileStr = read_file($storageBuildInfoFile);
-my $storageBuildInfoFileSubstr1 = substr($storageBuildInfoFileStr, index($storageBuildInfoFileStr, 16));
+my $storageBuildInfoFileSubstr1 = substr($storageBuildInfoFileStr, index($storageBuildInfoFileStr, "MEMCONF == 16"));
 my $storageBuildInfoHardware1;
 my $storageBuildInfoSoftware1;
 my $storageBuildInfoBootLoader1;
@@ -37,7 +37,7 @@ if ($storageBuildInfoFileSubstr1 =~ /SVN_SOFTWARE_REV[^\n\r0-9]+(\d+)/) { $stora
 if ($storageBuildInfoFileSubstr1 =~ /SVN_BOOTLOADER_REV[^\n\r0-9]+(\d+)/) { $storageBuildInfoBootLoader1 = $1; } else { $error = 1; }
 if ($storageBuildInfoFileSubstr1 =~ /SVN_COMMON_REV[^\n\r0-9]+(\d+)/) { $storageBuildInfoCommon1 = $1; } else { $error = 1; }
 
-my $storageBuildInfoFileSubstr2 = substr($storageBuildInfoFileStr, index($storageBuildInfoFileStr, 32));
+my $storageBuildInfoFileSubstr2 = substr($storageBuildInfoFileStr, index($storageBuildInfoFileStr, "MEMCONF == 32"));
 my $storageBuildInfoHardware2;
 my $storageBuildInfoSoftware2;
 my $storageBuildInfoBootLoader2;
