@@ -48,7 +48,7 @@ entity bd_wrapper is
     AXIS_BUF_S2MM_STS_MOSI : out t_axi4_stream_mosi_status;
     AXIS_BUF_S2MM_STS_MISO : in t_axi4_stream_miso;
 
-    AXIS_BUF_MM2S_MOSI : out t_axi4_stream_mosi16;
+    AXIS_BUF_MM2S_MOSI : out t_axi4_stream_mosi64;
     AXIS_BUF_MM2S_MISO : in t_axi4_stream_miso;
     
     AXIS_BUF_MM2S_CMD_MOSI : in t_axi4_stream_mosi_cmd64;
@@ -215,8 +215,8 @@ component core_wrapper
       M_AXIS_MM2S_STS_tlast : out STD_LOGIC;
       M_AXIS_MM2S_STS_tready : in STD_LOGIC;
       M_AXIS_MM2S_STS_tvalid : out STD_LOGIC;
-      M_AXIS_MM2S_tdata : out STD_LOGIC_VECTOR ( 15 downto 0 );
-      M_AXIS_MM2S_tkeep : out STD_LOGIC_VECTOR ( 1 downto 0 );
+      M_AXIS_MM2S_tdata : out STD_LOGIC_VECTOR ( 63 downto 0 );
+      M_AXIS_MM2S_tkeep : out STD_LOGIC_VECTOR ( 7 downto 0 );
       M_AXIS_MM2S_tlast : out STD_LOGIC;
       M_AXIS_MM2S_tready : in STD_LOGIC;
       M_AXIS_MM2S_tvalid : out STD_LOGIC;

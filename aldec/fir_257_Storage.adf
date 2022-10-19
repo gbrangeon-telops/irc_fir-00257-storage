@@ -65,11 +65,6 @@ BD=1
 MGT=1
 Buffering=1
 
-
-
-
-
-
 [Files]
 /..\..\src\fir_257_top.bde=-1
 /..\..\src\fir_00257_build.do=-1
@@ -88,6 +83,7 @@ Buffering/..\..\..\IP\buffer_table_ram\sim\buffer_table_ram.v=-1
 Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\Buffering.bde=-1
 Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\buffering_Ctrl.vhd=-1
 Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\buffering_fsm.vhd=-1
+Buffering/flow_controller.vhd=-1
 
 [Files.Data]
 .\..\src\fir_257_top.bde=Block Diagram
@@ -107,19 +103,20 @@ Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\buffering_fsm.vhd=-1
 .\..\..\FIR-00251-Common\VHDL\Buffering\Buffering.bde=Block Diagram
 .\..\..\FIR-00251-Common\VHDL\Buffering\buffering_Ctrl.vhd=VHDL Source Code
 .\..\..\FIR-00251-Common\VHDL\Buffering\buffering_fsm.vhd=VHDL Source Code
-.\compile\mgt_block.vhd=VHDL Source Code
-.\compile\storage_mgt_wrapper.vhd=VHDL Source Code
-.\compile\buffering.vhd=VHDL Source Code
-.\compile\buffering_wrapper.vhd=VHDL Source Code
-.\compile\fir_257_top.vhd=VHDL Source Code
+.\src\Buffering\flow_controller.vhd=VHDL Source Code
+
+[file_out:/..\..\src\fir_257_top.bde]
+/..\compile\fir_257_top.vhd=-1
 
 [file_out:MGT/..\..\..\src\MGT\HDL\mgt_block.bde]
 MGT/..\..\compile\mgt_block.vhd=-1
+
 [file_out:MGT/..\..\..\src\MGT\HDL\storage_mgt_wrapper.bde]
 MGT/..\..\compile\storage_mgt_wrapper.vhd=-1
-[file_out:Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\Buffering.bde]
-Buffering/..\..\compile\buffering.vhd=-1
+
 [file_out:Buffering/..\..\..\src\Buffering\HDL\Buffering_wrapper.bde]
 Buffering/..\..\compile\buffering_wrapper.vhd=-1
-[file_out:/..\..\src\fir_257_top.bde]
-/..\compile\fir_257_top.vhd=-1
+
+[file_out:Buffering/..\..\..\..\FIR-00251-Common\VHDL\Buffering\Buffering.bde]
+Buffering/..\..\compile\buffering.vhd=-1
+

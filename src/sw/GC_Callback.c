@@ -902,6 +902,7 @@ void GC_MemoryBufferSequenceDownloadModeCallback(gcCallbackPhase_t phase, gcCall
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
       BufferManager_UpdateSuggestedFrameImageCount(&gcRegsData);
+      BufferManager_UpdateFlowControllerConfig(&gcRegsData);
    }
 }
 

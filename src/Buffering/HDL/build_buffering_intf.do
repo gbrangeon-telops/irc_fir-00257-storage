@@ -35,10 +35,10 @@ acom -relax "$COMMON\VHDL\buffering\buffering_Ctrl.vhd"
 
 #source Buffering
 acom "$BUF_INTF\memory_access_handler.vhd"
-
+acom "$COMMON\VHDL\buffering\flow_controller.vhd"
 #Top
 acom "$COMMON\VHDL\buffering\buffering.bde"
-acom "$BUF_INTF\buffering_wrapper.bde"
+acom "$BUF_INTF\buffering_wrapper.bde"	
 
 #__END COMPILE BUFFERING
 
