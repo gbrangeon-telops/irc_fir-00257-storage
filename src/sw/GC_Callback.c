@@ -582,6 +582,11 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_IsActiveFlagsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      BufferManager_UpdateSuggestedFrameImageCount(&gcRegsData);
+   }
+
 }
 
 /**
