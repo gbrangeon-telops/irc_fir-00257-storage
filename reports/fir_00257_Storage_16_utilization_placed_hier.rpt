@@ -1,8 +1,8 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-| Date         : Thu Oct 20 15:34:51 2022
-| Host         : Telops280 running 64-bit major release  (build 9200)
+| Date         : Wed Jan 11 16:40:25 2023
+| Host         : Telops330 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file d:/Telops/fir-00257-Storage/reports/fir_00257_Storage_16_utilization_placed_hier.rpt -hierarchical -hierarchical_depth 5
 | Design       : fir_257_top
 | Device       : 7k160tfbg676-1
@@ -21,60 +21,60 @@ Table of Contents
 +-----------------------------------------------------------------+---------------------------------------------------------+------------+------------+---------+------+-------+--------+--------+--------------+
 |                             Instance                            |                          Module                         | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP48 Blocks |
 +-----------------------------------------------------------------+---------------------------------------------------------+------------+------------+---------+------+-------+--------+--------+--------------+
-| fir_257_top                                                     |                                                   (top) |      52440 |      41675 |    8548 | 2217 | 63697 |     97 |     38 |           16 |
-|   (fir_257_top)                                                 |                                                   (top) |         28 |         28 |       0 |    0 |     0 |      0 |      0 |            0 |
-|   AXIL_DEMUX                                                    |                                      axil32_addr_demux4 |        117 |        117 |       0 |    0 |     0 |      0 |      0 |            0 |
-|   CORE_BD                                                       |                                              bd_wrapper |      48906 |      38389 |    8548 | 1969 | 57896 |     85 |     35 |            0 |
+| fir_257_top                                                     |                                                   (top) |      52426 |      41658 |    8548 | 2220 | 63697 |     97 |     38 |           16 |
+|   (fir_257_top)                                                 |                                                   (top) |         30 |         30 |       0 |    0 |     0 |      0 |      0 |            0 |
+|   AXIL_DEMUX                                                    |                                      axil32_addr_demux4 |        124 |        124 |       0 |    0 |     0 |      0 |      0 |            0 |
+|   CORE_BD                                                       |                                              bd_wrapper |      48887 |      38369 |    8548 | 1970 | 57896 |     85 |     35 |            0 |
 |     (CORE_BD)                                                   |                                              bd_wrapper |          1 |          1 |       0 |    0 |     0 |      0 |      0 |            0 |
-|     core_wrapper_i                                              |                                            core_wrapper |      48905 |      38388 |    8548 | 1969 | 57896 |     85 |     35 |            0 |
+|     core_wrapper_i                                              |                                            core_wrapper |      48886 |      38368 |    8548 | 1970 | 57896 |     85 |     35 |            0 |
 |       (core_wrapper_i)                                          |                                            core_wrapper |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|       core_i                                                    |                                                    core |      48905 |      38388 |    8548 | 1969 | 57896 |     85 |     35 |            0 |
+|       core_i                                                    |                                                    core |      48886 |      38368 |    8548 | 1970 | 57896 |     85 |     35 |            0 |
 |         (core_i)                                                |                                                    core |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |         INTC                                                    |                                         INTC_imp_PABUAD |        199 |        167 |      32 |    0 |   210 |      0 |      0 |            0 |
 |           microblaze_0_axi_intc                                 |                            core_microblaze_0_axi_intc_0 |        199 |        167 |      32 |    0 |   210 |      0 |      0 |            0 |
 |           microblaze_0_xlconcat                                 |                            core_microblaze_0_xlconcat_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |         MCU                                                     |                                          MCU_imp_N4RJ0G |       1718 |       1509 |      64 |  145 |  1742 |     64 |      0 |            0 |
-|           mdm_1                                                 |                                            core_mdm_1_0 |        375 |        287 |       0 |   88 |   342 |      0 |      0 |            0 |
-|           microblaze_0                                          |                                     core_microblaze_0_0 |       1277 |       1156 |      64 |   57 |  1340 |      0 |      0 |            0 |
+|           mdm_1                                                 |                                            core_mdm_1_0 |        374 |        286 |       0 |   88 |   342 |      0 |      0 |            0 |
+|           microblaze_0                                          |                                     core_microblaze_0_0 |       1278 |       1157 |      64 |   57 |  1340 |      0 |      0 |            0 |
 |           microblaze_0_local_memory                             |                    microblaze_0_local_memory_imp_LRV7VF |         66 |         66 |       0 |    0 |    60 |     64 |      0 |            0 |
-|         MemoryBuffer                                            |                                 MemoryBuffer_imp_SPXWA4 |      44527 |      34293 |    8436 | 1798 | 52791 |     21 |     33 |            0 |
-|           axi_cdma_0                                            |                                       core_axi_cdma_0_0 |       2310 |       2088 |       0 |  222 |  3225 |      0 |      0 |            0 |
-|           axi_cdma_1                                            |                                       core_axi_cdma_1_0 |       2305 |       2084 |       0 |  221 |  2935 |      0 |      0 |            0 |
-|           axi_datamover_0                                       |                                  core_axi_datamover_0_0 |       2230 |       1971 |       0 |  259 |  2187 |      5 |      1 |            0 |
+|         MemoryBuffer                                            |                                 MemoryBuffer_imp_SPXWA4 |      44517 |      34282 |    8436 | 1799 | 52791 |     21 |     33 |            0 |
+|           axi_cdma_0                                            |                                       core_axi_cdma_0_0 |       2312 |       2090 |       0 |  222 |  3225 |      0 |      0 |            0 |
+|           axi_cdma_1                                            |                                       core_axi_cdma_1_0 |       2304 |       2082 |       0 |  222 |  2935 |      0 |      0 |            0 |
+|           axi_datamover_0                                       |                                  core_axi_datamover_0_0 |       2234 |       1975 |       0 |  259 |  2187 |      5 |      1 |            0 |
 |           axi_interconnect_0                                    |                               core_axi_interconnect_0_0 |       2202 |       1462 |     736 |    4 |  3581 |      0 |      0 |            0 |
 |           axi_interconnect_1                                    |                               core_axi_interconnect_1_0 |       2202 |       1462 |     736 |    4 |  3581 |      0 |      0 |            0 |
-|           buffer_interconnect_0                                 |                            core_buffer_interconnect_0_0 |      12028 |       8438 |    3580 |   10 | 21198 |     16 |     32 |            0 |
-|           dimm0_ctrl                                            |                                       core_dimm0_ctrl_0 |      10616 |       8389 |    1688 |  539 |  8042 |      0 |      0 |            0 |
-|           dimm1_ctrl                                            |                                       core_dimm1_ctrl_0 |      10634 |       8399 |    1696 |  539 |  8042 |      0 |      0 |            0 |
-|         axi_gpio                                                |                                         core_axi_gpio_0 |         43 |         43 |       0 |    0 |    52 |      0 |      0 |            0 |
-|           U0                                                    |                                core_axi_gpio_0_axi_gpio |         43 |         43 |       0 |    0 |    52 |      0 |      0 |            0 |
+|           buffer_interconnect_0                                 |                            core_buffer_interconnect_0_0 |      12034 |       8444 |    3580 |   10 | 21198 |     16 |     32 |            0 |
+|           dimm0_ctrl                                            |                                       core_dimm0_ctrl_0 |      10612 |       8385 |    1688 |  539 |  8042 |      0 |      0 |            0 |
+|           dimm1_ctrl                                            |                                       core_dimm1_ctrl_0 |      10620 |       8385 |    1696 |  539 |  8042 |      0 |      0 |            0 |
+|         axi_gpio                                                |                                         core_axi_gpio_0 |         42 |         42 |       0 |    0 |    52 |      0 |      0 |            0 |
+|           U0                                                    |                                core_axi_gpio_0_axi_gpio |         42 |         42 |       0 |    0 |    52 |      0 |      0 |            0 |
 |         axi_hwicap_0                                            |                                     core_axi_hwicap_0_0 |        334 |        334 |       0 |    0 |   978 |      0 |      2 |            0 |
 |           U0                                                    |                          core_axi_hwicap_0_0_axi_hwicap |        334 |        334 |       0 |    0 |   978 |      0 |      2 |            0 |
-|         axi_iic_0                                               |                                        core_axi_iic_0_0 |        405 |        395 |       0 |   10 |   366 |      0 |      0 |            0 |
-|           U0                                                    |                                core_axi_iic_0_0_axi_iic |        405 |        395 |       0 |   10 |   366 |      0 |      0 |            0 |
-|         axi_interconnect_0                                      |                               core_axi_interconnect_0_1 |        400 |        400 |       0 |    0 |   280 |      0 |      0 |            0 |
+|         axi_iic_0                                               |                                        core_axi_iic_0_0 |        402 |        392 |       0 |   10 |   366 |      0 |      0 |            0 |
+|           U0                                                    |                                core_axi_iic_0_0_axi_iic |        402 |        392 |       0 |   10 |   366 |      0 |      0 |            0 |
+|         axi_interconnect_0                                      |                               core_axi_interconnect_0_1 |        399 |        399 |       0 |    0 |   280 |      0 |      0 |            0 |
 |           s00_couplers                                          |                                s00_couplers_imp_134BMC2 |         17 |         17 |       0 |    0 |   144 |      0 |      0 |            0 |
-|           xbar                                                  |                                             core_xbar_3 |        383 |        383 |       0 |    0 |   136 |      0 |      0 |            0 |
-|         axi_quad_spi_0                                          |                                   core_axi_quad_spi_0_0 |        365 |        347 |      16 |    2 |   566 |      0 |      0 |            0 |
+|           xbar                                                  |                                             core_xbar_3 |        382 |        382 |       0 |    0 |   136 |      0 |      0 |            0 |
+|         axi_quad_spi_0                                          |                                   core_axi_quad_spi_0_0 |        364 |        346 |      16 |    2 |   566 |      0 |      0 |            0 |
 |           (axi_quad_spi_0)                                      |                                   core_axi_quad_spi_0_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
-|           U0                                                    |                      core_axi_quad_spi_0_0_axi_quad_spi |        365 |        347 |      16 |    2 |   566 |      0 |      0 |            0 |
+|           U0                                                    |                      core_axi_quad_spi_0_0_axi_quad_spi |        364 |        346 |      16 |    2 |   566 |      0 |      0 |            0 |
 |         axi_timer_0                                             |                                      core_axi_timer_0_0 |        282 |        282 |       0 |    0 |   216 |      0 |      0 |            0 |
 |           U0                                                    |                            core_axi_timer_0_0_axi_timer |        282 |        282 |       0 |    0 |   216 |      0 |      0 |            0 |
-|         axi_uart_fpga_output                                    |                             core_axi_uart_fpga_output_0 |        339 |        326 |       0 |   13 |   300 |      0 |      0 |            0 |
-|           U0                                                    |               core_axi_uart_fpga_output_0_axi_uart16550 |        339 |        326 |       0 |   13 |   300 |      0 |      0 |            0 |
+|         axi_uart_fpga_output                                    |                             core_axi_uart_fpga_output_0 |        338 |        325 |       0 |   13 |   300 |      0 |      0 |            0 |
+|           U0                                                    |               core_axi_uart_fpga_output_0_axi_uart16550 |        338 |        325 |       0 |   13 |   300 |      0 |      0 |            0 |
 |         clk_wiz_1                                               |                                        core_clk_wiz_1_0 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |           inst                                                  |               core_clk_wiz_1_0_core_clk_wiz_1_0_clk_wiz |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |         rst_clk_wiz_1_100M                                      |                               core_rst_clk_wiz_1_100M_0 |         16 |         15 |       0 |    1 |    31 |      0 |      0 |            0 |
 |           U0                                                    |                core_rst_clk_wiz_1_100M_0_proc_sys_reset |         16 |         15 |       0 |    1 |    31 |      0 |      0 |            0 |
 |         xadc_wiz_0                                              |                                       core_xadc_wiz_0_0 |        277 |        277 |       0 |    0 |   364 |      0 |      0 |            0 |
 |           U0                                                    |            core_xadc_wiz_0_0_core_xadc_wiz_0_0_axi_xadc |        277 |        277 |       0 |    0 |   364 |      0 |      0 |            0 |
-|   MGT                                                           |                                     storage_mgt_wrapper |       1586 |       1338 |       0 |  248 |  3521 |      8 |      2 |            0 |
+|   MGT                                                           |                                     storage_mgt_wrapper |       1585 |       1335 |       0 |  250 |  3521 |      8 |      2 |            0 |
 |     (MGT)                                                       |                                     storage_mgt_wrapper |          1 |          1 |       0 |    0 |     0 |      0 |      0 |            0 |
-|     FROM_PROC_FIFO                                              |                                    t_axi4_stream64_fifo |         89 |         89 |       0 |    0 |   177 |      1 |      1 |            0 |
-|       agen_d512.t_axi4_stream64_afifo_d512_inst                 |                              t_axi4_stream64_afifo_d512 |         89 |         89 |       0 |    0 |   177 |      1 |      1 |            0 |
-|         U0                                                      |       t_axi4_stream64_afifo_d512_fifo_generator_v13_1_2 |         89 |         89 |       0 |    0 |   177 |      1 |      1 |            0 |
-|           inst_fifo_gen                                         | t_axi4_stream64_afifo_d512_fifo_generator_v13_1_2_synth |         89 |         89 |       0 |    0 |   177 |      1 |      1 |            0 |
-|     MGT                                                         |                                               mgt_block |       1431 |       1183 |       0 |  248 |  3212 |      6 |      0 |            0 |
+|     FROM_PROC_FIFO                                              |                                    t_axi4_stream64_fifo |         88 |         88 |       0 |    0 |   177 |      1 |      1 |            0 |
+|       agen_d512.t_axi4_stream64_afifo_d512_inst                 |                              t_axi4_stream64_afifo_d512 |         88 |         88 |       0 |    0 |   177 |      1 |      1 |            0 |
+|         U0                                                      |       t_axi4_stream64_afifo_d512_fifo_generator_v13_1_2 |         88 |         88 |       0 |    0 |   177 |      1 |      1 |            0 |
+|           inst_fifo_gen                                         | t_axi4_stream64_afifo_d512_fifo_generator_v13_1_2_synth |         88 |         88 |       0 |    0 |   177 |      1 |      1 |            0 |
+|     MGT                                                         |                                               mgt_block |       1431 |       1181 |       0 |  250 |  3212 |      6 |      0 |            0 |
 |       (MGT)                                                     |                                               mgt_block |          0 |          0 |       0 |    0 |     0 |      0 |      0 |            0 |
 |       CTRL                                                      |                                                MGT_CTRL |         92 |         92 |       0 |    0 |   175 |      0 |      0 |            0 |
 |         (CTRL)                                                  |                                                MGT_CTRL |         91 |         91 |       0 |    0 |   143 |      0 |      0 |            0 |
@@ -83,14 +83,14 @@ Table of Contents
 |         exp_pwrdown_sync                                        |                                          double_sync__3 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |         pll_sync                                                |                                      double_sync_vector |          0 |          0 |       0 |    0 |     4 |      0 |      0 |            0 |
 |         sync_resetn_inst                                        |                                          sync_resetn__1 |          1 |          1 |       0 |    0 |     2 |      0 |      0 |            0 |
-|       EXP                                                       |                                                 exp_mgt |       1235 |        988 |       0 |  247 |  2597 |      2 |      0 |            0 |
-|         inst                                                    |                                    exp_mgt_exp_mgt_core |       1235 |        988 |       0 |  247 |  2597 |      2 |      0 |            0 |
+|       EXP                                                       |                                                 exp_mgt |       1235 |        986 |       0 |  249 |  2597 |      2 |      0 |            0 |
+|         inst                                                    |                                    exp_mgt_exp_mgt_core |       1235 |        986 |       0 |  249 |  2597 |      2 |      0 |            0 |
 |           (inst)                                                |                                    exp_mgt_exp_mgt_core |          0 |          0 |       0 |    0 |     1 |      0 |      0 |            0 |
 |           aurora_lane_0_i                                       |                             exp_mgt_exp_mgt_AURORA_LANE |         76 |         75 |       0 |    1 |   235 |      0 |      0 |            0 |
 |           aurora_lane_1_i                                       |                           exp_mgt_exp_mgt_AURORA_LANE_0 |         61 |         60 |       0 |    1 |   236 |      0 |      0 |            0 |
 |           axi_to_ll_data_i                                      |                               exp_mgt_exp_mgt_AXI_TO_LL |          0 |          0 |       0 |    0 |     1 |      0 |      0 |            0 |
 |           core_reset_logic_i                                    |                             exp_mgt_exp_mgt_RESET_LOGIC |          3 |          3 |       0 |    0 |    16 |      0 |      0 |            0 |
-|           exp_mgt_wrapper_i                                     |                                 exp_mgt_exp_mgt_WRAPPER |        742 |        637 |       0 |  105 |  1708 |      2 |      0 |            0 |
+|           exp_mgt_wrapper_i                                     |                                 exp_mgt_exp_mgt_WRAPPER |        742 |        635 |       0 |  107 |  1708 |      2 |      0 |            0 |
 |           global_logic_i                                        |                            exp_mgt_exp_mgt_GLOBAL_LOGIC |         52 |         52 |       0 |    0 |    40 |      0 |      0 |            0 |
 |           gt_reset_sync                                         |                                exp_mgt_exp_mgt_rst_sync |          0 |          0 |       0 |    0 |     5 |      0 |      0 |            0 |
 |           reset_pb_sync                                         |                              exp_mgt_exp_mgt_rst_sync_1 |          0 |          0 |       0 |    0 |     5 |      0 |      0 |            0 |
@@ -118,12 +118,12 @@ Table of Contents
 |         U0                                                      |        t_axi4_stream64_afifo_d16_fifo_generator_v13_1_2 |         47 |         47 |       0 |    0 |   112 |      1 |      1 |            0 |
 |           inst_fifo_gen                                         |  t_axi4_stream64_afifo_d16_fifo_generator_v13_1_2_synth |         47 |         47 |       0 |    0 |   112 |      1 |      1 |            0 |
 |     U2                                                          |                                                mgt_init |         18 |         18 |       0 |    0 |    20 |      0 |      0 |            0 |
-|   U1                                                            |                                       Buffering_wrapper |       1819 |       1819 |       0 |    0 |  2280 |      4 |      1 |           16 |
+|   U1                                                            |                                       Buffering_wrapper |       1820 |       1820 |       0 |    0 |  2280 |      4 |      1 |           16 |
 |     AXIL_MEM                                                    |                                   memory_access_handler |        100 |        100 |       0 |    0 |     0 |      0 |      0 |            0 |
 |     U1                                                          |                                          axis64_tid_gen |          2 |          2 |       0 |    0 |     3 |      0 |      0 |            0 |
 |       (U1)                                                      |                                          axis64_tid_gen |          1 |          1 |       0 |    0 |     1 |      0 |      0 |            0 |
 |       U1                                                        |                                          sync_resetn__2 |          1 |          1 |       0 |    0 |     2 |      0 |      0 |            0 |
-|     U2                                                          |                                               Buffering |       1717 |       1717 |       0 |    0 |  2277 |      4 |      1 |           16 |
+|     U2                                                          |                                               Buffering |       1718 |       1718 |       0 |    0 |  2277 |      4 |      1 |           16 |
 |       (U2)                                                      |                                               Buffering |          3 |          3 |       0 |    0 |     0 |      0 |      0 |            0 |
 |       BUF_CTRL                                                  |                                          Buffering_Ctrl |         70 |         70 |       0 |    0 |   544 |      0 |      0 |            0 |
 |         (BUF_CTRL)                                              |                                          Buffering_Ctrl |         65 |         65 |       0 |    0 |   527 |      0 |      0 |            0 |
@@ -134,8 +134,8 @@ Table of Contents
 |         U1E                                                     |                                          double_sync__9 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |         U3B                                                     |                                         double_sync__10 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |         U3D                                                     |                                         double_sync__12 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
-|       FSM                                                       |                                           BUFFERING_FSM |       1286 |       1286 |       0 |    0 |  1264 |      0 |      0 |           16 |
-|         (FSM)                                                   |                                           BUFFERING_FSM |       1286 |       1286 |       0 |    0 |  1260 |      0 |      0 |           16 |
+|       FSM                                                       |                                           BUFFERING_FSM |       1287 |       1287 |       0 |    0 |  1264 |      0 |      0 |           16 |
+|         (FSM)                                                   |                                           BUFFERING_FSM |       1287 |       1287 |       0 |    0 |  1260 |      0 |      0 |           16 |
 |         WL_sync                                                 |                                         double_sync__13 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |         inst_sync_reset                                         |                                           sync_reset__1 |          0 |          0 |       0 |    0 |     2 |      0 |      0 |            0 |
 |       U11                                                       |                                      axil32_to_native96 |         39 |         39 |       0 |    0 |    54 |      0 |      0 |            0 |
