@@ -34,7 +34,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 13.2.0
+// Generated from XML camera definition file version 13.3.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -114,6 +114,7 @@ void GC_Callback_Init()
    gcRegsDef[MemoryBufferTotalSpaceLowIdx].callback =                            &GC_MemoryBufferTotalSpaceLowCallback;
    gcRegsDef[OffsetXIdx].callback =                                              &GC_OffsetXCallback;
    gcRegsDef[OffsetYIdx].callback =                                              &GC_OffsetYCallback;
+   gcRegsDef[PayloadSizeMinFGIdx].callback =                                     &GC_PayloadSizeMinFGCallback;
    gcRegsDef[ReverseXIdx].callback =                                             &GC_ReverseXCallback;
    gcRegsDef[ReverseYIdx].callback =                                             &GC_ReverseYCallback;
    gcRegsDef[SensorHeightIdx].callback =                                         &GC_SensorHeightCallback;
@@ -1153,6 +1154,17 @@ void GC_OffsetXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  * @param access indicates whether the operation is read or write.
  */
 void GC_OffsetYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+}
+
+/**
+ * PayloadSizeMinFG GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_PayloadSizeMinFGCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
 }
 

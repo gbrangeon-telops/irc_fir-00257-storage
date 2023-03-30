@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 13.2.0
+// Generated from XML camera definition file version 13.3.0
 // using updateGenICamCallback.m Matlab script.
 
 void GC_Callback_Init();
@@ -97,6 +97,7 @@ void GC_MemoryBufferTotalSpaceHighCallback(gcCallbackPhase_t phase, gcCallbackAc
 void GC_MemoryBufferTotalSpaceLowCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_OffsetXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_OffsetYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_PayloadSizeMinFGCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_ReverseXCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_ReverseYCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_SensorHeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);

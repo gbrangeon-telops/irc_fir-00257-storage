@@ -26,7 +26,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 13.2.0
+// Generated from XML camera definition file version 13.3.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -108,6 +108,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* MemoryBufferTotalSpaceLow = */ 0,
    /* OffsetX = */ 0,
    /* OffsetY = */ 0,
+   /* PayloadSizeMinFG = */ 0,
    /* ReverseX = */ 0,
    /* ReverseY = */ 0,
    /* SensorHeight = */ 0,
@@ -242,6 +243,7 @@ void GC_Registers_Init()
    gcRegsDef[MemoryBufferTotalSpaceLowIdx].p_data = &gcRegsData.MemoryBufferTotalSpaceLow;
    gcRegsDef[OffsetXIdx].p_data = &gcRegsData.OffsetX;
    gcRegsDef[OffsetYIdx].p_data = &gcRegsData.OffsetY;
+   gcRegsDef[PayloadSizeMinFGIdx].p_data = &gcRegsData.PayloadSizeMinFG;
    gcRegsDef[ReverseXIdx].p_data = &gcRegsData.ReverseX;
    gcRegsDef[ReverseYIdx].p_data = &gcRegsData.ReverseY;
    gcRegsDef[SensorHeightIdx].p_data = &gcRegsData.SensorHeight;
