@@ -50,6 +50,7 @@ struct gcRegistersDataStruct {
    uint32_t AcquisitionFrameRateMode;
    uint32_t AcquisitionStart;
    uint32_t AcquisitionStop;
+   uint32_t BadPixelReplacement;
    uint32_t CalibrationMode;
    uint32_t ClConfiguration;
    uint32_t DeviceBuiltInTestsResults7;
@@ -83,6 +84,8 @@ struct gcRegistersDataStruct {
    uint32_t MemoryBufferNumberOfSequences;
    uint32_t MemoryBufferNumberOfSequencesMax;
    uint32_t MemoryBufferNumberOfSequencesMin;
+   uint32_t MemoryBufferSequenceBadPixelReplacement;
+   uint32_t MemoryBufferSequenceCalibrationMode;
    uint32_t MemoryBufferSequenceClear;
    uint32_t MemoryBufferSequenceClearAll;
    uint32_t MemoryBufferSequenceCount;
@@ -179,6 +182,8 @@ extern int32_t DeviceFirmwareModuleRevisionAry[DeviceFirmwareModuleRevisionAryLe
 #define GC_SetMemoryBufferSequenceOffsetY(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceOffsetYIdx], val)
 #define GC_SetMemoryBufferSequenceWidth(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceWidthIdx], val)
 #define GC_SetMemoryBufferSequenceHeight(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceHeightIdx], val)
+#define GC_SetMemoryBufferSequenceCalibrationMode(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceCalibrationModeIdx], val)
+#define GC_SetMemoryBufferSequenceBadPixelReplacement(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceBadPixelReplacementIdx], val)
 #define GC_SetMemoryBufferSequenceFirstFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceFirstFrameIDIdx], val)
 #define GC_SetMemoryBufferSequenceMOIFrameID(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceMOIFrameIDIdx], val)
 #define GC_SetMemoryBufferSequenceRecordedSize(val) GC_RegisterWriteUI32(&gcRegsDef[MemoryBufferSequenceRecordedSizeIdx], val)
