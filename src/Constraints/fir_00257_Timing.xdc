@@ -33,7 +33,9 @@ set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks CLK_
 ## Timing Exceptions Section
 
 # False Paths
-set_false_path -from [get_cells *reset*_reg* -hierarchical -filter {NAME =~ *rst_clk_wiz*}]
+#set_false_path -from [get_cells *reset*_reg* -hierarchical -filter {NAME =~ *rst_clk_wiz*}]
+# Since 2018.3, *reset*_reg* are replaced by : FDRE_BSR*,FDRE_PER*
+set_false_path -from [get_cells *FDRE_* -hierarchical -filter {NAME =~ *rst_clk_wiz*}]
 
 # Max Delay / Min Delay
 

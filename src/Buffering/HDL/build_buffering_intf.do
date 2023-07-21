@@ -19,14 +19,15 @@ acom  \
 #fir-00251-common
 acom  \
   "$COMMON\VHDL\tel2000pkg.vhd" \
-  "$COMMON\VHDL\Utilities\axis64_reg.vhd" \
-  "$COMMON\VHDL\Utilities\axis64_img_boundaries.vhd" \
-  "$COMMON\VHDL\Utilities\axis64_hole_sync.vhd" \
-  "$COMMON\VHDL\Utilities\axis64_tid_gen.vhd" \
+  "$COMMON\VHDL\Utilities\axis128_reg.vhd" \
+  "$COMMON\VHDL\Utilities\axis128_img_boundaries.vhd" \
+  "$COMMON\VHDL\Utilities\axis128_hole_sync.vhd" \
+  "$COMMON\VHDL\Utilities\axis128_tid_gen.vhd" \
   "$COMMON\VHDL\fifo\t_axi4_stream64_fifo.vhd" \
+  "$COMMON\VHDL\fifo\t_axi4_stream128_fifo.vhd" \
   "$COMMON\VHDL\Utilities\axil32_to_native96.vhd" \
   "$COMMON\VHDL\Utilities\shift_registers_x.vhd" \
-  "$COMMON\VHDL\axis64_pixel_cnt.vhd" \
+  "$COMMON\VHDL\axis128_pixel_cnt.vhd" \
   "$COMMON\VHDL\buffering\BufferingDefine.vhd" \
   "$COMMON\VHDL\buffering\buffering_fsm.vhd" \
   "$COMMON\VHDL\buffering\axis64_img_sof.vhd" \

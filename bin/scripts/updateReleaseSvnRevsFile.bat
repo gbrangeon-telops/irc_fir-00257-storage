@@ -14,8 +14,6 @@ echo our $rel_storage_boot_rev1 = 0;>> %revFile%
 echo our $rel_storage_common_rev1 = $WCREV$;>> %revFile%
 %svn_subwcrev% %commonDir% %revFile% %revFile%
 
-echo 1;>> %revFile%
-
 
 call D:\Telops\FIR-00257-Storage\bin\scripts\setEnvironment.bat 32
 
@@ -32,5 +30,3 @@ echo our $rel_storage_boot_rev2 = 0;>> %revFile%
 
 echo our $rel_storage_common_rev2 = $WCREV$;>> %revFile%
 %svn_subwcrev% %commonDir% %revFile% %revFile%
-
-echo 1;>> %revFile%

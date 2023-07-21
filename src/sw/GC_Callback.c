@@ -184,7 +184,7 @@ void GC_AcquisitionStartCallback(gcCallbackPhase_t phase, gcCallbackAccess_t acc
 {
    if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
    {
-      if (gcRegsData.AcquisitionStart)
+      if ((gcRegsData.AcquisitionStart && !BM_MemoryBufferRead) || (!gcRegsData.AcquisitionStart && BM_MemoryBufferRead))
       {
          if(!BM_MemoryBufferRead)
             gAcquisitionStarted = 1;

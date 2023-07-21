@@ -25,21 +25,22 @@ use IEEE.STD_LOGIC_1164.all;
 use work.TEL2000.all;
 
 entity bd_wrapper is
-	port(
+    port(
 
     UART_RX : in STD_LOGIC;
     UART_TX : out STD_LOGIC;
    
     ARESETN : out STD_LOGIC;
     CLK_MB : out STD_LOGIC;
-    CLK_DATA : out STD_LOGIC;
+    CLK_DATA : out STD_LOGIC;	
+    CLK_FLOW_CTRLER : out STD_LOGIC;
     CLK_MGT_INIT  : out STD_LOGIC;
     DIMM0_CLK_P : in STD_LOGIC;
     DIMM0_CLK_N : in STD_LOGIC;
-	 DIMM1_CLK_P : in STD_LOGIC;
-	 DIMM1_CLK_N : in STD_LOGIC;
+     DIMM1_CLK_P : in STD_LOGIC;
+     DIMM1_CLK_N : in STD_LOGIC;
     
-    AXIS_BUF_S2MM_MOSI : in t_axi4_stream_mosi64;
+    AXIS_BUF_S2MM_MOSI : in t_axi4_stream_mosi128;
     AXIS_BUF_S2MM_MISO : out t_axi4_stream_miso;
     
     AXIS_BUF_S2MM_CMD_MOSI : in t_axi4_stream_mosi_cmd64;
@@ -109,7 +110,7 @@ entity bd_wrapper is
     IIC_SCL : inout STD_LOGIC;
     IIC_SDA : inout STD_LOGIC
 
-	);
+    );
 end bd_wrapper;
 
 
@@ -178,6 +179,7 @@ component core_wrapper
       AXIL_PERIPHERAL_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
       AXIL_PERIPHERAL_wvalid : out STD_LOGIC;
       CLK_DATA : out STD_LOGIC;
+      CLK_FLOW_CTRLER : out STD_LOGIC;
       CLK_MB : out STD_LOGIC;
       CLK_MGT_INIT : out STD_LOGIC;
       DIMM0_addr : out STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -238,8 +240,8 @@ component core_wrapper
       S_AXIS_S2MM_CMD_tdata : in STD_LOGIC_VECTOR ( 103 downto 0 );
       S_AXIS_S2MM_CMD_tready : out STD_LOGIC;
       S_AXIS_S2MM_CMD_tvalid : in STD_LOGIC;
-      S_AXIS_S2MM_tdata : in STD_LOGIC_VECTOR ( 63 downto 0 );
-      S_AXIS_S2MM_tkeep : in STD_LOGIC_VECTOR ( 7 downto 0 );
+      S_AXIS_S2MM_tdata : in STD_LOGIC_VECTOR ( 127 downto 0 );
+      S_AXIS_S2MM_tkeep : in STD_LOGIC_VECTOR ( 15 downto 0 );
       S_AXIS_S2MM_tlast : in STD_LOGIC;
       S_AXIS_S2MM_tready : out STD_LOGIC;
       S_AXIS_S2MM_tvalid : in STD_LOGIC;
@@ -325,14 +327,15 @@ port map (
     CLK_MGT_INIT  => CLK_MGT_INIT,
     CLK_MB        => CLK_MB,     
     CLK_DATA      => CLK_DATA,
+    CLK_FLOW_CTRLER => CLK_FLOW_CTRLER,
 
-	 SYS_CLK_0_clk_n => DIMM0_CLK_N,
+     SYS_CLK_0_clk_n => DIMM0_CLK_N,
     SYS_CLK_0_clk_p => DIMM0_CLK_P,
     
-	 SYS_CLK_1_clk_n => DIMM1_CLK_N,
+     SYS_CLK_1_clk_n => DIMM1_CLK_N,
     SYS_CLK_1_clk_p => DIMM1_CLK_P,    
   
-	 M_AXIS_MM2S_tvalid => AXIS_BUF_MM2S_MOSI.TVALID,
+     M_AXIS_MM2S_tvalid => AXIS_BUF_MM2S_MOSI.TVALID,
     M_AXIS_MM2S_tdata => AXIS_BUF_MM2S_MOSI.TDATA,
     M_AXIS_MM2S_tkeep => AXIS_BUF_MM2S_MOSI.TKEEP,
     M_AXIS_MM2S_tlast => AXIS_BUF_MM2S_MOSI.TLAST,
@@ -343,22 +346,22 @@ port map (
     S_AXIS_MM2S_CMD_tready => AXIS_BUF_MM2S_CMD_MISO.TREADY,
 
     M_AXIS_MM2S_STS_tready => AXIS_BUF_MM2S_STS_MISO.TREADY,
-	 M_AXIS_MM2S_STS_tdata => AXIS_BUF_MM2S_STS_MOSI.TDATA,
-	 M_AXIS_MM2S_STS_tkeep => AXIS_BUF_MM2S_STS_MOSI.TKEEP,
-	 M_AXIS_MM2S_STS_tlast => AXIS_BUF_MM2S_STS_MOSI.TLAST,
-	 M_AXIS_MM2S_STS_tvalid => AXIS_BUF_MM2S_STS_MOSI.TVALID,
+     M_AXIS_MM2S_STS_tdata => AXIS_BUF_MM2S_STS_MOSI.TDATA,
+     M_AXIS_MM2S_STS_tkeep => AXIS_BUF_MM2S_STS_MOSI.TKEEP,
+     M_AXIS_MM2S_STS_tlast => AXIS_BUF_MM2S_STS_MOSI.TLAST,
+     M_AXIS_MM2S_STS_tvalid => AXIS_BUF_MM2S_STS_MOSI.TVALID,
     
     S_AXIS_S2MM_tdata => AXIS_BUF_S2MM_MOSI.TDATA,
     S_AXIS_S2MM_tkeep => AXIS_BUF_S2MM_MOSI.TKEEP,
     S_AXIS_S2MM_tlast => AXIS_BUF_S2MM_MOSI.TLAST,
     S_AXIS_S2MM_tvalid => AXIS_BUF_S2MM_MOSI.TVALID,
     S_AXIS_S2MM_tready => AXIS_BUF_S2MM_MISO.TREADY,
-	
-	 S_AXIS_S2MM_CMD_tdata => AXIS_BUF_S2MM_CMD_MOSI.TDATA,
+    
+     S_AXIS_S2MM_CMD_tdata => AXIS_BUF_S2MM_CMD_MOSI.TDATA,
     S_AXIS_S2MM_CMD_tvalid => AXIS_BUF_S2MM_CMD_MOSI.TVALID,
     S_AXIS_S2MM_CMD_tready => AXIS_BUF_S2MM_CMD_MISO.TREADY,
-	
-	 M_AXIS_S2MM_STS_tdata => AXIS_BUF_S2MM_STS_MOSI.TDATA,
+    
+     M_AXIS_S2MM_STS_tdata => AXIS_BUF_S2MM_STS_MOSI.TDATA,
     M_AXIS_S2MM_STS_tkeep => AXIS_BUF_S2MM_STS_MOSI.TKEEP,
     M_AXIS_S2MM_STS_tlast => AXIS_BUF_S2MM_STS_MOSI.TLAST,
     M_AXIS_S2MM_STS_tvalid => AXIS_BUF_S2MM_STS_MOSI.TVALID,
