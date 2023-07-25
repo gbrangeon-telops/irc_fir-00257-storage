@@ -31,7 +31,7 @@ proc setEnvironmentVariable {fpgaSize} {
     set hwFile "$sdkDir/${baseName}_$fpgaSize.hdf"
     set buildInfoFile "$srcDir/BuildInfo/BuildInfo.h"
     set revFile "$binDir/svnrevs_$fpgaSize.tcl"
-    set tortoiseSVNDir "\"C:/Program Files/TortoiseSVN\""
+    set tortoiseSVNDir "C:/Program Files/TortoiseSVN"
     set svn_subwcrev "$tortoiseSVNDir/bin/SubWCRev.exe"
     set xDir "C:/Xilinx"
     if {[file exists "D:/Xilinx/SDK/2018.3/*.*"]} {
