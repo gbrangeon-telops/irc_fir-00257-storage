@@ -86,11 +86,13 @@ update_ip_catalog
 
 #Set top level design
 set_property top fir_257_top [current_fileset]
-
 set_property generate_synth_checkpoint true [get_files  $proj_dir/$proj_name.srcs/sources_1/bd/core/core.bd]
-
 update_compile_order -fileset sources_1
 
+#Cleanup of unused sources
+remove_files [get_files -filter {IS_AUTO_DISABLED}]
+
+#Don't flatten hierarchy
 set_property STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY none [get_runs synth_1]
 
 #Limit max fanout (see UG949 p143 for Fanout Guidelines table)
