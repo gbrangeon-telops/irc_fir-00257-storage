@@ -12,7 +12,7 @@ set elfFile=%binDir%\%baseName%.elf
 set hwFile=%sdkDir%\hw_%memconf%\fir_257_top.hdf
 
 set buildInfoFile=%srcDir%\BuildInfo\BuildInfo.h
-set revFile=%binDir%\svnrevs_%memconf%.pl
+set revFile=%binDir%\svnrevs_%memconf%.tcl
 
 set tortoiseSVNDir="C:\Program Files\TortoiseSVN"
 set svn_subwcrev=%tortoiseSVNDir%\bin\SubWCRev.exe
