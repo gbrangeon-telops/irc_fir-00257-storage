@@ -28,7 +28,7 @@
 #elif MEMCONF == 32
  
 #define SVN_HARDWARE_REV 29309
-#define SVN_SOFTWARE_REV      29410
+#define SVN_SOFTWARE_REV      29412
  #define SVN_BOOTLOADER_REV    0 
  #define SVN_COMMON_REV      -28958
  
