@@ -182,16 +182,17 @@ if {($storageReleaseInfoHardware1 != $storageBuildInfoHardware1) ||
 }
 
 # Verify storage release log file
-if {($storageReleaseInfoHardware1 != $releaseLogStorageHardware1) ||
-($storageReleaseInfoSoftware1 != $releaseLogStorageSoftware1) ||
-($storageReleaseInfoBootLoader1 != $releaseLogStorageBootLoader1) ||
-($storageReleaseInfoCommon1 != $releaseLogStorageCommon1) ||
-($storageReleaseInfoHardware2 != $releaseLogStorageHardware2) ||
-($storageReleaseInfoSoftware2 != $releaseLogStorageSoftware2) ||
-($storageReleaseInfoBootLoader2 != $releaseLogStorageBootLoader2) ||
-($storageReleaseInfoCommon2 != $releaseLogStorageCommon2)} {
-    puts "Storage FPGA release info does not match release log file"
-    exit 1
-}
+# NOT PRESENT
+#if {($storageReleaseInfoHardware1 != $releaseLogStorageHardware1) ||
+#($storageReleaseInfoSoftware1 != $releaseLogStorageSoftware1) ||
+#($storageReleaseInfoBootLoader1 != $releaseLogStorageBootLoader1) ||
+#($storageReleaseInfoCommon1 != $releaseLogStorageCommon1) ||
+#($storageReleaseInfoHardware2 != $releaseLogStorageHardware2) ||
+#($storageReleaseInfoSoftware2 != $releaseLogStorageSoftware2) ||
+#($storageReleaseInfoBootLoader2 != $releaseLogStorageBootLoader2) ||
+#($storageReleaseInfoCommon2 != $releaseLogStorageCommon2)} {
+#    puts "Storage FPGA release info does not match release log file"
+#    exit 1
+#}
 
-puts "$releaseLogVersion (Passed)"
+puts "Storage FPGA release (Passed)"

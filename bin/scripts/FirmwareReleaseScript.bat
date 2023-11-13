@@ -32,6 +32,7 @@ for %%A in (%sdkDir%\fir_00257_storage_16\Release\fir_00257_storage_16.elf %sdkD
    )
 )
 echo Create and build projects done>> %FirmwareReleaseLogFile%
+timeout /t 5
 
 REM Copy files
 call %scriptsDir%\fetchHwSwFiles.bat
@@ -62,6 +63,7 @@ for %%A in (%sdkDir%\fir_00257_storage_16\Release\fir_00257_storage_16.elf %sdkD
    )
 )
 echo Build projects done>> %FirmwareReleaseLogFile%
+timeout /t 5
 
 REM Update release files
 call %scriptsDir%\updateReleaseSvnRevsFile.bat
@@ -72,7 +74,7 @@ call %scriptsDir%\verifyRelease.bat
 echo verifyRelease done>> %FirmwareReleaseLogFile%
 
 REM Generate prom files
-call %scriptsDir%\generatePromFile.bat
+call %xDir%\Vivado\2018.3\bin\vivado -mode batch -source %scriptsDir%\generatePromFile.tcl
 echo generatePromFile done>> %FirmwareReleaseLogFile%
 
 echo END Release compile>> %FirmwareReleaseLogFile%
