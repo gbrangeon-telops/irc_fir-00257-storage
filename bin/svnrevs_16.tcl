@@ -1,4 +1,4 @@
 set rel_storage_hw_rev1 29309
-set rel_storage_sw_rev1 29293
+set rel_storage_sw_rev1 29310
 set rel_storage_boot_rev1 0 
-set rel_storage_common_rev1 29303
+set rel_storage_common_rev1 28958
