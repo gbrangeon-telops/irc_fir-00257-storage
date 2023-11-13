@@ -42,6 +42,7 @@ echo.>> %FirmwareReleaseLogFile%
 
 REM Commit pre-release
 set preReleaseMessage=Pre-release %firmwareReleaseVersion%
+timeout /t 5
 svn commit %projectDir% -m "%preReleaseMessage%"
 svn update %projectDir%
 echo *****************************************>> %FirmwareReleaseLogFile%
@@ -79,6 +80,7 @@ echo.>> %FirmwareReleaseLogFile%
 
 REM Commit release
 set releaseMessage=Release %firmwareReleaseVersion%
+timeout /t 5
 svn commit %projectDir% -m "%releaseMessage%"
 svn update %projectDir%
 echo *****************************************>> %FirmwareReleaseLogFile%
