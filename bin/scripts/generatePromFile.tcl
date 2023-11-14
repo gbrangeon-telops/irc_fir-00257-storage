@@ -10,6 +10,7 @@ proc generatePromFile {mem_conf} {
     file delete -force "${elf_file}"
     if {[ catch {[file copy "${sdk_dir}/${base_name}/Release/${base_name}.elf" ${elf_file}]} err]} {
         puts $err
+        error "ERROR: Missing elf file"
     } else {
 
         set bit_file "${sdk_dir}/hw_platform_${mem_conf}/fir_257_top.bit"
