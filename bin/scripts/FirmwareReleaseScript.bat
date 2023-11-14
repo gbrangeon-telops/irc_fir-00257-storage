@@ -43,7 +43,7 @@ echo.>> %FirmwareReleaseLogFile%
 
 REM Commit pre-release
 set preReleaseMessage=Pre-release %firmwareReleaseVersion%
-timeout /t 5
+timeout /t 3 > nul
 svn commit %projectDir% -m "%preReleaseMessage%"
 svn update %projectDir%
 echo *****************************************>> %FirmwareReleaseLogFile%
@@ -63,14 +63,20 @@ for %%A in (%sdkDir%\fir_00257_storage_16\Release\fir_00257_storage_16.elf %sdkD
    )
 )
 echo Build projects done>> %FirmwareReleaseLogFile%
-timeout /t 5
 
 REM Update release files
 call %scriptsDir%\updateReleaseSvnRevsFile.bat
 echo updateReleaseSvnRevsFile done>> %FirmwareReleaseLogFile%
 
 REM Verify release files
-call %scriptsDir%\verifyRelease.bat
+call %x_xsct% %scriptsDir%\verifyRelease.tcl^
+   -sbf %buildInfoFile%^
+   -sf1 %binDir%\svnrevs_16.tcl -sf2 %binDir%\svnrevs_32.tcl
+if errorlevel 1 (
+	echo Verify release failed for storage
+	pause
+	exit
+)
 echo verifyRelease done>> %FirmwareReleaseLogFile%
 
 REM Generate prom files
@@ -82,7 +88,7 @@ echo.>> %FirmwareReleaseLogFile%
 
 REM Commit release
 set releaseMessage=Release %firmwareReleaseVersion%
-timeout /t 5
+timeout /t 3 > nul
 svn commit %projectDir% -m "%releaseMessage%"
 svn update %projectDir%
 echo *****************************************>> %FirmwareReleaseLogFile%
