@@ -11,11 +11,6 @@ if {$create_project == 1} {
    create_storage_sw
 }
 
-#prebuild
-source "D:/Telops/fir-00257-Storage/bin/scripts/generateBuildInfoFile.tcl"
-set scriptEnvironment "D:/Telops/FIR-00257-Storage/bin/scripts/setEnvironment.tcl"
-genCore  $scriptEnvironment "16"
-genCore  $scriptEnvironment "32"
 
 #Build project
 build_storage_sw

@@ -99,7 +99,6 @@ proc genCore {scriptEnvironment fpgaSize} {
 
 
 set scriptEnvironment "D:/Telops/FIR-00257-Storage/bin/scripts/setEnvironment.tcl"
-source $scriptEnvironment
 
 genCore  $scriptEnvironment "16"
 

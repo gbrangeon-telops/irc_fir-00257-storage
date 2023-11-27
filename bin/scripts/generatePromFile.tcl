@@ -26,8 +26,8 @@ proc generatePromFile {mem_conf} {
 
 }
 
-generatePromFile 16
-generatePromFile 32
+generatePromFile "16"
+generatePromFile "32"
 
 
 #Clean up

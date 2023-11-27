@@ -48,6 +48,13 @@ configapp -app fir_00257_storage_32 build-config release
 #Clean projects
 projects -clean
 
+
+#prebuild
+source "D:/Telops/fir-00257-Storage/bin/scripts/generateBuildInfoFile.tcl"
+set scriptEnvironment "D:/Telops/FIR-00257-Storage/bin/scripts/setEnvironment.tcl"
+genCore  $scriptEnvironment "16"
+genCore  $scriptEnvironment "32"
+
 #Rebuild all Release project
 projects -build -type bsp -name standalone_bsp_16
 projects -build -type app -name fir_00257_storage_16
