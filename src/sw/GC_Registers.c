@@ -26,7 +26,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam library.
-// Generated from XML camera definition file version 13.3.1
+// Generated from XML camera definition file version 13.4.0
 // using generateGenICamCLib.m Matlab script.
 
 // GenICam global variables definition
@@ -68,6 +68,7 @@ gcRegistersData_t gcRegsDataFactory = {
    /* FValSize = */ 0,
    /* FWMode = */ 0,
    /* Height = */ 0,
+   /* HeightMax = */ 0,
    /* IsActiveFlags = */ 0,
    /* MemoryBufferAvailableFreeSpaceHigh = */ 0,
    /* MemoryBufferAvailableFreeSpaceLow = */ 0,
@@ -120,7 +121,8 @@ gcRegistersData_t gcRegsDataFactory = {
    /* TDCFlags2 = */ 0,
    /* VideoAGC = */ 0,
    /* VideoFreeze = */ 0,
-   /* Width = */ 0
+   /* Width = */ 0,
+   /* WidthMax = */ 0
 };
 
 /**
@@ -206,6 +208,7 @@ void GC_Registers_Init()
    gcRegsDef[FValSizeIdx].p_data = &gcRegsData.FValSize;
    gcRegsDef[FWModeIdx].p_data = &gcRegsData.FWMode;
    gcRegsDef[HeightIdx].p_data = &gcRegsData.Height;
+   gcRegsDef[HeightMaxIdx].p_data = &gcRegsData.HeightMax;
    gcRegsDef[IsActiveFlagsIdx].p_data = &gcRegsData.IsActiveFlags;
    gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceHigh;
    gcRegsDef[MemoryBufferAvailableFreeSpaceLowIdx].p_data = &gcRegsData.MemoryBufferAvailableFreeSpaceLow;
@@ -259,6 +262,7 @@ void GC_Registers_Init()
    gcRegsDef[VideoAGCIdx].p_data = &gcRegsData.VideoAGC;
    gcRegsDef[VideoFreezeIdx].p_data = &gcRegsData.VideoFreeze;
    gcRegsDef[WidthIdx].p_data = &gcRegsData.Width;
+   gcRegsDef[WidthMaxIdx].p_data = &gcRegsData.WidthMax;
 }
 
 /**

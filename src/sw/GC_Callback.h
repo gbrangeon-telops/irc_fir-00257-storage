@@ -20,7 +20,7 @@
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 13.3.1
+// Generated from XML camera definition file version 13.4.0
 // using updateGenICamCallback.m Matlab script.
 
 void GC_Callback_Init();
@@ -56,6 +56,7 @@ void GC_EventTelopsTimestampCallback(gcCallbackPhase_t phase, gcCallbackAccess_t
 void GC_FValSizeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_FWModeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_HeightMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_IsActiveFlagsCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_MemoryBufferAvailableFreeSpaceHighCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_MemoryBufferAvailableFreeSpaceLowCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
@@ -110,6 +111,7 @@ void GC_TDCFlags2Callback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoAGCCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_VideoFreezeCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
+void GC_WidthMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access);
 
 /* AUTO-CODE END */
 

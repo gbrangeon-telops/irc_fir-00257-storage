@@ -34,7 +34,7 @@ extern t_bufferManager gBufManager;
 
 /* AUTO-CODE BEGIN */
 // Auto-generated GeniCam registers callback functions definition.
-// Generated from XML camera definition file version 13.3.1
+// Generated from XML camera definition file version 13.4.0
 // using updateGenICamCallback.m Matlab script.
 
 /**
@@ -73,6 +73,7 @@ void GC_Callback_Init()
    gcRegsDef[FValSizeIdx].callback =                                             &GC_FValSizeCallback;
    gcRegsDef[FWModeIdx].callback =                                               &GC_FWModeCallback;
    gcRegsDef[HeightIdx].callback =                                               &GC_HeightCallback;
+   gcRegsDef[HeightMaxIdx].callback =                                            &GC_HeightMaxCallback;
    gcRegsDef[IsActiveFlagsIdx].callback =                                        &GC_IsActiveFlagsCallback;
    gcRegsDef[MemoryBufferAvailableFreeSpaceHighIdx].callback =                   &GC_MemoryBufferAvailableFreeSpaceHighCallback;
    gcRegsDef[MemoryBufferAvailableFreeSpaceLowIdx].callback =                    &GC_MemoryBufferAvailableFreeSpaceLowCallback;
@@ -127,6 +128,7 @@ void GC_Callback_Init()
    gcRegsDef[VideoAGCIdx].callback =                                             &GC_VideoAGCCallback;
    gcRegsDef[VideoFreezeIdx].callback =                                          &GC_VideoFreezeCallback;
    gcRegsDef[WidthIdx].callback =                                                &GC_WidthCallback;
+   gcRegsDef[WidthMaxIdx].callback =                                             &GC_WidthMaxCallback;
 }
 
 /**
@@ -585,6 +587,26 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
          BufferManager_OnWindowSizeInit(&gcRegsData);
          firstRegConfig = false;
       }
+   }
+}
+
+/**
+ * HeightMax GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_HeightMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      
    }
 }
 
@@ -1320,6 +1342,26 @@ void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
          BufferManager_OnWindowSizeInit(&gcRegsData);
          firstRegConfig = false;
       }
+   }
+}
+
+/**
+ * WidthMax GenICam register callback function.
+ * 
+ * @param phase indicates whether the function is called before or
+ *    after the read or write operation.
+ * @param access indicates whether the operation is read or write.
+ */
+void GC_WidthMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
+{
+   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
+   {
+      
+   }
+
+   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
+   {
+      
    }
 }
 
