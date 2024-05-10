@@ -599,15 +599,6 @@ void GC_HeightCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_HeightMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      
-   }
 }
 
 /**
@@ -1354,15 +1345,6 @@ void GC_WidthCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
  */
 void GC_WidthMaxCallback(gcCallbackPhase_t phase, gcCallbackAccess_t access)
 {
-   if ((phase == GCCP_BEFORE) && (access == GCCA_READ))
-   {
-      
-   }
-
-   if ((phase == GCCP_AFTER) && (access == GCCA_WRITE))
-   {
-      
-   }
 }
 
 /* AUTO-CODE END */
