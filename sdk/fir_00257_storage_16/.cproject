@@ -33,7 +33,7 @@
 								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.64145690" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes"/>
 								<option id="xilinx.gnu.compiler.dircategory.includes.733891228" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_16/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
@@ -62,11 +62,10 @@
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.1598441544" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_16/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/GPIO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/usart}&quot;"/>
 									<listOptionValue builtIn="false" value="../../standalone_bsp_16/MCU_microblaze_0/include"/>
@@ -140,7 +139,7 @@
 								<option id="xilinx.gnu.mb.assembler.usele.954416083" name="Produce little endian code (-mlittle-endian)" superClass="xilinx.gnu.mb.assembler.usele" value="true" valueType="boolean"/>
 								<inputType id="xilinx.gnu.assembler.input.804029688" superClass="xilinx.gnu.assembler.input"/>
 							</tool>
-							<tool id="xilinx.gnu.mb.c.toolchain.compiler.release.1989400992" name="MicroBlaze gcc compiler" superClass="xilinx.gnu.mb.c.toolchain.compiler.release">
+							<tool command="mb-gcc" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="xilinx.gnu.mb.c.toolchain.compiler.release.1989400992" name="MicroBlaze gcc compiler" superClass="xilinx.gnu.mb.c.toolchain.compiler.release">
 								<option defaultValue="gnu.c.optimization.level.more" id="xilinx.gnu.compiler.option.optimization.level.406792634" name="Optimization Level" superClass="xilinx.gnu.compiler.option.optimization.level" valueType="enumerated"/>
 								<option id="xilinx.gnu.compiler.option.debugging.level.1505110800" name="Debug Level" superClass="xilinx.gnu.compiler.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
 								<option id="xilinx.gnu.mb.compiler.inferred.mbversion.382718681" name="MicroBlaze Version" superClass="xilinx.gnu.mb.compiler.inferred.mbversion" value="10.0" valueType="string"/>
@@ -150,7 +149,7 @@
 								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.2056550231" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes"/>
 								<option id="xilinx.gnu.compiler.dircategory.includes.746230214" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_16/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
@@ -178,11 +177,10 @@
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.957062635" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_16/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/GPIO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/usart}&quot;"/>
 									<listOptionValue builtIn="false" value="../../standalone_bsp_16/MCU_microblaze_0/include"/>

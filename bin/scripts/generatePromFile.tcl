@@ -1,6 +1,10 @@
+set current_file_location_absolute_path [file normalize [file dirname [info script]]]
+source "$current_file_location_absolute_path/setEnvironment.tcl"
+
 proc generatePromFile {mem_conf} {
     #set variables
-    set project_dir "D:/Telops/FIR-00257-Storage"
+    global projectDir
+    set project_dir "$projectDir"
     set bin_dir "${project_dir}/bin"
     set sdk_dir "${project_dir}/sdk"
     set base_name "fir_00257_storage_${mem_conf}"
@@ -40,4 +44,4 @@ if {[ catch {[file delete -force {*}[glob *.backup.jou]  ]} err]} {
 
 #Generate PROM file
 #Here the size is in M Bytes (was K Bytes), default checksum FF
-write_cfgmem  -format mcs -size 16 -interface SPIx4 -loadbit {up 0x00000000 "D:/Telops/FIR-00257-Storage/bin/download_16.bit" up 0x00670000 "D:/Telops/FIR-00257-Storage/bin/download_32.bit" } -checksum -force -file "D:/Telops/FIR-00257-Storage/bin/prom/fir_00257_storage.mcs"
+write_cfgmem  -format mcs -size 16 -interface SPIx4 -loadbit {up 0x00000000 "$binDir/download_16.bit" up 0x00670000 "D:/Telops/FIR-00257-Storage/bin/download_32.bit" } -checksum -force -file "$binDir/prom/fir_00257_storage.mcs"

@@ -1,11 +1,19 @@
+#Import build fonction
+set current_file_location_absolute_path [file normalize [file dirname [info script]]]
+set parts [file split $current_file_location_absolute_path]
+set root_location_absolute_path [file join {*}[lrange $parts 0 end-3]]
+
+#set project info from the root location
+set commonHDLDir "$root_location_absolute_path/irc_common_hdl"
+set commonDir "$root_location_absolute_path/irc_fir-00251-common"
+set projectDir "$root_location_absolute_path/ircam_fir-00251-storage_temp"
+set sdkDir "$projectDir/sdk"
+set srcDir "$projectDir/src"
+set binDir "$projectDir/bin"
+set scriptsDir "$projectDir/scripts"
+
 proc setEnvironmentVariable {fpgaSize} {
     upvar 1 baseName baseName
-    upvar 1 commonDir commonDir
-    upvar 1 projectDir projectDir
-    upvar 1 sdkDir sdkDir
-    upvar 1 srcDir srcDir
-    upvar 1 binDir binDir
-    upvar 1 scriptsDir scriptsDir
 
     upvar 1 elfFile elfFile
     upvar 1 hwFile hwFile
@@ -19,13 +27,8 @@ proc setEnvironmentVariable {fpgaSize} {
     upvar 1 x_mb-objcopy  x_mb-objcopy 
     upvar 1 x_xsct x_xsct
 
+
     set baseName "fir_00257_storage_$fpgaSize"
-    set commonDir "D:/Telops/FIR-00251-Common"
-    set projectDir "D:/Telops/FIR-00257-Storage"
-    set sdkDir "$projectDir/sdk"
-    set srcDir "$projectDir/src"
-    set binDir "$projectDir/bin"
-    set scriptsDir "$projectDir/bin/scripts"
 
     set elfFile "$binDir/${baseName}.elf"
     set hwFile "$sdkDir/hw_$fpgaSize/fir_257_top.hdf"

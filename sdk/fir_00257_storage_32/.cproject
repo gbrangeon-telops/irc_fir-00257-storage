@@ -35,7 +35,7 @@
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.733891228" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_32/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
@@ -63,15 +63,14 @@
 									<listOptionValue builtIn="false" value="../../standalone_bsp_32/MCU_microblaze_0/include"/>
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.1598441544" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_0/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_32/MCU_microblaze_0/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/GPIO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/usart}&quot;"/>
-									<listOptionValue builtIn="false" value="../../standalone_bsp_0/MCU_microblaze_0/include"/>
+									<listOptionValue builtIn="false" value="../../standalone_bsp_32/MCU_microblaze_0/include"/>
 								</option>
 								<option id="xilinx.gnu.compiler.symbols.defined.1585922891" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="FPGA_STORAGE"/>
@@ -154,7 +153,7 @@
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.746230214" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_32/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
@@ -181,15 +180,14 @@
 									<listOptionValue builtIn="false" value="../../standalone_bsp_32/MCU_microblaze_0/include"/>
 								</option>
 								<option id="xilinx.gnu.compiler.dircategory.includes.957062635" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_0/MCU_microblaze_0/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;D:\Telops\FIR-00257-Storage\src\sw&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/standalone_bsp_32/MCU_microblaze_0/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${STORAGE}\src\sw&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/BuildInfo}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/MGT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Buffering}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/GPIO}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/usart}&quot;"/>
-									<listOptionValue builtIn="false" value="../../standalone_bsp_0/MCU_microblaze_0/include"/>
+									<listOptionValue builtIn="false" value="../../standalone_bsp_32/MCU_microblaze_0/include"/>
 								</option>
 								<option id="xilinx.gnu.compiler.symbols.defined.1173556230" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="FPGA_STORAGE"/>

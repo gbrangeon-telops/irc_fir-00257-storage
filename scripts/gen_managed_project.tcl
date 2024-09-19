@@ -1,9 +1,11 @@
+#Set environement variable
+set current_file_location_absolute_path [file normalize [file dirname [info script]]]
+source $current_file_location_absolute_path/setEnvironment.tcl
+
 set proj_name "managed_ip_project"
-set root_dir "D:/Telops/FIR-00257-Storage"
-set script_dir $root_dir/scripts
-set proj_dir $root_dir/IP/managed_ip_project
-set ip_dir $root_dir/IP
-#create_project managed_ip_project D:/Telops/FIR-00251-Common/VHDL/IP/managed_ip_project -part xc7k160tfbg676-1 -ip
+set proj_dir $projectDir/IP/managed_ip_project
+set ip_dir $projectDir/IP
+#create_project managed_ip_project Common/VHDL/IP/managed_ip_project -part xc7k160tfbg676-1 -ip
 # Create project
 create_project $proj_name $proj_dir -ip
 

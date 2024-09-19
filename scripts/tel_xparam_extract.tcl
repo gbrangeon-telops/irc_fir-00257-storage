@@ -6,12 +6,15 @@
 # It assume segment have been name in the Adresse editor to start with "TEL_*"
 # This could be done(in adress editor) by clicking on the segment in the cell column
 # and changing the name in the adress segment properties windows
+set current_file_location_absolute_path [file normalize [file dirname [info script]]]
+source $current_file_location_absolute_path/setEnvironment.tcl
+
 set designname [get_bd_designs]
 set comparison [string  compare $designname "core"]
 if  {$comparison != 0} { 
    puts "Core.bd not open"
    puts "Opening core.bd"
-   open_bd_design {D:/Telops/FIR-00257-Storage/xilinx/fir_00257_Storage_$memconf.srcs/sources_1/bd/core/core.bd}
+   open_bd_design {$projectDir/xilinx/fir_00257_Storage_$memconf.srcs/sources_1/bd/core/core.bd}
 } else {
    puts "Core is open"
 }
@@ -26,7 +29,7 @@ set DataAddr [get_property offset [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
 set Datarange [get_property range [get_bd_addr_segs -filter {NAME =~ "TEL_*"}]]
 
 #open a file to write to
-set filename  "d:/telops/fir-00257-Storage/src/sw/tel2000_param_$memconf.h"
+set filename  "$projectDir/src/sw/tel2000_param_$memconf.h"
 set fd1 [open $filename "w"]
 
 #Start to write the First line of the header file (DOXYGEN)

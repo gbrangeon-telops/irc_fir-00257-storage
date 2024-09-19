@@ -1,4 +1,14 @@
 eclipse.preferences.version=1
+environment/project/xilinx.gnu.mb.exe.debug.36748601/STORAGE/delimiter=;
+environment/project/xilinx.gnu.mb.exe.debug.36748601/STORAGE/operation=append
+environment/project/xilinx.gnu.mb.exe.debug.36748601/STORAGE/value=${ProjDirPath}/../../
+environment/project/xilinx.gnu.mb.exe.debug.36748601/append=true
+environment/project/xilinx.gnu.mb.exe.debug.36748601/appendContributed=true
+environment/project/xilinx.gnu.mb.exe.release.1257917207/STORAGE/delimiter=;
+environment/project/xilinx.gnu.mb.exe.release.1257917207/STORAGE/operation=append
+environment/project/xilinx.gnu.mb.exe.release.1257917207/STORAGE/value=${ProjDirPath}/../../
+environment/project/xilinx.gnu.mb.exe.release.1257917207/append=true
+environment/project/xilinx.gnu.mb.exe.release.1257917207/appendContributed=true
 org.eclipse.cdt.core.formatter.alignment_for_arguments_in_method_invocation=16
 org.eclipse.cdt.core.formatter.alignment_for_assignment=16
 org.eclipse.cdt.core.formatter.alignment_for_base_clause_in_type_declaration=80

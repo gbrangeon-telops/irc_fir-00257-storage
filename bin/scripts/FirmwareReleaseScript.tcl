@@ -30,24 +30,21 @@ proc updateReleaseSvnRevsFile {} {
         puts "Error: Can't delete $revFile"
     }
     set Vfo [open $revFile w]
-    puts $Vfo "set rel_storage_hw_rev1 \$WCREV\$"
+    set rev [git_get_rev ${hwFile} 1]
+    puts $Vfo "set rel_storage_hw_rev1 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $hwFile $revFile $revFile]} ]} {
-        puts "SubWCRev.exe Hw done"
-    }
+
     set Vfo [open $revFile a]
-    puts $Vfo "set rel_storage_sw_rev1 \$WCREV\$"
+    set rev [git_get_rev ${elfFile} 1]
+    puts $Vfo "set rel_storage_sw_rev1 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $elfFile $revFile $revFile]} ]} {
-        puts "SubWCRev.exe elf done"
-    }
+   
     set Vfo [open $revFile a]
     puts $Vfo "set rel_storage_boot_rev1 0"
-    puts $Vfo "set rel_storage_common_rev1 \$WCREV\$"
+    set rev [git_get_rev ${commonDir} 1]
+    puts $Vfo "set rel_storage_common_rev1 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $commonDir $revFile $revFile]} ]} {
-        puts "SubWCRev.exe boot done"
-    }
+   
     
     setEnvironmentVariable 32
     # clean up
@@ -55,24 +52,22 @@ proc updateReleaseSvnRevsFile {} {
         puts "Error: Can't delete $revFile"
     }
     set Vfo [open $revFile w]
-    puts $Vfo "set rel_storage_hw_rev2 \$WCREV\$"
+    set rev [git_get_rev ${hwFile} 1]
+    puts $Vfo "set rel_storage_hw_rev2 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $hwFile $revFile $revFile]} ]} {
-        puts "SubWCRev.exe Hw done"
-    }
+    
     set Vfo [open $revFile a]
-    puts $Vfo "set rel_storage_sw_rev2 \$WCREV\$"
+    set rev [git_get_rev ${elfFile} 1]
+
+    puts $Vfo "set rel_storage_sw_rev2 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $elfFile $revFile $revFile]} ]} {
-        puts "SubWCRev.exe elf done"
-    }
+    
     set Vfo [open $revFile a]
     puts $Vfo "set rel_storage_boot_rev2 0"
-    puts $Vfo "set rel_storage_common_rev2 \$WCREV\$"
+    set rev [git_get_rev ${commonDir} 1]
+    puts $Vfo "set rel_storage_common_rev2 \"$rev\""
     close $Vfo
-    if {[ catch {[exec $svn_subwcrev $commonDir $revFile $revFile]} ]} {
-        puts "SubWCRev.exe boot done"
-    }
+    
 
 }
 
@@ -96,22 +91,22 @@ proc verifyRelease {storageBuildInfoFile storageReleaseInfoFile1 storageReleaseI
     set storageBuildInfoBootLoader1 ""
     set storageBuildInfoCommon1 ""
 
-    if {[regexp {SVN_HARDWARE_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr1 match storageBuildInfoHardware1]} {
+    if {[regexp {SVN_HARDWARE_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr1 match storageBuildInfoHardware1]} {
         set storageBuildInfoHardware1 $storageBuildInfoHardware1
     } else {
         set error 1
     }
-    if {[regexp {SVN_SOFTWARE_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr1 match storageBuildInfoSoftware1]} {
+    if {[regexp {SVN_SOFTWARE_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr1 match storageBuildInfoSoftware1]} {
         set storageBuildInfoSoftware1 $storageBuildInfoSoftware1
     } else {
         set error 1
     }
-    if {[regexp {SVN_BOOTLOADER_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr1 match storageBuildInfoBootLoader1]} {
+    if {[regexp {SVN_BOOTLOADER_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr1 match storageBuildInfoBootLoader1]} {
         set storageBuildInfoBootLoader1 $storageBuildInfoBootLoader1
     } else {
         set error 1
     }
-    if {[regexp {SVN_COMMON_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr1 match storageBuildInfoCommon1]} {
+    if {[regexp {SVN_COMMON_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr1 match storageBuildInfoCommon1]} {
         set storageBuildInfoCommon1 $storageBuildInfoCommon1
     } else {
         set error 1
@@ -129,22 +124,22 @@ proc verifyRelease {storageBuildInfoFile storageReleaseInfoFile1 storageReleaseI
     set storageBuildInfoBootLoader2 ""
     set storageBuildInfoCommon2 ""
 
-    if {[regexp {SVN_HARDWARE_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr2 match storageBuildInfoHardware2]} {
+    if {[regexp {SVN_HARDWARE_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr2 match storageBuildInfoHardware2]} {
         set storageBuildInfoHardware2 $storageBuildInfoHardware2
     } else {
         set error 1
     }
-    if {[regexp {SVN_SOFTWARE_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr2 match storageBuildInfoSoftware2]} {
+    if {[regexp {SVN_SOFTWARE_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr2 match storageBuildInfoSoftware2]} {
         set storageBuildInfoSoftware2 $storageBuildInfoSoftware2
     } else {
         set error 1
     }
-    if {[regexp {SVN_BOOTLOADER_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr2 match storageBuildInfoBootLoader2]} {
+    if {[regexp {SVN_BOOTLOADER_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr2 match storageBuildInfoBootLoader2]} {
         set storageBuildInfoBootLoader2 $storageBuildInfoBootLoader2
     } else {
         set error 1
     }
-    if {[regexp {SVN_COMMON_REV[^\n\r0-9]+(\d+)} $storageBuildInfoFileSubstr2 match storageBuildInfoCommon2]} {
+    if {[regexp {SVN_COMMON_REV[^\n\r0-9]+0x([a-fA-F0-9]+)} $storageBuildInfoFileSubstr2 match storageBuildInfoCommon2]} {
         set storageBuildInfoCommon2 $storageBuildInfoCommon2
     } else {
         set error 1
@@ -162,22 +157,22 @@ proc verifyRelease {storageBuildInfoFile storageReleaseInfoFile1 storageReleaseI
     set storageReleaseInfoBootLoader1 ""
     set storageReleaseInfoCommon1 ""
 
-    if {[regexp {rel_storage_hw_rev1[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr1 match storageReleaseInfoHardware1]} {
+    if {[regexp {rel_storage_hw_rev1[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr1 match storageReleaseInfoHardware1]} {
         set storageReleaseInfoHardware1 $storageReleaseInfoHardware1
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_sw_rev1[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr1 match storageReleaseInfoSoftware1]} {
+    if {[regexp {rel_storage_sw_rev1[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr1 match storageReleaseInfoSoftware1]} {
         set storageReleaseInfoSoftware1 $storageReleaseInfoSoftware1
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_boot_rev1[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr1 match storageReleaseInfoBootLoader1]} {
+    if {[regexp {rel_storage_boot_rev1[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr1 match storageReleaseInfoBootLoader1]} {
         set storageReleaseInfoBootLoader1 $storageReleaseInfoBootLoader1
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_common_rev1[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr1 match storageReleaseInfoCommon1]} {
+    if {[regexp {rel_storage_common_rev1[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr1 match storageReleaseInfoCommon1]} {
         set storageReleaseInfoCommon1 $storageReleaseInfoCommon1
     } else {
         set error 1
@@ -189,22 +184,22 @@ proc verifyRelease {storageBuildInfoFile storageReleaseInfoFile1 storageReleaseI
     set storageReleaseInfoBootLoader2 ""
     set storageReleaseInfoCommon2 ""
 
-    if {[regexp {rel_storage_hw_rev2[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr2 match storageReleaseInfoHardware2]} {
+    if {[regexp {rel_storage_hw_rev2[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr2 match storageReleaseInfoHardware2]} {
         set storageReleaseInfoHardware2 $storageReleaseInfoHardware2
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_sw_rev2[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr2 match storageReleaseInfoSoftware2]} {
+    if {[regexp {rel_storage_sw_rev2[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr2 match storageReleaseInfoSoftware2]} {
         set storageReleaseInfoSoftware2 $storageReleaseInfoSoftware2
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_boot_rev2[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr2 match storageReleaseInfoBootLoader2]} {
+    if {[regexp {rel_storage_boot_rev2[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr2 match storageReleaseInfoBootLoader2]} {
         set storageReleaseInfoBootLoader2 $storageReleaseInfoBootLoader2
     } else {
         set error 1
     }
-    if {[regexp {rel_storage_common_rev2[^\n\r0-9]+(\d+)} $storageReleaseInfoFileStr2 match storageReleaseInfoCommon2]} {
+    if {[regexp {rel_storage_common_rev2[^\n\r0-9]+\"([a-zA-Z0-9]+)\"} $storageReleaseInfoFileStr2 match storageReleaseInfoCommon2]} {
         set storageReleaseInfoCommon2 $storageReleaseInfoCommon2
     } else {
         set error 1
@@ -249,8 +244,7 @@ proc verifyRelease {storageBuildInfoFile storageReleaseInfoFile1 storageReleaseI
 
 }
 
-global scriptsDir
-set scriptsDir "D:/Telops/FIR-00257-Storage/bin/scripts" 
+source setEnvironment.tcl
 
 set TestMode "None"
 #Argument check
@@ -259,8 +253,7 @@ if { $argc == 1 } {
 	set TestMode [lindex $argv 0 ]
 } 
 
-set projectDir "D:/Telops/FIR-00257-Storage"
-set FirmwareReleaseVersionFile "D:/Telops/FIR-00251-Proc/bin/FirmwareReleaseVersion.txt"
+set FirmwareReleaseVersionFile "$procDir/bin/FirmwareReleaseVersion.txt"
 set FirmwareReleaseLogFile "$projectDir/bin/scripts/FirmwareRelease.log"
 set svnDir "http://einstein/svn/firmware/"
 set tortoiseSvnBin "C:/Program Files/TortoiseSVN/bin/svn.exe"
@@ -311,8 +304,7 @@ setEnvironmentVariable x
 
 # Create and build for pre-release
 source  "$projectDir/sdk/sdk_storage_cmd.tcl" 
-#base_dir is used in create and build
-set base_dir "d:/Telops/fir-00257-Storage/sdk"
+#sdkDir is used in create and build
 if {$TestMode != "SkipOne"} {
     create_storage_sw
     build_storage_sw
@@ -348,8 +340,8 @@ if {$TestMode == "Debug"} {
 }
 
 set preReleaseMessage "Pre-release $firmwareReleaseVersion"
-exec $tortoiseSvnBin commit $projectDir -m \"$preReleaseMessage\"
-exec $tortoiseSvnBin update $projectDir
+exec git add -u
+exec git commit -m \"$preReleaseMessage\"
 
 puts $fid "*****************************************"
 puts $fid "Pre-release commit done"
@@ -403,8 +395,8 @@ puts $fid "generatePromFile done"
 puts "generatePromFile done"
 
 set releaseMessage "Release $firmwareReleaseVersion"
-exec $tortoiseSvnBin commit $projectDir -m \"$releaseMessage\"
-exec $tortoiseSvnBin update $projectDir
+exec git add -u
+exec git commit -m \"$releaseMessage\"
 
 puts $fid "*****************************************"
 puts $fid "Release commit done"

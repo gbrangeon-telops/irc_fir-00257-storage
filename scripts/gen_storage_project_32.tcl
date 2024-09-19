@@ -1,6 +1,8 @@
-set root_dir "d:/Telops/fir-00257-Storage"
-set script_dir $root_dir/scripts
+#Set environement variable
+set current_file_location_absolute_path [file normalize [file dirname [info script]]]
+source $current_file_location_absolute_path/setEnvironment.tcl
+
 set memconf "32"
 
 # Call slave generation script
-source $script_dir/gen_storage_project.tcl
+source $scriptsDir/gen_storage_project.tcl

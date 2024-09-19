@@ -1,12 +1,12 @@
 proc create_storage_sw {} {
-upvar base_dir base_dir
 set current_path [exec pwd]
+global sdkDir
 
 #Switch directory
-cd $base_dir
+cd "$sdkDir"
 
 #set workspace
-setws -switch $base_dir
+setws -switch "$sdkDir"
 
 #Create HW projects
 createhw -name hw_platform_16 -hwspec hw_16/fir_257_top.hdf
@@ -17,14 +17,14 @@ createbsp -name standalone_bsp_16 -hwproject hw_platform_16 -proc MCU_microblaze
 createbsp -name standalone_bsp_32 -hwproject hw_platform_32 -proc MCU_microblaze_0
 
 #Import software projects
-importprojects "$base_dir/fir_00257_storage_16"
-importprojects "$base_dir/fir_00257_storage_32"
+importprojects "$sdkDir/fir_00257_storage_16"
+importprojects "$sdkDir/fir_00257_storage_32"
 
 #Import makefile
-file delete "$base_dir/fir_00257_storage_16/makefile.defs"
-file link "$base_dir/fir_00257_storage_16/makefile.defs" "$base_dir/makefile.defs"
-file delete "$base_dir/fir_00257_storage_32/makefile.defs"
-file link "$base_dir/fir_00257_storage_32/makefile.defs" "$base_dir/makefile.defs"
+file delete "$sdkDir/fir_00257_storage_16/makefile.defs"
+file link "$sdkDir/fir_00257_storage_16/makefile.defs" "$sdkDir/makefile.defs"
+file delete "$sdkDir/fir_00257_storage_32/makefile.defs"
+file link "$sdkDir/fir_00257_storage_32/makefile.defs" "$sdkDir/makefile.defs"
 
 #Clean projects
 projects -clean
@@ -38,14 +38,14 @@ cd ${current_path}
 }
 
 proc build_storage_sw {} {
-upvar base_dir base_dir
 set current_path [exec pwd]
+global sdkDir
 
 #Switch directory
-cd $base_dir
+cd "$sdkDir"
 
 #set workspace
-setws -switch $base_dir
+setws -switch "$sdkDir"
 
 #configure in release mode
 configapp -app fir_00257_storage_16 build-config release
