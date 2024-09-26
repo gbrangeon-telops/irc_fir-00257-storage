@@ -24,7 +24,10 @@ open_bd_design $projectDir/xilinx/$proj_name.srcs/sources_1/bd/core/core.bd
 
 #Export hardware for sdk
 source $projectDir/scripts/export_hw_to_sdk.tcl
-exec $projectDir/scripts/updateHwSvnRev.bat $memconf
+#Build git revision
+source $projectDir/scripts/updateHwRev.tcl
+updateHwRev ${memconf}
+#exec $projectDir/scripts/updateHwSvnRev.bat $memconf
 source $projectDir/scripts/tel_xparam_extract.tcl
 
 #Save reports
